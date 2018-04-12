@@ -1,0 +1,120 @@
+html{
+  font-family: "Helvetica Nuue",Helvetica, sans-serif;
+  /*谷歌浏览器字体最小12px 100%/none关闭了字体大小自动调整功能*/
+  -webkit-text-size-adjust: 100%;
+  /*a标签以及：active 的伪类有默认的高亮框*/
+  -webkit-tap-highlight-color: transparent;
+  /*禁止文本被选中*/
+  /*-webkit-user-select: none;*/
+  font-size:12px;
+  line-height: 1.5;
+}
+body{
+  overflow-x: hidden;
+  /*开启mobile网页的快速滚动和回弹效果*/
+  -webkit-overflow-scrolling: touch;
+}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{
+  margin:0;padding:0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/*防止低版本IE不认识H5标签*/
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section { display:block; }
+ul,ol{list-style:none;}
+/*
+        outline:none; 轮廓
+        hide-focus:expression(this.hideFocus=true); 兼容 针对于IE的写法 效果跟上面一样
+*/
+a{
+  text-decoration:none;
+  outline:none;
+  hide-focus:expression(this.hideFocus=true);
+  background-color:transparent;
+  -webkit-tap-highlight-color:transparent;
+}
+img{border:0;vertical-align:middle;}
+/*-webkit-appearance: none,就可以去除浏览器默认样式*/
+input,select{
+  vertical-align:middle;
+  outline: none;
+  border:none;
+  font-family:arial,'\5FAE\8F6F\96C5\9ED1',sans-serif;
+  -webkit-appearance:none;
+}
+i{font-style:normal;}
+table{border-spacing:0;border-collapse:collapse;}
+img{border:0;vertical-align:middle;}
+.clearfix:after{
+  content: '.';
+  display: block;
+  clear: both;
+  line-height: 0;
+  height: 0;
+}
+
+/*address, cite, dfn, em, var { font-style: normal; } !* 将斜体扶正 *!*/
+small {
+  font-size: 12px;
+}
+
+/* 小于 12px 的中文很难阅读，让 small 正常化 */
+
+/** 重置文本格式元素 **/
+a {
+  text-decoration: none;
+  /*color: #485579;*/
+}
+
+a:hover {
+  text-decoration: none;
+  /*color: #727a87;*/
+}
+
+/** 重置表单元素 **/
+legend {
+  color: #000;
+}
+
+/* for ie6 */
+fieldset, img {
+  border: 0;
+}
+
+/* img 搭车：让链接里的 img 无边框 */
+button, input, select, textarea {
+  font-size: 100%;
+}
+
+/* 清除浮动 */
+.clearfix:after {
+  content: '\20';
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
+.el-message__group p {
+  text-align: center;
+}
+
+[v-cloak] {
+  display: none;
+}
+.fr{
+  float: right;
+}
+.fl{
+  float: left;
+}
+#app_root{
+  min-width: 1200px;
+  /*min-height:-webkit-fill-available;*/
+  /*min-height: 2124px;*/
+  /*margin-bottom: 140px;*/
+  position: relative;
+}
