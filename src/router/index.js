@@ -8,15 +8,59 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);//创建路由实例
 const Home = resolve => require(['@/pages/home/home'], resolve);
+const Login = resolve => require(['@/pages/user/login'], resolve);
+const Register = resolve => require(['@/pages/user/register'], resolve);
+const JoinShop = resolve => require(['@/pages/home/chooseShop'], resolve);
+const Shop = resolve => require(['@/pages/shop/shop'], resolve);
+const ShopSuccess = resolve => require(['@/pages/shop/shopSuccess'], resolve);
+const Employee = resolve => require(['@/pages/employee/employee'], resolve);
+const EmployeeInfo = resolve => require(['@/pages/employee/employeeInfo'], resolve);
+const Role = resolve => require(['@/pages/role/role'], resolve);
+const RoleInfo = resolve => require(['@/pages/role/roleInfo'], resolve);
 
 const routes = [
   {
-    path: '/', redirect: '/home', //自动转跳到home
-  },
-  {
-    path: '/home',
-    component: Home,
-    meta: {title: "okhelper-主页"}
+    path: '/', redirect: '/user/login', //自动转跳到home
+  },{
+    path: '/user/login',
+    component: Login,
+    meta: {title: "okhelper-login"}
+  },{
+    path: '/user/register',
+    component: Register,
+    meta: {title: "okhelper-register"}
+  },{
+    path:'/home',
+    component:Home,
+    meta:{title:"okhelper-Home"}
+  },{
+    path:'/home/joinShop',
+    component:JoinShop,
+    meta:{title:"okhelper-joinShop"}
+  },{
+    path:'/shop/shopInfo',
+    component:Shop,
+    meta:{title:"okhelper-Shop"}
+  },{
+    path:'/shop/shopSuccess',
+    component:ShopSuccess,
+    meta:{title:"okhelper-ShopSuccess"}
+  },{
+    path:'/employee',
+    component:Employee,
+    meta:{title:"okhelper-Employee"}
+  },{
+    path:'/employee/employeeInfo',
+    component:EmployeeInfo,
+    meta:{title:"okhelper-EmployeeInfo"}
+  },{
+    path:'/role',
+    component:Role,
+    meta:{title:"okhelper-Role"}
+  },{
+    path:'/role/roleInfo',
+    component:RoleInfo,
+    meta:{title:"okhelper-RoleInfo"}
   }
 ];
 

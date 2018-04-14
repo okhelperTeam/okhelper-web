@@ -19,6 +19,11 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+/*去掉所有的边框*/
+*{
+  margin: 0;
+  padding: 0;
+}
 /*防止低版本IE不认识H5标签*/
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section { display:block; }
 ul,ol{list-style:none;}
@@ -40,7 +45,11 @@ input,select{
   outline: none;
   border:none;
   font-family:arial,'\5FAE\8F6F\96C5\9ED1',sans-serif;
+  background: #ffffff !important;
   -webkit-appearance:none;
+}
+input:-webkit-autofill{
+  background: #ffffff !important;
 }
 i{font-style:normal;}
 table{border-spacing:0;border-collapse:collapse;}
@@ -51,6 +60,10 @@ img{border:0;vertical-align:middle;}
   clear: both;
   line-height: 0;
   height: 0;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  -webkit-text-fill-color: #333;
 }
 
 /*address, cite, dfn, em, var { font-style: normal; } !* 将斜体扶正 *!*/
@@ -93,6 +106,7 @@ button, input, select, textarea {
   height: 0;
   clear: both;
 }
+
 
 .clearfix {
   *zoom: 1;
