@@ -70,14 +70,14 @@
             <div style="display: block;text-align: center;">
               <div style="display: block;">
                 <div class="login-icon">
-                  <i class="ion-social-apple"></i>
+                  <i class="ion-android-contact"></i>
                 </div>
                 <div class="login-text">
                   <van-field
                     v-model="nick"
                     lable="昵称"
                     style="font-size: 20px"
-                    placeholder="请输入昵称"
+                    placeholder="请输入姓名"
                     icon="clear"
                     @click-icon="nick = ''"
                   />
@@ -85,19 +85,20 @@
                 </div>
               </div>
             </div>
-            <div style="display: block;text-align: center;">
-              <div style="display: block;">
-                <div class="login-icon">
-                  <i class="ion-social-apple"></i>
-                </div>
-                <div class="login-text">
-                  <van-radio-group v-model="sex">
-                    <van-radio name="1">女</van-radio>
-                    <van-radio name="2">男</van-radio>
-                  </van-radio-group>
-                </div>
-              </div>
-            </div>
+            <!--<div style="display: block;text-align: center;">-->
+              <!--<div style="display: block;">-->
+                <!--<div class="login-icon">-->
+                  <!--<i class="ion-social-apple"></i>-->
+                <!--</div>-->
+                <!--<div class="login-text">-->
+                  <!--<van-radio-group v-model="sex">-->
+                    <!--<van-radio name="1">女</van-radio>-->
+                    <!--<van-radio name="2">男</van-radio>-->
+                  <!--</van-radio-group>-->
+                <!--</div>-->
+                <!---->
+              <!--</div>-->
+            <!--</div>-->
           </van-cell-group>
           <div style="height: 110px;padding-top:30px;width: 80%;margin:0 auto;">
             <van-button type="danger" size="large">立即注册</van-button>
@@ -139,11 +140,11 @@
     width: 30%;
     display: inline;
     font-size: 25px;
-    color: #f44;
+    color: #dd0a20;
   }
   .login-text{
     width: 70%;
     display: inline-block;
-    margin: 10px 10px 10px 10px;
+    margin: 15% 10px 10px 10px;
   }
 </style>

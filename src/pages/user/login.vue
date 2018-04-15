@@ -62,10 +62,27 @@
         </div>
       </van-cell-group>
       <div style="height: 110px;padding-top:30px;width: 80%;margin:0 auto;">
-        <van-button type="danger" size="large">登陆</van-button>
+        <van-button type="danger" size="large">登录</van-button>
       </div>
-      <div id="user-login-bottom" style="background: aqua;margin-right: 35px">
-        <van-button style="float:right" type="danger" size="small"  tag="a" href="@/pages/test/test2" target="_blank">立即注册</van-button>
+      <div style="float: right;margin-top: 50px">
+        <router-link to="/user/register" target="_blank">
+      <div class="register-icon" style="float:right;margin-right: 55px">
+        <i class="ion-person-add"></i>
+      </div>
+      <div id="user-login-bottom" style="margin-right: 43px">
+        <van-text style="float:right;margin-top: -10px;color: #dd0a20">立即注册</van-text>
+      </div>
+        </router-link>
+      </div>
+      <div style="float: left;margin-top: 50px">
+        <router-link to="/user/register" target="_blank">
+          <div class="register-icon" style="float:left;margin-left: 55px">
+            <i class="ion-ios-help"></i>
+          </div>
+          <div id="user-login-bottom" style="margin-left: 43px">
+            <van-text style="float:left;margin-top: -10px;color: #dd0a20" >忘记密码</van-text>
+          </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -100,7 +117,12 @@
     width: 30%;
     display: inline;
     font-size: 25px;
-    color: #f44;
+    color: #dd0a20;
+  }
+  .register-icon{
+    display: inline;
+    font-size: 30px;
+    color: #dd0a20;
   }
   .login-text{
     width: 70%;
