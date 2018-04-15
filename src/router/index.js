@@ -10,6 +10,7 @@ Vue.use(VueRouter);//创建路由实例
 const Home = resolve => require(['@/pages/home/home'], resolve);
 const Login = resolve => require(['@/pages/user/login'], resolve);
 const Register = resolve => require(['@/pages/user/register'], resolve);
+const Person = resolve => require(['@/pages/user/person'], resolve);
 const JoinShop = resolve => require(['@/pages/home/chooseShop'], resolve);
 const Shop = resolve => require(['@/pages/shop/shop'], resolve);
 const ShopSuccess = resolve => require(['@/pages/shop/shopSuccess'], resolve);
@@ -29,6 +30,10 @@ const routes = [
     path: '/user/register',
     component: Register,
     meta: {title: "okhelper-register"}
+  },{
+    path: '/user/person',
+    component: Person,
+    meta: {title: "okhelper-person"}
   },{
     path:'/home',
     component:Home,
