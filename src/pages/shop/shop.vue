@@ -3,20 +3,12 @@
 */
 <template>
     <div id="">
-      <div>返回条</div>
-      <div style="width:auto;height: 200px; margin:0 auto">
-
-        <van-cell-group>
+      <ok-back></ok-back>
+      <div style="width:auto;height: 200px; margin:0 auto;background: yellow;">
           <div style="display: block;text-align: center;">
             <div class="login-text">
-              <van-field
-                v-model="shopName"
-                style="font-size: 20px;"
-                lable="店铺名"
-                icon="clear"
-                placeholder="请输入店铺名"
-                @click-icon="shopName = ''"
-              />
+              <span>店铺名</span>
+              <input type="text"/>
               <hr>
             </div>
           </div>
@@ -34,7 +26,6 @@
               </div>
             </div>
           </div>
-        </van-cell-group>
         <div style="height: 110px;padding-top:30px;width: 80%;margin:0 auto;">
           <van-button type="danger" size="large">立即开店</van-button>
         </div>
@@ -46,10 +37,14 @@
   import Vue from 'vue';
   import { Field,Cell, CellGroup ,Row, Col,Button,Icon} from 'vant';
 
+  const Back = resolve => require(['@/components/common/backBar'], resolve);
+
   Vue.use(Icon).use(Button).use(Row).use(Col).use(Cell).use(CellGroup).use(Field);
     export default {
         mixins: [],     //混合
-        components: {},//注册组件
+        components: {
+          'ok-back':Back
+        },//注册组件
         data() {         //数据
             return {};
         },

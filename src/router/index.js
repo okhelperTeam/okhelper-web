@@ -17,6 +17,9 @@ const Employee = resolve => require(['@/pages/employee/employee'], resolve);
 const EmployeeInfo = resolve => require(['@/pages/employee/employeeInfo'], resolve);
 const Role = resolve => require(['@/pages/role/role'], resolve);
 const RoleInfo = resolve => require(['@/pages/role/roleInfo'], resolve);
+const Header = resolve => require(['@/components/header/header'], resolve);
+const Footer = resolve => require(['@/components/footer/footer'], resolve);
+const BackBar = resolve => require(['@/components/common/backBar'], resolve);
 
 const routes = [
   {
@@ -38,7 +41,7 @@ const routes = [
     component:JoinShop,
     meta:{title:"okhelper-joinShop"}
   },{
-    path:'/shop/shopInfo',
+    path:'/shop',
     component:Shop,
     meta:{title:"okhelper-Shop"}
   },{
@@ -61,6 +64,18 @@ const routes = [
     path:'/role/roleInfo',
     component:RoleInfo,
     meta:{title:"okhelper-RoleInfo"}
+  },{
+    path:'/header',
+    component:Header,
+    meta:{title:"okhelper-Header"}
+  },{
+    path:'/footer',
+    component:Footer,
+    meta:{title:"okhelper-footer"}
+  },{
+    path:'/back',
+    component:BackBar,
+    meta:{title:"okhelper-backBar"}
   }
 ];
 

@@ -3,16 +3,26 @@
 */
 <template>
   <div>
-    <div style="height: 46px;text-align: center;line-height: 46px;">
-      <div style="background: brown">
-        <h1>欢迎来到OK帮~</h1>
+    <ok-header></ok-header>
+    <div class="home-welcome">
+      <div class="home-welcome-word">
+        <span>欢迎使用OK帮云仓储系统</span>
       </div>
     </div>
-    <div style="height: 300px;text-align: center;line-height: 300px;">
-      <div style="display: inline-block;height: 150px;width: 50%;line-height: 150px;">现在开店</div>
-      <div style="display: inline-block;height: 150px;width: 49%;line-height: 150px">加入店铺</div>
+    <!--<div class="home-create-shop-box">-->
+      <!--<div class="home-create-shop-model">-->
+        <!--<router-link to="/shop">-->
+          <!--<i class="home-create-shop-icon ion-ios-paw"></i>-->
+          <!--<span class="home-create-shop-icon-name" style="">现在开店</span>-->
+        <!--</router-link>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div style="background: purple;height: 130px;width: 33%">
+      <div style="font-size: 24px;">
+        <i></i>
+      </div>
     </div>
-
+    <ok-footer></ok-footer>
   </div>
 
 </template>
@@ -21,23 +31,63 @@
   import Vue from 'vue';
   import { NavBar } from 'vant';
   import { Icon } from 'vant';
-
+  const Header = resolve => require(['@/components/header/header'], resolve);
+  const Footer = resolve => require(['@/components/footer/footer'], resolve);
   Vue.use(Icon);
 
   Vue.use(NavBar);
-    export default {
 
+    export default {
+      mixins: [],     //混合
+      components: {
+        'ok-header':Header,
+        'ok-footer':Footer
+      },//注册组件
+      data() {         //数据
+        return {};
+      },
+      computed: {},  //计算属性
+      created() {
+      },   //创建
+      mounted() {
+      },   //挂载
+      methods: {},   //方法
+      watch: {}      //监听
     }
 </script>
 
 <style scoped>
-  .bottom-bar-content{
-    width: 19%;
-    display: inline-block;
-    height: 56px;
-    line-height: 56px;
+  .home-welcome{
+    height: 46px;
     text-align: center;
-    font-size: 36px;
+    line-height: 46px;
   }
-
+  .home-welcome-word{
+    background: #dd0a20; color: white;text-align: center;font-size: 18px;
+  }
+  .home-create-shop-box{
+    height: 300px;
+    text-align: center;
+    padding-top: 150px;
+  }
+  .home-create-shop-model{
+    border:1px solid #dd0a20;
+    color: #dd0a20;
+    margin:0 auto;
+    display: block;
+    height: 150px;
+    width: 150px;
+    border-radius: 5px;
+    font-size: 18px;
+  }
+  .home-create-shop-icon{
+    display: block;
+    font-size: 80px;
+    color: #dd0a20;
+  }
+  .home-create-shop-icon-name{
+    display: block;
+    margin-top: -15px;
+    color: #dd0a20;
+  }
 </style>
