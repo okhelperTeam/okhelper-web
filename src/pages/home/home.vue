@@ -17,9 +17,40 @@
         <!--</router-link>-->
       <!--</div>-->
     <!--</div>-->
-    <div style="background: purple;height: 130px;width: 33%">
-      <div style="font-size: 24px;">
-        <i></i>
+    <div style="border:0.3px solid #cccccc;display:block;float:left;height: 130px;width: 33.3%">
+      <div style="color: brown;text-align: center;padding-top: 20px;">
+        <i class="ion-ios-cart" style="font-size: 35px;display: block;"></i>
+        <span style="font-size: 18px;display: block;">采购单</span>
+      </div>
+    </div>
+    <div style="border:0.3px solid #cccccc;display:block;float:left;height: 130px;width: 33.3%">
+      <div style="color: brown;text-align: center;padding-top: 20px;">
+        <i class="ion-ios-cart" style="font-size: 35px;display: block;"></i>
+        <span style="font-size: 18px;display: block;">采购单</span>
+      </div>
+    </div>
+    <div style="border:0.3px solid #cccccc;display:block;float:left;height: 130px;width: 33.3%">
+      <div style="color: brown;text-align: center;padding-top: 20px;">
+        <i class="ion-ios-cart" style="font-size: 35px;display: block;"></i>
+        <span style="font-size: 18px;display: block;">采购单</span>
+      </div>
+    </div>
+    <div style="border:0.3px solid #cccccc;display:block;float:left;height: 130px;width: 33.3%">
+      <div style="color: brown;text-align: center;padding-top: 20px;">
+        <i class="ion-ios-cart" style="font-size: 35px;display: block;"></i>
+        <span style="font-size: 18px;display: block;">采购单</span>
+      </div>
+    </div>
+    <div style="border:0.3px solid #cccccc;display:block;float:left;height: 130px;width: 33.3%">
+      <div style="color: brown;text-align: center;padding-top: 20px;">
+        <i class="ion-ios-cart" style="font-size: 35px;display: block;"></i>
+        <span style="font-size: 18px;display: block;">采购单</span>
+      </div>
+    </div>
+    <div style="border:0.3px solid #cccccc;display:block;float:left;height: 130px;width: 33.3%">
+      <div style="color: brown;text-align: center;padding-top: 20px;">
+        <i class="ion-ios-cart" style="font-size: 35px;display: block;"></i>
+        <span style="font-size: 18px;display: block;">采购单</span>
       </div>
     </div>
     <ok-footer></ok-footer>

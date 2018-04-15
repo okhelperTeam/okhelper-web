@@ -6,34 +6,34 @@
       <div class="bottom-bar">
         <hr>
         <div class="bottom-bar-model">
-          <a class="bottom-bar-content" style="color: #dd0a20">
+          <router-link to="/home" class="bottom-bar-content" style="color: #dd0a20">
             <i class="bottom-bar-icon ion-ios-home"></i>
             <span class="bottom-bar-icon-name">主页</span>
-          </a>
+          </router-link>
         </div>
         <div class="bottom-bar-model">
-          <a class="bottom-bar-content">
+          <router-link to="/" class="bottom-bar-content">
             <i class="bottom-bar-icon ion-ios-box-outline"></i>
             <span class="bottom-bar-icon-name">库存</span>
-          </a>
+          </router-link>
         </div>
         <div class="bottom-bar-model">
-          <a class="bottom-bar-content">
+          <router-link to="/" class="bottom-bar-content">
             <i class="bottom-bar-icon ion-ios-calculator-outline"></i>
             <span class="bottom-bar-icon-name">销售</span>
-          </a>
+          </router-link>
         </div>
         <div class="bottom-bar-model">
-          <a class="bottom-bar-content">
+          <router-link to="/" class="bottom-bar-content">
             <i class="bottom-bar-icon ion-ios-calendar-outline"></i>
             <span class="bottom-bar-icon-name">历史</span>
-          </a>
+          </router-link>
         </div>
         <div class="bottom-bar-model">
-          <a class="bottom-bar-content">
+          <router-link to="/user/person" class="bottom-bar-content">
             <i class="bottom-bar-icon  ion-ios-person-outline"></i>
             <span class="bottom-bar-icon-name">个人</span>
-          </a>
+          </router-link>
         </div>
       </div>
     </div>

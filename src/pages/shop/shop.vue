@@ -4,7 +4,7 @@
 <template>
     <div id="">
       <ok-back></ok-back>
-      <div style="width:auto;height: 200px; margin:0 auto;background: yellow;">
+      <div style="margin-top:56px;width:auto;height: 200px;background: yellow;">
           <div style="display: block;text-align: center;">
             <div class="login-text">
               <span>店铺名</span>
