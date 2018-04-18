@@ -7,7 +7,7 @@ import ajax from "@/utils/http.js";
 
 
 //用户登录
-var login = myData => ajax('post', '/api/user/login/', myData);
+var login = myData => ajax('post', '/api/user/login', myData);
 export {
   login
 }

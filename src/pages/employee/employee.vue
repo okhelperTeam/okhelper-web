@@ -3,8 +3,7 @@
 */
 <template>
     <div id="">
-      <div>返回条</div>
-      <div>搜索框</div>
+      <ok-back></ok-back>
       <div class="employee-info-box" style="background: red;height: 120px;width: auto;display: block;">
         <div style="display: block;float: left;width: 30%;text-align: center;height:120px;line-height: 120px; background: yellow;">
           <img src="@/assets/icon/ok.jpg" width="80px" height="80px"/>
@@ -24,9 +23,12 @@
 </template>
 
 <script>
+  const Back = resolve => require(['@/components/common/backBar'], resolve);
     export default {
         mixins: [],     //混合
-        components: {},//注册组件
+        components: {
+          'ok-back':Back
+        },//注册组件
         data() {         //数据
             return {};
         },

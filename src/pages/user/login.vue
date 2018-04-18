@@ -62,14 +62,14 @@
         </div>
       </van-cell-group>
       <div style="height: 110px;padding-top:30px;width: 80%;margin:0 auto;">
-        <van-button type="danger" size="large">登录</van-button>
+        <van-button @click="loginOk" type="danger" size="large">登录</van-button>
       </div>
       <div style="float: right;margin-top: 50px">
         <router-link to="/user/register" target="_blank">
       <div class="register-icon" style="float:right;margin-right: 55px">
         <i class="ion-person-add"></i>
       </div>
-      <div id="user-login-bottom" style="margin-right: 43px">
+      <div class="user-login-bottom" style="margin-right: 43px">
         <van-text style="float:right;margin-top: -10px;color: #dd0a20">立即注册</van-text>
       </div>
         </router-link>
@@ -79,7 +79,7 @@
           <div class="register-icon" style="float:left;margin-left: 55px">
             <i class="ion-ios-help"></i>
           </div>
-          <div id="user-login-bottom" style="margin-left: 43px">
+          <div class="user-login-bottom" style="margin-left: 43px">
             <van-text style="float:left;margin-top: -10px;color: #dd0a20" >忘记密码</van-text>
           </div>
         </router-link>
@@ -91,7 +91,8 @@
 <script>
   import Vue from 'vue';
   import { Field,Cell, CellGroup ,Row, Col,Button,Icon} from 'vant';
-
+import {login} from '@/service/getData';
+import router from '@/router/index'
   Vue.use(Icon).use(Button).use(Row).use(Col).use(Cell).use(CellGroup).use(Field);
     export default {
         mixins: [],     //混合
@@ -107,7 +108,22 @@
         },   //创建
         mounted() {
         },   //挂载
-        methods: {},   //方法
+        methods: {
+          loginOk(){
+
+            login({
+              username:this.username,
+              password:this.password
+            }).then(
+              response=>{
+                window.localStorage.setItem('token',response.data.token);
+                router.push({path:'/home'})
+              },error=>{
+                console.log(error.response.data())
+              }
+            )
+          }
+        },   //方法
         watch: {}      //监听
     }
 </script>

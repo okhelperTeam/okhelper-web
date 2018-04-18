@@ -3,34 +3,34 @@
 */
 <template>
     <div id="">
+      <!--<hr>-->
       <div class="bottom-bar">
-        <hr>
         <div class="bottom-bar-model">
-          <router-link to="/home" class="bottom-bar-content" style="color: #dd0a20">
+          <router-link to="/home" >
             <i class="bottom-bar-icon ion-ios-home"></i>
             <span class="bottom-bar-icon-name">主页</span>
           </router-link>
         </div>
-        <div class="bottom-bar-model">
-          <router-link to="/" class="bottom-bar-content">
+       <div class="bottom-bar-model">
+          <router-link to="/repertory" >
             <i class="bottom-bar-icon ion-ios-box-outline"></i>
             <span class="bottom-bar-icon-name">库存</span>
           </router-link>
         </div>
         <div class="bottom-bar-model">
-          <router-link to="/" class="bottom-bar-content">
+          <router-link to="/sell" >
             <i class="bottom-bar-icon ion-ios-calculator-outline"></i>
             <span class="bottom-bar-icon-name">销售</span>
           </router-link>
         </div>
         <div class="bottom-bar-model">
-          <router-link to="/" class="bottom-bar-content">
-            <i class="bottom-bar-icon ion-ios-calendar-outline"></i>
-            <span class="bottom-bar-icon-name">历史</span>
+          <router-link to="/statistics" >
+            <i class="bottom-bar-icon ion-ios-pie-outline"></i>
+            <span class="bottom-bar-icon-name">统计</span>
           </router-link>
         </div>
         <div class="bottom-bar-model">
-          <router-link to="/user/person" class="bottom-bar-content">
+          <router-link to="/user/person" >
             <i class="bottom-bar-icon  ion-ios-person-outline"></i>
             <span class="bottom-bar-icon-name">个人</span>
           </router-link>
@@ -65,17 +65,18 @@
     图标
     选中i class：
       主页：ion-ios-home;库存：ion-ios-box;
-      销售：ion-ios-calculator;历史：ion-ios-calendar;
+      销售：ion-ios-calculator;统计：ion-ios-pie;
       个人：ion-ios-person;
     未选中i class：
       主页：ion-ios-home-outline;库存：ion-ios-box-outline;
-      销售：ion-ios-calculator-outline;历史：ion-ios-calendar-outline;
+      销售：ion-ios-calculator-outline;统计：ion-ios-pie-outline;
       个人：ion-ios-person-outline;
   */
 .bottom-bar{
   height: 56px;
   bottom: 0;
   position: fixed;
+  background-color: rgba(0,0,0,0.85);
   width: 100%;
   z-index: 100;
 }
@@ -87,8 +88,7 @@
     line-height: 20px;
     text-align: center;
     padding-top: 3px;
-    color: #575757;
-    background: white;
+    color: rgba(255,255,255,0.9);
   }
   .bottom-bar-icon{
     display: block;

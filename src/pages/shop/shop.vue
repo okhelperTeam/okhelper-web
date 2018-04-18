@@ -4,30 +4,32 @@
 <template>
     <div id="">
       <ok-back></ok-back>
-      <div style="margin-top:56px;width:auto;height: 200px;background: yellow;">
-          <div style="display: block;text-align: center;">
-            <div class="login-text">
-              <span>店铺名</span>
-              <input type="text"/>
-              <hr>
-            </div>
-          </div>
-          <div style="display: block;text-align: center;">
-            <div style="display: block;">
-              <div class="login-text">
-                <van-field
-                  v-model="password"
-                  lable="店铺描述"
-                  style="font-size: 20px"
-                  icon="clear"
-                  @click-icon="password = ''"
-                />
-                <hr>
-              </div>
-            </div>
-          </div>
-        <div style="height: 110px;padding-top:30px;width: 80%;margin:0 auto;">
-          <van-button type="danger" size="large">立即开店</van-button>
+      <div class="ok-text-first ok-text-box">
+        <div class="ok-text-name">店铺名*</div>
+        <div class="ok-text-textBox">
+          <input class="ok-text-text" placeholder="请输入店铺名" type="text"/>
+          <hr>
+        </div>
+      </div>
+      <div class="ok-text-box">
+        <div class="ok-text-name">联系电话*</div>
+        <div class="ok-text-textBox">
+          <input class="ok-text-text" placeholder="请输入联系电话" type="text"/>
+          <hr>
+        </div>
+      </div>
+      <div class="ok-text-box">
+        <div class="ok-text-name">店铺地址</div>
+        <div class="ok-text-textBox">
+          <input class="ok-text-text" placeholder="请输入店铺地址" type="text"/>
+          <hr>
+        </div>
+      </div>
+      <div class="ok-text-box">
+        <div class="ok-text-name">负责人</div>
+        <div class="ok-text-textBox">
+          <input class="ok-text-text" placeholder="请输入负责人姓名" type="text"/>
+          <hr>
         </div>
       </div>
     </div>

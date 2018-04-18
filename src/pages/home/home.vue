@@ -9,49 +9,57 @@
         <span>欢迎使用OK帮云仓储系统</span>
       </div>
     </div>
-    <!--<div class="home-create-shop-box">-->
-      <!--<div class="home-create-shop-model">-->
-        <!--<router-link to="/shop">-->
-          <!--<i class="home-create-shop-icon ion-ios-paw"></i>-->
-          <!--<span class="home-create-shop-icon-name" style="">现在开店</span>-->
-        <!--</router-link>-->
-      <!--</div>-->
-    <!--</div>-->
-    <div style="border:0.3px solid #cccccc;display:block;float:left;height: 130px;width: 33.3%">
-      <div style="color: brown;text-align: center;padding-top: 20px;">
-        <i class="ion-ios-cart" style="font-size: 35px;display: block;"></i>
-        <span style="font-size: 18px;display: block;">采购单</span>
-      </div>
+    <van-swipe :autoplay="3000">
+      <van-swipe-item><img height="120px" width="100%" src="@/assets/icon/lunbo1.jpg"/></van-swipe-item>
+      <van-swipe-item><img height="120px" width="100%" src="@/assets/icon/lunbo2.jpg"/></van-swipe-item>
+      <van-swipe-item>优惠信息3</van-swipe-item>
+      <van-swipe-item>优惠信息4</van-swipe-item>
+    </van-swipe>
+    <van-notice-bar
+      text="号外号外！！！OK帮服务现在免费向大众开放了！！！快来注册吧！！！"
+      left-icon="https://img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png"
+    />
+    <div class="home-fun-model">
+      <router-link to="/home" class="home-fun-model-a">
+        <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">销售单</span>
+      </router-link>
     </div>
-    <div style="border:0.3px solid #cccccc;display:block;float:left;height: 130px;width: 33.3%">
-      <div style="color: brown;text-align: center;padding-top: 20px;">
-        <i class="ion-ios-cart" style="font-size: 35px;display: block;"></i>
-        <span style="font-size: 18px;display: block;">采购单</span>
-      </div>
+    <div class="home-fun-model">
+      <router-link to="/home" class="home-fun-model-a">
+        <i class="ion-ios-cart home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">采购单</span>
+      </router-link>
     </div>
-    <div style="border:0.3px solid #cccccc;display:block;float:left;height: 130px;width: 33.3%">
-      <div style="color: brown;text-align: center;padding-top: 20px;">
-        <i class="ion-ios-cart" style="font-size: 35px;display: block;"></i>
-        <span style="font-size: 18px;display: block;">采购单</span>
-      </div>
+    <div class="home-fun-model">
+      <router-link to="/home" class="home-fun-model-a">
+        <i class="ion-ios-box home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">库存管理</span>
+      </router-link>
     </div>
-    <div style="border:0.3px solid #cccccc;display:block;float:left;height: 130px;width: 33.3%">
-      <div style="color: brown;text-align: center;padding-top: 20px;">
-        <i class="ion-ios-cart" style="font-size: 35px;display: block;"></i>
-        <span style="font-size: 18px;display: block;">采购单</span>
-      </div>
+    <div class="home-fun-model">
+      <router-link to="/home" class="home-fun-model-a">
+        <i class="ion-ios-pie home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">数据统计</span>
+      </router-link>
     </div>
-    <div style="border:0.3px solid #cccccc;display:block;float:left;height: 130px;width: 33.3%">
-      <div style="color: brown;text-align: center;padding-top: 20px;">
-        <i class="ion-ios-cart" style="font-size: 35px;display: block;"></i>
-        <span style="font-size: 18px;display: block;">采购单</span>
-      </div>
+    <div class="home-fun-model">
+      <router-link to="/home" class="home-fun-model-a">
+        <i class="ion-ios-people home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">客户管理</span>
+      </router-link>
     </div>
-    <div style="border:0.3px solid #cccccc;display:block;float:left;height: 130px;width: 33.3%">
-      <div style="color: brown;text-align: center;padding-top: 20px;">
-        <i class="ion-ios-cart" style="font-size: 35px;display: block;"></i>
-        <span style="font-size: 18px;display: block;">采购单</span>
-      </div>
+    <div class="home-fun-model">
+      <router-link to="/home" class="home-fun-model-a">
+        <i class="ion-ios-help home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">快速入门</span>
+      </router-link>
+    </div>
+    <div class="home-fun-model">
+      <router-link to="/home" class="home-fun-model-a">
+        <i style="font-size: 35px;display: block;"></i>
+        <span class="home-fun-model-a-word">。。。</span>
+      </router-link>
     </div>
     <ok-footer></ok-footer>
   </div>
@@ -62,6 +70,12 @@
   import Vue from 'vue';
   import { NavBar } from 'vant';
   import { Icon } from 'vant';
+  import { Swipe, SwipeItem } from 'vant';
+  import { NoticeBar } from 'vant';
+
+  Vue.use(NoticeBar);
+
+  Vue.use(Swipe).use(SwipeItem);
   const Header = resolve => require(['@/components/header/header'], resolve);
   const Footer = resolve => require(['@/components/footer/footer'], resolve);
   Vue.use(Icon);
@@ -88,37 +102,34 @@
 </script>
 
 <style scoped>
+
   .home-welcome{
-    height: 46px;
+    height: 56px;
     text-align: center;
-    line-height: 46px;
+    line-height: 56px;
   }
   .home-welcome-word{
     background: #dd0a20; color: white;text-align: center;font-size: 18px;
   }
-  .home-create-shop-box{
-    height: 300px;
+  .home-fun-model{
+    border-right:0.3px solid #cccccc;
+    border-bottom:0.3px solid #cccccc;
+    display:block;
+    float:left;
+    height: 130px;
+    width: 33.3%;
+    padding-top: 20px;
+  }
+  .home-fun-model-a{
+    color: brown;
     text-align: center;
-    padding-top: 150px;
   }
-  .home-create-shop-model{
-    border:1px solid #dd0a20;
-    color: #dd0a20;
-    margin:0 auto;
+  .home-fun-model-a-icon{
+    font-size: 35px;
     display: block;
-    height: 150px;
-    width: 150px;
-    border-radius: 5px;
+  }
+  .home-fun-model-a-word{
     font-size: 18px;
-  }
-  .home-create-shop-icon{
     display: block;
-    font-size: 80px;
-    color: #dd0a20;
-  }
-  .home-create-shop-icon-name{
-    display: block;
-    margin-top: -15px;
-    color: #dd0a20;
   }
 </style>

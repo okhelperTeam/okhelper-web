@@ -4,14 +4,17 @@
 <template>
     <div id="">
       <div class="back-bar">
-        <div class="back-bar-backBtn">&lt;&nbsp;返回</div>
+        <div class="back-bar-backBtn">&lt;&nbsp;返回
+          <slot name="backPageName"></slot>
+        </div>
         <div class="back-bar-name">
           店铺信息
-          <slot name="backBarName"></slot>
+          <slot name="nowPageName"></slot>
         </div>
         <div class="back-bar-cancelBtn">
-          按钮
-          <slot name="backBarBtn"></slot>
+          保存
+          <slot name="backBarBtn1"></slot>
+          <slot name="backBarBtn1"></slot>
         </div>
       </div>
     </div>
@@ -19,9 +22,6 @@
 
 <script>
   import Vue from 'vue';
-  import { NavBar } from 'vant';
-
-  Vue.use(NavBar);
     export default {
         mixins: [],     //混合
         components: {},//注册组件

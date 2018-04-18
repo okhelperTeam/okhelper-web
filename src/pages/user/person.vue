@@ -6,12 +6,9 @@
 <template>
     <div class="container" style="width: auto">
       <div>
-        <van-nav-bar
-          title="个人中心"
-          left-text="设置"
-          left-arrow
-          @click-left="onClickLeft"
-        />
+        <div  style="color:white;background: #d43c33;font-size:16px;padding-top:12px;height: 56px;width: 100%;text-align: center;">
+          <div style="display: block;font-size: 20px;">个人信息</div>
+        </div>
       </div>
       <div style="height: 120px;background: #E0FFFF">
         <i class="ion-social-snapchat" style="font-size: 70px;margin-left: 10%"></i>
@@ -96,17 +93,21 @@
           </router-link>
           <hr>
         </div>
+      <ok-footer></ok-footer>
     </div>
 </template>
 
 <script>
   import Vue from 'vue';
   import { Field,Cell, CellGroup ,Row, Col,Button,Icon,NavBar} from 'vant';
+  const Footer = resolve => require(['@/components/footer/footer'], resolve);
 
   Vue.use(Icon).use(Button).use(Row).use(Col).use(Cell).use(CellGroup).use(Field).use(NavBar);
   export default {
     mixins: [],     //混合
-    components: {},//注册组件
+    components: {
+      'ok-footer':Footer
+    },//注册组件
     data() {         //数据
       return {
         username:'',

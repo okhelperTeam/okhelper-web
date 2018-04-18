@@ -2,12 +2,12 @@
  * Created by zc on 2017/3/14.
  */
 
-import axios from "axios"
-import store from '@/store/index'
-import * as type from '@/store/type'
+// import store from '@/store/index'
+// import * as type from '@/store/type'
 
 
 import router from "../router/index"
+import axios from "axios"
 let qs = require('qs');
 export default(method = 'GET', url = '', data = {}) => {
   method = method.toUpperCase();
@@ -24,6 +24,7 @@ export default(method = 'GET', url = '', data = {}) => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      'token':window.localStorage.getItem("token")
     },
     validateStatus: function (status) {
       return status >= 200 && status < 300; // default

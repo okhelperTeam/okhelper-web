@@ -13,11 +13,13 @@ const Register = resolve => require(['@/pages/user/register'], resolve);
 const Person = resolve => require(['@/pages/user/person'], resolve);
 const JoinShop = resolve => require(['@/pages/home/chooseShop'], resolve);
 const Shop = resolve => require(['@/pages/shop/shop'], resolve);
-const ShopSuccess = resolve => require(['@/pages/shop/shopSuccess'], resolve);
 const Employee = resolve => require(['@/pages/employee/employee'], resolve);
 const EmployeeInfo = resolve => require(['@/pages/employee/employeeInfo'], resolve);
 const Role = resolve => require(['@/pages/role/role'], resolve);
 const RoleInfo = resolve => require(['@/pages/role/roleInfo'], resolve);
+const Sell = resolve => require(['@/pages/sell/sell'], resolve);
+const Repertory = resolve => require(['@/pages/repertory/repertory'], resolve);
+const Statistics = resolve => require(['@/pages/statistics/statistics'], resolve);
 const Header = resolve => require(['@/components/header/header'], resolve);
 const Footer = resolve => require(['@/components/footer/footer'], resolve);
 const BackBar = resolve => require(['@/components/common/backBar'], resolve);
@@ -50,10 +52,6 @@ const routes = [
     component:Shop,
     meta:{title:"okhelper-Shop"}
   },{
-    path:'/shop/shopSuccess',
-    component:ShopSuccess,
-    meta:{title:"okhelper-ShopSuccess"}
-  },{
     path:'/employee',
     component:Employee,
     meta:{title:"okhelper-Employee"}
@@ -69,6 +67,18 @@ const routes = [
     path:'/role/roleInfo',
     component:RoleInfo,
     meta:{title:"okhelper-RoleInfo"}
+  },{
+    path:'/sell',
+    component:Sell,
+    meta:{title:"okhelper-Sell"}
+  },{
+    path:'/repertory',
+    component:Repertory,
+    meta:{title:"okhelper-Repertory"}
+  },{
+    path:'/statistics',
+    component:Statistics,
+    meta:{title:"okhelper-Statistics"}
   },{
     path:'/header',
     component:Header,
