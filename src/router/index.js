@@ -18,6 +18,8 @@ const EmployeeInfo = resolve => require(['@/pages/employee/employeeInfo'], resol
 const Role = resolve => require(['@/pages/role/role'], resolve);
 const RoleInfo = resolve => require(['@/pages/role/roleInfo'], resolve);
 const Sell = resolve => require(['@/pages/sell/sell'], resolve);
+const SellHistory = resolve => require(['@/pages/sell/sellHistory'], resolve);
+const SellTable= resolve => require(['@/pages/sell/sellTable'], resolve);
 const Repertory = resolve => require(['@/pages/repertory/repertory'], resolve);
 const Statistics = resolve => require(['@/pages/statistics/statistics'], resolve);
 const Header = resolve => require(['@/components/header/header'], resolve);
@@ -71,6 +73,14 @@ const routes = [
     path:'/sell',
     component:Sell,
     meta:{title:"okhelper-Sell"}
+  },{
+    path:'/sell/sellHistory',
+    component:SellHistory,
+    meta:{title:"okhelper-SellHistory"}
+  },{
+    path:'/sell/sellTable',
+    component:SellTable,
+    meta:{title:"okhelper-SellTable"}
   },{
     path:'/repertory',
     component:Repertory,

@@ -36,7 +36,6 @@
 </template>
 
 <script>
-  import Vue from 'vue';
   import { Field,Cell, CellGroup ,Row, Col,Button,Icon} from 'vant';
 
   const Back = resolve => require(['@/components/common/backBar'], resolve);

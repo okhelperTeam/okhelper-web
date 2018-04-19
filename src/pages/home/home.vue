@@ -109,7 +109,10 @@
     line-height: 56px;
   }
   .home-welcome-word{
-    background: #dd0a20; color: white;text-align: center;font-size: 18px;
+    background: #d43c33;
+    color: white;
+    text-align: center;
+    font-size: 18px;
   }
   .home-fun-model{
     border-right:0.3px solid #cccccc;

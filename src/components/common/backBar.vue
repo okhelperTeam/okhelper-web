@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import Vue from 'vue';
+  const Back = resolve => require(['@/components/common/backBar'], resolve);
     export default {
         mixins: [],     //混合
         components: {},//注册组件
@@ -46,40 +46,5 @@
 </script>
 
 <style scoped>
-  .back-bar{
-    top: 0;
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-    height: 56px;
-    background: #dd0a20;
-    color: white;
-  }
-  .back-bar-backBtn{
-    display:block;
-    float:left;
-    width: 20%;
-    height: 56px;
-    text-align: center;
-    line-height: 56px;
-    font-size: 18px;
-  }
-  .back-bar-name{
-    display:block;
-    float:left;
-    width: 60%;
-    height: 56px;
-    text-align: center;
-    line-height: 56px;
-    font-size: 18px;
-  }
-  .back-bar-cancelBtn{
-    display:block;
-    float:left;
-    width: 20%;
-    height: 56px;
-    text-align: center;
-    line-height: 56px;
-    font-size: 18px;
-  }
+
 </style>

@@ -7,7 +7,7 @@
       <div class="bottom-bar">
         <div class="bottom-bar-model">
           <router-link to="/home" >
-            <i class="bottom-bar-icon ion-ios-home"></i>
+            <i class="bottom-bar-icon ion-ios-home-outline"></i>
             <span class="bottom-bar-icon-name">主页</span>
           </router-link>
         </div>

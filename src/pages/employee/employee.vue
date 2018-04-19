@@ -4,21 +4,76 @@
 <template>
     <div id="">
       <ok-back></ok-back>
-      <div class="employee-info-box" style="background: red;height: 120px;width: auto;display: block;">
-        <div style="display: block;float: left;width: 30%;text-align: center;height:120px;line-height: 120px; background: yellow;">
-          <img src="@/assets/icon/ok.jpg" width="80px" height="80px"/>
+      <div class="ok-model-border"></div>
+      <div style="margin-top:56px;width: 100%;height: 34px;background: #F2F2F2;padding-top: 3px;padding-right: 10px;padding-left: 10px;">
+        <div style="color:white;display:block;float:left;width: 50%;height: 28px;line-height:28px;text-align:center;border-radius:3px;background: brown;border-right: 1px solid #F2F2F2">已启用（4）</div>
+        <div style="display:block;float:left;width: 50%;height: 28px;line-height:28px;text-align:center;border-radius:3px;background: white;color:black;border-right: 1px solid #F2F2F2">已停用（0）</div>
+      </div>
+      <div class="ok-model-border"></div>
+      <div class="employee-info-box" style="height: 80px;width: auto;display: block;">
+        <div style="display: block;float: left;width: 30%;text-align: center;height:80px;line-height: 80px;">
+          <img src="@/assets/icon/ok.jpg" width="70px" height="70px"/>
         </div>
-        <div style="display: block;float: left;width: 50%;background: aqua;height:120px;">
-          <span>名字</span>
-          <span class="employee-role">角色</span>
-          <span>女</span>
-          <span>1322222222</span>
+        <div style="display: block;float: left;width: 50%;height:80px;padding-top: 8px;">
+          <div style="display: block;float: left;font-size: 16px;">美丽</div>
+          <div style="display: block;float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background: orange;border-radius: 5px;margin-left: 10px;">店长</div>
+          <div style="display: block;float: left;margin-left: 10px;">女</div>
+          <div style="clear: both;">手机号：1322222222</div>
+          <div>创建时间：2018-4-19</div>
         </div>
-        <div style="display: block;float: left;width: 20%;background: green;height:120px;">
-          <button style="display: block;">删除</button>
-          <button style="display: block;">修改</button>
+        <div style="font-size:18px;line-height:80px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
+          修改
         </div>
       </div>
+      <div class="ok-model-border"></div>
+      <div class="employee-info-box" style="height: 80px;width: auto;display: block;">
+      <div style="display: block;float: left;width: 30%;text-align: center;height:80px;line-height: 80px;">
+        <img src="@/assets/icon/ok.jpg" width="70px" height="70px"/>
+      </div>
+      <div style="display: block;float: left;width: 50%;height:80px;padding-top: 8px;">
+        <div style="display: block;float: left;font-size: 16px;">大对对</div>
+        <div style="display: block;float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background: orange;border-radius: 5px;margin-left: 10px;">小工</div>
+        <div style="display: block;float: left;margin-left: 10px;">x</div>
+        <div style="clear: both;">手机号：1322222223</div>
+        <div>创建时间：2018-4-19</div>
+      </div>
+      <div style="font-size:18px;line-height:80px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
+        修改
+      </div>
+      </div>
+      <div class="ok-model-border"></div>
+      <div class="employee-info-box" style="height: 80px;width: auto;display: block;">
+        <div style="display: block;float: left;width: 30%;text-align: center;height:80px;line-height: 80px;">
+          <img src="@/assets/icon/ok.jpg" width="70px" height="70px"/>
+        </div>
+        <div style="display: block;float: left;width: 50%;height:80px;padding-top: 8px;">
+          <div style="display: block;float: left;font-size: 16px;">隔壁老张</div>
+          <div style="display: block;float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background: orange;border-radius: 5px;margin-left: 10px;">小工</div>
+          <div style="display: block;float: left;margin-left: 10px;">x</div>
+          <div style="clear: both;">手机号：1322222226</div>
+          <div>创建时间：2018-4-19</div>
+        </div>
+        <div style="font-size:18px;line-height:80px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
+          修改
+        </div>
+      </div>
+      <div class="ok-model-border"></div>
+      <div class="employee-info-box" style="height: 80px;width: auto;display: block;">
+        <div style="display: block;float: left;width: 30%;text-align: center;height:80px;line-height: 80px;">
+          <img src="@/assets/icon/ok.jpg" width="70px" height="70px"/>
+        </div>
+        <div style="display: block;float: left;width: 50%;height:80px;padding-top: 8px;">
+          <div style="display: block;float: left;font-size: 16px;">隔壁大潘</div>
+          <div style="display: block;float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background: orange;border-radius: 5px;margin-left: 10px;">小工</div>
+          <div style="display: block;float: left;margin-left: 10px;">x</div>
+          <div style="clear: both;">手机号：1322222228</div>
+          <div>创建时间：2018-4-19</div>
+        </div>
+        <div style="font-size:18px;line-height:80px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
+          修改
+        </div>
+      </div>
+      <div class="ok-model-border"></div>
     </div>
 </template>
 
