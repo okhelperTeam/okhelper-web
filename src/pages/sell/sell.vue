@@ -8,18 +8,18 @@
         <div style="display: block;float: right;margin-right: 20px;margin-top: -25px;" @click="show=!show">收款码</div>
       </div>
       <div class="ok-border"></div>
-      <div class="ok-sellOrStore-model">
+      <router-link to="/sell/sellTable" class="ok-sellOrStore-model">
         <div class="ok-sellOrStore-box" style="border-right:0.5px solid #F2F2F2;">
           <div class="ok-sellOrStore-icon">
             <i class="ion-ios-pricetags"></i>
           </div>
           <div class="ok-sellOrStore-content">
-            <router-link to="/sell/sellTable">销售单</router-link>
+            <div>销售单</div>
             <div class="ok-sellOrStore-subcontent">卖货、出库</div>
           </div>
         </div>
-      </div>
-      <div class="ok-sellOrStore-model">
+      </router-link>
+      <router-link to="/product" class="ok-sellOrStore-model">
         <div class="ok-sellOrStore-box">
           <div class="ok-sellOrStore-icon">
             <i class="ion-ios-star"></i>
@@ -29,7 +29,7 @@
             <div class="ok-sellOrStore-subcontent">商品单价、照片</div>
           </div>
         </div>
-      </div>
+      </router-link>
       <div class="ok-model-border"></div>
       <div class="ok-sellOrStore-model">
         <div class="ok-sellOrStore-box" style="border-right:0.5px solid #F2F2F2;">
@@ -54,7 +54,7 @@
       </div>
       </div>
       <div class="ok-model-border"></div>
-      <div class="ok-sellOrStore-model">
+      <router-link to="/sell/sellHistory" class="ok-sellOrStore-model">
         <div class="ok-sellOrStore-box" style="border-right:0.5px solid #F2F2F2;">
           <div class="ok-sellOrStore-icon">
             <i class="ion-ios-calendar-outline"></i>
@@ -64,7 +64,7 @@
             <div class="ok-sellOrStore-subcontent">销售历史</div>
           </div>
         </div>
-      </div>
+      </router-link>
       <div style="clear: both" class="ok-border"></div>
       <ok-footer></ok-footer>
       <transition-group enter-active-class="animated">

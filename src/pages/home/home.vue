@@ -44,9 +44,9 @@
       </router-link>
     </div>
     <div class="home-fun-model">
-      <router-link to="/home" class="home-fun-model-a">
+      <router-link to="/employee" class="home-fun-model-a">
         <i class="ion-ios-people home-fun-model-a-icon"></i>
-        <span class="home-fun-model-a-word">客户管理</span>
+        <span class="home-fun-model-a-word">员工管理</span>
       </router-link>
     </div>
     <div class="home-fun-model">
