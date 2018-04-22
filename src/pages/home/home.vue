@@ -12,15 +12,15 @@
     <van-swipe :autoplay="3000">
       <van-swipe-item><img height="120px" width="100%" src="@/assets/icon/lunbo1.jpg"/></van-swipe-item>
       <van-swipe-item><img height="120px" width="100%" src="@/assets/icon/lunbo2.jpg"/></van-swipe-item>
-      <van-swipe-item>优惠信息3</van-swipe-item>
-      <van-swipe-item>优惠信息4</van-swipe-item>
+      <van-swipe-item>平台广告3</van-swipe-item>
+      <van-swipe-item>平台广告4</van-swipe-item>
     </van-swipe>
     <van-notice-bar
       text="号外号外！！！OK帮服务现在免费向大众开放了！！！快来注册吧！！！"
       left-icon="https://img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png"
     />
     <div class="home-fun-model">
-      <router-link to="/home" class="home-fun-model-a">
+      <router-link to="/sell/sellTable" class="home-fun-model-a">
         <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">销售单</span>
       </router-link>
