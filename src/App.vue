@@ -17,4 +17,5 @@ export default {
   .router-link-active{
     color: rgba(255,255,255,0.9);
   }
+
 </style>

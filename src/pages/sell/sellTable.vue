@@ -4,8 +4,8 @@
 <template>
     <div id="">
       <div class="back-bar">
-        <div class="back-bar-backBtn">&lt;&nbsp;返回
-        </div>
+        <router-link to="/sell" class="back-bar-backBtn">&lt;&nbsp;返回
+        </router-link>
         <div class="back-bar-name">
           销售单
         </div>
