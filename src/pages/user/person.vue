@@ -4,97 +4,101 @@
 
 
 <template>
+  <div>
     <div class="container" style="width: auto">
       <div>
         <div  style="color:white;background: #C20C0C;font-size:16px;padding-top:12px;height: 56px;width: 100%;text-align: center;">
           <div style="display: block;font-size: 20px;">个人信息</div>
         </div>
       </div>
-      <div style="height: 120px;background: #E0FFFF">
-        <i class="ion-social-snapchat" style="font-size: 70px;margin-left: 10%"></i>
-        <div>
-          <router-link to="/user/register" target="_blank">
-            <div>
-              <van-text style="font-size: 20px;float: left;margin-left: 33%;margin-top: -18%;color: black">用户名</van-text>
-            </div>
-            <div class="person-icon">
-              <i class="ion-chevron-right"></i>
-            </div>
-          </router-link>
-        </div>
-      </div>
-        <div class="person-manger">
-          <router-link to="/user/register" target="_blank">
-            <div class="photo-icon" style="color: #CD4F39">
-            <i class="ion-social-instagram"></i>
-            </div>
-            <div>
-              <label style="font-size: 23px;float: left;margin-left: 20%;margin-top: -13%;color: black">商品管理</label>
-            </div>
-            <div class="manger-icon">
-              <i class="ion-chevron-right"></i>
-            </div>
-          </router-link>
-          <hr>
-        </div>
-      <div class="person-manger">
-          <router-link to="/user/register" target="_blank">
-            <div class="photo-icon" style="color: #EE2C2C">
-              <i class="ion-android-home"></i>
-            </div>
-            <div>
-              <label style="font-size: 23px;float: left;margin-left: 20%;margin-top: -13%;color: black">仓库管理</label>
-            </div>
-            <div class="manger-icon">
-              <i class="ion-chevron-right"></i>
-            </div>
-          </router-link>
-          <hr>
-      </div>
-      <div class="person-manger">
-          <router-link to="/user/register" target="_blank">
-            <div class="photo-icon" style="color: #8DB6CD">
-              <i class="ion-ios-person"></i>
-            </div>
-            <div>
-              <label style="font-size: 23px;float: left;margin-left: 20%;margin-top: -13%;color: black">客户管理</label>
-            </div>
-            <div class="manger-icon">
-              <i class="ion-chevron-right"></i>
-            </div>
-          </router-link>
-          <hr>
-      </div>
-      <div class="person-manger">
-          <router-link to="/user/register" target="_blank">
-            <div class="photo-icon" style="color: #9AFF9A">
-              <i class="ion-soup-can"></i>
-            </div>
-            <div>
-              <label style="font-size: 23px;float: left;margin-left: 20%;margin-top: -13%;color: black">供应商管理</label>
-            </div>
-            <div class="manger-icon">
-              <i class="ion-chevron-right"></i>
-            </div>
-          </router-link>
-          <hr>
-      </div>
-      <div class="person-manger">
-          <router-link to="/user/register" target="_blank">
-            <div class="photo-icon" style="color: #EE9A00">
-              <i class="ion-gear-b"></i>
-            </div>
-            <div>
-              <label style="font-size: 23px;float: left;margin-left: 20%;margin-top: -13%;color: black">系统设置</label>
-            </div>
-            <div class="manger-icon">
-              <i class="ion-chevron-right"></i>
-            </div>
-          </router-link>
-          <hr>
-        </div>
-      <ok-footer></ok-footer>
     </div>
+    <div>
+      <i class="ion-social-snapchat" style="font-size: 70px;margin-left: 10%"></i>
+      <div>
+        <router-link to="/user/register" target="_blank">
+          <div>
+            <van-text style="font-size: 20px;float: left;margin-left: 33%;margin-top: -18%;color: black">用户名</van-text>
+          </div>
+          <div class="person-icon">
+            <i class="ion-chevron-right"></i>
+          </div>
+        </router-link>
+      </div>
+    </div>
+    <div style="margin-top: -3%">
+      <div class="person-manger">
+        <router-link to="/user/register" target="_blank">
+          <div class="photo-icon" style="color: #CD4F39">
+            <i class="ion-social-instagram"></i>
+          </div>
+          <div>
+            <label style="font-size: 23px;float: left;margin-left: 20%;margin-top: -13%;color: black">商品管理</label>
+          </div>
+          <div class="manger-icon">
+            <i class="ion-chevron-right"></i>
+          </div>
+        </router-link>
+        <hr>
+      </div>
+      <div class="person-manger">
+        <router-link to="/warehouse/warehouse" target="_blank">
+          <div class="photo-icon" style="color: #EE2C2C">
+            <i class="ion-android-home"></i>
+          </div>
+          <div>
+            <label style="font-size: 23px;float: left;margin-left: 20%;margin-top: -13%;color: black">仓库管理</label>
+          </div>
+          <div class="manger-icon">
+            <i class="ion-chevron-right"></i>
+          </div>
+        </router-link>
+        <hr>
+      </div>
+      <div class="person-manger">
+        <router-link to="/user/customer" target="_blank">
+          <div class="photo-icon" style="color: #8DB6CD">
+            <i class="ion-ios-person"></i>
+          </div>
+          <div>
+            <label style="font-size: 23px;float: left;margin-left: 20%;margin-top: -13%;color: black">客户管理</label>
+          </div>
+          <div class="manger-icon">
+            <i class="ion-chevron-right"></i>
+          </div>
+        </router-link>
+        <hr>
+      </div>
+      <div class="person-manger">
+        <router-link to="/user/supplier" target="_blank">
+          <div class="photo-icon" style="color: #9AFF9A">
+            <i class="ion-soup-can"></i>
+          </div>
+          <div>
+            <label style="font-size: 23px;float: left;margin-left: 20%;margin-top: -13%;color: black">供应商管理</label>
+          </div>
+          <div class="manger-icon">
+            <i class="ion-chevron-right"></i>
+          </div>
+        </router-link>
+        <hr>
+      </div>
+      <div class="person-manger">
+        <router-link to="/user/register" target="_blank">
+          <div class="photo-icon" style="color: #EE9A00">
+            <i class="ion-gear-b"></i>
+          </div>
+          <div>
+            <label style="font-size: 23px;float: left;margin-left: 20%;margin-top: -13%;color: black">系统设置</label>
+          </div>
+          <div class="manger-icon">
+            <i class="ion-chevron-right"></i>
+          </div>
+        </router-link>
+        <hr>
+      </div>
+    </div>
+    <ok-footer></ok-footer>
+  </div>
 </template>
 
 <script>
@@ -132,6 +136,7 @@
     color: #EAEAEA;
     margin-right: 10%;
     margin-top: -18%;
+    font-family: 微软雅黑;
   }
   .manger-icon{
     float: right;
@@ -140,13 +145,16 @@
     color: #EAEAEA;
     margin-right: 10%;
     margin-top: -13%;
+    font-family: 微软雅黑;
   }
   .photo-icon{
     font-size: 40px;
     margin-left: 5%;
+    font-family: 微软雅黑;
   }
   .person-manger{
-    margin-top: 7%;
+    margin-top: 3%;
+    font-family: 微软雅黑;
   }
 
 </style>

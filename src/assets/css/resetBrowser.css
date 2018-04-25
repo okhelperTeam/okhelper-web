@@ -50,7 +50,16 @@
   text-align: left;
   width: 100%;
   /*margin-top: 56px;*/
-}
+}.ok-text-box1{
+   padding-left:20px;
+   padding-right:20px;
+   font-size:16px;
+   display: block;
+   height: 50px;
+   text-align: left;
+   width: 100%;
+   /*margin-top: 56px;*/
+ }
 .ok-text-name{
   color:#C20C0C;
   width: 30%;
@@ -58,6 +67,42 @@
   line-height:48px;
   display: block;
   float: left;
+}
+.ok-text-name2{
+  color:darkgrey;
+  height: 40px;
+  line-height:40px;
+  display: block;
+  margin-left: -30%;
+  float: left;
+  font-size: 10px;
+}
+.ok-text-name3{
+  color:black;
+  height: 40px;
+  line-height:70px;
+  display: block;
+  margin-left: -33%;
+  float: left;
+  font-size: 10px;
+}
+.ok-text-name4{
+  color:darkgrey;
+  height: 40px;
+  line-height:100px;
+  display: block;
+  margin-left: -33%;
+  float: left;
+  font-size: 10px;
+}
+.ok-text-name5{
+  color:darkgrey;
+  height: 40px;
+  line-height:85px;
+  display: block;
+  margin-left: -33%;
+  float: left;
+  font-size: 10px;
 }
 .ok-model-text-box{
   box-shadow: 0px 1px 3px #888888;
