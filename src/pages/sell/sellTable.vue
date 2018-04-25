@@ -4,7 +4,7 @@
 <template>
     <div id="">
       <div class="back-bar">
-        <router-link to="/sell" class="back-bar-backBtn">&lt;&nbsp;返回
+        <router-link to="/sell" class="back-bar-backBtn">&lt;&nbsp;销售
         </router-link>
         <div class="back-bar-name">
           销售单

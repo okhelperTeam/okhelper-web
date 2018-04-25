@@ -11,14 +11,6 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api':{
-        target:'http://zxadwz.cn/api/',
-        changeOrigin:true,
-        secure:false,
-        pathRewrite:{
-          '^/api':'',
-        }
-      }
     },
 
     // Various Dev Server settings

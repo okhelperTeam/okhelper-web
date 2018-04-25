@@ -5,15 +5,15 @@
     <div id="">
       <div class="header-bar">
         <div class="header-bar-icon">
-          <i class="ion-android-expand"></i>
+          <i class="ion-qr-scanner"></i>
         </div>
         <div class="header-bar-search">
           <div class="header-bar-search2">
             <i class="header-bar-search-icon ion-android-search"></i>
-            <input class="header-bar-search-text" type="text" value="查找商品"/>
+            <input class="header-bar-search-text" type="text" placeholder="查找商品"/>
           </div>
         </div>
-        <a class="header-bar-cancel-btn">取消</a>
+        <router-link to="/home" class="header-bar-cancel-btn">取消</router-link>
       </div>
     </div>
 </template>
@@ -42,14 +42,14 @@
     width: 100%;
     z-index: 100;
     height: 56px;
-    background: #dd0a20;
+    background: #C20C0C;
     text-align: center;
     line-height: 56px;
     padding: 10.5px;
   }
   .header-bar-icon{
     width: 15%;
-    font-size: 24px;
+    font-size: 30px;
     height: 35px;
     margin-top:-10px;
     display: block;
@@ -63,12 +63,28 @@
     height: 35px;
     border-radius:5px;
     background: white;
-    color:#dd0a20;
+    color:chocolate;
     margin: 0 auto;
-    font-size: 18px;
+    font-size: 16px;
   }
+  input::-webkit-input-placeholder { /* WebKit browsers */
+    color: chocolate;
+  }
+
+  input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: chocolate;
+  }
+
+  input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: chocolate;
+  }
+
+  input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: chocolate;
+  }
+
   .header-bar-search2{
-    width: auto;
+    width: 100%;
     line-height: 35px;
     height:35px;
     display: block;
@@ -82,8 +98,7 @@
     width: 8%;
   }
   .header-bar-search-text{
-    font-size:16px;
-    color:#dd0a20;
+    font-size:14px;
     height: 30px;
     margin-top:2px;
     display: block;

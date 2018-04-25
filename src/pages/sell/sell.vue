@@ -3,7 +3,7 @@
 */
 <template>
     <div id="">
-      <div  style="color:white;background: #d43c33;font-size:16px;padding-top:12px;height: 56px;width: 100%;text-align: center;">
+      <div  style="color:white;background: #C20C0C;font-size:16px;padding-top:12px;height: 56px;width: 100%;text-align: center;">
         <div style="display: block;font-size: 20px;">销售</div>
         <div style="display: block;float: right;margin-right: 20px;margin-top: -25px;" @click="show=!show">收款码</div>
       </div>
@@ -31,7 +31,7 @@
         </div>
       </router-link>
       <div class="ok-model-border"></div>
-      <div class="ok-sellOrStore-model">
+      <router-link to="/1" class="ok-sellOrStore-model">
         <div class="ok-sellOrStore-box" style="border-right:0.5px solid #F2F2F2;">
           <div class="ok-sellOrStore-icon">
             <i class="ion-reply"></i>
@@ -41,8 +41,8 @@
             <div class="ok-sellOrStore-subcontent">退货、换货</div>
           </div>
         </div>
-      </div>
-      <div class="ok-sellOrStore-model">
+      </router-link>
+      <router-link to="/cart" class="ok-sellOrStore-model">
       <div class="ok-sellOrStore-box">
         <div class="ok-sellOrStore-icon">
           <i class="ion-ios-cart"></i>
@@ -52,7 +52,7 @@
           <div class="ok-sellOrStore-subcontent">客户看好物品</div>
         </div>
       </div>
-      </div>
+      </router-link>
       <div class="ok-model-border"></div>
       <router-link to="/sell/sellHistory" class="ok-sellOrStore-model">
         <div class="ok-sellOrStore-box" style="border-right:0.5px solid #F2F2F2;">
@@ -67,7 +67,7 @@
       </router-link>
       <div style="clear: both" class="ok-border"></div>
       <ok-footer></ok-footer>
-      <transition-group enter-active-class="animated">
+      <transition-group enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
         <div :key="1" v-show="show" style="z-index:100;background:#C20C0C;width: 100%;height: 100%;position: absolute;top: 0px; ">
           <div :key="2" style="color: white;font-size: 18px;margin: 0 auto;width: 50%;text-align: center;margin-top: 20px;">收款二维码</div>
           <div :key="3" style="height: 50px;width: 50px;line-height:25px;margin-top:-25px;text-align:center;float:right;margin-right:20px;color: white;font-size: 25px;">
@@ -81,7 +81,8 @@
               <div :key="9" style="height: 30%;width: 100%;">
                 <div :key="10" style="display:block;float:left;width: 50%;font-size: 30px;color: #108ee9;text-align: center;padding-top: 10px;">
                   <van-icon name="alipay" />
-                  <div :key="11" style="font-size: 12px;color: #888888;">支付宝</div>
+                  <div :key="11" style="font-size: 12px;color: #888888;">支付宝<i style="font-size: 30px">.</i></div>
+
                 </div>
                 <div :key="12" style="display:block;float:left;width: 50%;font-size: 30px;text-align: center;padding-top: 10px;color: #439057;">
                   <van-icon name="wechat" />
@@ -126,4 +127,5 @@
 </script>
 
 <style scoped>
+
 </style>

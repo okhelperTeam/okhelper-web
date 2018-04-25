@@ -13,11 +13,11 @@ export default(method = 'GET', url = '', data = {}) => {
   method = method.toUpperCase();
   let axiosRequestConfig = {
     method: method,
-    url: url,
+    url: "http://139.199.30.155"+url,
     data: data,
     withCredentials: true,
-    xsrfCookieName: "csrftoken",
-    xsrfHeaderName: "X-CSRFToken",
+    // xsrfCookieName: "csrftoken",
+    // xsrfHeaderName: "X-CSRFToken",
     transformRequest: [function (data) { //将json解析成字符串
       return qs.stringify(data)
     }],

@@ -49,13 +49,13 @@
               <i class="ion-social-apple"></i>
             </div>
             <div class="login-text">
-              <van-field
-                v-model="yanzhengma"
-                style="font-size: 20px"
-                placeholder="请输入验证码"
-                icon="clear"
-                @click-icon="yanzhengma = ''"
-              />
+              <!--<van-field-->
+                <!--v-model="yanzhengma"-->
+                <!--style="font-size: 20px"-->
+                <!--placeholder="请输入验证码"-->
+                <!--icon="clear"-->
+                <!--@click-icon="yanzhengma = ''"-->
+              <!--/>-->
               <hr>
             </div>
           </div>
@@ -112,14 +112,14 @@ import router from '@/router/index'
           loginOk(){
 
             login({
-              username:this.username,
-              password:this.password
+              userName:this.username,
+              userPassword:this.password
             }).then(
               response=>{
                 window.localStorage.setItem('token',response.data.token);
                 router.push({path:'/home'})
               },error=>{
-                console.log(error.response.data())
+                console.log(error.response.msg)
               }
             )
           }

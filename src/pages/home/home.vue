@@ -3,7 +3,24 @@
 */
 <template>
   <div>
-    <ok-header></ok-header>
+
+    <div style="position:fixed;width: 100%;background: #C20C0C;height: 56px;">
+      <div style="width: 17%;text-align: center;float: left;line-height: 56px;">
+        <img width="30px" height="30px" src="@/assets/icon/ok-icon-white.png"/>
+      </div>
+      <div style="width: 66%;height: 56px;float: left;padding-top: 10.5px;">
+    <router-link to="/product/searchProduct">
+      <div style="color: chocolate;height: 35px;width: 100%;border-radius: 5px;background: white;text-align: center;line-height: 35px;font-size: 14px;">
+        <i style="font-size: 16px;" class="header-bar-search-icon ion-android-search"></i>
+        &nbsp;<span style="position: relative;top:-1px;">查找商品</span>
+      </div>
+    </router-link>
+      </div>
+      <div style="width: 17%;height: 56px;float: left;text-align: center;line-height: 56px;font-size: 30px;color: white;">
+        <i class="ion-qr-scanner"></i>
+      </div>
+
+    </div>
     <div class="home-welcome">
       <div class="home-welcome-word">
         <span>欢迎使用OK帮云仓储系统</span>
@@ -19,7 +36,7 @@
       text="号外号外！！！OK帮服务现在免费向大众开放了！！！快来注册吧！！！"
       left-icon="https://img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png"
     />
-    <div class="home-fun-model">
+    <div v-if="" class="sales_order_add home-fun-model">
       <router-link to="/sell/sellTable" class="home-fun-model-a">
         <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">销售单</span>
@@ -68,6 +85,7 @@
 
 <script>
   import Vue from 'vue';
+  import {getMenuCodeList} from "../../service/getData";
   import { NavBar } from 'vant';
   import { Icon } from 'vant';
   import { Swipe, SwipeItem } from 'vant';
@@ -76,7 +94,6 @@
   Vue.use(NoticeBar);
 
   Vue.use(Swipe).use(SwipeItem);
-  const Header = resolve => require(['@/components/header/header'], resolve);
   const Footer = resolve => require(['@/components/footer/footer'], resolve);
   Vue.use(Icon);
 
@@ -85,18 +102,31 @@
     export default {
       mixins: [],     //混合
       components: {
-        'ok-header':Header,
         'ok-footer':Footer
       },//注册组件
       data() {         //数据
-        return {};
+        return {
+          goods,
+          showMenuModel:[false,false,false,false]
+        };
       },
       computed: {},  //计算属性
       created() {
+        this.getMyMenuCodeList();
       },   //创建
       mounted() {
       },   //挂载
-      methods: {},   //方法
+      methods: {
+        getMyMenuCodeList(){
+          getMenuCodeList().then(
+            response=>{
+              console.log(response.data);
+            },error=>{
+              console.log(error.response.msg)
+            }
+          );
+        }
+      },   //方法
       watch: {}      //监听
     }
 </script>
@@ -109,7 +139,7 @@
     line-height: 56px;
   }
   .home-welcome-word{
-    background: #d43c33;
+    background: #C20C0C;
     color: white;
     text-align: center;
     font-size: 18px;
@@ -124,7 +154,7 @@
     padding-top: 20px;
   }
   .home-fun-model-a{
-    color: brown;
+    color: orangered;
     text-align: center;
   }
   .home-fun-model-a-icon{

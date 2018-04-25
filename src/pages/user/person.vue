@@ -6,7 +6,7 @@
 <template>
     <div class="container" style="width: auto">
       <div>
-        <div  style="color:white;background: #d43c33;font-size:16px;padding-top:12px;height: 56px;width: 100%;text-align: center;">
+        <div  style="color:white;background: #C20C0C;font-size:16px;padding-top:12px;height: 56px;width: 100%;text-align: center;">
           <div style="display: block;font-size: 20px;">个人信息</div>
         </div>
       </div>

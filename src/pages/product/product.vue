@@ -19,33 +19,33 @@
         </div>
       </div>
       <div style="margin-top:56px;height: 37px;width: 100%;">
-        <div style="width: 25%;height: 37px;display: block;float: left" @click="arrowsShow(0)">
-          <div style="width: 80%;margin: 0 auto;height: 37px;line-height: 37px;text-align: center;">
-            <i v-show="arrows_show[0]" class="ion-arrow-down-c"></i>
-            <span>上架时间</span>
-          </div>
-        </div>
         <div style="width: 25%;height: 37px;display: block;float: left" @click="arrowsShow(1)">
           <div style="width: 80%;margin: 0 auto;height: 37px;line-height: 37px;text-align: center;">
-            <i v-show="arrows_show[1]" class="ion-arrow-down-c"></i>
-            <span>价格</span>
+            <i v-if="arrows1" class="ion-arrow-down-c"></i>
+            <span>上架时间</span>
           </div>
         </div>
         <div style="width: 25%;height: 37px;display: block;float: left" @click="arrowsShow(2)">
           <div style="width: 80%;margin: 0 auto;height: 37px;line-height: 37px;text-align: center;">
-            <i v-show="arrows_show[2]" class="ion-arrow-down-c"></i>
-            <span>销量</span>
+            <i v-if="arrows2" class="ion-arrow-down-c"></i>
+            <span>价格</span>
           </div>
         </div>
         <div style="width: 25%;height: 37px;display: block;float: left" @click="arrowsShow(3)">
           <div style="width: 80%;margin: 0 auto;height: 37px;line-height: 37px;text-align: center;">
-            <i v-show="arrows_show[3]" class="ion-arrow-down-c"></i>
-            <span>上架时间</span>
+            <i v-if="arrows3" class="ion-arrow-down-c"></i>
+            <span>销量</span>
+          </div>
+        </div>
+        <div style="width: 25%;height: 37px;display: block;float: left" @click="arrowsShow(4)">
+          <div style="width: 80%;margin: 0 auto;height: 37px;line-height: 37px;text-align: center;">
+            <i v-if="arrows4" class="ion-arrow-down-c"></i>
+            <span>热销</span>
           </div>
         </div>
       </div>
       <div class="ok-model-border"></div>
-      <div class="employee-info-box" style="height: 100px;width: auto;display: block;">
+      <div style="height: 100px;width: auto;display: block;">
         <div style="display: block;float: left;width: 30%;text-align: center;height:100px;line-height: 100px;">
           <img src="@/assets/icon/product1.jpg" width="70px" height="70px"/>
         </div>
@@ -56,13 +56,14 @@
           <div style="clear: both;color: orange;">￥599.00</div>
           <div  style="clear: both;color: #888888;">上架时间：2018-4-21 8:20:11</div>
         </div>
-        <div style="font-size:30px;line-height:80px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
-          <i class="ion-share"></i>
+        <div style="font-size:30px;line-height:30px;padding-top:20px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
+          <i style="display: block" class="ion-share"></i>
+          <i style="display: block" class="ion-ios-cart"></i>
         </div>
       </div>
       <div class="ok-model-border"></div>
 
-      <div class="employee-info-box" style="height: 100px;width: auto;display: block;">
+      <div style="height: 100px;width: auto;display: block;">
         <div style="display: block;float: left;width: 30%;text-align: center;height:100px;line-height: 100px;">
           <img src="@/assets/icon/product2.jpg" width="70px" height="70px"/>
         </div>
@@ -73,13 +74,14 @@
           <div style="clear: both;color: orange;">￥499.00</div>
           <div  style="clear: both;color: #888888;">上架时间：2018-4-20 5:20:22</div>
         </div>
-        <div style="font-size:30px;line-height:80px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
-          <i class="ion-share"></i>
+        <div style="font-size:30px;line-height:30px;padding-top:20px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
+          <i style="display: block" class="ion-share"></i>
+          <i style="display: block" class="ion-ios-cart"></i>
         </div>
       </div>
       <div class="ok-model-border"></div>
 
-      <div class="employee-info-box" style="height: 100px;width: auto;display: block;">
+      <div style="height: 100px;width: auto;display: block;">
         <div style="display: block;float: left;width: 30%;text-align: center;height:100px;line-height: 100px;">
           <img src="@/assets/icon/product3.jpg" width="70px" height="70px"/>
         </div>
@@ -90,11 +92,13 @@
           <div style="clear: both;color: orange;">￥699.00</div>
           <div  style="clear: both;color: #888888;">上架时间：2018-4-20 2:20:10</div>
         </div>
-        <div style="font-size:30px;line-height:80px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
-          <i class="ion-share"></i>
+        <div style="font-size:30px;line-height:30px;padding-top:20px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
+          <i style="display: block" class="ion-share"></i>
+          <i style="display: block" class="ion-ios-cart"></i>
         </div>
       </div>
       <div class="ok-model-border"></div>
+
     </div>
 </template>
 
@@ -104,7 +108,16 @@
         components: {},//注册组件
         data() {         //数据
             return {
-              arrows_show:[true,false,false,false]
+              isActive:-1,
+              arrows1:true,
+              arrows2:false,
+              arrows3:false,
+              arrows4:false,
+              cartList:[
+                {'index':0},
+                {'index':1},
+                {'index':2},
+              ]
             };
         },
         computed: {},  //计算属性
@@ -113,14 +126,29 @@
         mounted() {
         },   //挂载
         methods: {
-          arrowsShow:function (n) {
-            alert(n);
-            this.arrows_show[0]=false;
-            this.arrows_show[1]=false;
-            this.arrows_show[2]=false;
-            this.arrows_show[3]=false;
-            this.arrows_show[n]=true;
-            alert(n);
+          arrowsShow(n) {
+            this.arrows1=false;
+            this.arrows2=false;
+            this.arrows3=false;
+            this.arrows4=false;
+            switch (n){
+              case 1:
+              this.arrows1=true;
+              break;
+              case 2:
+                this.arrows2=true;
+                break;
+              case 3:
+                this.arrows3=true;
+                break;
+              case 4:
+                this.arrows4=true;
+                break;
+              default :break;
+            }
+          },
+          addProduct(index){
+            this.isActive=index;
           }
         },   //方法
         watch: {}      //监听
