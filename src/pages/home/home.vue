@@ -4,7 +4,7 @@
 <template>
   <div>
 
-    <div style="position:fixed;width: 100%;background: #C20C0C;height: 56px;">
+    <div style="z-index:100;position:fixed;width: 100%;background: #C20C0C;height: 56px;">
       <div style="width: 17%;text-align: center;float: left;line-height: 56px;">
         <img width="30px" height="30px" src="@/assets/icon/ok-icon-white.png"/>
       </div>
@@ -20,64 +20,123 @@
         <i class="ion-qr-scanner"></i>
       </div>
 
+      <div style="height:56px;width:100%"></div>
+
+      <van-swipe :autoplay="3000">
+        <van-swipe-item><img height="120px" width="100%" src="@/assets/icon/lunbo1.jpg"/></van-swipe-item>
+        <van-swipe-item><img height="120px" width="100%" src="@/assets/icon/lunbo2.jpg"/></van-swipe-item>
+        <van-swipe-item>平台广告3</van-swipe-item>
+        <van-swipe-item>平台广告4</van-swipe-item>
+      </van-swipe>
+      <van-notice-bar
+        text="号外号外！！！OK帮服务现在免费向大众开放了！！！快来注册吧！！！"
+        left-icon="https://img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png"
+      />
+  </div>
+  <div class="home-welcome">
+    <div class="home-welcome-word">
+      <span>欢迎使用OK帮云仓储系统</span>
     </div>
-    <div class="home-welcome">
-      <div class="home-welcome-word">
-        <span>欢迎使用OK帮云仓储系统</span>
-      </div>
+  </div>
+  <div style="margin-top:156px;">
+    <div v-if="showMenuModel[0]"  class="sales_order_add home-fun-model">
+      <router-link to="/sell/sellTable" class="home-fun-model-a">
+        <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">分类管理</span>
+      </router-link>
     </div>
-    <van-swipe :autoplay="3000">
-      <van-swipe-item><img height="120px" width="100%" src="@/assets/icon/lunbo1.jpg"/></van-swipe-item>
-      <van-swipe-item><img height="120px" width="100%" src="@/assets/icon/lunbo2.jpg"/></van-swipe-item>
-      <van-swipe-item>平台广告3</van-swipe-item>
-      <van-swipe-item>平台广告4</van-swipe-item>
-    </van-swipe>
-    <van-notice-bar
-      text="号外号外！！！OK帮服务现在免费向大众开放了！！！快来注册吧！！！"
-      left-icon="https://img.yzcdn.cn/public_files/2017/8/10/6af5b7168eed548100d9041f07b7c616.png"
-    />
-    <div v-if="" class="sales_order_add home-fun-model">
+    <div v-if="showMenuModel[1]" class="sales_order_add home-fun-model">
+      <router-link to="/sell/sellTable" class="home-fun-model-a">
+        <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">商品管理</span>
+      </router-link>
+    </div>
+    <div v-if="showMenuModel[2]" class="sales_order_add home-fun-model">
+      <router-link to="/sell/sellTable" class="home-fun-model-a">
+        <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">统计报表</span>
+      </router-link>
+    </div>
+    <div v-if="showMenuModel[3]" class="sales_order_add home-fun-model">
       <router-link to="/sell/sellTable" class="home-fun-model-a">
         <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">销售单</span>
       </router-link>
     </div>
-    <div class="home-fun-model">
+    <div v-if="showMenuModel[4]" class="sales_order_add home-fun-model">
+      <router-link to="/sell/sellTable" class="home-fun-model-a">
+        <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">入库单</span>
+      </router-link>
+    </div>
+    <div v-if="showMenuModel[5]" class="sales_order_add home-fun-model">
+      <router-link to="/sell/sellTable" class="home-fun-model-a">
+        <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">销售历史</span>
+      </router-link>
+    </div>
+    <div v-if="showMenuModel[6]" class="sales_order_add home-fun-model">
+      <router-link to="/sell/sellTable" class="home-fun-model-a">
+        <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">供应商管理</span>
+      </router-link>
+    </div>
+    <div v-if="showMenuModel[7]" class="sales_order_add home-fun-model">
+      <router-link to="/sell/sellTable" class="home-fun-model-a">
+        <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">新增销售单</span>
+      </router-link>
+    </div>
+    <div v-if="showMenuModel[8]"  class="home-fun-model">
       <router-link to="/home" class="home-fun-model-a">
         <i class="ion-ios-cart home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">采购单</span>
       </router-link>
     </div>
-    <div class="home-fun-model">
+    <div v-if="showMenuModel[9]" class="home-fun-model">
       <router-link to="/home" class="home-fun-model-a">
         <i class="ion-ios-box home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">库存管理</span>
       </router-link>
     </div>
-    <div class="home-fun-model">
-      <router-link to="/home" class="home-fun-model-a">
-        <i class="ion-ios-pie home-fun-model-a-icon"></i>
-        <span class="home-fun-model-a-word">数据统计</span>
-      </router-link>
-    </div>
-    <div class="home-fun-model">
+    <div v-if="showMenuModel[10]"  class="home-fun-model">
       <router-link to="/employee" class="home-fun-model-a">
         <i class="ion-ios-people home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">员工管理</span>
       </router-link>
     </div>
-    <div class="home-fun-model">
+    <div v-if="showMenuModel[11]"  class="home-fun-model">
       <router-link to="/home" class="home-fun-model-a">
         <i class="ion-ios-help home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">快速入门</span>
       </router-link>
     </div>
-    <div class="home-fun-model">
+    <div v-if="showMenuModel[12]"  class="home-fun-model">
+      <router-link to="/home" class="home-fun-model-a">
+        <i class="ion-ios-help home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">客户管理</span>
+      </router-link>
+    </div>
+    <div v-if="showMenuModel[13]"  class="home-fun-model">
+      <router-link to="/home" class="home-fun-model-a">
+        <i class="ion-ios-help home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">仓库管理</span>
+      </router-link>
+    </div>
+    <div v-if="showMenuModel[14]"  class="home-fun-model">
+      <router-link to="/home" class="home-fun-model-a">
+        <i class="ion-ios-help home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">角色管理</span>
+      </router-link>
+    </div>
+    <!-- <div class="home-fun-model">
       <router-link to="/home" class="home-fun-model-a">
         <i style="font-size: 35px;display: block;"></i>
         <span class="home-fun-model-a-word">。。。</span>
       </router-link>
-    </div>
+    </div> -->
+    <div style="width:100%;height:56px;clear:both;"></div>
+  </div>
     <ok-footer></ok-footer>
   </div>
 
@@ -106,26 +165,61 @@
       },//注册组件
       data() {         //数据
         return {
-          goods,
-          showMenuModel:[false,false,false,false]
+          goods:"",
+          //vue无法直接检测数组的更新，需要使用Vue对象set方法  Vue.set(数组名，i，数组[i])
+          showMenuModel:[false,false,false,false,false,false,false,false,false,false,false,true]
         };
       },
       computed: {},  //计算属性
       created() {
-        this.getMyMenuCodeList();
+        getMenuCodeList().then(
+          response=>{
+            let menuList=response.data;
+            for(let item of menuList){
+              console.log(item.menuCode);
+              switch (item.menuCode) {
+                case 'category':this.showMenuModel[0]=true;
+                  break;
+                case 'customer':this.showMenuModel[12]=true;
+                  break;
+                case 'employee':this.showMenuModel[10]=true;
+                  break;
+                case 'goods':this.showMenuModel[1]=true;
+                  break;
+                case 'report':this.showMenuModel[2]=true;
+                  break;
+                case 'role':this.showMenuModel[14]=true;
+                  break;
+                case 'sales_order_add':this.showMenuModel[7]=true;
+                  break;
+                case 'sales_order_history':this.showMenuModel[5]=true;
+                  break;
+                case 'stock':this.showMenuModel[9]=true;
+                  break;
+                case 'supplier':this.showMenuModel[6]=true;
+                  break;
+                case 'warehouse':this.showMenuModel[13]=true;
+                  break;
+                default:
+                Vue.set(this.showMenuModel,0,this.showMenuModel[0]);
+
+              }
+            }
+          },error=>{
+            console.log(error.response.msg)
+          }
+        );
       },   //创建
       mounted() {
       },   //挂载
       methods: {
-        getMyMenuCodeList(){
-          getMenuCodeList().then(
-            response=>{
-              console.log(response.data);
-            },error=>{
-              console.log(error.response.msg)
-            }
-          );
-        }
+        showModel(){
+          for(var i=0;i<6;i++){
+            this.showMenuModel[i]=!this.showMenuModel[i];
+            Vue.set(this.showMenuModel,i,this.showMenuModel[i]);
+          }
+
+        },
       },   //方法
       watch: {}      //监听
     }
