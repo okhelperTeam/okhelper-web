@@ -60,9 +60,15 @@
         </div>
       </div>
       <div style="height: auto;padding: 20px;background: #F2F2F2;width: 100%;">
-        <div style="border: 3px solid #888888;font-size: 50px;width:60px;height: 60px;text-align: center;line-height: 60px;color: #888888;">
-          <i class="ion-camera"></i>
+        <div  v-longtap="chooseMainImg(1)">
+          <div style="width: 20px;height: 20px;background: orange;">主</div>
+          <img v-for="(imgSrc) in productImgList" width="100px" height="100px" :src="imgSrc"/>
         </div>
+        <van-uploader :after-read="onRead" accept="image/gif, image/jpeg" multiple>
+          <div style="border: 3px solid #888888;font-size: 50px;width:60px;height: 60px;text-align: center;line-height: 60px;color: #888888;">
+            <i class="ion-camera"></i>
+          </div>
+        </van-uploader>
         <div style="color: #888888;font-size: 12px;width:100%;text-align: center;margin-top:20px;">上传图片大小不能超过4M，单个商品最多可添加6张图片</div>
         <div style="color: #888888;font-size: 12px;width:100%;text-align: center;">点击图片看大图，【长按】图片设置为商品主图</div>
       </div>
@@ -71,18 +77,66 @@
 </template>
 
 <script>
+  import Vue from 'vue'
+  import {upLoadGoodsImgs} from '@/service/getData.js'
+  import { Uploader } from 'vant';
+  import { Toast } from 'vant';
+
+  Vue.use(Uploader);
     export default {
         mixins: [],     //混合
         components: {},//注册组件
         data() {         //数据
-            return {};
+            return {
+              productImgList:[]
+            };
         },
         computed: {},  //计算属性
         created() {
         },   //创建
         mounted() {
         },   //挂载
-        methods: {},   //方法
+        methods: {
+          chooseMainImg(n){
+            alert(n);
+          },
+          onRead(file) {
+            let formData = new FormData();
+            if(file instanceof Array){//instanceof用于判断是否为已知类型
+              for(let item of file){
+                this.productImgList.push(item.content);
+                formData.append('file',item.file);
+                upLoadGoodsImgs(formData).then(
+                  response=>{
+                    console.log(response.data.url);
+                    Toast({
+                      position: 'bottom',
+                      message: '图片上传成功'
+                    });
+                  },error=>{
+                    console.log(error.response.msg);
+                    Toast(error.response.msg);
+                  }
+                )
+              }
+            }else {
+              this.productImgList.push(file.content);
+              formData.append('file',file.file);
+              upLoadGoodsImgs(formData).then(
+                response=>{
+                  console.log(response.data.url);
+                  Toast({
+                    position: 'bottom',
+                    message: '图片上传成功'
+                  });
+                },error=>{
+                  console.log(error.response.msg);
+                }
+              )
+            }
+
+          }
+        },   //方法
         watch: {}      //监听
     }
 </script>

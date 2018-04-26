@@ -4,7 +4,7 @@
 <template>
     <div id="">
       <div class="back-bar">
-        <router-link :to="lastPage" style="color: white" class="back-bar-backBtn">&lt;&nbsp;销售
+        <router-link :to="lastPage" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回
         </router-link>
         <div class="back-bar-name">
           购物车
@@ -38,7 +38,6 @@
         },   //挂载
         methods: {
           backToLastPage(el){
-
           }
         },   //方法
         watch: {} ,     //监听

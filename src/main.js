@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router/index'
 import '@/assets/css/resetBrowser.css'
+import '@/utils/vue-touch.js'
 import {defaultImg,toTime,formateData} from './components/filters/filter'
 
 Vue.config.productionTip = false;
