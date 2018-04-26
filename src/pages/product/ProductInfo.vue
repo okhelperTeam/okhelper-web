@@ -60,11 +60,13 @@
         </div>
       </div>
       <div style="height: auto;padding: 20px;background: #F2F2F2;width: 100%;">
-        <div  v-longtap="chooseMainImg(1)">
-          <div style="width: 20px;height: 20px;background: orange;">主</div>
-          <img v-for="(imgSrc) in productImgList" width="100px" height="100px" :src="imgSrc"/>
+        <div>
+          <v-touch v-for="(imgSrc,index) in productImgList" @press="chooseMainImg(index)" :key="index">
+            <div style="width: 20px;height: 20px;background: orange;" v-show="mainImg[index]">主</div>
+            <img width="100px" height="100px" :src="imgSrc"/>
+          </v-touch>
         </div>
-        <van-uploader :after-read="onRead" accept="image/gif, image/jpeg" multiple>
+        <van-uploader :after-read="onRead" accept="image/*" multiple>
           <div style="border: 3px solid #888888;font-size: 50px;width:60px;height: 60px;text-align: center;line-height: 60px;color: #888888;">
             <i class="ion-camera"></i>
           </div>
@@ -78,6 +80,8 @@
 
 <script>
   import Vue from 'vue'
+  var VueTouch = require('vue-touch');
+  Vue.use(VueTouch, {name: 'v-touch'});
   import {upLoadGoodsImgs} from '@/service/getData.js'
   import { Uploader } from 'vant';
   import { Toast } from 'vant';
@@ -88,7 +92,8 @@
         components: {},//注册组件
         data() {         //数据
             return {
-              productImgList:[]
+              productImgList:[],
+              mainImg:[]
             };
         },
         computed: {},  //计算属性
@@ -98,6 +103,11 @@
         },   //挂载
         methods: {
           chooseMainImg(n){
+            for(var i=0;i<this.mainImg.length;i++){
+              this.mainImg[i]=false;
+            }
+            this.mainImg[n]=true;
+            Vue.set(this.mainImg,n,this.mainImg[n]);
             alert(n);
           },
           onRead(file) {
