@@ -11,15 +11,19 @@ import axios from "axios"
 let qs = require('qs');
 export default(method = 'GET', url = '', data = {}) => {
   method = method.toUpperCase();
+  const httpPrefix='http://139.199.30.155';
+
   let axiosRequestConfig = {
     method: method,
-    url: url,
+    url: httpPrefix+url,
     data: data,
     withCredentials: true,
-    xsrfCookieName: "csrftoken",
-    xsrfHeaderName: "X-CSRFToken",
     transformRequest: [function (data) { //将json解析成字符串
-      return qs.stringify(data)
+      if(!data instanceof FormData){
+        return qs.stringify(data);
+      }else {
+        return data;
+      }
     }],
     headers: {
       'Accept': 'application/json',
@@ -30,13 +34,6 @@ export default(method = 'GET', url = '', data = {}) => {
       return status >= 200 && status < 300; // default
     },
   };
-  if (method == "GET") {
-    axiosRequestConfig.params = data;
-    axiosRequestConfig.data = "";
-  }
-  else {
-    // axiosRequestConfig.data=Object.assign(axiosRequestConfig.data,{csrftoken:'I3sKNrTZJZA9DyWb3K4YnYlAhSaimsaT'});
-  }
 
 //创建自定义axios对象
   let ajax = axios.create();
@@ -44,9 +41,14 @@ export default(method = 'GET', url = '', data = {}) => {
 // http request 拦截器
   ajax.interceptors.request.use(
     config => {
-      // if (store.state.token) {
-      // config.headers.Authorization = `token ${store.state.token}`;
-      // }
+      if (method == "GET") {
+        config.params = data;
+        config.data = "";
+      }
+
+      if(data instanceof FormData){
+        config.headers['Content-Type']='multipart/form-data';
+      }
       return config;
     },
     error => {
@@ -65,12 +67,15 @@ export default(method = 'GET', url = '', data = {}) => {
             console.log("参数错误");
             break;
           case 401:  // 401 清除session信息并跳转到登录页面
-            console.log("session失效");
-            if (store.state.userInfo != null) {
-              //session 失效跳到登录页面
-              router.replace({path: '/user/login', query: {redirect: router.currentRoute.fullPath}});
-            }
-            store.commit(type.CANCEL_USER);//消除userInfo
+            console.log("token失效/登陆失败");
+            // if (store.state.userInfo != null) {
+            //   //session 失效跳到登录页面
+            //   router.replace({path: '/user/login', query: {redirect: router.currentRoute.fullPath}});
+            // }
+            // store.commit(type.CANCEL_USER);//消除userInfo
+            break;
+          case 403:
+            console.log("无权访问");
             break;
           case 500:  // 500 处理
             router.replace("/500");

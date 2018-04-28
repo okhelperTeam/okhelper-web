@@ -11,13 +11,14 @@ const Home = resolve => require(['@/pages/home/home'], resolve);
 const Login = resolve => require(['@/pages/user/login'], resolve);
 const Register = resolve => require(['@/pages/user/register'], resolve);
 const Person = resolve => require(['@/pages/user/person'], resolve);
-const JoinShop = resolve => require(['@/pages/home/chooseShop'], resolve);
 const Shop = resolve => require(['@/pages/shop/shop'], resolve);
 const Employee = resolve => require(['@/pages/employee/employee'], resolve);
 const EmployeeInfo = resolve => require(['@/pages/employee/employeeInfo'], resolve);
 const Role = resolve => require(['@/pages/role/role'], resolve);
 const RoleInfo = resolve => require(['@/pages/role/roleInfo'], resolve);
+const Cart = resolve => require(['@/pages/cart/cart'], resolve);
 const Product = resolve => require(['@/pages/product/product'], resolve);
+const SearchProduct = resolve => require(['@/pages/product/searchProduct'], resolve);
 const ProductInfo = resolve => require(['@/pages/product/productInfo'], resolve);
 const Sell = resolve => require(['@/pages/sell/sell'], resolve);
 const SellHistory = resolve => require(['@/pages/sell/sellHistory'], resolve);
@@ -32,11 +33,7 @@ const CustomerInfo = resolve => require(['@/pages/user/customerInfo'], resolve);
 const Supplier = resolve => require(['@/pages/user/supplier'], resolve);
 const SupplierInfo = resolve => require(['@/pages/user/supplierInfo'], resolve);
 const Warehouse = resolve => require(['@/pages/warehouse/warehouse'], resolve);
-const WarehouseInfo = resolve => require(['@/pages/warehouse/warehouseInfo'], resolve);
-const Stock = resolve => require(['@/pages/warehouse/stock'], resolve);
-const StockWarning = resolve => require(['@/pages/warehouse/stockWarning'], resolve);
-const EarlyWarning = resolve => require(['@/pages/warehouse/earlyWarning'], resolve);
-const PurchaseHistory = resolve => require(['@/pages/warehouse/purchaseHistory'], resolve);
+const WarehouseInfo = resolve => require(['@/pages/warehouse/WarehouseInfo'], resolve);
 
 const routes = [
   {
@@ -58,10 +55,6 @@ const routes = [
     component:Home,
     meta:{title:"okhelper-Home"}
   },{
-    path:'/home/joinShop',
-    component:JoinShop,
-    meta:{title:"okhelper-joinShop"}
-  },{
     path:'/shop',
     component:Shop,
     meta:{title:"okhelper-Shop"}
@@ -82,11 +75,19 @@ const routes = [
     component:RoleInfo,
     meta:{title:"okhelper-RoleInfo"}
   },{
+    path:'/cart',
+    component:Cart,
+    meta:{title:"okhelper-Cart"}
+  },{
     path:'/product',
     component:Product,
     meta:{title:"okhelper-Product"}
   },{
-    path:'/product/ProductInfo',
+    path:'/product/searchProduct',
+    component:SearchProduct,
+    meta:{title:"okhelper-searchProduct"}
+  },{
+    path:'/product/productInfo',
     component:ProductInfo,
     meta:{title:"okhelper-ProductInfo"}
   },{
@@ -144,23 +145,7 @@ const routes = [
   },{
     path:'/warehouse/warehouseInfo',
     component:WarehouseInfo,
-    meta:{title:"okhelper-warehouseInfo"}
-  },{
-  path:'/warehouse/stock',
-    component:Stock,
-    meta:{title:"okhelper-stock"}
-  },{
-    path:'/warehouse/stockWarning',
-    component:StockWarning,
-    meta:{title:"okhelper-stockWarning"}
-  },{
-    path:'/warehouse/earlyWarning',
-    component:EarlyWarning,
-    meta:{title:"okhelper-earlyWarning"}
-  },{
-    path:'/warehouse/purchaseHistory',
-    component:PurchaseHistory,
-    meta:{title:"okhelper-purchaseHistory"}
+    meta:{title:"okhelper-WarehouseInfo"}
   }
 ];
 
@@ -191,11 +176,11 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
-router.afterEach((to, from) => {
-  document.title = to.meta.title;
-})
-router.onReady(() => {
-  //console.log("first")//手输+第一次进入路由器的时候被调用
-  // store.dispatch(ACTION_GET_USERINFO); //刷新进行权限认证,并重新获取用户信息
-})
+// router.afterEach((to, from) => {
+//   document.title = to.meta.title;
+// })
+// router.onReady(() => {
+//   //console.log("first")//手输+第一次进入路由器的时候被调用
+//   // store.dispatch(ACTION_GET_USERINFO); //刷新进行权限认证,并重新获取用户信息
+// })
 export default router;

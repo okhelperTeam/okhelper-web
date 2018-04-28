@@ -60,29 +60,106 @@
         </div>
       </div>
       <div style="height: auto;padding: 20px;background: #F2F2F2;width: 100%;">
-        <div style="border: 3px solid #888888;font-size: 50px;width:60px;height: 60px;text-align: center;line-height: 60px;color: #888888;">
-          <i class="ion-camera"></i>
+        <div v-if="productListShow[index]" v-for="(imgSrc,index) in productImgList" style="margin: 5px;display: block;float: left;">
+          <v-touch @press="chooseMainImg(index)" :key="index">
+            <div style="width: 20px;height: 20px;background: orange;position: fixed;text-align: center;line-height: 20px;color: white;" v-show="mainImg[index]">主</div>
+            <div @click="deleteImg(index)" style="z-index:100;position:relative;margin-left: -20px;width: 20px;height: 20px;background: #C20C0C;text-align: center;line-height: 20px;color: white;float: right;">
+              <i class="ion-close-round"></i>
+            </div>
+            <img width="100px" height="100px" :src="imgSrc"/>
+          </v-touch>
         </div>
-        <div style="color: #888888;font-size: 12px;width:100%;text-align: center;margin-top:20px;">上传图片大小不能超过4M，单个商品最多可添加6张图片</div>
-        <div style="color: #888888;font-size: 12px;width:100%;text-align: center;">点击图片看大图，【长按】图片设置为商品主图</div>
+        <van-uploader :after-read="onRead" accept="image/*" multiple>
+          <div style="margin:10px;border: 3px solid #888888;font-size: 50px;width:60px;height: 60px;text-align: center;line-height: 60px;color: #888888;">
+            <i class="ion-camera"></i>
+          </div>
+        </van-uploader>
+        <div style="clear:both;color: #888888;font-size: 12px;width:100%;text-align: center;margin-top:20px;">上传图片大小不能超过4M，单个商品最多可添加6张图片</div>
+        <div style="clear:both;color: #888888;font-size: 12px;width:100%;text-align: center;">点击图片看大图，【长按】图片设置为商品主图</div>
       </div>
 
     </div>
 </template>
 
 <script>
+  import Vue from 'vue'
+  var VueTouch = require('vue-touch');
+  Vue.use(VueTouch, {name: 'v-touch'});
+  import {upLoadGoodsImgs} from '@/service/getData.js'
+  import { Uploader } from 'vant';
+  import { Toast } from 'vant';
+
+  Vue.use(Uploader);
     export default {
         mixins: [],     //混合
         components: {},//注册组件
         data() {         //数据
-            return {};
+            return {
+              productImgList:[],
+              mainImg:[],
+              productListShow:[],
+              imgCount:0
+            };
         },
         computed: {},  //计算属性
         created() {
         },   //创建
         mounted() {
         },   //挂载
-        methods: {},   //方法
+        methods: {
+          chooseMainImg(n){
+            for(var i=0;i<this.mainImg.length;i++){
+              this.mainImg[i]=false;
+            }
+            this.mainImg[n]=true;
+            Vue.set(this.mainImg,n,this.mainImg[n]);
+          },
+          deleteImg(index){
+            this.productListShow[index]=false;
+            Vue.set(this.productListShow,index,this.productListShow[index]);
+            this.productImgList.remove(index);
+          },
+          onRead(file) {
+            let formData = new FormData();
+            if(file instanceof Array){//instanceof用于判断是否为已知类型
+              for(let item of file){
+                this.productImgList.push(item.content);
+                this.productListShow[this.imgCount]=true;
+                this.imgCount++;
+                formData.append('file',item.file);
+                upLoadGoodsImgs(formData).then(
+                  response=>{
+                    console.log(response.data.url);
+                    Toast({
+                      position: 'bottom',
+                      message: '图片上传成功'
+                    });
+                  },error=>{
+                    console.log(error.response.msg);
+                    Toast(error.response.msg);
+                  }
+                )
+              }
+            }else {
+              this.productImgList.push(file.content);
+              this.productListShow[this.imgCount]=true;
+              this.imgCount++;
+              formData.append('file',file.file);
+              upLoadGoodsImgs(formData).then(
+                response=>{
+                  console.log(response.data.url);
+                  Toast({
+                    position: 'bottom',
+                    message: '图片上传成功'
+                  });
+                },error=>{
+                  console.log(error.response.msg);
+                }
+              )
+            }
+
+          }
+        },   //方法
         watch: {}      //监听
     }
 </script>

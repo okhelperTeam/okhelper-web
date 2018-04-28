@@ -6,7 +6,7 @@
   width: 100%;
   z-index: 100;
   height: 56px;
-  background: #dd0a20;
+  background: #C20C0C;
   color: white;
 }
 .back-bar-backBtn{
@@ -61,7 +61,7 @@
    /*margin-top: 56px;*/
  }
 .ok-text-name{
-  color:brown;
+  color:#C20C0C;
   width: 30%;
   height: 48px;
   line-height:48px;
@@ -118,7 +118,7 @@
   height: 8px;
 }
 .ok-text-textBox{
-  color:brown;
+  color:#C20C0C;
   width:70%;
   height: 48px;
   display: block;
