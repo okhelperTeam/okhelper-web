@@ -12,10 +12,10 @@
           <div class="ok-sellOrStore-icon">
             <i class="ion-ios-pricetags"></i>
           </div>
-          <div class="ok-sellOrStore-content">
+          <router-link to="/statistics/client" class="ok-sellOrStore-content">
             <div>客户对账</div>
             <div class="ok-sellOrStore-subcontent">欠款对账</div>
-          </div>
+          </router-link>
         </div>
       </div>
       <div class="ok-sellOrStore-model">

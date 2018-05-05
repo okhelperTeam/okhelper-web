@@ -26,6 +26,7 @@ const SellTable= resolve => require(['@/pages/sell/sellTable'], resolve);
 const Repertory = resolve => require(['@/pages/repertory/repertory'], resolve);
 const Statistics = resolve => require(['@/pages/statistics/statistics'], resolve);
 const HotSell = resolve => require(['@/pages/statistics/hotSell'], resolve);
+const ClientReconciliation = resolve => require(['@/pages/statistics/clientReconciliation'], resolve);
 const Header = resolve => require(['@/components/header/header'], resolve);
 const Footer = resolve => require(['@/components/footer/footer'], resolve);
 const BackBar = resolve => require(['@/components/common/backBar'], resolve);
@@ -116,6 +117,10 @@ const routes = [
     path:'/statistics/hotSell',
     component:HotSell,
     meta:{title:"okhelper-HotSell"}
+  },{
+    path:'/statistics/client',
+    component:ClientReconciliation,
+    meta:{title:"okhelper-ClientReconciliation"}
   },{
     path:'/header',
     component:Header,

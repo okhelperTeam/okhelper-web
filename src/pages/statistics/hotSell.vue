@@ -9,7 +9,7 @@
         </div>
 
         <div style="width: 60%;display: block;float: left;height: 32px;line-height: 32px;">热/滞销商品</div>
-        <div style="width: 20%;display: block;float: left;height: 32px;line-height: 32px;" ></div>
+        <div style="width: 20%;display: block;float: left;height: 32px;line-height: 32px;"></div>
       </div>
 
       <div style="clear:both;width: 100%;height:46px;background: #F2F2F2;text-align: center;">
