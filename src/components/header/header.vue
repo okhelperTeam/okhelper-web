@@ -13,7 +13,7 @@
             <input class="header-bar-search-text" type="text" placeholder="查找商品"/>
           </div>
         </div>
-        <router-link to="/home" class="header-bar-cancel-btn">取消</router-link>
+        <router-link :to="lastPage" class="header-bar-cancel-btn">取消</router-link>
       </div>
     </div>
 </template>
@@ -23,7 +23,10 @@
         mixins: [],     //混合
         components: {},//注册组件
         data() {         //数据
-            return {};
+            return {
+              lastPage:'',
+              props:{lastPage:''}
+            };
         },
         computed: {},  //计算属性
         created() {
@@ -32,6 +35,7 @@
         },   //挂载
         methods: {},   //方法
         watch: {}      //监听
+
     }
 </script>
 

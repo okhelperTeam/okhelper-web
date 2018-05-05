@@ -110,7 +110,7 @@
         <div style="width: 80%;height: 50px;display: block;float: left;padding-top: 13px;">
           <div style="width: 100%" class="ok-sellOrStore-content">
             <div>滞/热销商品</div>
-            <div style="font-size: 12px;color:#888888;margin-top:-23px;float: right;margin-right: 10px;">商品销售排行&nbsp;&nbsp;></div>
+            <router-link to="/statistics/hotSell" style="font-size: 12px;color:#888888;margin-top:-23px;float: right;margin-right: 10px;">商品销售排行&nbsp;&nbsp;></router-link>
           </div>
         </div>
       </div>

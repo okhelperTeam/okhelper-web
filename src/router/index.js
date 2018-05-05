@@ -25,6 +25,7 @@ const SellHistory = resolve => require(['@/pages/sell/sellHistory'], resolve);
 const SellTable= resolve => require(['@/pages/sell/sellTable'], resolve);
 const Repertory = resolve => require(['@/pages/repertory/repertory'], resolve);
 const Statistics = resolve => require(['@/pages/statistics/statistics'], resolve);
+const HotSell = resolve => require(['@/pages/statistics/hotSell'], resolve);
 const Header = resolve => require(['@/components/header/header'], resolve);
 const Footer = resolve => require(['@/components/footer/footer'], resolve);
 const BackBar = resolve => require(['@/components/common/backBar'], resolve);
@@ -34,6 +35,7 @@ const Supplier = resolve => require(['@/pages/user/supplier'], resolve);
 const SupplierInfo = resolve => require(['@/pages/user/supplierInfo'], resolve);
 const Warehouse = resolve => require(['@/pages/warehouse/warehouse'], resolve);
 const WarehouseInfo = resolve => require(['@/pages/warehouse/WarehouseInfo'], resolve);
+const Test = resolve => require(['@/pages/test/test'], resolve);
 
 const routes = [
   {
@@ -111,6 +113,10 @@ const routes = [
     component:Statistics,
     meta:{title:"okhelper-Statistics"}
   },{
+    path:'/statistics/hotSell',
+    component:HotSell,
+    meta:{title:"okhelper-HotSell"}
+  },{
     path:'/header',
     component:Header,
     meta:{title:"okhelper-Header"}
@@ -146,6 +152,9 @@ const routes = [
     path:'/warehouse/warehouseInfo',
     component:WarehouseInfo,
     meta:{title:"okhelper-WarehouseInfo"}
+  },{
+    path:'/test',
+    component:Test
   }
 ];
 
