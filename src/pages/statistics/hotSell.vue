@@ -22,8 +22,8 @@
       </div>
       <div>
         <ul style="width: 100%;list-style:none;">
-          <li @click="hotTime(1)" :class="{timeActive:isNow}" class="ok-hotsell-time-li" >今日</li>
-          <li @click="hotTime(2)" :class="{timeActive:isThreeDays}" class="ok-hotsell-time-li" >近3天</li>
+          <li @click="hotTime(1)" :class="{timeActive:isToday}" class="ok-hotsell-time-li" >今日</li>
+          <li @click="hotTime(2)" :class="{timeActive:isYesterday}" class="ok-hotsell-time-li" >昨日</li>
           <li @click="hotTime(3)" :class="{timeActive:isAWeek}" class="ok-hotsell-time-li" >近7日</li>
           <li @click="hotTime(4)" :class="{timeActive:isAMonth}" class="ok-hotsell-time-li" >本月</li>
         </ul>
@@ -57,8 +57,8 @@
             return {
               isHot:true,
               isCold:false,
-              isNow:true,
-              isThreeDays:false,
+              isToday:true,
+              isYesterday:false,
               isAWeek:false,
               isAMonth:false,
               myData:[
@@ -83,11 +83,11 @@
           },
           hotTime(n){
             switch (n){
-              case 1:this.isNow=true;this.isThreeDays=false;this.isAWeek=false;this.isAMonth=false;break;
-              case 2:this.isNow=false;this.isThreeDays=true;this.isAWeek=false;this.isAMonth=false;break;
-              case 3:this.isNow=false;this.isThreeDays=false;this.isAWeek=true;this.isAMonth=false;break;
-              case 4:this.isNow=false;this.isThreeDays=false;this.isAWeek=false;this.isAMonth=true;break;
-              default:this.isNow=true;this.isThreeDays=false;this.isAWeek=false;this.isAMonth=false;
+              case 1:this.isToday=true;this.isYesterday=false;this.isAWeek=false;this.isAMonth=false;break;
+              case 2:this.isToday=false;this.isYesterday=true;this.isAWeek=false;this.isAMonth=false;break;
+              case 3:this.isToday=false;this.isYesterday=false;this.isAWeek=true;this.isAMonth=false;break;
+              case 4:this.isToday=false;this.isYesterday=false;this.isAWeek=false;this.isAMonth=true;break;
+              default:this.isToday=true;this.isYesterday=false;this.isAWeek=false;this.isAMonth=false;
             }
           }
         },   //方法

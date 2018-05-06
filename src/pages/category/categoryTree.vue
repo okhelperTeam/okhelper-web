@@ -5,13 +5,13 @@
   <ul class="tree-menu">
     <li v-for="(item, index) in data">
       <span style="float: left;width: 5%;display: block" @click="toggle(item, index)">
-        <i :class="['icon', item.children && item.children.length ? folderIconList[index] : 'file-text']"></i>
+        <i :class="['icon', item.categoryVoList && item.categoryVoList.length ? folderIconList[index] : 'file-text']"></i>
       </span>
       <div style="width: 95%;display: block;float: left;" @click="choose(item,index)">
-        {{ item[name] || item.menuName }}
+        {{ item[name] || item.categoryName }}
         <i style="float: right;" :class="{'ion-checkmark-round':isChoosed[index]}"></i>
       </div>
-      <tree-menu v-if="scope[index]" :data="item.children" @getSubMenu="getSubMenu"></tree-menu>
+      <tree-menu v-if="scope[index]" :data="item.categoryVoList" @getSubMenu="getSubMenu"></tree-menu>
     </li>
   </ul>
 </template>
@@ -21,8 +21,7 @@
     name: 'treeMenu',
     props: {
       data: Array,
-      name: String,
-      loading: Boolean
+      name: String
     },
     data () {
       return {
@@ -33,10 +32,10 @@
       }
     },
     created () {
+      console.log(this.data)
       this.data.forEach((item, index) => {
-
-        if (item.children && item.children.length) {
-          console.log(item.children)
+        if (item.categoryVoList && item.categoryVoList.length) {
+          console.log(item.categoryVoList)
           this.folderIconList[index] = 'ion-arrow-right-b';
         }
       });
@@ -56,7 +55,7 @@
         this.folderIconList[index] = this.scope[index] ? 'ion-arrow-down-b' : 'ion-arrow-right-b';
       },
       toggle (item, index) {
-        if (item.children && item.children.length) {
+        if (item.categoryVoList && item.categoryVoList.length) {
           this.doTask(index);
         }
       },

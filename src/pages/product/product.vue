@@ -7,7 +7,7 @@
         <router-link to="/sell" style="color: white" class="back-bar-backBtn">&lt;&nbsp;销售
         </router-link>
         <div class="back-bar-name">
-          <div style="width: 70%;margin: 0 auto;" @click="categoryShow=!categoryShow" v-model="choosedCategory">{{choosedCategory}}&nbsp;&nbsp;<i class="ion-arrow-down-b"></i> </div>
+          <div style="width: 70%;margin: 0 auto;" @click="getCategoryList" v-model="choosedCategory">{{choosedCategory}}&nbsp;&nbsp;<i class="ion-arrow-down-b"></i> </div>
         </div>
         <div class="back-bar-cancelBtn">
           <router-link to="/product/productInfo" style="display:block;float:left;width: 25px;height: 25px;font-size: 25px;color: white;font-weight: bolder;">
@@ -45,38 +45,50 @@
       </div>
       </div>
       <div class="ok-model-border"></div>
-      <div v-for="(item,index) in myData">
-        <ok-product
-          :goods-img="item.goodsPhoto"
-          :goods-name="item.goodsName"
-          :cate-name="item.cateName"
-          :discounts="item.youhui"
-          :price="item.danjia"
-          :addTime="item.shangjiashijian"
-          :goodsId="item.goodsId"
-          :index="index"
-          @addProduct="addProduct"
-        ></ok-product>
+      <div v-if="productList.length>0">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          @load="onLoad"
+        >
+          <div v-for="(item,index) in productList">
+            <ok-product
+              :goods-img="item.goodsImg"
+              :goods-name="item.goodsName"
+              :cate-name="item.cateName"
+              :discounts="item.youhui"
+              :price="item.danjia"
+              :addTime="item.shangjiashijian"
+              :goodsId="item.goodsId"
+              :index="index"
+              @addProduct="addProduct"
+            />
+          </div>
+        </van-list>
       </div>
+      <div v-else>
+        没有您要找的商品。。。
+      </div>
+
       <div style="position:fixed;bottom:0;height: 30px;width: 100%;border-top: 1px solid #F2F2F2">
-        <div style="width: 70%;height: 30px;float: left;padding-left:20px;line-height: 30px;">合计种类：{{productList.length}}</div>
+        <div style="width: 70%;height: 30px;float: left;padding-left:20px;line-height: 30px;">合计种类：{{productChoosedList.length}}</div>
         <div @click="toCart" style="background: #C20C0C;color:white;width:30%;height: 30px;float: left;text-align: center;line-height: 30px;">查看销售单</div>
       </div>
 
 
       <transition-group enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
-        <div :key="1" v-show="categoryShow" style="z-index:100;background:white;width: 100%;height: 100%;position: absolute;top: 0px; ">
+        <div :key="1" v-if="categoryShow" style="z-index:100;background:white;width: 100%;height: 100%;position: absolute;top: 0px; ">
           <div :key="2" style="color: white;height:56px;background:#C20C0C;font-size: 18px;margin: 0 auto;width: 100%;text-align: center;line-height: 56px;">
-            <span style="margin-left: 80px">全部分类</span>
+            <span style="margin-left: 80px">{{choosedCategory}}</span>
             <div :key="3" style="float: right;margin-right: 30px;font-size: 25px;width: 56px;height: 20px;"  @click="categoryShow=!categoryShow" >
               <i :key="4" class="ion-ios-close-empty"></i>
             </div>
           </div>
           <div>
             <!--根分类-->
-            <div style="margin-right: 15px;clear: both;">
+            <div style="margin-right: 15px;clear: both;" v-if="isshow">
               <div style="margin-left: 30px;font-size: 18px;height: 36px;line-height: 36px;">全部分类</div>
-              <category-tree :data="theData" :name="menuName" @getSubMenu="getSubMenu"></category-tree>
+              <category-tree :data="categoryList" :name="categoryName" @getSubMenu="getSubMenu"></category-tree>
             </div>
 
           </div>
@@ -90,105 +102,13 @@
   import Vue from 'vue'
   import { TreeSelect } from 'vant';
   import { Collapse, CollapseItem } from 'vant';
-  Vue.use(Collapse).use(CollapseItem);
   import ProductModel from '@/components/common/productModel';
-
-  //分类数据
-  const myData = [
-    {
-      id: '1',
-      menuName: '基础管理',
-      menuCode: '10',
-      children: [
-        {
-          menuName: '用户管理',
-          menuCode: '11'
-        },
-        {
-          id: '12',
-          menuName: '角色管理',
-          menuCode: '12',
-          children: [
-            {
-              menuName: '管理员',
-              menuCode: '121'
-            },
-            {
-              menuName: 'CEO',
-              menuCode: '122'
-            },
-            {
-              menuName: 'CFO',
-              menuCode: '123'
-            },
-            {
-              menuName: 'COO',
-              menuCode: '124'
-            },
-            {
-              menuName: '普通人',
-              menuCode: '124'
-            }
-          ]
-        },
-        {
-          menuName: '权限管理',
-          menuCode: '13'
-        }
-      ]
-    },
-    {
-      id: '2',
-      menuName: '商品管理',
-      menuCode: '',
-      children: [
-        {
-          menuName: '商品一',
-          menuCode: '21'
-        },
-        {
-          id: '22',
-          menuName: '商品二',
-          menuCode: '22',
-          children: [
-            {
-              menuName: '子类商品1',
-              menuCode: '221'
-            },
-            {
-              menuName: '子类商品2',
-              menuCode: '222'
-            }
-          ]
-        }
-      ]
-    },
-    {
-      id: '3',
-      menuName: '订单管理',
-      menuCode: '30',
-      children: [
-        {
-          menuName: '订单列表',
-          menuCode: '31'
-        },
-        {
-          menuName: '退货列表',
-          menuCode: '32',
-          children: []
-        }
-      ]
-    },
-    {
-      id: '4',
-      menuName: '商家管理',
-      menuCode: '',
-      children: []
-    }
-  ];
-
   import categoryTree from '@/pages/category/categoryTree'
   import Category from "../category/category";
+  import {getCategoryList,getProductList} from '@/service/getData';
+  import { List } from 'vant';
+  Vue.use(List);
+  Vue.use(Collapse).use(CollapseItem);
   Vue.use(TreeSelect);
     export default {
         mixins: [],     //混合
@@ -199,18 +119,22 @@
         },//注册组件
         data() {         //数据
             return {
+              loading: false,
+              finished: false,
               choosedCategory:'全部分类',
-              theData: myData,
-              menuName: 'menuName', // 显示菜单名称的属性
+              categoryList:[],//分类数据
+              categoryName: 'categoryName', // 显示菜单名称的属性
               categoryShow:false,
               totalCount:0,
               arrows_show:[true,false,false,false],
-              productList:[],
-              myData:[
-                {goodsId:10000,goodsPhoto:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'热销',danjia:'599.00',shangjiashijian:'2018-4-20 2:20:10'},
-                {goodsId:10001,goodsPhoto:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'热销',danjia:'499.00',shangjiashijian:'2018-4-20 2:20:10'},
-                {goodsId:10002,goodsPhoto:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'热销',danjia:'699.00',shangjiashijian:'2018-4-20 2:20:10'}
-              ]
+              productChoosedList:[],
+              productList:[
+                {goodsId:10000,goodsImg:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'热销',danjia:'599.00',shangjiashijian:'2018-4-20 2:20:10'},
+                {goodsId:10001,goodsImg:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'热销',danjia:'499.00',shangjiashijian:'2018-4-20 2:20:10'},
+                {goodsId:10002,goodsImg:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'热销',danjia:'699.00',shangjiashijian:'2018-4-20 2:20:10'}
+              ],
+              isshow:false,
+              pageModel:{}
             };
         },
         computed: {},  //计算属性
@@ -219,10 +143,45 @@
         mounted() {
         },   //挂载
         methods: {
+          onLoad() {//上划加载商品
+            // setTimeout(() => {
+              // for (let i = 0; i < 10; i++) {
+              //   this.list.push(this.list.length + 1);
+              // }
+              getProductList().then(
+                response=>{
+                  this.loading=false;
+                  this.pageModel=response.data;
+                },error=>{
+                  this.loading=false;
+                  this.finished = true;
+                  console.log(error.response.msg);
+                }
+              );
+
+              if (this.pageModel.lastPage) {
+                this.finished = true;
+              }
+            // }, 500);
+          },
+          getCategoryList(){
+            this.categoryShow=!this.categoryShow;
+            getCategoryList(0).then(
+              response=>{
+                this.categoryList=response.data;
+                this.isshow=true;
+              },error=>{
+                console.log(error.response.msg)
+              }
+            )
+          },
           getSubMenu (categoryItem) {
-            this.categoryShow=false;
-            console.log(categoryItem.menuName);
-            this.choosedCategory=categoryItem.menuName;
+            setTimeout(()=>{
+              this.categoryShow=false;
+            },300);
+            console.log(categoryItem.categoryName);
+            this.choosedCategory=categoryItem.categoryName;
+
           },
           onBuyClicked(){
 
@@ -267,13 +226,13 @@
           addProduct(goodsId,isActive){
             console.log(goodsId);
             if(isActive){
-              this.productList.push(goodsId);
+              this.productChoosedList.push(goodsId);
             }else {
-              this.productList.remove(goodsId);
+              this.productChoosedList.remove(goodsId);
             }
           },
           toCart(){
-            this.$router.push({path:'/cart',query:{productList:this.productList}})
+            this.$router.push({path:'/cart',query:{productChoosedList:this.productChoosedList}})
           }
         },   //方法
         watch: {}      //监听
