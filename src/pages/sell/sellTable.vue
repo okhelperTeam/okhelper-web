@@ -39,7 +39,7 @@
       <div class="ok-model-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;padding-left: 20px;font-size: 16px;color: #888888;font-size: 30px;color: cornflowerblue">
         <div style="width: 50%;height: 50px;display: block;float: left;text-align: center;"><i class="ion-android-expand"></i></div>
-        <div style="width: 50%;height: 50px;display: block;float: left;text-align: center;"><i class="ion-android-add"></i></div>
+        <router-link to="/product/SearchProduct" style="color: cornflowerblue;width: 50%;height: 50px;display: block;float: left;text-align: center;"><i class="ion-android-add"></i></router-link>
       </div>
       <div style="clear: both" class="ok-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;padding-left: 20px;font-size: 16px;color: #888888">客户实付金额

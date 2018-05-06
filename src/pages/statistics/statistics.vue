@@ -23,10 +23,10 @@
           <div class="ok-sellOrStore-icon">
             <i class="ion-ios-star"></i>
           </div>
-          <div class="ok-sellOrStore-content">
+          <router-link to="/statistics/supplier" class="ok-sellOrStore-content">
             <div>供应商对账</div>
             <div class="ok-sellOrStore-subcontent">对账</div>
-          </div>
+          </router-link>
         </div>
       </div>
       <div class="ok-model-border"></div>

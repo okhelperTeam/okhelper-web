@@ -1,6 +1,6 @@
 /**
 * Created by ztt on 2018/5/6.
-*--客户对账
+*--供应商对账
 */
 <template>
     <div id="">
@@ -9,7 +9,7 @@
           <router-link to="/statistics">&lt;&nbsp;返回</router-link>
         </div>
 
-        <div style="width: 60%;display: block;float: left;height: 32px;line-height: 32px;">客户对账</div>
+        <div style="width: 60%;display: block;float: left;height: 32px;line-height: 32px;">供应商对账</div>
         <div style="width: 20%;display: block;float: left;height: 32px;line-height: 32px;" >
           <!--<router-link to="/product/SearchProduct" style="margin-left:8px;display:block;float:left;width: 25px;height: 25px;font-size: 25px;color: white;font-weight: bolder;">-->
             <!--<i class="ion-ios-search"></i>-->
@@ -34,27 +34,22 @@
       <div>
         <ul style="width: 100%;list-style:none;">
           <li class="ok-client-li" >
-            <span>欠款客户合计:</span><span style="color: orangered;">&nbsp;&nbsp;&nbsp;&nbsp;9</span>
+            <span>全部供应商:</span><span style="color: orangered;">&nbsp;&nbsp;&nbsp;&nbsp;9</span>
           </li>
-          <li class="ok-client-li" >
-            <span>欠款金额合计:</span><span style="color: orangered;">&nbsp;&nbsp;&nbsp;&nbsp;￥999.00</span>
-          </li>
+          <!--<li class="ok-client-li" >-->
+            <!--<span>欠款金额合计:</span><span style="color: orangered;">&nbsp;&nbsp;&nbsp;&nbsp;￥999.00</span>-->
+          <!--</li>-->
         </ul>
       </div>
       <div class="ok-model-border"></div>
       <div v-for="item in 9">
         <div style="width: 65%;display: block;float: left;height: 56px;padding-left: 15px;padding-top: 10px;">
-          <span>当当当</span>
+          <span>郑州市鸿丰纸业</span><span style="background: orange;color: white;margin-left: 10px;padding: 3px;border-radius: 5px;height: 16px;line-height: 16px;font-size: 12px;">李玉梅</span>
           <div style="font-size: 12px;color: #888888;">手机号：13838384388</div>
         </div>
-        <div style="width: 35%;display: block;float: right;height: 56px;">
-          <div v-if="arrearage>0">
-            <div style="font-size:12px;margin-right:10px;float: right;background: orangered;height: 24px;width:24px;border-radius:12px;color: white;margin-top: 16px;text-align: center;line-height: 24px;">欠</div>
-          </div>
-          <div v-else>
-            <div style="font-size:12px;margin-right:10px;float: right;height: 24px;width:24px;border-radius:12px;color: white;margin-top: 16px;text-align: center;line-height: 24px;">&nbsp;</div>
-          </div>
-          <div v-model="arrearage" style="margin-right:10px;float: right;line-height: 56px;">222.00</div>
+        <div style="width: 35%;display: block;float: right;height: 56px;font-size: 12px;color: #888888;">
+          <div style="margin-right:10px;float: right;line-height: 56px;"><i class="ion-chevron-right"></i></div>
+          <div style="font-size:14px;margin-right:10px;float: right;height: 24px;border-radius:5px;color: orangered;margin-top: 16px;text-align: center;line-height: 24px;">0.00</div>
         </div>
         <div class="ok-model-border"></div>
       </div>
@@ -68,9 +63,7 @@
         mixins: [],     //混合
         components: {},//注册组件
         data() {         //数据
-            return {
-              arrearage:22
-            };
+            return {};
         },
         computed: {},  //计算属性
         created() {
@@ -84,7 +77,7 @@
 
 <style scoped>
   .ok-client-li{
-    width: 50%;
+    /*width: 50%;*/margin-left: 15px;
     height: 36px;display: block;float:left;background: white;text-align: center;line-height: 36px;
   }
 </style>
