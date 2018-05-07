@@ -11,7 +11,7 @@ import axios from "axios"
 let qs = require('qs');
 export default(method = 'GET', url = '', data = {}) => {
   method = method.toUpperCase();
-  const httpPrefix='http://139.199.30.155';
+  const httpPrefix='http://zxadwz.cn';
 
   let axiosRequestConfig = {
     method: method,

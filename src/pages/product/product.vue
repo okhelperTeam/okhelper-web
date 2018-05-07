@@ -7,15 +7,15 @@
         <router-link to="/sell" style="color: white" class="back-bar-backBtn">&lt;&nbsp;销售
         </router-link>
         <div class="back-bar-name">
-          <div style="width: 70%;margin: 0 auto;" @click="categoryShow=!categoryShow">全部分类(51)&nbsp;&nbsp;<i class="ion-arrow-down-b"></i> </div>
+          <div style="width: 70%;margin: 0 auto;" @click="getCategoryList" v-model="choosedCategory">{{choosedCategory}}&nbsp;&nbsp;<i class="ion-arrow-down-b"></i> </div>
         </div>
         <div class="back-bar-cancelBtn">
           <router-link to="/product/productInfo" style="display:block;float:left;width: 25px;height: 25px;font-size: 25px;color: white;font-weight: bolder;">
             <i class="ion-ios-plus-empty"></i>
           </router-link>
-          <div style="margin-left:8px;display:block;float:left;width: 25px;height: 25px;font-size: 25px;color: white;font-weight: bolder;">
+          <router-link to="/product/SearchProduct" style="margin-left:8px;display:block;float:left;width: 25px;height: 25px;font-size: 25px;color: white;font-weight: bolder;">
             <i class="ion-ios-search"></i>
-          </div>
+          </router-link>
         </div>
       </div>
       <div style="margin-top:56px;height: 37px;width: 100%;">
@@ -45,47 +45,57 @@
       </div>
       </div>
       <div class="ok-model-border"></div>
-      <div v-for="(item,index) in myData">
-        <div style="height: 100px;width: auto;display: block;">
-          <div style="display: block;float: left;width: 30%;text-align: center;height:100px;line-height: 100px;">
-            <img :src="item.goodsPhoto | defaultImg" width="70px" height="70px"/>
+      <div v-if="productList.length>0||pageNum==0">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          :offset=0
+          @load="onLoad"
+        >
+          <div v-for="(item,index) in productList">
+            <ok-product
+              :main-img="item.mainImg"
+              :product-name="item.productName"
+              :cate-name="item.cateName"
+              :discounts="item.youhui"
+              :retail-price="item.retailPrice"
+              :createTime="item.createTime"
+              :Id="item.id"
+              :index="index"
+              @addProduct="addProduct"
+            />
           </div>
-          <div style="display: block;float: left;width: 50%;height:80px;padding-top: 8px;">
-            <div style="width:100%;display: block;float: left;font-size: 16px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">{{item.goodsName}}</div>
-            <div style="float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background:#2D84FF;border-radius: 5px;margin-right: 5px;">{{item.cateName}}</div>
-            <div style="float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background: orange;border-radius: 5px;">{{item.youhui}}</div>
-            <div style="clear: both;color: orange;">￥{{item.danjia}}</div>
-            <div  style="clear: both;color: #888888;">上架时间：{{item.shangjiashijian}}</div>
-          </div>
-          <div style="font-size:30px;line-height:30px;padding-top:20px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
-            <i style="display: block" class="ion-share"></i>
-            <i :class="{cartActive:isActive[index]}" @click="addProduct(item.goodsId,index)" style="display: block" class="ion-ios-cart"></i>
-          </div>
+        </van-list>
+        <div>
+          到底了别滑了，真的没了。。。。。
         </div>
-        <div class="ok-model-border"></div>
       </div>
+      <div v-else>
+        没有您要找的商品。。。
+      </div>
+
       <div style="position:fixed;bottom:0;height: 30px;width: 100%;border-top: 1px solid #F2F2F2">
-        <div style="width: 70%;height: 30px;float: left;padding-left:20px;line-height: 30px;">合计种类：{{productList.length}}</div>
-        <div @click="toCart" style="background: #C20C0C;color:white;width:30%;height: 30px;float: left;text-align: center;line-height: 30px;">查看购物车</div>
+        <div style="background:white;width: 70%;height: 30px;float: left;padding-left:20px;line-height: 30px;">合计种类：{{productChoosedList.length}}</div>
+        <div @click="toCart" style="background: #C20C0C;color:white;width:30%;height: 30px;float: left;text-align: center;line-height: 30px;">查看销售单</div>
       </div>
+
+
       <transition-group enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
-        <div :key="1" v-show="categoryShow" style="z-index:100;background:white;width: 100%;height: 100%;position: absolute;top: 0px; ">
+        <div :key="1" v-if="categoryShow" style="z-index:100;background:white;width: 100%;height: 100%;position: absolute;top: 0px; ">
           <div :key="2" style="color: white;height:56px;background:#C20C0C;font-size: 18px;margin: 0 auto;width: 100%;text-align: center;line-height: 56px;">
-            全部分类
+            <span style="margin-left: 80px">{{choosedCategory}}</span>
             <div :key="3" style="float: right;margin-right: 30px;font-size: 25px;width: 56px;height: 20px;"  @click="categoryShow=!categoryShow" >
               <i :key="4" class="ion-ios-close-empty"></i>
             </div>
           </div>
+          <div>
+            <!--根分类-->
+            <div style="margin-right: 15px;clear: both;" v-if="isshow">
+              <div style="margin-left: 30px;font-size: 18px;height: 36px;line-height: 36px;">全部分类</div>
+              <category-tree :data="categoryList" :name="categoryName" @getSubMenu="getSubMenu"></category-tree>
+            </div>
 
-            <van-tree-select
-              :key="5"
-              :items="items"
-              :main-active-index="mainActiveIndex"
-              :active-id="activeId"
-              @navclick="onNavClick"
-              @itemclick="onItemClick"
-            />
-
+          </div>
         </div>
       </transition-group>
 
@@ -95,104 +105,40 @@
 <script>
   import Vue from 'vue'
   import { TreeSelect } from 'vant';
+  import { Collapse, CollapseItem } from 'vant';
+  import ProductModel from '@/components/common/productModel';
+  import categoryTree from '@/pages/category/categoryTree'
+  import Category from "../category/category";
+  import {getCategoryList,getProductList} from '@/service/getData';
+  import { List } from 'vant';
+  Vue.use(List);
+  Vue.use(Collapse).use(CollapseItem);
   Vue.use(TreeSelect);
     export default {
         mixins: [],     //混合
         components: {
-          'item':{
-             template:`<ul>\\
-                     <li v-for="child in model">\\
-                         <item-child v-if="child.children" :folder="child"  @transid="getid(arguments[0])"/>\\
-                        <p v-else @click="getid(child.id)">{{ child.name }}</p>\\
-                      </li>\\
-                  </ul>`,
-             props:{ model: Object },
-             methods:{
-                  getid:function(id){
-                        this.$emit('transid',id);
-                     },
-             },
-            'item-child':{
-             template:`<div>\\
-                  <p @click="toggle(folder.children)" @click="getid(folder.id)">{{ folder.name }}<a v-if="folder.children">{{ open ? pack : lanch}}</a></p>\\
-                  <item v-if="folder.children" :model="folder.children" v-show="open" @transid="getid(arguments[0])"/>\\
-                 </div>`,
-             props:{ folder: Object },
-            methods:{
-                    toggle:function(status){
-                       if(status){ this.open = !this.open; }
-                    },
-                   getid:function(id){
-                        this.$emit('transid',id);
-                   }
-                },
-             data:function(){
-                 return {
-                        open:false,
-                       lanch:' [+]',
-                       pack:' [-]',
-                   }
-             },
-        }
-       }
+          Category,
+          'ok-product':ProductModel,
+          'category-tree':categoryTree
         },//注册组件
         data() {         //数据
             return {
-              items: [
-                {
-                  id:2000,
-                  // 导航名称
-                  text: '毛巾',
-                  // 该导航下所有的可选项
-                  children: [
-                    {
-                      // 可选项的名称
-                      text: '红色',
-                      // 可选项的id，高亮的时候是根据id是否和选中的id是否相同进行判断的
-                      id: 2002
-                    },
-                    {
-                      // 可选项的名称
-                      text: '绿色',
-                      // 可选项的id，高亮的时候是根据id是否和选中的id是否相同进行判断的
-                      id: 2001
-                    }
-                  ]
-                },{
-                  id:3000,
-                  // 导航名称
-                  text: '牙膏',
-                  // 该导航下所有的可选项
-                  children: [
-                    {
-                      // 可选项的名称
-                      text: '中华',
-                      // 可选项的id，高亮的时候是根据id是否和选中的id是否相同进行判断的
-                      id: 3002
-                    },
-                    {
-                      // 可选项的名称
-                      text: '佳洁士',
-                      // 可选项的id，高亮的时候是根据id是否和选中的id是否相同进行判断的
-                      id: 3001
-                    }
-                  ]
-                }
-              ],
-              // 左侧高亮元素的index
-              mainActiveIndex: 0,
-              // 被选中元素的id
-              activeId: 1001,
+              loading: false,
+              finished: false,
+              paging:true,//开启分页
+              pageNum:0,//请求页码
+              limit:3,//每页多少条
+              choosedCategoryId:0,//所选分类id
+              choosedCategory:'全部分类',
+              categoryList:[],//分类数据
+              categoryName: 'categoryName', // 显示菜单名称的属性
               categoryShow:false,
-              isActive:[],
               totalCount:0,
               arrows_show:[true,false,false,false],
+              productChoosedList:[],
               productList:[],
-              myData:[
-                {goodsId:10000,goodsPhoto:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'特惠',danjia:'599.00',shangjiashijian:'2018-4-20 2:20:10'},
-                {goodsId:10001,goodsPhoto:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'特惠',danjia:'499.00',shangjiashijian:'2018-4-20 2:20:10'},
-                {goodsId:10002,goodsPhoto:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'特惠',danjia:'699.00',shangjiashijian:'2018-4-20 2:20:10'}
-                ]
+              isshow:false,
+              pageModel:{}
             };
         },
         computed: {},  //计算属性
@@ -201,6 +147,61 @@
         mounted() {
         },   //挂载
         methods: {
+          onLoad() {//上划加载商品
+
+            this.pageNum++;
+              getProductList({
+                paging:this.paging,
+                pageNum:this.pageNum,
+                limit:this.limit,
+                CategoryId:this.choosedCategoryId
+              }).then(
+                response=>{
+
+                  // alert(1);
+                  // console.log(response.data.results)
+                  for(var i=0;i<response.data.results.length;i++){
+                    this.productList.push(response.data.results[i]);
+                  }
+
+                  this.loading=false;
+                  if (response.data.lastPage) {
+                    this.finished = true;
+                  }
+                },error=>{
+                  this.loading=false;
+                  this.finished = true;
+
+                  console.log(error.response.msg);
+                }
+              );
+
+          },
+          getCategoryList(){
+            this.categoryShow=!this.categoryShow;
+            getCategoryList(0).then(
+              response=>{
+                this.categoryList=response.data;
+                this.isshow=true;
+              },error=>{
+                console.log(error.response.msg)
+              }
+            )
+          },
+          getSubMenu (categoryItem) {
+            setTimeout(()=>{
+              this.categoryShow=false;
+            },300);
+            console.log(categoryItem.categoryName);
+            this.choosedCategory=categoryItem.categoryName;
+
+          },
+          onBuyClicked(){
+
+          },
+          onAddCartClicked(){
+
+          },
           onNavClick(index) {
             alert(this.items[index].id);
             this.mainActiveIndex = index;
@@ -235,17 +236,16 @@
 
             }
           },
-          addProduct(n,index){
-            this.isActive[index]=!this.isActive[index];
-            console.log(n);
-            if(this.isActive[index]){
-              this.productList.push(n);
+          addProduct(goodsId,isActive){
+            console.log(goodsId);
+            if(isActive){
+              this.productChoosedList.push(goodsId);
             }else {
-              this.productList.remove(n);
+              this.productChoosedList.remove(goodsId);
             }
           },
           toCart(){
-            this.$router.push({path:'/cart',query:{productList:this.productList}})
+            this.$router.push({path:'/cart',query:{productChoosedList:this.productChoosedList}})
           }
         },   //方法
         watch: {}      //监听
@@ -253,7 +253,5 @@
 </script>
 
 <style scoped>
-  .cartActive{
-    color: orange;
-  }
+
 </style>

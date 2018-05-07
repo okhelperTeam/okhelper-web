@@ -25,6 +25,10 @@ const SellHistory = resolve => require(['@/pages/sell/sellHistory'], resolve);
 const SellTable= resolve => require(['@/pages/sell/sellTable'], resolve);
 const Repertory = resolve => require(['@/pages/repertory/repertory'], resolve);
 const Statistics = resolve => require(['@/pages/statistics/statistics'], resolve);
+const HotSell = resolve => require(['@/pages/statistics/hotSell'], resolve);
+const ClientReconciliation = resolve => require(['@/pages/statistics/clientReconciliation'], resolve);
+const SupplierReconciliation = resolve => require(['@/pages/statistics/supplierReconciliation'], resolve);
+const SellDetails = resolve => require(['@/pages/statistics/sellStatistics/sellDetails'], resolve);
 const Header = resolve => require(['@/components/header/header'], resolve);
 const Footer = resolve => require(['@/components/footer/footer'], resolve);
 const BackBar = resolve => require(['@/components/common/backBar'], resolve);
@@ -39,7 +43,7 @@ const StockWarning = resolve => require(['@/pages/warehouse/stockWarning'], reso
 const EarlyWarning = resolve => require(['@/pages/warehouse/earlyWarning'], resolve);
 const PurchaseHistory = resolve => require(['@/pages/warehouse/purchaseHistory'], resolve);
 const PurchaseOrder = resolve => require(['@/pages/warehouse/purchaseOrder'], resolve);
-
+const Test = resolve => require(['@/pages/test/test'], resolve);
 
 const routes = [
   {
@@ -117,6 +121,22 @@ const routes = [
     component:Statistics,
     meta:{title:"okhelper-Statistics"}
   },{
+    path:'/statistics/hotSell',
+    component:HotSell,
+    meta:{title:"okhelper-HotSell"}
+  },{
+    path:'/statistics/client',
+    component:ClientReconciliation,
+    meta:{title:"okhelper-ClientReconciliation"}
+  },{
+    path:'/statistics/supplier',
+    component:SupplierReconciliation,
+    meta:{title:"okhelper-SupplierReconciliation"}
+  },{
+    path:'/statistics/sellDetails',
+    component:SellDetails,
+    meta:{title:"okhelper-SellDetails"}
+  },{
     path:'/header',
     component:Header,
     meta:{title:"okhelper-Header"}
@@ -172,13 +192,15 @@ const routes = [
     path:'/warehouse/purchaseOrder',
     component:PurchaseOrder,
     meta:{title:"okhelper-purchaseOrder"}
+},{
+    path:'/test',
+    component:Test
   }
 ];
 
 //返回路由实例
 const router = new VueRouter({
-  routes
-  ,
+  routes,
   mode: 'history', //html5 模式去除锚点
   saveScrollPosition: false, //记住页面的滚动位置 html5模式适用
   scrollBehavior (to, from, savedPosition) {

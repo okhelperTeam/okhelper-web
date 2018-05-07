@@ -12,10 +12,10 @@
           <div class="ok-sellOrStore-icon">
             <i class="ion-ios-pricetags"></i>
           </div>
-          <div class="ok-sellOrStore-content">
+          <router-link to="/statistics/client" class="ok-sellOrStore-content">
             <div>客户对账</div>
             <div class="ok-sellOrStore-subcontent">欠款对账</div>
-          </div>
+          </router-link>
         </div>
       </div>
       <div class="ok-sellOrStore-model">
@@ -23,10 +23,10 @@
           <div class="ok-sellOrStore-icon">
             <i class="ion-ios-star"></i>
           </div>
-          <div class="ok-sellOrStore-content">
+          <router-link to="/statistics/supplier" class="ok-sellOrStore-content">
             <div>供应商对账</div>
             <div class="ok-sellOrStore-subcontent">对账</div>
-          </div>
+          </router-link>
         </div>
       </div>
       <div class="ok-model-border"></div>
@@ -47,13 +47,13 @@
           <i class="ion-ios-paper"></i>
         </div>
         <div style="width: 80%;height: 70px;display: block;float: left;padding-top: 10px;">
-          <div style="width: 100%" class="ok-sellOrStore-content">
+          <router-link to="/statistics/sellDetails" style="width: 100%" class="ok-sellOrStore-content">
             <div>销售报表</div>
             <div style="margin-top: 5px;">
               <div style="float: left;display: block" class="ok-sellOrStore-subcontent">今日销售&nbsp;&nbsp;&nbsp;<span style="color: red;">58</span>&nbsp;&nbsp;&nbsp;笔</div>
               <div style="float: right;display: block;margin-left: 20px;" class="ok-sellOrStore-subcontent">销售金额&nbsp;&nbsp;&nbsp;<span style="color: red;">￥100.000.00</span></div>
             </div>
-            </div>
+            </router-link>
         </div>
       </div>
       <div class="ok-model-border"></div>
@@ -110,7 +110,7 @@
         <div style="width: 80%;height: 50px;display: block;float: left;padding-top: 13px;">
           <div style="width: 100%" class="ok-sellOrStore-content">
             <div>滞/热销商品</div>
-            <div style="font-size: 12px;color:#888888;margin-top:-23px;float: right;margin-right: 10px;">商品销售排行&nbsp;&nbsp;></div>
+            <router-link to="/statistics/hotSell" style="font-size: 12px;color:#888888;margin-top:-23px;float: right;margin-right: 10px;">商品销售排行&nbsp;&nbsp;></router-link>
           </div>
         </div>
       </div>

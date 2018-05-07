@@ -22,7 +22,7 @@
 
       <div style="height:56px;width:100%"></div>
 
-      <van-swipe :autoplay="3000">
+      <van-swipe :autoplay="3000" style="background: white;">
         <van-swipe-item><img height="120px" width="100%" src="@/assets/icon/lunbo1.jpg"/></van-swipe-item>
         <van-swipe-item><img height="120px" width="100%" src="@/assets/icon/lunbo2.jpg"/></van-swipe-item>
         <van-swipe-item>平台广告3</van-swipe-item>
