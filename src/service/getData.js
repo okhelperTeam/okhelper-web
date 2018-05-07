@@ -15,8 +15,14 @@ var upLoadGoodsImgs = myData => ajax('post','/api/upload/img',myData);
 //获取我的菜单列表
 var getMenuCodeList=myData=>ajax('get','/api/permission/menu/me',myData);
 
+//获取仓库列表
+var getWareHouseList = myData=>ajax('get','/api/warehouse',myData);
+
+
+
 export {
   login,
   getMenuCodeList,
-  upLoadGoodsImgs
+  upLoadGoodsImgs,
+  getWareHouseList
 }

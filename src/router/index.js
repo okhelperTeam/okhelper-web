@@ -34,6 +34,12 @@ const Supplier = resolve => require(['@/pages/user/supplier'], resolve);
 const SupplierInfo = resolve => require(['@/pages/user/supplierInfo'], resolve);
 const Warehouse = resolve => require(['@/pages/warehouse/warehouse'], resolve);
 const WarehouseInfo = resolve => require(['@/pages/warehouse/WarehouseInfo'], resolve);
+const Stock = resolve => require(['@/pages/warehouse/stock'], resolve);
+const StockWarning = resolve => require(['@/pages/warehouse/stockWarning'], resolve);
+const EarlyWarning = resolve => require(['@/pages/warehouse/earlyWarning'], resolve);
+const PurchaseHistory = resolve => require(['@/pages/warehouse/purchaseHistory'], resolve);
+const PurchaseOrder = resolve => require(['@/pages/warehouse/purchaseOrder'], resolve);
+
 
 const routes = [
   {
@@ -146,6 +152,26 @@ const routes = [
     path:'/warehouse/warehouseInfo',
     component:WarehouseInfo,
     meta:{title:"okhelper-WarehouseInfo"}
+  },{
+    path:'/warehouse/stock',
+    component:Stock,
+    meta:{title:"okhelper-stock"}
+  },{
+    path:'/warehouse/stockWarning',
+    component:StockWarning,
+    meta:{title:"okhelper-stockWarning"}
+  },{
+    path:'/warehouse/earlyWarning',
+    component:EarlyWarning,
+    meta:{title:"okhelper-earlyWarning"}
+  },{
+    path:'/warehouse/purchaseHistory',
+    component:PurchaseHistory,
+    meta:{title:"okhelper-purchaseHistory"}
+  },{
+    path:'/warehouse/purchaseOrder',
+    component:PurchaseOrder,
+    meta:{title:"okhelper-purchaseOrder"}
   }
 ];
 

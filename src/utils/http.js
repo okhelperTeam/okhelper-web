@@ -19,10 +19,10 @@ export default(method = 'GET', url = '', data = {}) => {
     data: data,
     withCredentials: true,
     transformRequest: [function (data) { //将json解析成字符串
-      if(!data instanceof FormData){
-        return qs.stringify(data);
-      }else {
+      if(data instanceof FormData){
         return data;
+      }else {
+        return qs.stringify(data);
       }
     }],
     headers: {

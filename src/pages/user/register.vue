@@ -102,7 +102,7 @@
           <!--</div>-->
         </van-cell-group>
         <div style="height: 110px;padding-top:30px;width: 80%;margin:0 auto;">
-          <van-button type="danger" size="large">立即注册</van-button>
+          <van-button type="danger" size="large" @click="submitForm">立即注册</van-button>
         </div>
       </div>
     </div>
@@ -117,22 +117,90 @@
   export default {
     mixins: [],     //混合
     components: {},//注册组件
-    data() {         //数据
-      return {
-        username:'',
-        password:'',
-        passwordagn:'',
-        nick:'',
-        sex:'1'
-      };
+    data () {
+      // var validateUser = (rule, value, cb) => {
+      //   var pattern = /^[\w\u4e00-\u9fa5]{3,10}$/g
+      //   if (value === '') {
+      //     cb(new Error('请输入用户名'))
+      //   } else if (!pattern.test(value)) {
+      //     cb(new Error('请输入3-10个字母/汉字/数字/下划线'))
+      //   } else {
+      //     cb()
+      //   }
+      // }
+      // var validatePwd = (rule, value, cb) => {
+      //   var pattern = /^\S{3,20}$/g
+      //   if (value === '') {
+      //     cb(new Error('请输入密码'))
+      //   } else if (!pattern.test(value)) {
+      //     cb(new Error('请输入3-20个非空白字符'))
+      //   } else {
+      //     if (this.registerForm.checkPwd !== '') {
+      //       this.$refs.registerForm.validateField('checkPwd')
+      //     }
+      //     cb()
+      //   }
+      // }
+      // var validateCheckPwd = (rule, value, cb) => {
+      //   if (value === '') {
+      //     cb(new Error('请再次输入密码'))
+      //   } else if (value !== this.registerForm.pwd) {
+      //     cb(new Error('两次输入密码不一致!'))
+      //   } else {
+      //     cb()
+      //   }
+      // }
+      // var validateUser = (rule, value, cb) => {
+      //   var pattern = /^[\w\u4e00-\u9fa5]{3,10}$/g
+      //   if (value === '') {
+      //     cb(new Error('请输入用户名'))
+      //   } else if (!pattern.test(value)) {
+      //     cb(new Error('请输入3-10个字母/汉字/数字/下划线'))
+      //   } else {
+      //     cb()
+      //   }
+      // }
+      // return {
+      //   registerForm: {
+      //     userPhone:'',
+      //     pwd: '',
+      //     checkPwd: '',
+      //     userName: ''
+      //   },
+      //   registerRule: {
+      //     userName: [
+      //       { validator: validateUser, trigger: 'blur' }
+      //     ],
+      //     pwd: [
+      //       { validator: validatePwd, trigger: 'blur' }
+      //     ],
+      //     checkPwd: [
+      //       { validator: validateCheckPwd, trigger: 'blur' }
+      //     ],
+      //     userName: [
+      //       { validator: validateUser, trigger: 'blur' }
+      //     ]
+      //   }
+      // };
     },
     computed: {},  //计算属性
     created() {
     },   //创建
     mounted() {
     },   //挂载
-    methods: {},   //方法
-    watch: {}      //监听
+    methods: {
+    //   submitForm (formName) {
+    //     this.$refs[formName].validate((valid) => {
+    //       if (valid) {
+    //       ...
+    //       } else {
+    //         return false
+    //       }
+    //     })
+    //   }
+    // }
+    },   //方法
+    watch: {}     //监听
   }
 </script>
 

@@ -15,7 +15,7 @@
     <div>
       <i class="ion-social-snapchat" style="font-size: 70px;margin-left: 10%"></i>
       <div>
-        <router-link to="/user/register" target="_blank">
+        <router-link to="/user/register">
           <div>
             <van-text style="font-size: 20px;float: left;margin-left: 33%;margin-top: -18%;color: black">用户名</van-text>
           </div>
@@ -27,7 +27,7 @@
     </div>
     <div style="margin-top: -3%">
       <div class="person-manger">
-        <router-link to="/user/register" target="_blank">
+        <router-link to="/user/register">
           <div class="photo-icon" style="color: #CD4F39">
             <i class="ion-social-instagram"></i>
           </div>
@@ -41,7 +41,7 @@
         <hr>
       </div>
       <div class="person-manger">
-        <router-link to="/warehouse/warehouse" target="_blank">
+        <router-link to="/warehouse/warehouse">
           <div class="photo-icon" style="color: #EE2C2C">
             <i class="ion-android-home"></i>
           </div>
@@ -55,7 +55,7 @@
         <hr>
       </div>
       <div class="person-manger">
-        <router-link to="/user/customer" target="_blank">
+        <router-link to="/user/customer">
           <div class="photo-icon" style="color: #8DB6CD">
             <i class="ion-ios-person"></i>
           </div>
@@ -69,7 +69,7 @@
         <hr>
       </div>
       <div class="person-manger">
-        <router-link to="/user/supplier" target="_blank">
+        <router-link to="/user/supplier">
           <div class="photo-icon" style="color: #9AFF9A">
             <i class="ion-soup-can"></i>
           </div>
@@ -83,7 +83,7 @@
         <hr>
       </div>
       <div class="person-manger">
-        <router-link to="/user/register" target="_blank">
+        <router-link to="/user/register">
           <div class="photo-icon" style="color: #EE9A00">
             <i class="ion-gear-b"></i>
           </div>
