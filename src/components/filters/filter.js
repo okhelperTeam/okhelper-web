@@ -9,7 +9,7 @@ let defaultImg = function (value) {
 
 //时间格式过滤器
 let toTime = function (ns) {
-  var d = new Date(ns * 1000);
+  var d = new Date(ns);
   var dformat = [d.getFullYear(), d.getMonth() + 1, d.getDate()].join('-');
   return dformat;
 }

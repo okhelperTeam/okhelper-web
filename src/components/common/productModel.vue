@@ -5,18 +5,18 @@
     <div id="">
       <div class="ok-product-box">
         <div class="ok-product-img-box">
-          <img :src="goodsImg | defaultImg" width="70px" height="70px"/>
+          <img :src="mainImg | defaultImg" width="70px" height="70px"/>
         </div>
         <div class="ok-product-details-box">
-          <div class="ok-product-details-name">{{goodsName}}</div>
+          <div class="ok-product-details-name">{{productName}}</div>
           <div  class="ok-product-details-category-name">{{cateName}}</div>
           <div class="ok-product-details-discounts" >{{discounts}}</div>
-          <div class="ok-product-details-price" >￥{{price}}</div>
-          <div class="ok-product-details-addtime">上架时间：{{addTime}}</div>
+          <div class="ok-product-details-price" >￥{{retailPrice}}</div>
+          <div class="ok-product-details-addtime">上架时间：{{createTime | toTime}}</div>
         </div>
         <div class="ok-product-operation">
           <i style="display: block" class="ion-share"></i>
-          <i :class="{cartActive:isActive}" @click="addProduct(goodsId)" style="display: block" class="ion-ios-cart"></i>
+          <i :class="{cartActive:isActive}" @click="addProduct(Id)" style="display: block" class="ion-ios-cart"></i>
         </div>
       </div>
       <div class="ok-model-border"></div>
@@ -33,13 +33,13 @@
             };
         },
         props: {
-          goodsImg: {},
-          goodsName: {},
+          mainImg: {},
+          productName: {},
           cateName: {},
           discounts: {},
-          price: {},
-          addTime: {},
-          goodsId: {},
+          retailPrice: {},
+          createTime: {},
+          Id: {},
           index:{}
         },
         computed: {},  //计算属性

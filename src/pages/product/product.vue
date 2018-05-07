@@ -45,33 +45,37 @@
       </div>
       </div>
       <div class="ok-model-border"></div>
-      <div v-if="productList.length>0">
+      <div v-if="productList.length>0||pageNum==0">
         <van-list
           v-model="loading"
           :finished="finished"
+          :offset=0
           @load="onLoad"
         >
           <div v-for="(item,index) in productList">
             <ok-product
-              :goods-img="item.goodsImg"
-              :goods-name="item.goodsName"
+              :main-img="item.mainImg"
+              :product-name="item.productName"
               :cate-name="item.cateName"
               :discounts="item.youhui"
-              :price="item.danjia"
-              :addTime="item.shangjiashijian"
-              :goodsId="item.goodsId"
+              :retail-price="item.retailPrice"
+              :createTime="item.createTime"
+              :Id="item.id"
               :index="index"
               @addProduct="addProduct"
             />
           </div>
         </van-list>
+        <div>
+          到底了别滑了，真的没了。。。。。
+        </div>
       </div>
       <div v-else>
         没有您要找的商品。。。
       </div>
 
       <div style="position:fixed;bottom:0;height: 30px;width: 100%;border-top: 1px solid #F2F2F2">
-        <div style="width: 70%;height: 30px;float: left;padding-left:20px;line-height: 30px;">合计种类：{{productChoosedList.length}}</div>
+        <div style="background:white;width: 70%;height: 30px;float: left;padding-left:20px;line-height: 30px;">合计种类：{{productChoosedList.length}}</div>
         <div @click="toCart" style="background: #C20C0C;color:white;width:30%;height: 30px;float: left;text-align: center;line-height: 30px;">查看销售单</div>
       </div>
 
@@ -121,6 +125,10 @@
             return {
               loading: false,
               finished: false,
+              paging:true,//开启分页
+              pageNum:0,//请求页码
+              limit:3,//每页多少条
+              choosedCategoryId:0,//所选分类id
               choosedCategory:'全部分类',
               categoryList:[],//分类数据
               categoryName: 'categoryName', // 显示菜单名称的属性
@@ -128,11 +136,7 @@
               totalCount:0,
               arrows_show:[true,false,false,false],
               productChoosedList:[],
-              productList:[
-                {goodsId:10000,goodsImg:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'热销',danjia:'599.00',shangjiashijian:'2018-4-20 2:20:10'},
-                {goodsId:10001,goodsImg:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'热销',danjia:'499.00',shangjiashijian:'2018-4-20 2:20:10'},
-                {goodsId:10002,goodsImg:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'热销',danjia:'699.00',shangjiashijian:'2018-4-20 2:20:10'}
-              ],
+              productList:[],
               isshow:false,
               pageModel:{}
             };
@@ -144,25 +148,34 @@
         },   //挂载
         methods: {
           onLoad() {//上划加载商品
-            // setTimeout(() => {
-              // for (let i = 0; i < 10; i++) {
-              //   this.list.push(this.list.length + 1);
-              // }
-              getProductList().then(
+
+            this.pageNum++;
+              getProductList({
+                paging:this.paging,
+                pageNum:this.pageNum,
+                limit:this.limit,
+                CategoryId:this.choosedCategoryId
+              }).then(
                 response=>{
+
+                  // alert(1);
+                  // console.log(response.data.results)
+                  for(var i=0;i<response.data.results.length;i++){
+                    this.productList.push(response.data.results[i]);
+                  }
+
                   this.loading=false;
-                  this.pageModel=response.data;
+                  if (response.data.lastPage) {
+                    this.finished = true;
+                  }
                 },error=>{
                   this.loading=false;
                   this.finished = true;
+
                   console.log(error.response.msg);
                 }
               );
 
-              if (this.pageModel.lastPage) {
-                this.finished = true;
-              }
-            // }, 500);
           },
           getCategoryList(){
             this.categoryShow=!this.categoryShow;

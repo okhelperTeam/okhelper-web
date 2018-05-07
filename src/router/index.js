@@ -175,8 +175,7 @@ const routes = [
 
 //返回路由实例
 const router = new VueRouter({
-  routes
-  ,
+  routes,
   mode: 'history', //html5 模式去除锚点
   saveScrollPosition: false, //记住页面的滚动位置 html5模式适用
   scrollBehavior (to, from, savedPosition) {
