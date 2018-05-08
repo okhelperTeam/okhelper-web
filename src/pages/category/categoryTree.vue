@@ -32,25 +32,20 @@
       }
     },
     created () {
-      console.log(this.data)
       this.data.forEach((item, index) => {
         if (item.categoryVoList && item.categoryVoList.length) {
-          console.log(item.categoryVoList)
           this.folderIconList[index] = 'ion-arrow-right-b';
         }
       });
     },
     methods: {
       choose(categoryItem,index){
-        console.log(categoryItem);
-        console.log(index);
         this.isChoosed=[];
         this.isChoosed[index]=true;
         Vue.set(this.isChoosed,index,this.isChoosed[index]);
         this.$emit('getSubMenu', categoryItem);
       },
       doTask (index) {
-        console.log(index);
         this.$set(this.scope, index, !this.scope[index]);
         this.folderIconList[index] = this.scope[index] ? 'ion-arrow-down-b' : 'ion-arrow-right-b';
       },

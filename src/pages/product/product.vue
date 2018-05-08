@@ -40,12 +40,12 @@
         <div style="width: 25%;height: 37px;display: block;float: left" @click="arrowsShow(3)">
         <div style="width: 80%;margin: 0 auto;height: 37px;line-height: 37px;text-align: center;">
           <i v-if="arrows_show[3]" class="ion-arrow-down-c"></i>
-          <span>热销</span>
+          <span>库存</span>
         </div>
       </div>
       </div>
       <div class="ok-model-border"></div>
-      <div v-if="productList.length>0||pageNum==0">
+      <div v-if="productList.length>0||myData.pageNum==0">
         <van-list
           v-model="loading"
           :finished="finished"
@@ -62,18 +62,19 @@
               :createTime="item.createTime"
               :Id="item.id"
               :index="index"
+              :salesStock="item.salesStock"
               @addProduct="addProduct"
             />
           </div>
         </van-list>
-        <div>
-          到底了别滑了，真的没了。。。。。
+        <div v-if="finished&&myData.pageNum>1" style="color: #888888;text-align: center;padding: 20px;">
+          到底了别滑了，真的没了.....
         </div>
       </div>
       <div v-else>
         没有您要找的商品。。。
       </div>
-
+      <div style="height: 30px;width: 100%;"></div>
       <div style="position:fixed;bottom:0;height: 30px;width: 100%;border-top: 1px solid #F2F2F2">
         <div style="background:white;width: 70%;height: 30px;float: left;padding-left:20px;line-height: 30px;">合计种类：{{productChoosedList.length}}</div>
         <div @click="toCart" style="background: #C20C0C;color:white;width:30%;height: 30px;float: left;text-align: center;line-height: 30px;">查看销售单</div>
@@ -91,10 +92,11 @@
           <div>
             <!--根分类-->
             <div style="margin-right: 15px;clear: both;" v-if="isshow">
-              <div style="margin-left: 30px;font-size: 18px;height: 36px;line-height: 36px;">全部分类</div>
+              <div @click="choosedAllCategory" style="margin-left: 30px;font-size: 18px;height: 36px;line-height: 36px;">全部分类
+                <i style="float: right;" :class="{'ion-checkmark-round':isChoosedAll}"></i>
+              </div>
               <category-tree :data="categoryList" :name="categoryName" @getSubMenu="getSubMenu"></category-tree>
             </div>
-
           </div>
         </div>
       </transition-group>
@@ -125,10 +127,7 @@
             return {
               loading: false,
               finished: false,
-              paging:true,//开启分页
-              pageNum:0,//请求页码
-              limit:6,//每页多少条
-              choosedCategoryId:0,//所选分类id
+              myData:{paging:true,pageNum:0,limit:6,categoryId:0,orderBy:'create_time desc'},
               choosedCategory:'全部分类',
               categoryList:[],//分类数据
               categoryName: 'categoryName', // 显示菜单名称的属性
@@ -138,7 +137,8 @@
               productChoosedList:[],
               productList:[],
               isshow:false,
-              pageModel:{}
+              pageModel:{},
+              isChoosedAll:true
             };
         },
         computed: {},  //计算属性
@@ -148,13 +148,8 @@
         },   //挂载
         methods: {
           onLoad() {//上划加载商品
-            this.pageNum++;
-              getProductList({
-                paging:this.paging,
-                pageNum:this.pageNum,
-                limit:this.limit,
-                CategoryId:this.choosedCategoryId
-              }).then(
+            this.myData.pageNum++;
+              getProductList(this.myData).then(
                 response=>{
                   for(var i=0;i<response.data.results.length;i++){
                     this.productList.push(response.data.results[i]);
@@ -182,28 +177,25 @@
               }
             )
           },
-          getSubMenu (categoryItem) {
+          getSubMenu (categoryItem) {//获取子菜单
             setTimeout(()=>{
               this.categoryShow=false;
             },300);
-            console.log(categoryItem.categoryName);
-            this.choosedCategory=categoryItem.categoryName;
-
+            this.isChoosedAll=false;
+            this.myData.categoryId=categoryItem.id;
+            this.productList=[];
+            this.myData.pageNum=0;
+            this.myData.orderBy='create_time desc';
+            this.onLoad();
           },
-          onBuyClicked(){
-
-          },
-          onAddCartClicked(){
-
-          },
-          onNavClick(index) {
-            alert(this.items[index].id);
-            this.mainActiveIndex = index;
-            alert(index);
-            // this.activeId = this.items[index].children[0].id;
-          },
-          onItemClick(data) {
-            this.activeId = data.id;
+          choosedAllCategory(){
+            this.isChoosedAll=true;
+            this.myData.categoryId=0;
+            this.productList=[];
+            this.myData.pageNum=0;
+            this.myData.orderBy='create_time desc';
+            this.onLoad();
+            this.categoryShow=false;
           },
           arrowsShow(n) {
             for(var i=0;i<this.arrows_show.length;i++){
@@ -213,18 +205,38 @@
               case 0:
                 this.arrows_show[0]=true;
                 Vue.set(this.arrows_show,0,this.arrows_show[0]);
+                this.productList=[];
+                this.myData.pageNum=0;
+                this.finished = false;
+                this.myData.orderBy='create_time desc';
+                this.onLoad();
                 break;
               case 1:
                 this.arrows_show[1]=true;
                 Vue.set(this.arrows_show,1,this.arrows_show[1]);
+                this.productList=[];
+                this.myData.pageNum=0;
+                this.finished = false;
+                this.myData.orderBy='retail_price desc';
+                this.onLoad();
                 break;
               case 2:
                 this.arrows_show[2]=true;
                 Vue.set(this.arrows_show,2,this.arrows_show[2]);
+                this.productList=[];
+                this.myData.pageNum=0;
+                this.finished = false;
+                this.myData.orderBy='retail_price desc';
+                this.onLoad();
                 break;
               case 3:
                 this.arrows_show[3]=true;
                 Vue.set(this.arrows_show,3,this.arrows_show[3]);
+                this.productList=[];
+                this.myData.pageNum=0;
+                this.finished = false;
+                this.myData.orderBy='sales_stock desc';
+                this.onLoad();
                 break;
               default :
 

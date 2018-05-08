@@ -44,7 +44,7 @@
           <div style="height: auto;margin-left: 15px;margin-right: 15px;">
             <div style="border-bottom: 1px dashed #F2F2F2">
               <div style="font-size: 14px;color: #108ee9;margin-left: 10px;height: 35px;line-height: 35px;">
-                <div @click="editChoosedProductList">
+                <div @click="editChoosedProductList" style="width: 25%;">
                   <i style="font-size: 20px;" class="ion-ios-compose-outline"></i>&nbsp;<span>{{editText}}</span>
                 </div>
               </div>

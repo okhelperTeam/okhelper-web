@@ -24,8 +24,11 @@ var getWareHouseList = myData=>ajax('get','/api/warehouse',myData);
 //获取分类列表
 var getCategoryList=(id)=>ajax('get','/api/categorys/'+id);
 
-//获取商品列表
+//获取商品列表(分类id)
 var getProductList=myData=>ajax('get','/api/product/category',myData);
+
+//获取商品列表(商品名)
+var getProductListByName=myData=>ajax('get','/api/product/search',myData);
 
 export {
   login,
@@ -34,5 +37,6 @@ export {
   getWareHouseList,
   upLoadPayImgs,
   getCategoryList,
-  getProductList
+  getProductList,
+  getProductListByName
 }
