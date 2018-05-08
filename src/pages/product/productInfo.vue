@@ -34,9 +34,9 @@
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">条码<span style="color: #dd0a20">*</span></div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:55%;display: block;float: left;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="唯一保存后不可修改，可生成" type="text"/>
+          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="唯一保存后不可修改，可生成" type="text" v-model="barCode"/>
         </div>
-        <div style="float: right;background: #2D84FF;margin-right:20px;height: 30px;width: 50px;border-radius: 5px;margin-top: 10px;color: white;text-align: center;line-height: 30px;">生成</div>
+        <div @click="generateBarCodeM" style="float: right;background: #2D84FF;margin-right:20px;height: 30px;width: 50px;border-radius: 5px;margin-top: 10px;color: white;text-align: center;line-height: 30px;">生成</div>
       </div>
       <div class="ok-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
@@ -111,7 +111,7 @@
   import Vue from 'vue'
   var VueTouch = require('vue-touch');
   Vue.use(VueTouch, {name: 'v-touch'});
-  import {upLoadGoodsImgs} from '@/service/getData.js'
+  import {upLoadGoodsImgs,generateBarCode} from '@/service/getData.js'
   import { Uploader } from 'vant';
   import { Toast } from 'vant';
 
@@ -124,7 +124,8 @@
               productImgList:[],
               mainImg:[],
               productListShow:[],
-              imgCount:0
+              imgCount:0,
+              barCode:''
             };
         },
         computed: {},  //计算属性
@@ -184,6 +185,13 @@
               )
             }
 
+          },
+          generateBarCodeM(){
+            generateBarCode().then(response=>{
+              this.barCode=response.data.barCode;
+            },error=>{
+              console.log(error.response.msg);
+            })
           }
         },   //方法
         watch: {}      //监听
