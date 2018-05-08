@@ -82,24 +82,7 @@
                     </li>
                   </ul>
                   <div v-show="item.isPriceOpen">
-                    <ul style="list-style: none;background: #F2F2F2;width: 100%;height:50px;padding-top:5px;text-align: center;">
-                      <li class="sell-table-price-detail-open-li">
-                        <div>单价</div>
-                        <input class="sell-table-price-detail-open-li-input" type="number" v-model="item.retailPrice"/>
-                      </li>
-                      <li class="sell-table-price-detail-open-li">
-                        <div>折扣(%)</div>
-                        <input class="sell-table-price-detail-open-li-input" type="number" v-model="item.discounts"/>
-                      </li>
-                      <li class="sell-table-price-detail-open-li">
-                        <div>折后价</div>
-                        <input class="sell-table-price-detail-open-li-input" disabled type="number" v-model="item.discountPrice"/>
-                      </li>
-                      <li class="sell-table-price-detail-open-li">
-                        <div>数量</div>
-                        <input class="sell-table-price-detail-open-li-input" type="number" v-model="item.productCount"/>
-                      </li>
-                    </ul>
+                    <sell-table-item :choosedItem="item"></sell-table-item>
                   </div>
                   <div v-show="item.isNoteOpen" style="width: 100%;height: 40px;border-top: 1px #F2F2F2 dashed;line-height: 40px;font-size: 16px;margin-top: 5px;margin-bottom: 5px;">
                     <div style="width:20%;height: 100%;float: left;text-align: center;color: #888888">备注</div>
@@ -150,17 +133,19 @@
 
 <script>
   const Back = resolve => require(['@/components/common/backBar'], resolve);
+  import sellTableItem from '@/pages/sell/sellTableItem';
     export default {
         mixins: [],     //混合
         components: {
-          'ok-back':Back
+          'ok-back':Back,
+          sellTableItem
         },//注册组件
         data() {         //数据
             return {
               editText:'编辑',
               choosedProductList:[
-                {isPriceOpen:false,retailPrice:100,discountPrice:100,discounts:100,productCount:15,productNotes:'',isNoteOpen:false,productNotes:''},
-                {isPriceOpen:false,retailPrice:200,discountPrice:100,discounts:50,productCount:15,productNotes:'',isNoteOpen:false,productNotes:''},
+                {id:1,isPriceOpen:false,retailPrice:100,discountPrice:100,discounts:100,productCount:15,productNotes:'',isNoteOpen:false,productNotes:''},
+                {id:2,isPriceOpen:false,retailPrice:200,discountPrice:100,discounts:50,productCount:15,productNotes:'',isNoteOpen:false,productNotes:''},
               ]
 
             };
@@ -191,7 +176,9 @@
             }
           }
         },   //方法
-        watch: {}      //监听
+        watch: {
+
+        }      //监听
     }
 </script>
 

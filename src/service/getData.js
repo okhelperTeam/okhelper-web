@@ -27,6 +27,9 @@ var getCategoryList=(id)=>ajax('get','/api/categorys/'+id);
 //获取商品列表
 var getProductList=myData=>ajax('get','/api/product/category',myData);
 
+//生产商品条码
+var generateBarCode=myData=>ajax('get','/api/until/bar_code',myData);
+
 export {
   login,
   getMenuCodeList,
@@ -34,5 +37,6 @@ export {
   getWareHouseList,
   upLoadPayImgs,
   getCategoryList,
-  getProductList
+  getProductList,
+  generateBarCode
 }
