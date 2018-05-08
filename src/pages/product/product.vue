@@ -49,7 +49,7 @@
         <van-list
           v-model="loading"
           :finished="finished"
-          :offset=0
+          :offset=10
           @load="onLoad"
         >
           <div v-for="(item,index) in productList">
@@ -127,7 +127,7 @@
               finished: false,
               paging:true,//开启分页
               pageNum:0,//请求页码
-              limit:3,//每页多少条
+              limit:6,//每页多少条
               choosedCategoryId:0,//所选分类id
               choosedCategory:'全部分类',
               categoryList:[],//分类数据
@@ -148,7 +148,6 @@
         },   //挂载
         methods: {
           onLoad() {//上划加载商品
-
             this.pageNum++;
               getProductList({
                 paging:this.paging,
@@ -157,13 +156,9 @@
                 CategoryId:this.choosedCategoryId
               }).then(
                 response=>{
-
-                  // alert(1);
-                  // console.log(response.data.results)
                   for(var i=0;i<response.data.results.length;i++){
                     this.productList.push(response.data.results[i]);
                   }
-
                   this.loading=false;
                   if (response.data.lastPage) {
                     this.finished = true;
@@ -171,7 +166,6 @@
                 },error=>{
                   this.loading=false;
                   this.finished = true;
-
                   console.log(error.response.msg);
                 }
               );

@@ -28,7 +28,7 @@ Array.prototype.indexOf = function(val) {
   }
   return -1;
 };
-//根据元素下标删除元素
+//根据元素名删除元素
 Array.prototype.remove = function(val) {
   var index = this.indexOf(val);
   if (index > -1) {
