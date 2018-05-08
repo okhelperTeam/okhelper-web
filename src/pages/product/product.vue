@@ -108,7 +108,7 @@
               finished: false,
               myData:{paging:true,pageNum:0,limit:6,categoryId:0,orderBy:'create_time desc'},
               categoryName: 'categoryName', // 显示菜单名称的属性
-              parentData:{categoryShow:false,choosedCategoryName:'全部分类',choosedId:0},
+              parentData:{categoryShow:false,choosedCategoryName:'全部分类'},
               totalCount:0,
               arrows_show:[true,false,false,false],
               productChoosedList:[],
@@ -147,7 +147,6 @@
           },
           getChoosedCategoryId(categoryItem){//获取从子组件来的分类id
             this.parentData.choosedCategoryName=categoryItem.categoryName;
-            this.parentData.choosedId=categoryItem.id;
             this.myData.categoryId=categoryItem.id;
             this.myData.orderBy='create_time desc';
             this.reLoad();

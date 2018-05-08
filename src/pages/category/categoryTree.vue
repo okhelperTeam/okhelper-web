@@ -11,7 +11,7 @@
         {{ item[name] || item.categoryName }}
         <i style="float: right;" :class="{'ion-checkmark-round':isChoosed[index]}"></i>
       </div>
-      <tree-menu v-if="scope[index]" :data="item.categoryVoList" :choosedId="choosedId" :isClear="isClear" @getSubMenu="getSubMenu"></tree-menu>
+      <tree-menu v-if="scope[index]" :data="item.categoryVoList" :chooseId="chooseId" @getSubMenu="getSubMenu"></tree-menu>
     </li>
   </ul>
 </template>
@@ -22,33 +22,31 @@
     props: {
       data: Array,
       name: String,
-      choosedId:{},
-      isClear:{}
+      chooseId:{}
     },
     data () {
       return {
         folderIconList: [],
         loadingIconList: [],
         scope: {},
-        isChoosed:[]//是否选中分类
+        isChoosed:[],//是否选中分类
+        theChoosedId:0
       }
     },
     created () {
-      this.data.forEach((item, index) => {
-        if (item.categoryVoList && item.categoryVoList.length) {
-          this.folderIconList[index] = 'ion-arrow-right-b';
-        }
-         if(item.id===this.choosedId){
-          //this.choose(item,index);
-           this.isChoosed=[];
-           this.isChoosed[index]=true;
-           Vue.set(this.isChoosed,index,this.isChoosed[index]);
-         }
-      });
+      setTimeout(()=>{
+        this.data.forEach((item, index) => {
+          if (item.categoryVoList && item.categoryVoList.length) {
+            this.folderIconList[index] = 'ion-arrow-right-b';
+          }
+        });
+      },500)
     },
     methods: {
       choose(categoryItem,index){
-        this.$emit('getSubMenu', categoryItem,(a)=>{
+        this.$emit('getSubMenu', categoryItem,(id)=>{
+          this.theChoosedId=categoryItem.id;
+          this.isChoosed=[];
           this.isChoosed[index]=true;
           Vue.set(this.isChoosed,index,this.isChoosed[index]);
         });
@@ -62,13 +60,21 @@
           this.doTask(index);
         }
       },
-      getSubMenu(item){
-        this.$emit('getSubMenu', item);
+      getSubMenu(item,callback){
+        this.$emit('getSubMenu', item,(id)=>{
+          callback(id);
+        });
       }
     },
     watch:{
-      isClear:function (val,oldVal) {
-        if(true){
+      chooseId:function (val,oldVal) {
+        // let flag=false;
+        // this.data.forEach((item, index) => {
+        //   if(item.id==val){
+        //     flag=true;
+        //   }
+        // });
+        if(this.theChoosedId!=val){
           this.isChoosed=[];
         }
       }

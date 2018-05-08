@@ -17,7 +17,7 @@
               <div @click="choosedAllCategory" style="margin-left: 30px;font-size: 18px;height: 36px;line-height: 36px;">全部分类
                 <i style="float: right;" :class="{'ion-checkmark-round':isChoosedAll}"></i>
               </div>
-              <category-tree :data="categoryList" :name="categoryName" :choosedId="parentData.choosedId" :isClear="isClear" @getSubMenu="getSubMenu"></category-tree>
+              <category-tree :data="categoryList" :name="categoryName" :chooseId="choosedCategoryId" @getSubMenu="getSubMenu"></category-tree>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@
               isChoosedAll:true,
               categoryList:[],//分类数据
               categoryName: 'categoryName',
-              isClear:false
+              choosedCategoryId:0
             };
         },
         props:{
@@ -72,17 +72,18 @@
               this.parentData.categoryShow=false;
             },300);
             var categoryItem={categoryName:'全部分类',id:0};
+            this.choosedCategoryId=0;
+              this.isChoosedAll=true;
             this.$emit('getChoosedCategoryId',categoryItem);
           },
           getSubMenu (categoryItem,callback) {//获取子菜单
-            this.isClear=!this.isClear;
+            this.choosedCategoryId=categoryItem.id;
+            this.isChoosedAll=false;
+            this.$emit('getChoosedCategoryId',categoryItem);
             setTimeout(()=>{
               this.parentData.categoryShow=false;
             },300);
-            this.isChoosedAll=false;
-            callback(1);
-            this.$emit('getChoosedCategoryId',categoryItem);
-
+            callback(categoryItem.id);
           }
         },   //方法
         watch: {

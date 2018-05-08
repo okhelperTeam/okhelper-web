@@ -54,6 +54,7 @@
   import {getProductListByName} from '@/service/getData';
   import { List } from 'vant';
   import ProductModel from '@/components/common/productModel';
+  import _ from 'lodash';
   Vue.use(List);
 
   Vue.use(Search);
@@ -113,12 +114,15 @@
           },
           addProduct(index){//选择商品
             alert(index);
-          }
+          },
+          search:_.debounce(function(){
+            this.reLoad()
+          },500)
         },   //方法
         watch: {
           searchProductName:function (newValue,oldValue) {
               this.searchProductName=newValue;
-              this.reLoad();
+              this.search();
           }
         },      //监听
         beforeRouteEnter (to, from, next) {
