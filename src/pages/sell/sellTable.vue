@@ -117,7 +117,7 @@
       </div>
       <div style="clear: both" class="ok-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;padding-left: 20px;font-size: 16px;color: #888888">本单客户积分
-        <input style="height: 50px;font-size: 16px;width: 20%;margin-right: 20px;float: right;" placeholder="0" type="text"/>
+        <input disabled style="height: 50px;font-size: 16px;width: 20%;margin-right: 20px;float: right;" placeholder="0" type="text" v-model="integral"/>
       </div>
       <div class="ok-model-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;padding-left: 20px;font-size: 16px;color: #888888">备注
@@ -125,7 +125,7 @@
       </div>
       <div style="clear: both" class="ok-border"></div>
       <div style="width: 100%;height: 40px;bottom: 0;position: fixed;border-top:1px solid #F2F2F2 ">
-        <div style="margin-left:20px;font-size: 14px;height: 40px;line-height:40px;background: white;width: 60%;display: block;float: left;" v-model="choosedProductList.length">合计：{{choosedProductList.length}}件&nbsp;&nbsp;&nbsp;<span style="color: orange;">￥0.00</span></div>
+        <div style="margin-left:20px;font-size: 14px;height: 40px;line-height:40px;background: white;width: 60%;display: block;float: left;" v-model="choosedProductList.length">合计：{{choosedProductList.length}}件&nbsp;&nbsp;&nbsp;<span style="color: orange;">￥{{totalMoney}}</span></div>
         <div style="width: 30%;height: 40px;display: block;float: right;color:white;background: cadetblue;text-align:center;line-height:40px;font-size: 14px;">出售</div>
       </div>
     </div>
@@ -144,13 +144,17 @@
             return {
               editText:'编辑',
               choosedProductList:[
-                {id:1,isPriceOpen:false,retailPrice:100,discountPrice:100,discounts:100,productCount:15,productNotes:'',isNoteOpen:false,productNotes:''},
-                {id:2,isPriceOpen:false,retailPrice:200,discountPrice:100,discounts:50,productCount:15,productNotes:'',isNoteOpen:false,productNotes:''},
-              ]
+                {isPriceOpen:false,retailPrice:100,discountPrice:100,discounts:100,productCount:15,productNotes:'',isNoteOpen:false,productNotes:''},
+                {isPriceOpen:false,retailPrice:200,discountPrice:100,discounts:50,productCount:15,productNotes:'',isNoteOpen:false,productNotes:''},
+              ],
+              totalMoney:10000.56
 
             };
         },
         computed: {
+          integral(){
+            return parseInt(this.totalMoney);
+          }
         },  //计算属性
         created() {
         },   //创建
@@ -158,7 +162,6 @@
         },   //挂载
         methods: {
           editChoosedProductList(){
-            alert(this.editText=='编辑')
             if(this.editText=='编辑'){
               this.editText='取消编辑';
             }else{
