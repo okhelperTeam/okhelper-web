@@ -3,24 +3,95 @@
 */
 <template>
     <div id="">
-
+      <transition-group enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
+        <div :key="1" v-show="parentData.categoryShow" style="z-index:100;background:white;width: 100%;height: 100%;position: absolute;top: 0px; ">
+          <div :key="2" style="color: white;height:56px;background:#C20C0C;font-size: 18px;margin: 0 auto;width: 100%;text-align: center;line-height: 56px;">
+            <span style="margin-left: 80px">{{parentData.choosedCategoryName}}</span>
+            <div :key="3" style="float: right;margin-right: 30px;font-size: 25px;width: 56px;height: 20px;"  @click="parentData.categoryShow=false" >
+              <i :key="4" class="ion-ios-close-empty"></i>
+            </div>
+          </div>
+          <div>
+            <!--根分类-->
+            <div style="margin-right: 15px;clear: both;">
+              <div @click="choosedAllCategory" style="margin-left: 30px;font-size: 18px;height: 36px;line-height: 36px;">全部分类
+                <i style="float: right;" :class="{'ion-checkmark-round':isChoosedAll}"></i>
+              </div>
+              <category-tree :data="categoryList" :name="categoryName" :choosedId="parentData.choosedId" :isClear="isClear" @getSubMenu="getSubMenu"></category-tree>
+            </div>
+          </div>
+        </div>
+      </transition-group>
     </div>
 </template>
 
 <script>
+  import categoryTree from '@/pages/category/categoryTree'
+  import {getCategoryList} from '@/service/getData';
     export default {
         mixins: [],     //混合
-        components: {},//注册组件
+        components: {
+          'category-tree':categoryTree
+        },//注册组件
         data() {         //数据
-            return {};
+            return {
+              choosedCategoryName:'全部分类',
+              isChoosedAll:true,
+              categoryList:[],//分类数据
+              categoryName: 'categoryName',
+              isClear:false
+            };
+        },
+        props:{
+          parentData:{}
         },
         computed: {},  //计算属性
         created() {
+          getCategoryList(0).then(
+            response=>{
+              this.categoryList=response.data;
+            },error=>{
+              console.log(error.response.msg)
+            }
+          )
         },   //创建
         mounted() {
         },   //挂载
-        methods: {},   //方法
-        watch: {}      //监听
+        methods: {
+          getCategoryList(){//获取菜单列表
+            getCategoryList(0).then(
+              response=>{
+                this.categoryList=response.data;
+              },error=>{
+                console.log(error.response.msg)
+              }
+            )
+          },
+          choosedAllCategory(){
+            setTimeout(()=>{
+              this.parentData.categoryShow=false;
+            },300);
+            var categoryItem={categoryName:'全部分类',id:0};
+            this.$emit('getChoosedCategoryId',categoryItem);
+          },
+          getSubMenu (categoryItem,callback) {//获取子菜单
+            this.isClear=!this.isClear;
+            setTimeout(()=>{
+              this.parentData.categoryShow=false;
+            },300);
+            this.isChoosedAll=false;
+            callback(1);
+            this.$emit('getChoosedCategoryId',categoryItem);
+
+          }
+        },   //方法
+        watch: {
+          'parentData.categoryShow':function (newValue,oldValue) {
+            if(newValue){
+              this.getCategoryList();
+            }
+          }   //监听
+        }
     }
 </script>
 

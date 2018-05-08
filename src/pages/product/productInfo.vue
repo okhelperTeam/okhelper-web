@@ -101,8 +101,11 @@
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">分类</div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-          <router-link style="height: 30px;font-size: 16px;width: 100%;">选择分类</router-link>
+          <div @click="showCategory=!showCategory" style="height: 30px;font-size: 16px;width: 100%;">选择分类</div>
         </div>
+      </div>
+      <div v-if="showCategory">
+
       </div>
     </div>
 </template>
@@ -125,7 +128,8 @@
               mainImg:[],
               productListShow:[],
               imgCount:0,
-              barCode:''
+              barCode:'',
+              showCategory:false
             };
         },
         computed: {},  //计算属性

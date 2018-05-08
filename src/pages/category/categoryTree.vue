@@ -11,7 +11,7 @@
         {{ item[name] || item.categoryName }}
         <i style="float: right;" :class="{'ion-checkmark-round':isChoosed[index]}"></i>
       </div>
-      <tree-menu v-if="scope[index]" :data="item.categoryVoList" @getSubMenu="getSubMenu"></tree-menu>
+      <tree-menu v-if="scope[index]" :data="item.categoryVoList" :choosedId="choosedId" :isClear="isClear" @getSubMenu="getSubMenu"></tree-menu>
     </li>
   </ul>
 </template>
@@ -21,7 +21,9 @@
     name: 'treeMenu',
     props: {
       data: Array,
-      name: String
+      name: String,
+      choosedId:{},
+      isClear:{}
     },
     data () {
       return {
@@ -36,14 +38,20 @@
         if (item.categoryVoList && item.categoryVoList.length) {
           this.folderIconList[index] = 'ion-arrow-right-b';
         }
+         if(item.id===this.choosedId){
+          //this.choose(item,index);
+           this.isChoosed=[];
+           this.isChoosed[index]=true;
+           Vue.set(this.isChoosed,index,this.isChoosed[index]);
+         }
       });
     },
     methods: {
       choose(categoryItem,index){
-        this.isChoosed=[];
-        this.isChoosed[index]=true;
-        Vue.set(this.isChoosed,index,this.isChoosed[index]);
-        this.$emit('getSubMenu', categoryItem);
+        this.$emit('getSubMenu', categoryItem,(a)=>{
+          this.isChoosed[index]=true;
+          Vue.set(this.isChoosed,index,this.isChoosed[index]);
+        });
       },
       doTask (index) {
         this.$set(this.scope, index, !this.scope[index]);
@@ -57,6 +65,13 @@
       getSubMenu(item){
         this.$emit('getSubMenu', item);
       }
+    },
+    watch:{
+      isClear:function (val,oldVal) {
+        if(true){
+          this.isChoosed=[];
+        }
+      }
     }
   }
 </script>
@@ -66,13 +81,13 @@
     clear: both;
     list-style: none;
     font-size: 18px;
-    border-top: 1px solid #F2F2F2;
+    /*border-top: 1px solid #F2F2F2;*/
   }
   .tree-menu li {
     clear: both;
     line-height: 2;
-    border-bottom: 1px solid #F2F2F2;
-    margin-left: 15px;
+    /*border-bottom: 1px solid #F2F2F2;*/
+    margin-left: 25px;
   }
   .tree-menu li span {
     cursor: default;
