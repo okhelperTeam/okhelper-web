@@ -174,7 +174,7 @@
 html{
   font-family: "Helvetica Nuue",Helvetica, sans-serif;
   /*谷歌浏览器字体最小12px 100%/none关闭了字体大小自动调整功能*/
-  -webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: none;
   /*a标签以及：active 的伪类有默认的高亮框*/
   -webkit-tap-highlight-color: transparent;
   /*禁止文本被选中*/

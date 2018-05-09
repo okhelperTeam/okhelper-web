@@ -15,57 +15,34 @@
         </div>
         <router-link :to="lastPage" class="header-bar-cancel-btn">取消</router-link>
       </div>
-      <div style="margin-top:56px;height: 100px;width: auto;display: block;">
-        <div style="display: block;float: left;width: 30%;text-align: center;height:100px;line-height: 100px;">
-          <img src="@/assets/icon/product2.jpg" width="70px" height="70px"/>
-        </div>
-        <div style="display: block;float: left;width: 50%;height:80px;padding-top: 8px;">
-          <div style="width:100%;display: block;float: left;font-size: 16px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">菀草壹韩版春季宽松春秋蝙蝠袖风衣</div>
-          <div style="float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background:#2D84FF;border-radius: 5px;margin-right: 5px;">半身裙</div>
-          <div style="float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background: red;border-radius: 5px;">热销</div>
-          <div style="clear: both;color: orange;">￥499.00</div>
-          <div  style="clear: both;color: #888888;">上架时间：2018-4-20 5:20:22</div>
-        </div>
-        <div style="font-size:30px;line-height:30px;padding-top:20px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
-          <i style="display: block" class="ion-share"></i>
-          <i style="display: block" class="ion-ios-cart"></i>
-        </div>
+      <div class="ok-model-border"></div>
+      <div style="margin-top:56px;"></div>
+      <div v-if="productList.length>0">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          :offset=10
+          @load="onLoad"
+        >
+          <div v-for="(item,index) in productList">
+            <ok-product
+              :main-img="item.mainImg"
+              :product-name="item.productName"
+              :cate-name="item.cateName"
+              :discounts="item.youhui"
+              :retail-price="item.retailPrice"
+              :createTime="item.createTime"
+              :Id="item.id"
+              :index="index"
+              @addProduct="addProduct"
+            />
+          </div>
+        </van-list>
+      </div>
+      <div v-else>
+        商品未找到
       </div>
       <div class="ok-model-border"></div>
-      <div style="height: 100px;width: auto;display: block;">
-        <div style="display: block;float: left;width: 30%;text-align: center;height:100px;line-height: 100px;">
-          <img src="@/assets/icon/product1.jpg" width="70px" height="70px"/>
-        </div>
-        <div style="display: block;float: left;width: 50%;height:80px;padding-top: 8px;">
-          <div style="width:100%;display: block;float: left;font-size: 16px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">菀草壹韩版春季宽松春秋蝙蝠袖风衣</div>
-          <div style="float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background:#2D84FF;border-radius: 5px;margin-right: 5px;">大衣</div>
-          <div style="float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background: red;border-radius: 5px;">热销</div>
-          <div style="clear: both;color: orange;">￥599.00</div>
-          <div  style="clear: both;color: #888888;">上架时间：2018-4-21 8:20:11</div>
-        </div>
-        <div style="font-size:30px;line-height:30px;padding-top:20px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
-          <i style="display: block" class="ion-share"></i>
-          <i style="display: block" class="ion-ios-cart"></i>
-        </div>
-      </div>
-      <div style="height: 100px;width: auto;display: block;">
-        <div style="display: block;float: left;width: 30%;text-align: center;height:100px;line-height: 100px;">
-          <img src="@/assets/icon/product3.jpg" width="70px" height="70px"/>
-        </div>
-        <div style="display: block;float: left;width: 50%;height:80px;padding-top: 8px;">
-          <div style="width:100%;display: block;float: left;font-size: 16px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">菀草壹韩版春季宽松春秋蝙蝠袖风衣</div>
-          <div style="float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background:#2D84FF;border-radius: 5px;margin-right: 5px;">大衣</div>
-          <div style="float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background: red;border-radius: 5px;">热销</div>
-          <div style="clear: both;color: orange;">￥699.00</div>
-          <div  style="clear: both;color: #888888;">上架时间：2018-4-20 2:20:10</div>
-        </div>
-        <div style="font-size:30px;line-height:30px;padding-top:20px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
-          <i style="display: block" class="ion-share"></i>
-          <i style="display: block" class="ion-ios-cart"></i>
-        </div>
-      </div>
-      <div class="ok-model-border"></div>
-      <!--<ok-footer></ok-footer>-->
     </div>
 </template>
 
@@ -74,18 +51,30 @@
   const Footer = resolve => require(['@/components/footer/footer'], resolve);
   import Vue from 'vue'
   import { Search } from 'vant';
+  import {getProductListByName} from '@/service/getData';
+  import { List } from 'vant';
+  import ProductModel from '@/components/common/productModel';
+  import _ from 'lodash';
+  Vue.use(List);
 
   Vue.use(Search);
     export default {
         mixins: [],     //混合
         components: {
           'ok-header':Header,
-          'ok-footer':Footer
+          'ok-footer':Footer,
+          'ok-product':ProductModel
         },//注册组件
         data() {         //数据
             return {
+              loading:false,
+              finished:false,
               lastPage:'',
-              searchProductName:''
+              searchProductName:'',
+              pageNum:0,
+              paging:true,
+              limit:6,
+              productList:[]
             };
         },
         computed: {},  //计算属性
@@ -94,11 +83,46 @@
         mounted() {
         },   //挂载
         methods: {
-
+          onLoad(){//上划加载商品
+            this.pageNum++;
+            getProductListByName({
+              paging: this.paging,
+              pageNum: this.pageNum,
+              limit: this.limit,
+              condition:this.searchProductName
+            }).then(
+              response => {
+                for(var i=0;i<response.data.results.length;i++){
+                  this.productList.push(response.data.results[i]);
+                }
+                this.loading=false;
+                if (response.data.lastPage) {
+                  this.finished = true;
+                }
+              },error=> {
+                this.loading = false;
+                this.finished = true;
+                console.log(error.response.msg);
+              }
+            );
+          },
+          reLoad(){//重新加载商品
+            this.pageNum=0;
+            this.productList=[];
+            this.finished=false;
+            this.onLoad();
+          },
+          addProduct(index){//选择商品
+            alert(index);
+          },
+          search:_.debounce(function(){
+            this.reLoad()
+          },500)
         },   //方法
         watch: {
           searchProductName:function (newValue,oldValue) {
-
+              this.searchProductName=newValue;
+              this.search();
           }
         },      //监听
         beforeRouteEnter (to, from, next) {

@@ -11,7 +11,7 @@
         {{ item[name] || item.categoryName }}
         <i style="float: right;" :class="{'ion-checkmark-round':isChoosed[index]}"></i>
       </div>
-      <tree-menu v-if="scope[index]" :data="item.categoryVoList" @getSubMenu="getSubMenu"></tree-menu>
+      <tree-menu v-if="scope[index]" :data="item.categoryVoList" :chooseId="chooseId" @getSubMenu="getSubMenu"></tree-menu>
     </li>
   </ul>
 </template>
@@ -21,36 +21,37 @@
     name: 'treeMenu',
     props: {
       data: Array,
-      name: String
+      name: String,
+      chooseId:{}
     },
     data () {
       return {
         folderIconList: [],
         loadingIconList: [],
         scope: {},
-        isChoosed:[]//是否选中分类
+        isChoosed:[],//是否选中分类
+        theChoosedId:0
       }
     },
     created () {
-      console.log(this.data)
-      this.data.forEach((item, index) => {
-        if (item.categoryVoList && item.categoryVoList.length) {
-          console.log(item.categoryVoList)
-          this.folderIconList[index] = 'ion-arrow-right-b';
-        }
-      });
+      setTimeout(()=>{
+        this.data.forEach((item, index) => {
+          if (item.categoryVoList && item.categoryVoList.length) {
+            this.folderIconList[index] = 'ion-arrow-right-b';
+          }
+        });
+      },500)
     },
     methods: {
       choose(categoryItem,index){
-        console.log(categoryItem);
-        console.log(index);
-        this.isChoosed=[];
-        this.isChoosed[index]=true;
-        Vue.set(this.isChoosed,index,this.isChoosed[index]);
-        this.$emit('getSubMenu', categoryItem);
+        this.$emit('getSubMenu', categoryItem,(id)=>{
+          this.theChoosedId=categoryItem.id;
+          this.isChoosed=[];
+          this.isChoosed[index]=true;
+          Vue.set(this.isChoosed,index,this.isChoosed[index]);
+        });
       },
       doTask (index) {
-        console.log(index);
         this.$set(this.scope, index, !this.scope[index]);
         this.folderIconList[index] = this.scope[index] ? 'ion-arrow-down-b' : 'ion-arrow-right-b';
       },
@@ -59,8 +60,23 @@
           this.doTask(index);
         }
       },
-      getSubMenu(item){
-        this.$emit('getSubMenu', item);
+      getSubMenu(item,callback){
+        this.$emit('getSubMenu', item,(id)=>{
+          callback(id);
+        });
+      }
+    },
+    watch:{
+      chooseId:function (val,oldVal) {
+        // let flag=false;
+        // this.data.forEach((item, index) => {
+        //   if(item.id==val){
+        //     flag=true;
+        //   }
+        // });
+        if(this.theChoosedId!=val){
+          this.isChoosed=[];
+        }
       }
     }
   }
@@ -71,13 +87,13 @@
     clear: both;
     list-style: none;
     font-size: 18px;
-    border-top: 1px solid #F2F2F2;
+    /*border-top: 1px solid #F2F2F2;*/
   }
   .tree-menu li {
     clear: both;
     line-height: 2;
-    border-bottom: 1px solid #F2F2F2;
-    margin-left: 15px;
+    /*border-bottom: 1px solid #F2F2F2;*/
+    margin-left: 25px;
   }
   .tree-menu li span {
     cursor: default;
