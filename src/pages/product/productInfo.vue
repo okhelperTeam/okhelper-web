@@ -10,7 +10,7 @@
           新增商品
         </div>
         <div class="back-bar-cancelBtn">
-          <div style="margin-left:8px;display:block;float:left;width: 50px;height: 25px;font-size: 18px;color: white;">
+          <div @click="addNewProduct" style="margin-left:8px;display:block;float:left;width: 50px;height: 25px;font-size: 18px;color: white;">
             保存
           </div>
         </div>
@@ -19,7 +19,7 @@
       <div style="margin-top:56px;width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">名称<span style="color: #dd0a20">*</span></div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品名称" type="text"/>
+          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品名称" type="text" v-model="product.productName"/>
         </div>
       </div>
       <div class="ok-model-border"></div>
@@ -27,14 +27,14 @@
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
       <div style="width:25%;display: block;float: left;padding-left: 20px;">货号<span style="color: #dd0a20">*</span></div>
       <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-        <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="货号" type="text"/>
+        <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="货号" type="text"v-model="product.productNumber"/>
       </div>
       </div>
       <div class="ok-model-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">条码<span style="color: #dd0a20">*</span></div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:55%;display: block;float: left;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="唯一保存后不可修改，可生成" type="text" v-model="barCode"/>
+          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="唯一保存后不可修改，可生成" type="text" v-model="product.barCode"/>
         </div>
         <div @click="generateBarCodeM" style="float: right;background: #2D84FF;margin-right:20px;height: 30px;width: 50px;border-radius: 5px;margin-top: 10px;color: white;text-align: center;line-height: 30px;">生成</div>
       </div>
@@ -42,35 +42,35 @@
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">采购价<span style="color: #dd0a20">*</span></div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:50%;display: block;float: right;margin-right: 20px;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="￥0.00" type="text"/>
+          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="￥0.00" type="text" v-model="product.productInPrice"/>
         </div>
       </div>
       <div class="ok-model-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">批发价<span style="color: #dd0a20">*</span></div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:50%;display: block;float: right;margin-right: 20px;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="￥0.00" type="text"/>
+          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="￥0.00" type="text" v-model="product.productOutPrice"/>
         </div>
       </div>
       <div class="ok-model-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">零售价<span style="color: #dd0a20">*</span></div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:50%;display: block;float: right;margin-right: 20px;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="￥0.00" type="text"/>
+          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="￥0.00" type="text" v-model="product.productRetailPrice"/>
         </div>
       </div>
       <div class="ok-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">颜色</div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品颜色" type="text"/>
+          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品颜色" type="text"  v-model="product.productDetail.productColor"/>
         </div>
       </div>
       <div class="ok-model-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">尺码</div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品尺寸" type="text"/>
+          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品尺寸" type="text" v-model="product.productDetail.productSize"/>
         </div>
       </div>
       <div style="height: auto;padding: 20px;background: #F2F2F2;width: 100%;">
@@ -94,7 +94,7 @@
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">品牌</div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品品牌" type="text"/>
+          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品品牌" type="text" v-model="product.productBrand"/>
         </div>
       </div>
       <div class="ok-model-border"></div>
@@ -116,7 +116,7 @@
   import Category from "../category/category";
   var VueTouch = require('vue-touch');
   Vue.use(VueTouch, {name: 'v-touch'});
-  import {upLoadGoodsImgs,generateBarCode} from '@/service/getData.js'
+  import {upLoadGoodsImgs,generateBarCode,addProduct} from '@/service/getData.js'
   import { Uploader } from 'vant';
   import { Toast } from 'vant';
 
@@ -130,12 +130,13 @@
             return {
               productImgList:[],
               mainImg:[],
+              productImgPath:[],//商品图片路径
               productListShow:[],
               imgCount:0,
-              barCode:'',
               showCategory:false,
               parentData:{categoryShow:false,choosedCategoryName:'选择分类',plusShow:true},
-              choosedCategoryId:0
+              choosedCategoryId:0,
+              product:{mainImg:'',productName:'',productNumber:'',barCode:'',productInPrice:'',productOutPrice:'',productRetailPrice:'',productDetail:{productColor:'',productSize:''},productBrand:'',}
             };
         },
         computed: {},  //计算属性
@@ -150,55 +151,69 @@
             }
             this.mainImg[n]=true;
             Vue.set(this.mainImg,n,this.mainImg[n]);
+            this.product.mainImg=this.productImgPath[n];
+            alert(this.product.mainImg)
+            // this.productImgPath.remove(this.product.mainImg);//删除副图组中主图
           },
           deleteImg(index){
             this.productListShow[index]=false;
             Vue.set(this.productListShow,index,this.productListShow[index]);
             this.productImgList.remove(index);
+            this.productImgPath.splice(index,1);//删除图片路径
           },
           onRead(file) {
-            let formData = new FormData();
-            if(file instanceof Array){//instanceof用于判断是否为已知类型
-              for(let item of file){
-                this.productImgList.push(item.content);
+            if(this.productImgList.length<=6){
+              let formData = new FormData();
+              if(file instanceof Array){//instanceof用于判断是否为已知类型
+                for(let item of file){
+                  this.productImgList.push(item.content);
+                  this.productListShow[this.imgCount]=true;
+                  this.imgCount++;
+                  formData.append('file',item.file);
+                  upLoadGoodsImgs(formData).then(
+                    response=>{
+                      console.log(response.data.url);
+                      this.productImgPath.push(response.data.url);//存入图片路径
+                      Toast({
+                        position: 'bottom',
+                        message: '图片上传成功'
+                      });
+                    },error=>{
+                      console.log(error.response.msg);
+                      Toast(error.response.msg);
+                    }
+                  )
+                }
+              }else {
+                this.productImgList.push(file.content);
                 this.productListShow[this.imgCount]=true;
                 this.imgCount++;
-                formData.append('file',item.file);
+                formData.append('file',file.file);
                 upLoadGoodsImgs(formData).then(
                   response=>{
                     console.log(response.data.url);
+                    this.productImgPath.push(response.data.url);//存入图片路径
                     Toast({
                       position: 'bottom',
                       message: '图片上传成功'
                     });
                   },error=>{
                     console.log(error.response.msg);
-                    Toast(error.response.msg);
                   }
                 )
               }
-            }else {
-              this.productImgList.push(file.content);
-              this.productListShow[this.imgCount]=true;
-              this.imgCount++;
-              formData.append('file',file.file);
-              upLoadGoodsImgs(formData).then(
-                response=>{
-                  console.log(response.data.url);
-                  Toast({
-                    position: 'bottom',
-                    message: '图片上传成功'
-                  });
-                },error=>{
-                  console.log(error.response.msg);
-                }
-              )
+            }else{
+              Toast({
+                position: 'bottom',
+                message: '已有6张图片'
+              });
             }
+
 
           },
           generateBarCodeM(){
             generateBarCode().then(response=>{
-              this.barCode=response.data.barCode;
+              this.product.barCode=response.data.barCode;
             },error=>{
               console.log(error.response.msg);
             })
@@ -206,6 +221,25 @@
           getChoosedCategoryId(categoryItem){//获取从子组件来的分类id
             this.parentData.choosedCategoryName=categoryItem.categoryName;
             this.choosedCategoryId=categoryItem.id;
+          },
+          addNewProduct(){
+            addProduct({
+              productName:this.product.productName,
+              productAttribute:JSON.stringify(this.product.productDetail),
+              categoryId:this.choosedCategoryId,
+              retailPrice:this.product.productRetailPrice,
+              subImgs:this.productImgPath,
+              mainImg:this.product.mainImg,
+              articleNumber:this.product.productNumber,
+              barCode:this.product.barCode
+            }).then(response=>{
+              Toast({
+                position: 'bottom',
+                message: '商品保存成功'
+              });
+            },error=>{
+
+            })
           }
 
         },   //方法

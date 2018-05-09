@@ -2,13 +2,14 @@
 * Created by ztt on 2018/5/9.
 */
 <template>
-    <div id="">
+  <transition-group enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
+    <div :key="1" id="" style="position: absolute;top:0;height: 100%;width:100%;background:white;z-index: 10000">
       <div style="color: white;height:56px;background:#C20C0C;font-size: 18px;margin: 0 auto;width: 100%;text-align: center;line-height: 56px;">
         <span>新增分类</span>
         <div style="float: left;font-size: 25px;width: 56px;height: 20px;"  @click="Show=false" >
           <i>&nbsp;</i>
         </div>
-        <div style="float: right;font-size: 25px;width: 56px;height: 20px;"  @click="Show=false" >
+        <div style="float: right;font-size: 25px;width: 56px;height: 20px;"  @click="closeCategoryInfo" >
           <i class="ion-ios-close-empty"></i>
         </div>
       </div>
@@ -44,6 +45,7 @@
         </div>
       </div>
     </div>
+  </transition-group>
 </template>
 
 <script>
@@ -69,6 +71,9 @@
           getChoosedCategoryId(categoryItem){//获取从子组件来的分类id
             this.parentData.choosedCategoryName=categoryItem.categoryName;
             this.choosedCategoryId=categoryItem.id;
+          },
+          closeCategoryInfo(){
+            this.$emit('closeCategoryInfo',{close:false,reflashCategoryList:true});
           }
         },   //方法
         watch: {}      //监听

@@ -43,6 +43,9 @@ var getProductListByName=myData=>ajax('get','/api/product/search',myData);
 //生产商品条码
 var generateBarCode=myData=>ajax('get','/api/until/bar_code',myData);
 
+//新增商品
+var addProduct=myData=>ajax('post','/api/product',myData);
+
 
 export {
   login,
@@ -56,6 +59,7 @@ export {
   getCustomerList,
   getPurchaseOrderList,
   getProductListByName,
-  generateBarCode
+  generateBarCode,
+  addProduct
 
 }
