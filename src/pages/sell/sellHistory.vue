@@ -33,25 +33,27 @@
         <i style="color:#575757;font-size: 20px;margin-left: 10px;" class="ion-ios-close-outline"></i><span style="margin-left: 5px;position:relative;top: -3px;color: #888888">已关闭</span>
         <i style="color:#C20C0C;font-size: 20px;margin-left: 10px;" class="ion-clipboard"></i><span style="margin-left: 5px;position:relative;top: -3px;color: #888888">有欠款</span>
       </div>
-      <div class="employee-info-box" style="height: 80px;width: auto;display: block;padding-left: 20px;">
-        <div style="display: block;float: left;width: 10%;height:80px;line-height: 80px;font-size: 30px;">
-          <i v-if="status=='finished'" style="color:#108ee9" class="ion-ios-checkmark-outline"></i>
-          <i v-if="status=='close'" style="color:#575757" class="ion-ios-close-outline"></i>
-          <i v-if="status=='arrearage'" style="color:#C20C0C" class="ion-clipboard"></i>
+
+        <div class="employee-info-box" style="height: 80px;width: auto;display: block;padding-left: 20px;">
+          <div style="display: block;float: left;width: 10%;height:80px;line-height: 80px;font-size: 30px;">
+            <i v-if="status=='finished'" style="color:#108ee9" class="ion-ios-checkmark-outline"></i>
+            <i v-if="status=='close'" style="color:#575757" class="ion-ios-close-outline"></i>
+            <i v-if="status=='arrearage'" style="color:#C20C0C" class="ion-clipboard"></i>
+          </div>
+          <div style="display: block;float: left;width: 60%;height:80px;padding-top: 8px;padding-left: 5px;">
+            <div style="display: block;float: left;font-size: 16px;">隔壁老王</div>
+            <div style="display: block;float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background: orange;border-radius: 5px;margin-left: 10px;">重点客户</div>
+            <div style="clear: both;">SN20180419031515</div>
+            <div>业务时间：2018-4-19&nbsp;&nbsp;3:15:15</div>
+          </div>
+          <div style="font-size:14px;padding-top: 8px;height:80px;display: block;float: left;width: 30%;height:80px;text-align: center;">
+            <div style="text-decoration: underline;">销：1</div>
+            <div style="font-size:12px;color: orange;">￥250.00</div>
+            <!--<div style="font-size:12px;color: #888888;">1号仓库</div>-->
+          </div>
         </div>
-        <div style="display: block;float: left;width: 60%;height:80px;padding-top: 8px;padding-left: 5px;">
-          <div style="display: block;float: left;font-size: 16px;">隔壁老王</div>
-          <div style="display: block;float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background: orange;border-radius: 5px;margin-left: 10px;">重点客户</div>
-          <div style="clear: both;">SN20180419031515</div>
-          <div>业务时间：2018-4-19&nbsp;&nbsp;3:15:15</div>
-        </div>
-        <div style="font-size:14px;padding-top: 8px;height:80px;display: block;float: left;width: 30%;height:80px;text-align: center;">
-          <div style="text-decoration: underline;">销：1</div>
-          <div style="font-size:12px;color: orange;">￥250.00</div>
-          <!--<div style="font-size:12px;color: #888888;">1号仓库</div>-->
-        </div>
-      </div>
-      <div class="ok-model-border"></div>
+        <div class="ok-model-border"></div>
+
     </div>
 </template>
 

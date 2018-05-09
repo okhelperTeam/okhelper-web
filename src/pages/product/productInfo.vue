@@ -59,20 +59,7 @@
           <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="￥0.00" type="text" v-model="product.productRetailPrice"/>
         </div>
       </div>
-      <div class="ok-border"></div>
-      <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
-        <div style="width:25%;display: block;float: left;padding-left: 20px;">颜色</div>
-        <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品颜色" type="text"  v-model="product.productDetail.productColor"/>
-        </div>
-      </div>
-      <div class="ok-model-border"></div>
-      <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
-        <div style="width:25%;display: block;float: left;padding-left: 20px;">尺码</div>
-        <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品尺寸" type="text" v-model="product.productDetail.productSize"/>
-        </div>
-      </div>
+
       <div style="height: auto;padding: 20px;background: #F2F2F2;width: 100%;">
         <div v-if="productListShow[index]" v-for="(imgSrc,index) in productImgList" style="margin: 5px;display: block;float: left;">
           <v-touch @press="chooseMainImg(index)" :key="index">
@@ -91,17 +78,37 @@
         <div style="clear:both;color: #888888;font-size: 12px;width:100%;text-align: center;margin-top:20px;">上传图片大小不能超过4M，单个商品最多可添加6张图片</div>
         <div style="clear:both;color: #888888;font-size: 12px;width:100%;text-align: center;">点击图片看大图，【长按】图片设置为商品主图</div>
       </div>
-      <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
-        <div style="width:25%;display: block;float: left;padding-left: 20px;">品牌</div>
-        <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品品牌" type="text" v-model="product.productBrand"/>
+      <div @click="showProductOtherInfo=!showProductOtherInfo" style="width: 100%;font-size: 16px;color: #108ee9;text-align: center">
+        <div v-if="!showProductOtherInfo" style="height:43px;line-height: 43px;">
+          显示详细信息<i class="ion-chevron-down"></i>
         </div>
       </div>
-      <div class="ok-model-border"></div>
-      <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
-        <div style="width:25%;display: block;float: left;padding-left: 20px;">分类</div>
-        <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-          <div @click="parentData.categoryShow=!parentData.categoryShow" style="height: 30px;font-size: 16px;width: 100%;">{{parentData.choosedCategoryName}}</div>
+      <div v-show="showProductOtherInfo">
+        <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
+          <div style="width:25%;display: block;float: left;padding-left: 20px;">颜色</div>
+          <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
+            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品颜色" type="text"  v-model="product.productDetail.productColor"/>
+          </div>
+        </div>
+        <div class="ok-model-border"></div>
+        <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
+          <div style="width:25%;display: block;float: left;padding-left: 20px;">尺码</div>
+          <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
+            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品尺寸" type="text" v-model="product.productDetail.productSize"/>
+          </div>
+        </div>
+        <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
+          <div style="width:25%;display: block;float: left;padding-left: 20px;">品牌</div>
+          <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
+            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品品牌" type="text" v-model="product.productBrand"/>
+          </div>
+        </div>
+        <div class="ok-model-border"></div>
+        <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
+          <div style="width:25%;display: block;float: left;padding-left: 20px;">分类</div>
+          <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
+            <div @click="changeCategoryShowStatus" style="height: 30px;font-size: 16px;width: 100%;">{{parentData.choosedCategoryName}}</div>
+          </div>
         </div>
       </div>
       <ok-category
@@ -136,6 +143,7 @@
               showCategory:false,
               parentData:{categoryShow:false,choosedCategoryName:'选择分类',plusShow:true},
               choosedCategoryId:0,
+              showProductOtherInfo:false,//显示扩展信息
               product:{mainImg:'',productName:'',productNumber:'',barCode:'',productInPrice:'',productOutPrice:'',productRetailPrice:'',productDetail:{productColor:'',productSize:''},productBrand:'',}
             };
         },
@@ -145,6 +153,10 @@
         mounted() {
         },   //挂载
         methods: {
+          changeCategoryShowStatus(){
+            this.parentData.categoryShow=!this.parentData.categoryShow;
+            this.showProductOtherInfo=false;
+          },
           chooseMainImg(n){
             for(var i=0;i<this.mainImg.length;i++){
               this.mainImg[i]=false;
@@ -221,6 +233,7 @@
           getChoosedCategoryId(categoryItem){//获取从子组件来的分类id
             this.parentData.choosedCategoryName=categoryItem.categoryName;
             this.choosedCategoryId=categoryItem.id;
+            this.showProductOtherInfo=true;
           },
           addNewProduct(){
             addProduct({
