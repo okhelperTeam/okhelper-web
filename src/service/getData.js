@@ -61,5 +61,4 @@ export {
   getProductListByName,
   generateBarCode,
   addProduct
-
 }
