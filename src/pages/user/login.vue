@@ -65,7 +65,7 @@
         <span v-if="loginIsTrue" class="tishixiaoxi disappear">{{loginMsg}}</span>
       </div>
       <div style="float: right;margin-top: 50px">
-        <router-link to="/user/register" target="_blank">
+        <router-link to="/user/register">
       <div class="register-icon" style="float:right;margin-right: 55px">
         <i class="ion-person-add"></i>
       </div>
@@ -75,7 +75,7 @@
         </router-link>
       </div>
       <div style="float: left;margin-top: 50px">
-        <router-link to="/user/register" target="_blank">
+        <router-link to="/user/register">
           <div class="register-icon" style="float:left;margin-left: 55px">
             <i class="ion-ios-help"></i>
           </div>

@@ -43,7 +43,9 @@ const StockWarning = resolve => require(['@/pages/warehouse/stockWarning'], reso
 const EarlyWarning = resolve => require(['@/pages/warehouse/earlyWarning'], resolve);
 const PurchaseHistory = resolve => require(['@/pages/warehouse/purchaseHistory'], resolve);
 const PurchaseOrder = resolve => require(['@/pages/warehouse/purchaseOrder'], resolve);
+const PurchaseInfo = resolve => require(['@/pages/warehouse/purchaseInfo'], resolve);
 const Test = resolve => require(['@/pages/test/test'], resolve);
+const OpenStore = resolve => require(['@/pages/user/openStore'], resolve);
 
 const routes = [
   {
@@ -56,6 +58,10 @@ const routes = [
     path: '/user/register',
     component: Register,
     meta: {title: "okhelper-register"}
+  },{
+    path: '/user/openStore',
+    component: OpenStore,
+    meta: {title: "okhelper-openStore"}
   },{
     path: '/user/person',
     component: Person,
@@ -193,6 +199,10 @@ const routes = [
     component:PurchaseOrder,
     meta:{title:"okhelper-purchaseOrder"}
 },{
+    path:'/warehouse/purchaseInfo',
+    component:PurchaseInfo,
+    meta:{title:"okhelper-purchaseInfo"}
+  },{
     path:'/test',
     component:Test
   }

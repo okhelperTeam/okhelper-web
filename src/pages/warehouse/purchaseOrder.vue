@@ -63,18 +63,16 @@
         <input style="height: 50px;font-size: 16px;width: 20%;margin-right: 20px;float: right;" placeholder="0.00" type="text"/>
       </div>
       <div style="clear: both" class="ok-border"></div>
-      <div style="width: 100%;padding-left: 20px;font-size: 16px;color: #888888">业务日期
+      <div style="width: 100%;line-height: 50px;padding-left: 20px;font-size: 16px;color: #888888">业务日期
         <div style="width: 60%;display: block;float: left;margin-left: 40%;margin-top: -15%">
           <van-datetime-picker
-            name="orderDate"
             v-model="currentDate"
             type="date"
-            :min-date="minDate"
-          />
+            :min-date="minDate"></van-datetime-picker>
         </div>
       </div>
-      <div class="ok-model-border"></div>
-      <div style="width: 100%;height: 50px;line-height: 50px;padding-left: 20px;font-size: 16px;color: #888888">备注
+      <div style="clear: both" class="ok-border"></div>
+      <div style="width: 100%;height: 100px;line-height: 50px;padding-left: 20px;font-size: 16px;color: #888888">备注
         <input style="height: 50px;font-size: 16px;width: 70%;margin-left: 20px;" type="text"/>
       </div>
       <div style="clear: both" class="ok-border"></div>
@@ -93,7 +91,7 @@
     export default {
       data() {
         return {
-          minDate:new Date(2019, 10, 1),
+          minDate:'',
           currentDate: new Date()
         };
       }
