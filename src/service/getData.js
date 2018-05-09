@@ -19,7 +19,7 @@ var upLoadPayImgs = myData => ajax('post','/api/upload/img',myData);
 var getMenuCodeList=myData=>ajax('get','/api/permission/menu/me',myData);
 
 //获取仓库列表
-var getWareHouseList = myData=>ajax('get','/api/warehouse',myData);
+var getWarehouseList = myData=>ajax('get','/api/warehouse',myData);
 
 //获取分类列表
 var getCategoryList=(id)=>ajax('get','/api/categorys/'+id);
@@ -27,12 +27,25 @@ var getCategoryList=(id)=>ajax('get','/api/categorys/'+id);
 //获取商品列表
 var getProductList=myData=>ajax('get','/api/product/category',myData);
 
+//查询所有供应商
+var getSupplierList=myData=>ajax('get','/api/supplier',myData);
+
+//查询所有客户
+var getCustomerList=myData=>ajax('get','/api/customer',myData);
+
+//查询所有采购订单
+var getPurchaseOrderList=myData=>ajax('get','/api/storage',myData);
+
+
 export {
   login,
   getMenuCodeList,
   upLoadGoodsImgs,
-  getWareHouseList,
+  getWarehouseList,
   upLoadPayImgs,
   getCategoryList,
-  getProductList
+  getProductList,
+  getSupplierList,
+  getCustomerList,
+  getPurchaseOrderList,
 }

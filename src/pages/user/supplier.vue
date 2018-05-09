@@ -21,63 +21,26 @@
       </div>
     </div>
     <hr>
-    <div style="margin-top: 13%">
-      <div class="ok-text-box1">
-        <div class="ok-text-name">家居</div><br>
+    <div v-if="supplierList.length>0||pageNum==0" style="margin-top: 13%">
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        :offset=0
+        @load="onLoad"
+      >
+      <div class="ok-text-box1" v-for="item in supplierList" style="float: left;height: 70px">
+        <div class="ok-text-name" style="width: 70%">公司名称：{{item.supplierName}}</div><br>
         <div class="ok-text-name2">
-          负责人： 李丽
+          负责人： {{item.supplierContacts}}
         </div>
         <div class="ok-text-name5">
-          欠供应商款： <span style="color: red">￥139.86</span>
+          供应商地址： <span style="color: red">{{item.supplierAddress}}</span>
+        </div>
+        <div class="manger-icon">
+          <i class="ion-chevron-right"></i>
         </div>
       </div>
-      <div class="manger-icon">
-        <i class="ion-chevron-right"></i>
-      </div>
-      <br><br>
-      <hr>
-      <div class="ok-text-box1">
-        <div class="ok-text-name">孙磊</div><br>
-        <div class="ok-text-name2">
-          负责人： 孙磊
-        </div>
-        <div class="ok-text-name5">
-          欠供应商款： <span style="color: red">￥0.00</span>
-        </div>
-      </div>
-      <div class="manger-icon">
-        <i class="ion-chevron-right"></i>
-      </div>
-      <br><br>
-      <hr>
-      <div class="ok-text-box1">
-        <div class="ok-text-name">爱家</div><br>
-        <div class="ok-text-name2">
-          负责人： 无
-        </div>
-        <div class="ok-text-name5">
-          欠供应商款： <span style="color: red">￥0.00</span>
-        </div>
-      </div>
-      <div class="manger-icon">
-        <i class="ion-chevron-right"></i>
-      </div>
-      <br><br>
-      <hr>
-      <div class="ok-text-box1">
-        <div class="ok-text-name">塘厦</div><br>
-        <div class="ok-text-name2">
-          负责人： 刘明
-        </div>
-        <div class="ok-text-name5">
-          欠供应商款： <span style="color: red">￥0.00</span>
-        </div>
-      </div>
-      <div class="manger-icon">
-        <i class="ion-chevron-right"></i>
-      </div>
-      <br><br>
-      <hr>
+      </van-list>
     </div>
     <div class="ok-model-border"></div>
   </div>
@@ -85,20 +48,62 @@
 
 <script>
   const Back = resolve => require(['@/components/common/backBar'], resolve);
+  import Vue from 'vue';
+  import {getSupplierList} from '@/service/getData';
+  import {List} from 'vant';
+  Vue.use(List);
   export default {
     mixins: [],     //混合
     components: {
       'ok-back':Back
     },//注册组件
     data() {         //数据
-      return {};
+      return {
+        supplierName:'',
+        supplierContacts:'',
+        supplierAddress:'',
+        supplierList: [],
+        loading: false,
+        finished: false,
+        paging: true,//开启分页
+        pageNum: 0,//请求页码
+        limit: 5,//每页多少条
+      };
     },
     computed: {},  //计算属性
     created() {
     },   //创建
     mounted() {
     },   //挂载
-    methods: {},   //方法
+    methods: {
+      onLoad() {//上划加载仓库信息
+        this.pageNum++;
+        getSupplierList({
+          paging:this.paging,
+          pageNum:this.pageNum,
+          limit:this.limit,
+        }).then(
+          response=>{
+
+            // alert(1);
+            //console.log(response.data.results);
+            for(var i=0;i<response.data.results.length;i++){
+              this.supplierList.push(response.data.results[i]);
+            }
+
+            this.loading=false;
+            if (response.data.lastPage) {
+              this.finished = true;
+            }
+          },error=>{
+            this.loading=false;
+            this.finished = true;
+
+            console.log(error.response.msg);
+          }
+        );
+      },
+    },   //方法
     watch: {}      //监听
   }
 </script>
@@ -107,10 +112,9 @@
   .manger-icon{
     float: right;
     display: inline;
-    font-size: 25px;
-    color: #EAEAEA;
+    font-size: 20px;
+    color: #000000;
     margin-right: 10%;
-    margin-top: -5%;
     font-family: 微软雅黑;
   }
 </style>

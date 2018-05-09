@@ -4,7 +4,7 @@
 
 
 <template>
-  <div id="">
+  <div id="warehouse">
     <div class="back-bar">
       <router-link to="/user/person" style="color: white;" class="back-bar-backBtn">&lt;&nbsp;返回
       </router-link>
@@ -21,77 +21,97 @@
       </div>
     </div>
     <div class="ok-model-border"></div>
-    <!--<div style="margin-top:56px;width: 100%;height: 34px;background: #F2F2F2;padding-top: 3px;padding-right: 10px;padding-left: 10px;">-->
-      <!--<div style="color:white;display:block;float:left;width: 50%;height: 28px;line-height:28px;text-align:center;border-radius:3px;background: brown;border-right: 1px solid #F2F2F2">已启用（4）</div>-->
-      <!--<div style="display:block;float:left;width: 50%;height: 28px;line-height:28px;text-align:center;border-radius:3px;background: white;color:black;border-right: 1px solid #F2F2F2">已停用（0）</div>-->
-    <!--</div>-->
     <br><br>
     <div class="ok-model-border"></div>
     <br>
     <hr>
-    <div style="margin-top: 56px;height: 1px;width: 100%;"></div>
-    <div v-for="item in list" class="ok-text-box">
-      <div class="ok-text-name">{{item.storeName}}</div><br>
-      <div class="ok-text-name2">
+
+    <div v-if="warehouseList.length>0||pageNum==0">
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        :offset=0
+        @load="onLoad"
+      >
+      <div v-for="item in warehouseList" class="ok-text-box" style="float: left">
+        <div class="ok-text-name" style="width: 80%">仓库名称：{{item.warehouseName}}</div><br>
+        <div @click="getId(item.id)" class="ok-text-name2" style="margin-left: 1%;margin-top: -7%">
         仓库负责人：{{item.storeKeeper}}
+        </div>
+        <div class="manger-icon">
+          <i class="ion-chevron-right"></i>
+        </div>
       </div>
+      </van-list>
     </div>
-    <br>
-    <hr>
-    <!--<div class="ok-text-box">-->
-      <!--<div class="ok-text-name">二号仓库</div><br>-->
-      <!--<div class="ok-text-name2">-->
-        <!--仓库负责人：小刘-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<br>-->
-    <!--<hr>-->
-    <!--<div class="ok-text-box">-->
-      <!--<div class="ok-text-name">{{storeName}}</div><br>-->
-      <!--<div class="ok-text-name2">-->
-        <!--仓库负责人：{{storeKeeper}}-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<br>-->
-    <!--<hr>-->
-    <!--<div class="ok-text-box">-->
-      <!--<div class="ok-text-name">四号仓库</div><br>-->
-      <!--<div class="ok-text-name2">-->
-        <!--仓库负责人：小赵-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<br>-->
-    <!--<hr>-->
+
+
   </div>
 </template>
 
 <script>
+  import Vue from 'vue';
+  import {getWarehouseList} from '@/service/getData';
+  import {List} from 'vant';
+  Vue.use(List);
     export default {
         name: "warehouse",
-      data:{
-        storeName:'',
-        storeKeeper:'',
-        list:[]
+      data(){
+        return {
+          warehouseName: '',
+          storeKeeper: '',
+          warehouseList: [],
+          loading: false,
+          finished: false,
+          paging: true,//开启分页
+          pageNum: 0,//请求页码
+          limit: 5,//每页多少条
+        }
       },
         methods: {
-          getWarehouse(){
-            getWareHouseList(
-              {
+          getId(id){
 
-              }).then(
+          },
+          onLoad() {//上划加载仓库信息
+            this.pageNum++;
+            getWarehouseList({
+              paging:this.paging,
+              pageNum:this.pageNum,
+              limit:this.limit,
+            }).then(
               response=>{
-                this.list=response.data.results;
+
+                // alert(1);
+                //console.log(response.data.results);
+                for(var i=0;i<response.data.results.length;i++){
+                  this.warehouseList.push(response.data.results[i]);
+                }
+
+                this.loading=false;
+                if (response.data.lastPage) {
+                  this.finished = true;
+                }
               },error=>{
-                console.log(error.response.msg),
-                  nameMsg=response.msg;
+                this.loading=false;
+                this.finished = true;
+
+                console.log(error.response.msg);
               }
-            )
-          }
+            );
+          },
       }
     };
 
 </script>
 
 <style scoped>
-
+  .manger-icon{
+    float: right;
+    display: inline;
+    font-size: 20px;
+    color: black;
+    margin-right: 10%;
+    margin-top: -12%;
+    font-family: 微软雅黑;
+  }
 </style>
