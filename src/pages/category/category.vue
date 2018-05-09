@@ -6,8 +6,16 @@
       <transition-group enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
         <div :key="1" v-show="parentData.categoryShow" style="z-index:100;background:white;width: 100%;height: 100%;position: absolute;top: 0px; ">
           <div :key="2" style="color: white;height:56px;background:#C20C0C;font-size: 18px;margin: 0 auto;width: 100%;text-align: center;line-height: 56px;">
-            <span style="margin-left: 80px">{{parentData.choosedCategoryName}}</span>
-            <div :key="3" style="float: right;margin-right: 30px;font-size: 25px;width: 56px;height: 20px;"  @click="parentData.categoryShow=false" >
+            <span>{{parentData.choosedCategoryName}}</span>
+            <div v-if="parentData.plusShow" style="color:white;float: left;font-size: 25px;width: 56px;height: 20px;">
+              <router-link to="/categoryInfo" :key="5" style="color: white" >
+                <i :key="6" class="ion-ios-plus-empty"></i>
+              </router-link>
+            </div>
+            <div v-else style="float: left;font-size: 25px;width: 56px;height: 20px;">
+              <i>&nbsp;</i>
+            </div>
+            <div :key="3" style="float: right;font-size: 25px;width: 56px;height: 20px;"  @click="parentData.categoryShow=false" >
               <i :key="4" class="ion-ios-close-empty"></i>
             </div>
           </div>

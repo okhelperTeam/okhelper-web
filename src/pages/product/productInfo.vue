@@ -29,7 +29,7 @@
       <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
         <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="货号" type="text"/>
       </div>
-    </div>
+      </div>
       <div class="ok-model-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">条码<span style="color: #dd0a20">*</span></div>
@@ -101,17 +101,19 @@
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">分类</div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-          <div @click="showCategory=!showCategory" style="height: 30px;font-size: 16px;width: 100%;">选择分类</div>
+          <div @click="parentData.categoryShow=!parentData.categoryShow" style="height: 30px;font-size: 16px;width: 100%;">{{parentData.choosedCategoryName}}</div>
         </div>
       </div>
-      <div v-if="showCategory">
-
-      </div>
+      <ok-category
+        :parentData="parentData"
+        @getChoosedCategoryId="getChoosedCategoryId"
+      ></ok-category>
     </div>
 </template>
 
 <script>
   import Vue from 'vue'
+  import Category from "../category/category";
   var VueTouch = require('vue-touch');
   Vue.use(VueTouch, {name: 'v-touch'});
   import {upLoadGoodsImgs,generateBarCode} from '@/service/getData.js'
@@ -121,7 +123,9 @@
   Vue.use(Uploader);
     export default {
         mixins: [],     //混合
-        components: {},//注册组件
+        components: {
+          'ok-category':Category
+        },//注册组件
         data() {         //数据
             return {
               productImgList:[],
@@ -129,7 +133,9 @@
               productListShow:[],
               imgCount:0,
               barCode:'',
-              showCategory:false
+              showCategory:false,
+              parentData:{categoryShow:false,choosedCategoryName:'选择分类',plusShow:true},
+              choosedCategoryId:0
             };
         },
         computed: {},  //计算属性
@@ -196,7 +202,12 @@
             },error=>{
               console.log(error.response.msg);
             })
+          },
+          getChoosedCategoryId(categoryItem){//获取从子组件来的分类id
+            this.parentData.choosedCategoryName=categoryItem.categoryName;
+            this.choosedCategoryId=categoryItem.id;
           }
+
         },   //方法
         watch: {}      //监听
     }
