@@ -29,6 +29,7 @@ var getProductList=myData=>ajax('get','/api/product/category',myData);
 
 //获取商品列表(商品名)
 var getProductListByName=myData=>ajax('get','/api/product/search',myData);
+
 //生产商品条码
 var generateBarCode=myData=>ajax('get','/api/until/bar_code',myData);
 
