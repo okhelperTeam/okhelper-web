@@ -3,7 +3,7 @@
 */
 <template>
     <div id="">
-      <transition-group enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
+      <transition-group enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown" :duration="800">
         <div :key="1" v-show="parentData.categoryShow" style="z-index:100;background:white;width: 100%;height: 100%;position: absolute;top: 0px; ">
           <div :key="2" style="color: white;height:56px;background:#C20C0C;font-size: 18px;margin: 0 auto;width: 100%;text-align: center;line-height: 56px;">
             <span>{{parentData.choosedCategoryName}}</span>
@@ -44,6 +44,7 @@
   import categoryInfo from '@/pages/category/categoryInfo'
   import {getCategoryList} from '@/service/getData';
     export default {
+        name:'ok-category',
         mixins: [],     //混合
         components: {
           'category-tree':categoryTree,

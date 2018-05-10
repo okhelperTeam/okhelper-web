@@ -4,7 +4,7 @@
 
 
 <template>
-  <div>
+  <div style="height: 100%;">
     <div class="container" style="width: auto">
       <div>
         <div  style="color:white;background: #C20C0C;font-size:16px;padding-top:12px;height: 56px;width: 100%;text-align: center;">

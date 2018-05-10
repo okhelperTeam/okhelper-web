@@ -21,5 +21,18 @@ let formateData = function (value) {
 
 }
 
+//格式化金额(￥xxx.xx)
+let formateMoney = function (value) {
+  var money=value.toString();
+  var moneyArray=money.split('.');
+  if(moneyArray.length==1){
+    return money+'.00';
+  }
+  else if(moneyArray[1].length==1){
+    return money+'0';
+  }else {
+    return money;
+  }
 
-export {defaultImg,toTime, formateData}
+}
+export {defaultImg,toTime, formateData,formateMoney}

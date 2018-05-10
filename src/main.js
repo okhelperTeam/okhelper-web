@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router/index'
 import '@/assets/css/resetBrowser.css'
-import {defaultImg,toTime,formateData} from './components/filters/filter'
+import {defaultImg, toTime, formateData, formateMoney} from './components/filters/filter'
 
 Vue.config.productionTip = false;
 
@@ -12,6 +12,7 @@ Vue.config.productionTip = false;
 Vue.filter("defaultImg",defaultImg);
 Vue.filter("toTime",toTime);
 Vue.filter("formateData",formateData);
+Vue.filter("formateMoney",formateMoney);
 
 new Vue({
   el: '#app',
