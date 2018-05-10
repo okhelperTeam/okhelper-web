@@ -71,8 +71,8 @@
           到底了别滑了，真的没了.....
         </div>
       </div>
-      <div v-else>
-        没有您要找的商品。。。
+      <div v-else  style="color: #888888;text-align: center;padding: 20px;">
+        没有您要找的商品......
       </div>
       <div style="height: 30px;width: 100%;"></div>
       <div style="position:fixed;bottom:0;height: 30px;width: 100%;border-top: 1px solid #F2F2F2">
@@ -92,7 +92,7 @@
   import { Collapse, CollapseItem } from 'vant';
   import ProductModel from '@/components/common/productModel';
   import Category from "../category/category";
-  import {getCategoryList,getProductList} from '@/service/getData';
+  import {getProductList} from '@/service/getData';
   import { List } from 'vant';
   Vue.use(List);
   Vue.use(Collapse).use(CollapseItem);
@@ -108,7 +108,7 @@
               finished: false,
               myData:{paging:true,pageNum:0,limit:6,categoryId:0,orderBy:'create_time desc'},
               categoryName: 'categoryName', // 显示菜单名称的属性
-              parentData:{categoryShow:false,choosedCategoryName:'全部分类'},
+              parentData:{categoryShow:false,choosedCategoryName:'全部分类',plusShow:false},
               totalCount:0,
               arrows_show:[true,false,false,false],
               productChoosedList:[],

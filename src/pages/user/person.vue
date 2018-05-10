@@ -27,7 +27,7 @@
     </div>
     <div style="margin-top: -3%">
       <div class="person-manger">
-        <router-link to="/user/register">
+        <router-link to="/product">
           <div class="photo-icon" style="color: #CD4F39">
             <i class="ion-social-instagram"></i>
           </div>

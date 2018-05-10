@@ -1,10 +1,12 @@
 /**
-* Created by ztt on 2018/4/13.
+* Created by lulu on 2018/5/7.
 */
+
+
 <template>
   <div id="">
     <div class="back-bar">
-      <router-link to="/user/login" style="color: white;" class="back-bar-backBtn">&lt;&nbsp;返回
+      <router-link to="/user/register" style="color: white;" class="back-bar-backBtn">&lt;&nbsp;返回
       </router-link>
       <div class="back-bar-name">
         OK帮注册
@@ -20,12 +22,12 @@
             </div>
             <div class="login-text">
               <van-field
-                v-model="username"
+                v-model="storeName"
                 style="font-size: 20px;"
                 icon="clear"
-                lable="用户名"
-                placeholder="请输入手机号"
-                @click-icon="username = ''"
+                lable="店铺名称"
+                placeholder="请输入店铺名称"
+                @click-icon=" storeName=''"
               />
               <hr>
             </div>
@@ -37,13 +39,12 @@
               </div>
               <div class="login-text">
                 <van-field
-                  v-model="password"
-                  type="password"
+                  v-model="storeAddress"
                   style="font-size: 20px"
-                  lable="密码"
-                  placeholder="请输入密码"
+                  lable="店铺地址"
+                  placeholder="请输入店铺地址"
                   icon="clear"
-                  @click-icon="password = ''"
+                  @click-icon="storeAddress='' "
                 />
                 <hr>
               </div>
@@ -56,53 +57,38 @@
               </div>
               <div class="login-text">
                 <van-field
-                  v-model="passwordagn"
-                  type="password"
+                  v-model="storePhone"
                   style="font-size: 20px"
-                  lable="密码确认"
-                  placeholder="再次输入密码"
+                  lable="店铺联系方式"
+                  placeholder="请输入店铺联系方式"
                   icon="clear"
-                  @click-icon="passwordagn = ''"
-                />
-                <hr>
-              </div>
-            </div>
-          </div>
-          <div style="display: block;text-align: center;">
-            <div style="display: block;">
-              <div class="login-icon">
-                <i class="ion-android-contact"></i>
-              </div>
-              <div class="login-text">
-                <van-field
-                  v-model="nick"
-                  lable="昵称"
-                  style="font-size: 20px"
-                  placeholder="请输入姓名"
-                  icon="clear"
-                  @click-icon="nick = ''"
+                  @click-icon="storePhone = ''"
                 />
                 <hr>
               </div>
             </div>
           </div>
           <!--<div style="display: block;text-align: center;">-->
-          <!--<div style="display: block;">-->
-          <!--<div class="login-icon">-->
-          <!--<i class="ion-social-apple"></i>-->
-          <!--</div>-->
-          <!--<div class="login-text">-->
-          <!--<van-radio-group v-model="sex">-->
-          <!--<van-radio name="1">女</van-radio>-->
-          <!--<van-radio name="2">男</van-radio>-->
-          <!--</van-radio-group>-->
-          <!--</div>-->
-          <!---->
-          <!--</div>-->
+            <!--<div style="display: block;">-->
+              <!--<div class="login-icon">-->
+                <!--<i class="ion-android-contact"></i>-->
+              <!--</div>-->
+              <!--<div class="login-text">-->
+                <!--<van-field-->
+                  <!--v-model="nick"-->
+                  <!--lable="昵称"-->
+                  <!--style="font-size: 20px"-->
+                  <!--placeholder="请输入姓名"-->
+                  <!--icon="clear"-->
+                  <!--@click-icon="nick = ''"-->
+                <!--/>-->
+                <!--<hr>-->
+              <!--</div>-->
+            <!--</div>-->
           <!--</div>-->
         </van-cell-group>
         <div style="height: 110px;padding-top:30px;width: 80%;margin:0 auto;">
-          <router-link to="/user/openStore"><van-button type="danger" size="large" @click="">立即开店</van-button></router-link>
+          <van-button type="danger" size="large" @click="">立即注册</van-button>
         </div>
       </div>
     </div>
@@ -126,16 +112,16 @@
     mounted() {
     },   //挂载
     methods: {
-    //   submitForm (formName) {
-    //     this.$refs[formName].validate((valid) => {
-    //       if (valid) {
-    //       ...
-    //       } else {
-    //         return false
-    //       }
-    //     })
-    //   }
-    // }
+      //   submitForm (formName) {
+      //     this.$refs[formName].validate((valid) => {
+      //       if (valid) {
+      //       ...
+      //       } else {
+      //         return false
+      //       }
+      //     })
+      //   }
+      // }
     },   //方法
     watch: {}     //监听
   }

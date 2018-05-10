@@ -16,7 +16,7 @@ const Employee = resolve => require(['@/pages/employee/employee'], resolve);
 const EmployeeInfo = resolve => require(['@/pages/employee/employeeInfo'], resolve);
 const Role = resolve => require(['@/pages/role/role'], resolve);
 const RoleInfo = resolve => require(['@/pages/role/roleInfo'], resolve);
-const Cart = resolve => require(['@/pages/cart/cart'], resolve);
+const CategoryInfo = resolve => require(['@/pages/category/categoryInfo'], resolve);
 const Product = resolve => require(['@/pages/product/product'], resolve);
 const SearchProduct = resolve => require(['@/pages/product/searchProduct'], resolve);
 const ProductInfo = resolve => require(['@/pages/product/productInfo'], resolve);
@@ -43,7 +43,9 @@ const StockWarning = resolve => require(['@/pages/warehouse/stockWarning'], reso
 const EarlyWarning = resolve => require(['@/pages/warehouse/earlyWarning'], resolve);
 const PurchaseHistory = resolve => require(['@/pages/warehouse/purchaseHistory'], resolve);
 const PurchaseOrder = resolve => require(['@/pages/warehouse/purchaseOrder'], resolve);
-const Test = resolve => require(['@/pages/test/test2'], resolve);
+const PurchaseInfo = resolve => require(['@/pages/warehouse/purchaseInfo'], resolve);
+const Test = resolve => require(['@/pages/test/test'], resolve);
+const OpenStore = resolve => require(['@/pages/user/openStore'], resolve);
 
 const routes = [
   {
@@ -56,6 +58,10 @@ const routes = [
     path: '/user/register',
     component: Register,
     meta: {title: "okhelper-register"}
+  },{
+    path: '/user/openStore',
+    component: OpenStore,
+    meta: {title: "okhelper-openStore"}
   },{
     path: '/user/person',
     component: Person,
@@ -85,9 +91,9 @@ const routes = [
     component:RoleInfo,
     meta:{title:"okhelper-RoleInfo"}
   },{
-    path:'/cart',
-    component:Cart,
-    meta:{title:"okhelper-Cart"}
+    path:'/categoryInfo',
+    component:CategoryInfo,
+    meta:{title:"okhelper-categoryInfo"}
   },{
     path:'/product',
     component:Product,
@@ -193,6 +199,10 @@ const routes = [
     component:PurchaseOrder,
     meta:{title:"okhelper-purchaseOrder"}
 },{
+    path:'/warehouse/purchaseInfo',
+    component:PurchaseInfo,
+    meta:{title:"okhelper-purchaseInfo"}
+  },{
     path:'/test',
     component:Test
   }

@@ -6,8 +6,16 @@
       <transition-group enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown" :duration="800">
         <div :key="1" v-show="parentData.categoryShow" style="z-index:100;background:white;width: 100%;height: 100%;position: absolute;top: 0px; ">
           <div :key="2" style="color: white;height:56px;background:#C20C0C;font-size: 18px;margin: 0 auto;width: 100%;text-align: center;line-height: 56px;">
-            <span style="margin-left: 80px">{{parentData.choosedCategoryName}}</span>
-            <div :key="3" style="float: right;margin-right: 30px;font-size: 25px;width: 56px;height: 20px;"  @click="parentData.categoryShow=false" >
+            <span>{{parentData.choosedCategoryName}}</span>
+            <div v-if="parentData.plusShow" style="color:white;float: left;font-size: 25px;width: 56px;height: 20px;">
+              <div @click="productInfoShow=!productInfoShow" :key="5" style="color: white" >
+                <i :key="6" class="ion-ios-plus-empty"></i>
+              </div>
+            </div>
+            <div v-else style="float: left;font-size: 25px;width: 56px;height: 20px;">
+              <i>&nbsp;</i>
+            </div>
+            <div :key="3" style="float: right;font-size: 25px;width: 56px;height: 20px;"  @click="parentData.categoryShow=false" >
               <i :key="4" class="ion-ios-close-empty"></i>
             </div>
           </div>
@@ -22,16 +30,24 @@
           </div>
         </div>
       </transition-group>
+
+        <div :key="1" v-if="productInfoShow">
+          <category-info :key="2" @closeCategoryInfo="closeCategoryInfo"/>
+        </div>
+
+
     </div>
 </template>
 
 <script>
   import categoryTree from '@/pages/category/categoryTree'
+  import categoryInfo from '@/pages/category/categoryInfo'
   import {getCategoryList} from '@/service/getData';
     export default {
         mixins: [],     //混合
         components: {
-          'category-tree':categoryTree
+          'category-tree':categoryTree,
+          'category-info':categoryInfo
         },//注册组件
         data() {         //数据
             return {
@@ -39,7 +55,8 @@
               isChoosedAll:true,
               categoryList:[],//分类数据
               categoryName: 'categoryName',
-              choosedCategoryId:0
+              choosedCategoryId:0,
+              productInfoShow:false
             };
         },
         props:{
@@ -84,6 +101,9 @@
               this.parentData.categoryShow=false;
             },300);
             callback(categoryItem.id);
+          },
+          closeCategoryInfo(childrenData){//关闭新增分类组件
+            this.productInfoShow=childrenData.close;
           }
         },   //方法
         watch: {
