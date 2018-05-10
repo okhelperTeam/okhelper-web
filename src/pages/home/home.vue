@@ -70,7 +70,7 @@
       </router-link>
     </div>
     <div v-if="showMenuModel[5]" class="sales_order_add home-fun-model">
-      <router-link to="/sell/sellTable" class="home-fun-model-a">
+      <router-link to="/sell/sellHistory" class="home-fun-model-a">
         <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">销售历史</span>
       </router-link>

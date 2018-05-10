@@ -51,6 +51,7 @@
 <script>
   import Category from "../category/category";
     export default {
+        name:'categoryInfo',
         mixins: [],     //混合
         components: {
           'ok-category':Category
