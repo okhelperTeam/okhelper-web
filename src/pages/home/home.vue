@@ -17,7 +17,8 @@
     </router-link>
       </div>
       <div style="width: 17%;height: 56px;float: left;text-align: center;line-height: 56px;font-size: 30px;color: white;">
-        <i class="ion-qr-scanner"></i>
+        <scan :P="P" @scanover="scanOver"/>
+        <i class="ion-qr-scanner" @click="P.isOpen=true"></i>
       </div>
 
       <div style="height:56px;width:100%"></div>
@@ -149,6 +150,7 @@
   import { Icon } from 'vant';
   import { Swipe, SwipeItem } from 'vant';
   import { NoticeBar } from 'vant';
+  import scan from '@/components/common/scan';
 
   Vue.use(NoticeBar);
 
@@ -161,13 +163,15 @@
     export default {
       mixins: [],     //混合
       components: {
-        'ok-footer':Footer
+        'ok-footer':Footer,
+        scan
       },//注册组件
       data() {         //数据
         return {
           goods:"",
           //vue无法直接检测数组的更新，需要使用Vue对象set方法  Vue.set(数组名，i，数组[i])
-          showMenuModel:[false,false,false,false,false,false,false,false,false,false,false,true]
+          showMenuModel:[false,false,false,false,false,false,false,false,false,false,false,true],
+          P:{isOpen:false}
         };
       },
       computed: {},  //计算属性
@@ -176,7 +180,6 @@
           response=>{
             let menuList=response.data;
             for(let item of menuList){
-              console.log(item.menuCode);
               switch (item.menuCode) {
                 case 'category':this.showMenuModel[0]=true;
                   break;
@@ -220,6 +223,10 @@
           }
 
         },
+        scanOver(code){
+          // console.log(code);
+          alert(code);
+        }
       },   //方法
       watch: {}      //监听
     }

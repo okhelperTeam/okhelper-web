@@ -11,7 +11,7 @@ import axios from "axios"
 let qs = require('qs');
 export default(method = 'GET', url = '', data = {}) => {
   method = method.toUpperCase();
-  const httpPrefix='http://zxadwz.cn';
+  const httpPrefix='http://139.199.30.155';
 
   let axiosRequestConfig = {
     method: method,
@@ -66,13 +66,9 @@ export default(method = 'GET', url = '', data = {}) => {
           case 400:
             console.log("参数错误");
             break;
-          case 401:  // 401 清除session信息并跳转到登录页面
+          case 401:  // 401 跳转到登录页面
             console.log("token失效/登陆失败");
-            // if (store.state.userInfo != null) {
-            //   //session 失效跳到登录页面
-            //   router.replace({path: '/user/login', query: {redirect: router.currentRoute.fullPath}});
-            // }
-            // store.commit(type.CANCEL_USER);//消除userInfo
+            router.replace({path: '/user/login', query: {redirect: router.currentRoute.fullPath}});
             break;
           case 403:
             console.log("无权访问");

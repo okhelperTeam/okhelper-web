@@ -2,11 +2,92 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <!--<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">-->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta name="misapplication-tap-highlight" content="no"/>
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="MobileOptimized" content="320"/>
     <link href="https://cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
     <title>okhelper</title>
+    <script type=text/javascript charset=utf-8>
+
+      window.localStorage.setItem("hasShow","false");
+
+			//取消浏览器的所有事件，使得active的样式在手机上正常生效
+			document.addEventListener('touchstart', function() {
+				return false;
+			}, true);
+			// 禁止选择
+			document.oncontextmenu = function() {
+				return true;
+			};
+			// H5 plus事件处理
+			function plusReady() {
+				// 隐藏滚动条
+				plus.webview.currentWebview().setStyle({
+					scrollIndicator: 'none'
+				});
+				// Android处理返回键
+				plus.key.addEventListener('backbutton', function() {
+          //有没关闭的组件
+          if(localStorage.getItem("hasShow")==="true"){
+            return;
+          }else{
+            if('iOS' == plus.os.name) {
+          plus.nativeUI.confirm('确认退出？', function(e) {
+            if(e.index > 0) {
+              plus.runtime.quit();
+            }
+          }, 'HelloH5', ['取消', '确定']);
+        } else {
+              if(location.hash === '#/home' || location.hash === '#/user/login') {
+                if(confirm('确认退出？')) {
+                  plus.runtime.quit()
+                }
+              } else {
+                history.back();
+              }
+            }
+          }
+				}, false);
+				compatibleAdjust();
+			}
+			if(window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener('plusready', plusReady, false);
+			}
+			// DOMContentLoaded事件处理
+			var _domReady = false;
+			document.addEventListener('DOMContentLoaded', function() {
+				_domReady = true;
+				compatibleAdjust();
+			}, false);
+			// 兼容性样式调整
+			var _adjust = false;
+
+			function compatibleAdjust() {
+				if(_adjust || !window.plus || !_domReady) {
+					return;
+				}
+				_adjust = true;
+				// iOS平台特效
+				if('iOS' == plus.os.name) {
+					document.getElementById('content').className = 'scontent'; // 使用div的滚动条
+					if(navigator.userAgent.indexOf('StreamApp') >= 0) { // 在流应用模式下显示返回按钮
+						document.getElementById('back').style.visibility = 'visible';
+					}
+				}
+				// 预创建二级窗口
+				//	preateWebviews();
+				// 关闭启动界面
+				plus.navigator.setStatusBarBackground('#C20C0C');
+
+				setTimeout(function() {
+					plus.navigator.closeSplashscreen();
+				}, 200);
+			}
+		</script>
   </head>
   <body>
     <div id="app"></div>

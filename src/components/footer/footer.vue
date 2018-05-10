@@ -78,7 +78,7 @@
   position: fixed;
   background-color: rgba(0,0,0,0.85);
   width: 100%;
-  z-index: 100;
+  z-index: 3;
 }
   .bottom-bar-model{
     width: 20%;

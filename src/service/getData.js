@@ -29,8 +29,12 @@ var getProductList=myData=>ajax('get','/api/product/category',myData);
 
 //获取商品列表(商品名)
 var getProductListByName=myData=>ajax('get','/api/product/search',myData);
+
 //生产商品条码
 var generateBarCode=myData=>ajax('get','/api/until/bar_code',myData);
+
+//获取我的信息,校验token
+var getMyUserInfo=myData=>ajax('get','/api/user/me',myData);
 
 export {
   login,
@@ -41,5 +45,6 @@ export {
   getCategoryList,
   getProductList,
   getProductListByName,
-  generateBarCode
+  generateBarCode,
+  getMyUserInfo
 }

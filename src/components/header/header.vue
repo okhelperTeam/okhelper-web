@@ -5,7 +5,7 @@
     <div id="">
       <div class="header-bar">
         <div class="header-bar-icon">
-          <i class="ion-qr-scanner"></i>
+        <i class="ion-qr-scanner"></i>
         </div>
         <div class="header-bar-search">
           <div class="header-bar-search2">
@@ -33,7 +33,9 @@
         },   //创建
         mounted() {
         },   //挂载
-        methods: {},   //方法
+        methods: {
+
+        },   //方法
         watch: {}      //监听
 
     }
