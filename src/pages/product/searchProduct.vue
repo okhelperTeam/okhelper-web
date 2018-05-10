@@ -38,11 +38,22 @@
             />
           </div>
         </van-list>
+        <div style="position:fixed;bottom:0;height: 30px;width: 100%;border-top: 1px solid #F2F2F2">
+          <div style="background:white;width: 70%;height: 30px;float: left;padding-left:20px;line-height: 30px;">合计种类：{{productChoosedList.length}}</div>
+          <div @click="toSellTable" style="background: #C20C0C;color:white;width:30%;height: 30px;float: left;text-align: center;line-height: 30px;">选好了</div>
+        </div>
       </div>
-      <div v-else>
-        商品未找到
+      <div v-if="pageNum!=0&&productList.length==0&&finished==true">
+        <div  style="color: #888888;text-align: center;padding: 10px;margin-top: 30%;">
+          没有找到相关商品
+        </div>
+        <div style="width: 100%;text-align: center;padding-bottom: 20px;">
+          <div style="width:30%;border: 1px solid black;border-radius: 5px;height: 40px;padding-left:10px;padding-right:10px;line-height: 40px;text-align: center;margin: 0 auto;">
+            去新增商品
+          </div>
+        </div>
       </div>
-      <div class="ok-model-border"></div>
+
     </div>
 </template>
 
@@ -74,15 +85,20 @@
               pageNum:0,
               paging:true,
               limit:6,
-              productList:[]
+              productList:[],
+              productChoosedList:[]
             };
         },
         computed: {},  //计算属性
         created() {
+          this.onLoad();
         },   //创建
         mounted() {
         },   //挂载
         methods: {
+          toSellTable(){
+            this.$router.push({path:'/sell/sellTable',query:{productChoosedList:this.productChoosedList}})
+          },
           onLoad(){//上划加载商品
             this.pageNum++;
             getProductListByName({
@@ -112,8 +128,8 @@
             this.finished=false;
             this.onLoad();
           },
-          addProduct(index){//选择商品
-            alert(index);
+          addProduct(productId){//选择商品
+            this.productChoosedList.push(productId);
           },
           search:_.debounce(function(){
             this.reLoad()

@@ -10,30 +10,15 @@
           销售单
         </div>
       </div>
-        <div style="width: 100%;height: 60px;margin-top: 56px;">
-          <div style="width: 20%;height: 60px;color: #dd0a20;display: block;float: left;text-align: center;line-height: 60px;font-size: 16px;">客户*</div>
-          <div style="width: 80%;height: 60px;display: block;float: left;">
-            <select style="width: 100%;height: 60px;text-align: center;">
-              <option value ="volvo">老王</option>
-              <option value ="saab">小美</option>
-              <option value="opel">大路</option>
-              <option value="audi">Audi</option>
-            </select>
-            <hr>
-          </div>
+      <div style="width: 100%;height: 60px;margin-top: 56px;">
+        <div style="width: 20%;height: 60px;color: #dd0a20;display: block;float: left;text-align: center;line-height: 60px;font-size: 16px;">客户*</div>
+        <div style="width: 80%;height: 40px;display: block;float: left;">
+          <select  style="width: 70%;height: 60px;text-align: center;font-size: 12px;">
+            <option v-for="item in customerList" v-model="item.customerName">{{item.customerName}}</option>
+          </select>
+          <hr>
         </div>
-      <!--<div style="width: 100%;height: 50px;">-->
-        <!--<div style="width: 20%;height: 50px;color: #dd0a20;display: block;float: left;text-align: center;line-height: 60px;font-size: 16px;">仓库*</div>-->
-        <!--<div style="width: 80%;height: 50px;display: block;float: left;">-->
-          <!--<select style="width: 100%;height: 50px;text-align: center;">-->
-            <!--<option value ="volvo">Volvo</option>-->
-            <!--<option value ="saab">Saab</option>-->
-            <!--<option value="opel">Opel</option>-->
-            <!--<option value="audi">Audi</option>-->
-          <!--</select>-->
-          <!--<hr>-->
-        <!--</div>-->
-      <!--</div>-->
+      </div>
       <div style="clear: both" class="ok-border"></div>
       <div>
         <div v-if="choosedProductList.length==0">
@@ -134,6 +119,7 @@
 <script>
   const Back = resolve => require(['@/components/common/backBar'], resolve);
   import sellTableItem from '@/pages/sell/sellTableItem';
+  import {getCustomerList} from '@/service/getData.js'
     export default {
         mixins: [],     //混合
         components: {
@@ -147,7 +133,8 @@
                 {isPriceOpen:false,retailPrice:100,discountPrice:100,discounts:100,productCount:15,productNotes:'',isNoteOpen:false,productNotes:''},
                 {isPriceOpen:false,retailPrice:200,discountPrice:100,discounts:50,productCount:15,productNotes:'',isNoteOpen:false,productNotes:''},
               ],
-              totalMoney:10000.56
+              totalMoney:10000.56,
+              customerList:[]
 
             };
         },
@@ -157,10 +144,20 @@
           }
         },  //计算属性
         created() {
+          this.getMyCustomerList();
         },   //创建
         mounted() {
         },   //挂载
         methods: {
+          getMyCustomerList(){
+            getCustomerList({
+              paging:false
+            }).then(response=>{
+              this.customerList=response.data.results;
+            },error=>{
+
+            });
+          },
           editChoosedProductList(){
             if(this.editText=='编辑'){
               this.editText='取消编辑';

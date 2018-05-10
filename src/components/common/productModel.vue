@@ -11,8 +11,8 @@
           <div class="ok-product-details-name">{{productName}}</div>
           <div  class="ok-product-details-category-name">{{cateName}}</div>
           <div class="ok-product-details-discounts" >{{discounts}}</div>
-          <div class="ok-product-details-price" >￥{{retailPrice}}</div>
-          <div class="ok-product-details-addtime">上架时间：{{createTime | toTime}}</div>
+          <div class="ok-product-details-price" >￥{{retailPrice | formateMoney}}</div>
+          <div class="ok-product-details-addtime">上架时间：{{createTime | formateTime('YMDHM')}}</div>
           <div class="ok-product-details-addtime">库存：{{salesStock}}</div>
         </div>
         <div class="ok-product-operation">
