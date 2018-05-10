@@ -29,17 +29,24 @@
         <li @click="sellTableStatus(4)" :class="{statusActive:isClose}" class="ok-hotsell-time-li">已关闭</li>
       </ul>
     </div>
-    <div style="background: #F2F2F2;height: 30px; width: 100%;font-size: 12px;clear: both;line-height: 30px;">
+    <div style="background: #F2F2F2;height: 60px; width: 100%;font-size: 12px;clear: both;line-height: 30px;">
       <i style="color: orange;font-size: 20px;margin-left: 10px;" class="ion-ios-star-outline"></i><span
       style="margin-left: 5px;position:relative;top: -3px;color: #888888">销售单状态&nbsp;&nbsp;:</span>
       <i style="color: #108ee9;font-size: 20px;margin-left: 10px;" class="ion-ios-checkmark-outline"></i><span
+      style="margin-left: 5px;position:relative;top: -3px;color: #888888">已付款</span>
+      <i style="color: #66CD00;font-size: 20px;margin-left: 10px;" class="ion-ios-checkmark"></i><span
       style="margin-left: 5px;position:relative;top: -3px;color: #888888">已完成</span>
       <i style="color:#575757;font-size: 20px;margin-left: 10px;" class="ion-ios-close-outline"></i><span
       style="margin-left: 5px;position:relative;top: -3px;color: #888888">已关闭</span>
-      <i style="color:#C20C0C;font-size: 20px;margin-left: 10px;" class="ion-clipboard"></i><span
-      style="margin-left: 5px;position:relative;top: -3px;color: #888888">有欠款</span>
+      <div style="margin-left: 105px;">
+        <i style="color:#C20C0C;font-size: 20px;margin-left: 10px;" class="ion-clipboard"></i><span
+        style="margin-left: 5px;position:relative;top: -3px;color: #888888">有欠款</span>
+        <i style="color:orange;font-size: 20px;margin-left: 10px;" class="ion-ios-timer-outline"></i><span
+        style="margin-left: 5px;position:relative;top: -3px;color: #888888">未付款</span>
+      </div>
+
     </div>
-    <div>
+    <div v-if="orderList.length>0||myData.pageNum==0">
       <van-list
         v-model="loading"
         :finished="finished"
@@ -51,8 +58,8 @@
             <div style="display: block;float: left;width: 10%;height:80px;line-height: 80px;font-size: 30px;">
 
               <i v-if="item.orderStatus==1" style="color:orange" class="ion-ios-timer-outline"></i>
-              <i v-if="item.orderStatus==3" style="color:#66CD00" class="ion-ios-checkmark"></i>
-              <i v-if="item.orderStatus==4" style="color:#108ee9" class="ion-ios-checkmark-outline"></i>
+              <i v-if="item.orderStatus==4" style="color:#66CD00" class="ion-ios-checkmark"></i>
+              <i v-if="item.orderStatus==3" style="color:#108ee9" class="ion-ios-checkmark-outline"></i>
               <i v-if="item.orderStatus==5" style="color:#575757" class="ion-ios-close-outline"></i>
               <i v-if="item.orderStatus==2" style="color:#C20C0C" class="ion-clipboard"></i>
             </div>
@@ -76,13 +83,14 @@
         </div>
       </van-list>
     </div>
-
+    <div v-if="myData.pageNum!=0&&orderList.length==0&&finished==true" style="color: #888888;text-align: center;padding: 20px;">
+      没有此类销售单
+    </div>
 
   </div>
 </template>
 
 <script>
-  const Back = resolve => require(['@/components/common/backBar'], resolve);
   import {List} from 'vant';
   import {getSellHistoryList} from '@/service/getData';
   import Vue from 'vue'
@@ -90,7 +98,6 @@
   export default {
     mixins: [],     //混合
     components: {
-      'ok-back': Back
     },//注册组件
     data() {         //数据
       return {
@@ -101,7 +108,7 @@
         orderList:[],
         loading: false,
         finished: false,
-        myData:{paging:true,pageNum:0,limit:6,range:'month',orderBy:'create_time desc'}
+        myData:{paging:true,pageNum:0,limit:8,range:'month',orderStatus:null,orderBy:'create_time desc'}
       };
     },
     computed: {},  //计算属性
@@ -111,49 +118,46 @@
     },   //挂载
     methods: {
       sellTableStatus(n) {
+        this.isAll = false;
+        this.isFinished = false;
+        this.isArrearage = false;
+        this.isClose = false;
         switch (n) {
           case 1:
             this.isAll = true;
-            this.isFinished = false;
-            this.isArrearage = false;
-            this.isClose = false;
+            this.myData.orderStatus=null;
+            this.reLoad();
             break;
           case 2:
             this.isAll = false;
-            this.isFinished = true;
-            this.isArrearage = false;
-            this.isClose = false;
+            this.myData.orderStatus=2;
+            this.reLoad();
             break;
           case 3:
             this.isAll = false;
-            this.isFinished = false;
-            this.isArrearage = true;
-            this.isClose = false;
+            this.myData.orderStatus=4;
+            this.reLoad();
             break;
           case 4:
             this.isAll = false;
-            this.isFinished = false;
-            this.isArrearage = false;
-            this.isClose = true;
+            this.myData.orderStatus=5;
+            this.reLoad();
             break;
           default:
             this.isAll = true;
-            this.isFinished = false;
-            this.isArrearage = false;
-            this.isClose = false;
         }
       },
       onLoad() {//上划加载订单历史
         this.myData.pageNum++;
         getSellHistoryList(this.myData).then(
           response => {
-            for (var i = 0; i < response.data.results.length; i++) {
-              this.orderList.push(response.data.results[i]);
-            }
-            this.loading = false;
-            if (response.data.lastPage) {
-              this.finished = true;
-            }
+              for (var i = 0; i < response.data.results.length; i++) {
+                this.orderList.push(response.data.results[i]);
+              }
+              this.loading = false;
+              if (response.data.lastPage) {
+                this.finished = true;
+              }
           }, error => {
             this.loading = false;
             this.finished = true;
@@ -162,6 +166,7 @@
         );
       },
       reLoad() {
+        // alert(2)
         this.orderList = [];
         this.myData.pageNum = 0;
         this.finished = false;
