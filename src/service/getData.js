@@ -53,6 +53,10 @@ var addProduct=myData=>ajax('post','/api/product',myData);
 
 //查询销售历史订单
 var getSellHistoryList=myData=>ajax('get','/api/sale/sale_table',myData);
+
+//查询临期商品
+var getearlyWarningList=(myData,days)=>ajax('get','/api/product/nearDay/'+days,myData);
+
 export {
   login,
   getMenuCodeList,
@@ -69,5 +73,6 @@ export {
   getMyUserInfo,
   addProduct,
   addCategory,
-  getSellHistoryList
+  getSellHistoryList,
+  getearlyWarningList
 }
