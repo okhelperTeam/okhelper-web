@@ -50,8 +50,8 @@
           <router-link to="/statistics/sellDetails" style="width: 100%" class="ok-sellOrStore-content">
             <div>销售报表</div>
             <div style="margin-top: 5px;">
-              <div style="float: left;display: block" class="ok-sellOrStore-subcontent">今日销售&nbsp;&nbsp;&nbsp;<span style="color: red;">58</span>&nbsp;&nbsp;&nbsp;笔</div>
-              <div style="float: right;display: block;margin-left: 20px;" class="ok-sellOrStore-subcontent">销售金额&nbsp;&nbsp;&nbsp;<span style="color: red;">￥100.000.00</span></div>
+              <div style="float: left;display: block" class="ok-sellOrStore-subcontent">今日销售&nbsp;&nbsp;&nbsp;<span style="color: red;">{{sellTotal.saleCount}}</span>&nbsp;&nbsp;&nbsp;笔</div>
+              <div style="float: right;display: block;margin-left: 20px;" class="ok-sellOrStore-subcontent">销售金额&nbsp;&nbsp;&nbsp;<span style="color: red;">￥{{sellTotal.totalSales}}</span></div>
             </div>
             </router-link>
         </div>
@@ -121,20 +121,32 @@
 
 <script>
   const Footer = resolve => require(['@/components/footer/footer'], resolve);
+  import {getSellTotal} from "@/service/getData.js"
     export default {
         mixins: [],     //混合
         components: {
           'ok-footer':Footer
         },//注册组件
         data() {         //数据
-            return {};
+            return {
+              sellTotal:{saleCount:0,totalSales:0}
+            };
         },
         computed: {},  //计算属性
         created() {
+          this.getSellTotal();
         },   //创建
         mounted() {
         },   //挂载
-        methods: {},   //方法
+        methods: {
+          getSellTotal(){
+            getSellTotal({
+              range:'month'
+            }).then(response=>{
+              this.sellTotal=response.data;
+            },error=>{});
+          }
+        },   //方法
         watch: {}      //监听
     }
 </script>

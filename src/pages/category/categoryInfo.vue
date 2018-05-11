@@ -68,7 +68,7 @@
               choosedCategoryId:0,
               category:{
                 categoryName:'',
-                superId:this.choosedCategoryId,
+                superId:0,
                 remarks:''
               }
             };
@@ -88,12 +88,13 @@
             // this.$emit('closeCategoryInfo',{close:false,reflashCategoryList:true});
           },
           saveCategoryInfo(){
+            this.category.superId=this.choosedCategoryId;
             addCategory({
               superId:this.category.superId,
               categoryName:this.category.categoryName,
               remarks:this.category.remarks
             }).then(response=>{
-              alert(response.data)
+              // alert(response.data)
               Toast({
                 position: 'bottom',
                 message: '新增分类成功'
