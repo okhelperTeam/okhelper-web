@@ -34,54 +34,27 @@
                 </div>
               </div>
             </div>
-            <div v-for="(item,index) in choosedProductList">
-              <div>
-                <div style="border-bottom: 1px dashed #F2F2F2;height: 26px;line-height: 26px;">
-                  <span style="font-weight: bolder;">商品名（货号）</span>
-                  <i style="color: #108ee9;margin-left: 15px;" class="ion-edit"></i>
-                </div>
-                <div style="border-bottom: 1px dashed #F2F2F2">
-                  <ul style="list-style: none;height: 36px;line-height: 36px;width: 100%;font-size: 12px;">
-                    <li style="display: block;float: left;width: 10%;">
-                      <div v-if="editText=='编辑'">
-                        <div @click="showNoteOrPrice(1,index)" style="height: 26px;width: 26px;border-radius: 13px;color:white;background: #F2F2F2;font-size:10px;text-align: center;margin-top: 5px;line-height: 24px;">备</div>
-                      </div>
-                      <div v-else>
-                        <div @click="deleteProduct(index)" style="height: 26px;width: 26px;border-radius: 13px;color:white;background: red;font-size:10px;text-align: center;margin-top: 5px;line-height: 26px;">一</div>
-                      </div>
-                    </li>
-                    <li style="display: block;float: left;width: 20%;text-align: center;">
-                      <div>蓝色</div>
-                    </li>
-                    <li style="display: block;float: left;width: 20%;text-align: center;">
-                      <div>xxxs</div>
-                    </li>
-                    <li style="display: block;float: left;width: 20%;text-align: center;">
-                      <div>￥{{item.discountPrice}}</div>
-                    </li>
-                    <li style="display: block;float: left;width: 20%;text-align: center;">
-                      <div>{{item.productCount}}</div>
-                    </li>
-                    <li style="display: block;float: left;width: 10%;color: #575757;">
-                      <i @click="showNoteOrPrice(2,index)" :class="[item.isPriceOpen?'ion-chevron-up':'ion-chevron-down']"></i>
-                    </li>
-                  </ul>
-                  <div v-show="item.isPriceOpen">
-                    <sell-table-item :choosedItem="item"></sell-table-item>
-                  </div>
-                  <div v-show="item.isNoteOpen" style="width: 100%;height: 40px;border-top: 1px #F2F2F2 dashed;line-height: 40px;font-size: 16px;margin-top: 5px;margin-bottom: 5px;">
-                    <div style="width:20%;height: 100%;float: left;text-align: center;color: #888888">备注</div>
-                    <input style="border-bottom:1px solid #108ee9;width: 70%;display: inline;height: 34px;margin-top:3px;float: left;" type="text" v-model="item.productNotes"/>
-                  </div>
-                </div>
+            <div v-for="(item) in choosedProductList">
+              <sell-table-item
+                :productId="item.productId"
+                :productName="item.productName"
+                :productNumber="item.productNumber"
+                :productColor="item.productColor"
+                :productSize="item.productSize"
+                :editText="editText"
+                :productCount="item.productCount"
+                :retailPrice="item.retailPrice"
+                :discounts="item.discounts"
+                :productNotes="item.productNotes"
+                @deleteProduct="deleteProduct"
+              />
               </div>
             </div>
-
-
-          </div>
         </div>
         <div style="width: 100%;height: 50px;line-height: 50px;padding-left: 20px;font-size: 16px;color: #888888;font-size: 30px;color: cornflowerblue">
-          <div style="width: 50%;height: 50px;display: block;float: left;text-align: center;"><i class="ion-android-expand"></i></div>
+          <div style="width: 50%;height: 50px;display: block;float: left;text-align: center;">
+            <i class="ion-android-expand"></i>
+          </div>
           <router-link to="/product/SearchProduct" style="color: cornflowerblue;width: 50%;height: 50px;display: block;float: left;text-align: center;">
             <i class="ion-android-add"></i>
           </router-link>
@@ -128,14 +101,14 @@
         },//注册组件
         data() {         //数据
             return {
+              choosedId:this.$route.params.productChoosedList,
               editText:'编辑',
               choosedProductList:[
-                {isPriceOpen:false,retailPrice:100,discountPrice:100,discounts:100,productCount:15,productNotes:'',isNoteOpen:false,productNotes:''},
-                {isPriceOpen:false,retailPrice:200,discountPrice:100,discounts:50,productCount:15,productNotes:'',isNoteOpen:false,productNotes:''},
+                {productId:'1',productName:'商品1',productNumber:'001',productColor:'蓝色',productSize:'均码',retailPrice:100,discounts:100,productCount:15,productNotes:'',productNotes:''},
+                {productId:'2',productName:'商品1',productNumber:'001',productColor:'蓝色',productSize:'均码',retailPrice:200,discounts:50,productCount:15,productNotes:'',productNotes:''},
               ],
               totalMoney:10000.56,
               customerList:[]
-
             };
         },
         computed: {
@@ -165,15 +138,8 @@
               this.editText='编辑';
             }
           },
-          deleteProduct(index){
-            this.choosedProductList.splice(index,1);
-          },
-          showNoteOrPrice(n,index){
-            switch (n){
-              case 1:this.choosedProductList[index].isNoteOpen=!this.choosedProductList[index].isNoteOpen;this.choosedProductList[index].isPriceOpen=false;break;
-              case 2:this.choosedProductList[index].isNoteOpen=false;this.choosedProductList[index].isPriceOpen=!this.choosedProductList[index].isPriceOpen;break;
-              default:this.choosedProductList[index].isNoteOpen=!this.choosedProductList[index].isNoteOpen;this.choosedProductList[index].isPriceOpen=false;
-            }
+          deleteProduct(productId){
+            this.choosedProductList.remove(productId);
           }
         },   //方法
         watch: {
@@ -183,10 +149,5 @@
 </script>
 
 <style scoped>
-  .sell-table-price-detail-open-li{
-    display: block;float: left;width: 25%;padding-left: 10px;padding-right: 10px;
-  }
-  .sell-table-price-detail-open-li-input{
-    height: 20px;width: 100%;margin-top: 2px;border-bottom: 1px solid #108ee9;
-  }
+
 </style>
