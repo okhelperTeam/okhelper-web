@@ -25,7 +25,7 @@ var getWarehouseList = myData=>ajax('get','/api/warehouse',myData);
 var getCategoryList=(id)=>ajax('get','/api/categorys/'+id);
 
 //新增分类
-var addCategory=myData=>ajax('get','/api/categorys',myData);
+var addCategory=myData=>ajax('post','/api/categorys',myData);
 
 //获取商品列表(分类id)
 var getProductList=myData=>ajax('get','/api/product/category',myData);
@@ -53,6 +53,16 @@ var addProduct=myData=>ajax('post','/api/product',myData);
 
 //查询销售历史订单
 var getSellHistoryList=myData=>ajax('get','/api/sale/sale_table',myData);
+
+//客户欠款查询
+var getCustomerDebtList=myData=>ajax('get','/api/report/customer_debt',myData);
+
+//供应商对账查询
+var getSupplierDebtList=myData=>ajax('get','/api/supplier',myData);
+
+//销售汇总查询
+var getSellTotal=myData=>ajax('get','/api/sale/total',myData);
+
 export {
   login,
   getMenuCodeList,
@@ -69,5 +79,8 @@ export {
   getMyUserInfo,
   addProduct,
   addCategory,
-  getSellHistoryList
+  getSellHistoryList,
+  getCustomerDebtList,
+  getSupplierDebtList,
+  getSellTotal
 }
