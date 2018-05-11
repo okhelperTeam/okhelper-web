@@ -24,9 +24,11 @@ var getWarehouseList = myData=>ajax('get','/api/warehouse',myData);
 //获取分类列表
 var getCategoryList=(id)=>ajax('get','/api/categorys/'+id);
 
+//新增分类
+var addCategory=myData=>ajax('get','/api/categorys',myData);
+
 //获取商品列表(分类id)
 var getProductList=myData=>ajax('get','/api/product/category',myData);
-
 
 //查询所有供应商
 var getSupplierList=myData=>ajax('get','/api/supplier',myData);
@@ -43,14 +45,14 @@ var getProductListByName=myData=>ajax('get','/api/product/search',myData);
 //生产商品条码
 var generateBarCode=myData=>ajax('get','/api/until/bar_code',myData);
 
-
 //获取我的信息,校验token
 var getMyUserInfo=myData=>ajax('get','/api/user/me',myData);
 
 //新增商品
 var addProduct=myData=>ajax('post','/api/product',myData);
 
-
+//查询销售历史订单
+var getSellHistoryList=myData=>ajax('get','/api/sale/sale_table',myData);
 export {
   login,
   getMenuCodeList,
@@ -65,5 +67,7 @@ export {
   getProductListByName,
   generateBarCode,
   getMyUserInfo,
-  addProduct
+  addProduct,
+  addCategory,
+  getSellHistoryList
 }

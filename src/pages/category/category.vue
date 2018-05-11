@@ -43,7 +43,7 @@
   // import categoryInfo from '@/pages/category/categoryInfo'
   import {getCategoryList} from '@/service/getData';
     export default {
-        name:'category',
+        name:'ok-category',
         mixins: [],     //混合
         components: {
           'category-tree':categoryTree,

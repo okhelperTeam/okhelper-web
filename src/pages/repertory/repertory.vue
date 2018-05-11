@@ -2,7 +2,7 @@
 * Created by ztt on 2018/4/18.
 */
 <template>
-  <div id="">
+  <div id=""  style="height: 100%;">
     <div  style="color:white;background: #C20C0C;font-size:16px;padding-top:12px;height: 56px;width: 100%;text-align: center;">
       <div style="display: block;font-size: 20px;">库存</div>
     </div>

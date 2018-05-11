@@ -256,7 +256,12 @@
           }
 
         },   //方法
-        watch: {}      //监听
+        watch: {},      //监听
+        beforeRouteEnter (to, from, next) { // 缓存组件是，此方法还有效
+        next(vm => {
+          // alert(from.fullPath);
+        })
+      }
     }
 </script>
 

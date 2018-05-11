@@ -71,7 +71,7 @@
           到底了别滑了，真的没了.....
         </div>
       </div>
-      <div v-else  style="color: #888888;text-align: center;padding: 20px;">
+      <div v-if="myData.pageNum!=0&&productList.length==0&&finished==true"  style="color: #888888;text-align: center;padding: 20px;">
         没有您要找的商品......
       </div>
       <div style="height: 30px;width: 100%;"></div>

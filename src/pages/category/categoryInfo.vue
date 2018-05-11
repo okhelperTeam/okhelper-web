@@ -19,7 +19,7 @@
         <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
           <div style="width:30%;display: block;float: left;padding-left: 20px;text-align: center">分类名称<span style="color: #dd0a20">*</span></div>
           <div style="height:43px;border-bottom: 1px solid #2D84FF;width:65%;display: block;float: left;">
-            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="分类名称" type="text"/>
+            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="分类名称" type="text" v-model="category.categoryName"/>
           </div>
         </div>
         <div class="ok-model-border"></div>
@@ -37,12 +37,12 @@
         <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
           <div style="width:30%;display: block;float: left;padding-left: 20px;text-align: center">分类描述</div>
           <div style="height:43px;border-bottom: 1px solid #2D84FF;width:65%;display: block;float: left;">
-            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="分类描述...." type="text"/>
+            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="分类描述...." type="text" v-model="category.remarks"/>
           </div>
         </div>
         <div style="margin-top: 10px;" class="ok-border"></div>
         <div style="padding: 20px;width: 100%">
-          <div style="background: #108ee9;height: 40px;width: 80%;margin: 0 auto;border-radius: 5px;color: white;text-align: center;line-height: 40px;font-size: 16px;">保存</div>
+          <div style="background: #108ee9;height: 40px;width: 80%;margin: 0 auto;border-radius: 5px;color: white;text-align: center;line-height: 40px;font-size: 16px;" @click="saveCategoryInfo">保存</div>
         </div>
       </div>
     </div>
@@ -53,17 +53,24 @@
 
 <script>
   import Category from "@/pages/category/category";
+  import {addCategory} from '@/service/getData.js';
+  import { Toast } from 'vant';
     export default {
-        name:'categoryInfo',
+        name:"ci",
         mixins: [],     //混合
         components: {
           'ok-category':Category
         },//注册组件
-        data() {         //数据
+        data() {//数据
             return {
               isShow:true,
               parentData:{categoryShow:false,choosedCategoryName:'选择上级分类',plusShow:false},
-              choosedCategoryId:0
+              choosedCategoryId:0,
+              category:{
+                categoryName:'',
+                superId:this.choosedCategoryId,
+                remarks:''
+              }
             };
         },
         computed: {},  //计算属性
@@ -78,6 +85,22 @@
           },
           closeCategoryInfo(){
             this.$router.back();
+            // this.$emit('closeCategoryInfo',{close:false,reflashCategoryList:true});
+          },
+          saveCategoryInfo(){
+            addCategory({
+              superId:this.category.superId,
+              categoryName:this.category.categoryName,
+              remarks:this.category.remarks
+            }).then(response=>{
+              alert(response.data)
+              Toast({
+                position: 'bottom',
+                message: '新增分类成功'
+              });
+            },error=>{
+
+            });
           }
         },   //方法
         watch: {}      //监听
