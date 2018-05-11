@@ -13,7 +13,7 @@
             <input class="header-bar-search-text"  v-model="searchProductName" type="text" placeholder="查找商品"/>
           </div>
         </div>
-        <router-link :to="lastPage" class="header-bar-cancel-btn">取消</router-link>
+        <span @click="$router.back()" class="header-bar-cancel-btn">取消</span>
       </div>
       <div class="ok-model-border"></div>
       <div style="margin-top:56px;"></div>
@@ -140,12 +140,7 @@
               this.searchProductName=newValue;
               this.search();
           }
-        },      //监听
-        beforeRouteEnter (to, from, next) {
-        next(vm => {
-          vm.lastPage=from.fullPath;
-        })
-      }
+        }
     }
 </script>
 
