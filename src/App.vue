@@ -1,9 +1,9 @@
 <template>
   <div id="app" v-cloak>
-    <transition     enter-active-class="animated slideInLeft"
-    leave-active-class="animated slideOutRight">
-  　　　　　　<router-view class="Router"></router-view>
-  　　</transition>
+  <keep-alive>
+      <router-view v-if="$route.meta.keepAlive" class="Router"></router-view>
+  </keep-alive>
+  <router-view v-if="!$route.meta.keepAlive" class="Router"></router-view>
   </div>
 </template>
 

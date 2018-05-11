@@ -2,64 +2,42 @@
 * Created by ztt on 2018/4/13.
 */
 <template>
-  <div class="container" style="width:auto;">
+  <div class="container">
     <div id="ok-home-icon" style="height: 200px;width: auto;text-align: center;padding-top: 50px;padding-bottom: 25px;">
-      <img src="@/assets/icon/ok.jpg" width="100" height="100">
+      <img src="/static/img/ok-icon-red.png" width="100" height="100">
     </div>
 
-    <div style="width:auto;height: 200px; margin:0 auto">
-
-      <van-cell-group>
-        <div style="display: block;text-align: center;">
-          <div class="login-icon">
-            <i class="ion-person" style="float: left;margin-left: 9.5%;margin-top: 5%"></i>
-          </div>
-          <div class="login-text">
-            <van-field
-              v-model="userName"
-              style="font-size: 20px;"
-              icon="clear"
-              placeholder="请输入手机号"
-              @blur="checkUserName"
-            />
-            <hr>
-            <br>
-            <span v-if="nameIsNull" class="tishixiaoxi disappear">{{nameMsg}}</span>
-          </div>
-        </div>
-        <div style="display: block;text-align: center;">
-          <div style="display: block;">
-            <div class="login-icon">
-              <i class="ion-unlocked" style="float: left;margin-left: 9.5%;margin-top: 5%"></i>
-            </div>
-            <div class="login-text">
-              <van-field
-                v-model="userPassword"
-                type="password"
-                style="font-size: 20px"
-                placeholder="请输入6-20位字母和数字"
-                icon="clear"
-                @blur="checkLPwd"
-              />
-              <hr>
-              <br>
-              <span v-if="pwdIsNull" class="tishixiaoxi disappear">{{pwdMsg}}</span>
-            </div>
-          </div>
-        </div>
-        <div style="display: block;text-align: center;">
-          <div style="display: block;">
-            <div class="login-icon">
-              <i class="ion-social-apple" style="font-size: 35px;float: left;margin-left: 9.5%;margin-top: 3%"></i>
-            </div>
-            <div class="login-text">
-              <input type="text" placeholder="请输入验证码" class="yanzhengma_input" @blur="checkLpicma" v-model="userYanzhengma">
-              <input type="button" id="code" @click="createCode" class="verification1" v-model="checkCode" style="border: 1px skyblue solid"/><br>
-              <span v-if="yanzhengmaIsNull" class="tishixiaoxi disappear">{{yanzhengmaMsg}}</span>
-            </div>
-          </div>
-        </div>
+    <div style="width:95%; margin:0 auto">
+      <van-cell-group >
+        <van-cell  >
+          <i class="ion-person login-icon" slot="icon"/>
+          <van-field slot="title"  style="font-size: 16px;"
+            v-model="userName"
+            icon="clear"
+            placeholder="请输入用户名,店长请使用手机号"
+            required
+            :error-message="nameMsg"
+            @click-icon="userName = ''"
+            @blur="checkUserName"
+            @focus="nameMsg=''"
+          />
+        </van-cell>
+        <van-cell  icon="location">
+          <i class="ion-unlocked login-icon" slot="icon"/>
+          <van-field slot="title"  style="font-size: 16px;"
+            v-model="userPassword"
+            type="password"
+            placeholder="请输入6-20位字母和数字"
+            icon="clear"
+            required
+            :error-message="pwdMsg"
+            @click-icon="userPassword = ''"
+            @blur="checkLPwd"
+            @focus="pwdMsg=''"
+          />
+        </van-cell>
       </van-cell-group>
+
       <div style="height: 110px;padding-top:30px;width: 80%;margin:auto;">
         <van-button @click="loginOk" type="danger" size="large">登录</van-button>
         <span v-if="loginIsTrue" class="tishixiaoxi disappear">{{loginMsg}}</span>
@@ -70,7 +48,7 @@
         <i class="ion-person-add"></i>
       </div>
       <div class="user-login-bottom" style="margin-right: 43px">
-        <van-text style="float:right;margin-top: -10px;color: #dd0a20">立即注册</van-text>
+        <span style="float:right;margin-top: -10px;color: #dd0a20">立即注册</span>
       </div>
         </router-link>
       </div>
@@ -80,7 +58,7 @@
             <i class="ion-ios-help"></i>
           </div>
           <div class="user-login-bottom" style="margin-left: 43px">
-            <van-text style="float:left;margin-top: -10px;color: #dd0a20" >忘记密码</van-text>
+            <span style="float:left;margin-top: -10px;color: #dd0a20" >忘记密码</span>
           </div>
         </router-link>
       </div>
@@ -93,6 +71,7 @@
   import { Field,Cell, CellGroup ,Row, Col,Button,Icon} from 'vant';
   import {login} from '@/service/getData';
   import router from '@/router/index'
+  import { Toast } from 'vant';
   Vue.use(Icon).use(Button).use(Row).use(Col).use(Cell).use(CellGroup).use(Field);
   var code ; //在全局定义验证码
     export default {
@@ -108,8 +87,8 @@
               pwdMsg:'',
               loginMsg:'',
               yanzhengmaMsg:'',
-              nameIsNull:false,
-              pwdIsNull:false,
+              nameIsNull:true,
+              pwdIsNull:true,
               yanzhengmaIsNull:false,
               loginIsTrue:false
             };
@@ -129,13 +108,25 @@
             }).then(
               response=>{
                 window.localStorage.setItem('token',response.data.token);
-                router.push({path:'/home'})
+                Toast({
+                  type:'success',
+                  message: '登陆成功',
+                  duration:1000
+                });
+                router.push({path:'/home'});
               },error=>{
-                console.log(error.response.msg);
-                this.loginMsg=response.msg;
+                Toast({
+                  position: 'bottom',
+                  message: '用户名或密码错误'
+                });
               }
             )
-            }
+          }else{
+            Toast({
+              position: 'bottom',
+              message: '请完善信息'
+            });
+          }
 
           },
 
@@ -150,7 +141,9 @@
           //     this.nameIsNull=true;
           //   }
             else {
-              return true;
+                this.nameMsg='';
+                this.pwdIsNull=false;
+                return true;
             }
           },
 
@@ -160,13 +153,14 @@
             if(this.userPassword == ''){
               this.pwdMsg="请输入密码";
               this.pwdIsNull=true;
-
              }//else if(this.userPassword.search(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/) != 0){
             //   this.pwdMsg="密码必须6-20位，包含字母与数字";
             //   this.pwdIsNull=true;
             // }
               else {
-              return true;
+                this.pwdMsg='';
+                this.pwdIsNull=false;
+                return true;
             }
           },
           // 图片验证码
@@ -227,16 +221,20 @@
 </script>
 
 <style scoped>
+  .container{
+    background-color:#f8f8f8;
+    height:100%;
+  }
+
   .login-icon{
-    width: 30%;
-    display: inline;
     font-size: 25px;
     color: #dd0a20;
+    line-height: 44px;
   }
   .register-icon{
-    display: inline;
     font-size: 30px;
     color: #dd0a20;
+    line-height: 44px;
   }
   .login-text{
     width: 70%;
@@ -320,8 +318,3 @@
     background: #f2f2f5;
   }
 </style>
-
-
-
-
-

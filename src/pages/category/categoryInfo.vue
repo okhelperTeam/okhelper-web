@@ -2,6 +2,7 @@
 * Created by ztt on 2018/5/9.
 */
 <template>
+  <div>
   <transition-group enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
     <div :key="1" id="" style="position: absolute;top:0;height: 100%;width:100%;background:white;z-index: 10000">
       <div style="color: white;height:56px;background:#C20C0C;font-size: 18px;margin: 0 auto;width: 100%;text-align: center;line-height: 56px;">
@@ -46,11 +47,14 @@
       </div>
     </div>
   </transition-group>
+
+</div>
 </template>
 
 <script>
-  import Category from "../category/category";
+  import Category from "@/pages/category/category";
     export default {
+        name:'categoryInfo',
         mixins: [],     //混合
         components: {
           'ok-category':Category
@@ -73,7 +77,7 @@
             this.choosedCategoryId=categoryItem.id;
           },
           closeCategoryInfo(){
-            this.$emit('closeCategoryInfo',{close:false,reflashCategoryList:true});
+            this.$router.back();
           }
         },   //方法
         watch: {}      //监听

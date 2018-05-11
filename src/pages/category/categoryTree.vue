@@ -34,13 +34,16 @@
       }
     },
     created () {
-      setTimeout(()=>{
-        this.data.forEach((item, index) => {
-          if (item.categoryVoList && item.categoryVoList.length) {
-            this.folderIconList[index] = 'ion-arrow-right-b';
-          }
-        });
-      },500)
+      // setTimeout(()=>{
+      //
+      // },300)
+      console.log(this.data);
+      this.data.forEach((item, index) => {
+        if (item.categoryVoList && item.categoryVoList.length) {
+          this.folderIconList[index] = 'ion-arrow-right-b';
+          this.$set(this.folderIconList, index, this.folderIconList[index]);
+        }
+      });
     },
     methods: {
       choose(categoryItem,index){
