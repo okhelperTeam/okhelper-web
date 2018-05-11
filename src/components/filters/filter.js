@@ -1,6 +1,6 @@
 //设置头像的默认图片
 let defaultImg = function (value) {
-  if (value === "") {
+  if (value === ""||value==null) {
     return "/static/img/ok-icon-red.png";
   } else {
     return value;
@@ -68,4 +68,28 @@ let formateMoney = function (value) {
   }
 }
 
-export {defaultImg,toTime, formateData,formateMoney,formateTime}
+//格式化支付方式(1-现金, 2-支付宝，3-微信，4-刷卡 混合数字拼接)
+let formatePayType = function (value) {
+  if(value.length==1){
+    switch (value){
+      case '1':return "现金";
+      case '2':return "支付宝";
+      case '3':return "微信";
+      case '4':return "刷卡";
+      default :return "未知支付方式";
+    }
+  }else{
+    switch (value){
+      case '12':
+      case '21':return "现金支付宝";
+      case '23':
+      case '32':return "支付宝微信";
+      case '13':
+      case '13':return "现金微信";
+      case '4':return "刷卡";
+      default :return "未知支付方式";
+    }
+  }
+
+}
+export {defaultImg,toTime, formateData,formateMoney,formateTime,formatePayType}

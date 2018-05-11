@@ -29,25 +29,46 @@
         </ul>
       </div>
       <div class="ok-model-border"></div>
-      <div v-for="(item,index) in myData">
-        <ok-product
-          :goods-img="item.goodsPhoto"
-          :goods-name="item.goodsName"
-          :cate-name="item.cateName"
-          :discounts="item.youhui"
-          :price="item.danjia"
-          :addTime="item.shangjiashijian"
-          :goodsId="item.goodsId"
-          :index="index"
-          @addProduct="addProduct"
-        ></ok-product>
+      <div v-if="productList.length>0||myData.pageNum==0">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          :offset=10
+          @load="onLoad"
+        >
+          <div v-for="(item,index) in productList">
+            <ok-product
+              :main-img="item.mainImg"
+              :product-name="item.productName"
+              :cate-name="item.cateName"
+              :discounts="item.youhui"
+              :retail-price="item.retailPrice"
+              :createTime="item.createTime"
+              :Id="item.id"
+              :index="index"
+              :salesStock="item.salesStock"
+              :salesVolume="item.salesVolume"
+              @addProduct="addProduct"
+            />
+          </div>
+        </van-list>
+        <div v-if="finished&&myData.pageNum>1" style="color: #888888;text-align: center;padding: 20px;">
+          到底了别滑了，真的没了.....
+        </div>
+      </div>
+      <div v-if="myData.pageNum!=0&&productList.length==0&&finished==true"  style="color: #888888;text-align: center;padding: 20px;">
+        没有您要找的商品......
       </div>
 
     </div>
 </template>
 
 <script>
+  import Vue from 'vue'
   import ProductModel from '@/components/common/productModel';
+  import {getProductList} from '@/service/getData';
+  import { List } from 'vant';
+  Vue.use(List);
     export default {
         mixins: [],     //混合
         components: {
@@ -61,7 +82,10 @@
               isYesterday:false,
               isAWeek:false,
               isAMonth:false,
-              myData:[
+              loading: false,
+              finished: false,
+              myData:{paging:true,pageNum:0,limit:6,orderBy:'create_time desc'},
+              productList:[
                 {goodsId:10000,goodsPhoto:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'热销',danjia:'599.00',shangjiashijian:'2018-4-20 2:20:10'},
                 {goodsId:10001,goodsPhoto:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'热销',danjia:'499.00',shangjiashijian:'2018-4-20 2:20:10'},
                 {goodsId:10002,goodsPhoto:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'热销',danjia:'699.00',shangjiashijian:'2018-4-20 2:20:10'}
@@ -74,6 +98,30 @@
         mounted() {
         },   //挂载
         methods: {
+          onLoad() {//上划加载商品
+            this.myData.pageNum++;
+            getProductList(this.myData).then(
+              response=>{
+                for(var i=0;i<response.data.results.length;i++){
+                  this.productList.push(response.data.results[i]);
+                }
+                this.loading=false;
+                if (response.data.lastPage) {
+                  this.finished = true;
+                }
+              },error=>{
+                this.loading=false;
+                this.finished = true;
+                console.log(error.response.msg);
+              }
+            );
+          },
+          reLoad(){
+            this.productList=[];
+            this.myData.pageNum=0;
+            this.finished=false;
+            this.onLoad();
+          },
           isHotP(n){
             switch (n){
               case 1:this.isHot=true;this.isCold=false;break;
