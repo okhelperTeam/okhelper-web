@@ -1,15 +1,19 @@
 <template>
-  <div class="scan" v-if="P.isOpen">
-    <div id="bcid">
-      <!-- <div style="height:40%">
-      </div> -->
+<div>
+  <transition enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight">
+    <div class="scan" v-if="P.isOpen">
+      <div id="bcid">
+      </div>
+      <footer>
+        <button @click="cancel">取消</button>
+        <button @click="setFlash">闪光灯</button>
+        <button @click="choosePic">从相册中获取</button>
+      </footer>
     </div>
-    <footer>
-      <button @click="cancel">取消</button>
-      <button @click="setFlash">闪光灯</button>
-      <button @click="setFlash">从相册中获取</button>
-    </footer>
-  </div>
+  </transition>
+</div>
+
+
 </template>
 
 <script type='text/ecmascript-6'>
@@ -26,7 +30,6 @@
       P:{isOpen:{}}
     },
     created(){
-      this.isInOpen=this.isOpen;
     },
     mounted(){
     },
@@ -38,7 +41,7 @@
       //创建扫描控件
       startRecognize() {
         let that=this;
-        if (!window.plus) {alert("请在手机上使用"); this.P.isOpen=false; return;}
+        if (!window.plus) {alert("请在手机上使用"); that.P.isOpen=false; return;}
         scan = new plus.barcode.Barcode('bcid',
         [plus.barcode.QR,plus.barcode.EAN8,plus.barcode.EAN13],
         {frameColor:'#108ee9',scanbarColor:'#108ee9',background:'#000'});
@@ -113,6 +116,14 @@
               that.closeScan();
               that.P.isOpen=false;
     				   });
+          },
+          choosePic(){
+              if (!window.plus) return;
+              plus.gallery.pick(succss=>{
+                succss.files
+              },error=>{
+
+              },{})
           }
     },
     watch:{

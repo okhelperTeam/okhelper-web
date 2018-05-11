@@ -2,6 +2,7 @@
 * Created by ztt on 2018/5/9.
 */
 <template>
+  <div>
   <transition-group enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
     <div :key="1" id="" style="position: absolute;top:0;height: 100%;width:100%;background:white;z-index: 10000">
       <div style="color: white;height:56px;background:#C20C0C;font-size: 18px;margin: 0 auto;width: 100%;text-align: center;line-height: 56px;">
@@ -28,10 +29,10 @@
             <div style="height: 30px;font-size: 16px;width: 100%;"  @click="parentData.categoryShow=!parentData.categoryShow" placeholder="选择上级分类">{{parentData.choosedCategoryName}}</div>
           </div>
         </div>
-        <category
+        <ok-category
           :parentData="parentData"
           @getChoosedCategoryId="getChoosedCategoryId"
-        ></category>
+        ></ok-category>
         <div class="ok-model-border"></div>
         <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
           <div style="width:30%;display: block;float: left;padding-left: 20px;text-align: center">分类描述</div>
@@ -46,17 +47,19 @@
       </div>
     </div>
   </transition-group>
+
+</div>
 </template>
 
 <script>
-  import category from "@/pages/category/category";
+  import Category from "@/pages/category/category";
   import {addCategory} from '@/service/getData.js';
   import { Toast } from 'vant';
     export default {
         name:"ci",
         mixins: [],     //混合
         components: {
-          category
+          'ok-category':Category
         },//注册组件
         data() {//数据
             return {
@@ -65,7 +68,7 @@
               choosedCategoryId:0,
               category:{
                 categoryName:'',
-                superId:this.choosedCategoryId,
+                superId:0,
                 remarks:''
               }
             };
@@ -81,15 +84,17 @@
             this.choosedCategoryId=categoryItem.id;
           },
           closeCategoryInfo(){
-            this.$emit('closeCategoryInfo',{close:false,reflashCategoryList:true});
+            this.$router.back();
+            // this.$emit('closeCategoryInfo',{close:false,reflashCategoryList:true});
           },
           saveCategoryInfo(){
+            this.category.superId=this.choosedCategoryId;
             addCategory({
               superId:this.category.superId,
               categoryName:this.category.categoryName,
               remarks:this.category.remarks
             }).then(response=>{
-              alert(response.data)
+              // alert(response.data)
               Toast({
                 position: 'bottom',
                 message: '新增分类成功'

@@ -34,50 +34,93 @@
       <div>
         <ul style="width: 100%;list-style:none;">
           <li class="ok-client-li" >
-            <span>欠款客户合计:</span><span style="color: orangered;">&nbsp;&nbsp;&nbsp;&nbsp;9</span>
+            <span>欠款客户合计:</span><span style="color: orangered;">&nbsp;&nbsp;&nbsp;&nbsp;{{customerDebtList.length}}</span>
           </li>
           <li class="ok-client-li" >
-            <span>欠款金额合计:</span><span style="color: orangered;">&nbsp;&nbsp;&nbsp;&nbsp;￥999.00</span>
+            <span>欠款金额合计:</span><span style="color: orangered;">&nbsp;&nbsp;&nbsp;&nbsp;￥{{total | formateMoney}}</span>
           </li>
         </ul>
       </div>
       <div class="ok-model-border"></div>
-      <div v-for="item in 9">
-        <div style="width: 65%;display: block;float: left;height: 56px;padding-left: 15px;padding-top: 10px;">
-          <span>当当当</span>
-          <div style="font-size: 12px;color: #888888;">手机号：13838384388</div>
-        </div>
-        <div style="width: 35%;display: block;float: right;height: 56px;">
-          <div v-if="arrearage>0">
-            <div style="font-size:12px;margin-right:10px;float: right;background: orangered;height: 24px;width:24px;border-radius:12px;color: white;margin-top: 16px;text-align: center;line-height: 24px;">欠</div>
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        :offset=10
+        @load="onLoad"
+      >
+        <div v-for="(item,index) in customerDebtList">
+          <div style="width: 65%;display: block;float: left;height: 56px;padding-left: 15px;padding-top: 10px;">
+            <span>{{item.customerName}}</span>
+            <div style="font-size: 12px;color: #888888;">手机号：{{item.customerPhone}}</div>
           </div>
-          <div v-else>
-            <div style="font-size:12px;margin-right:10px;float: right;height: 24px;width:24px;border-radius:12px;color: white;margin-top: 16px;text-align: center;line-height: 24px;">&nbsp;</div>
+          <div style="width: 35%;display: block;float: right;height: 56px;">
+            <div v-if="item.toBePaid>0">
+              <div style="font-size:12px;margin-right:10px;float: right;background: orangered;height: 24px;width:24px;border-radius:12px;color: white;margin-top: 16px;text-align: center;line-height: 24px;">欠</div>
+            </div>
+            <div v-else>
+              <div style="font-size:12px;margin-right:10px;float: right;height: 24px;width:24px;border-radius:12px;color: white;margin-top: 16px;text-align: center;line-height: 24px;">&nbsp;</div>
+            </div>
+            <div style="margin-right:10px;float: right;line-height: 56px;">{{item.toBePaid | formateMoney}}</div>
           </div>
-          <div v-model="arrearage" style="margin-right:10px;float: right;line-height: 56px;">222.00</div>
+          <div class="ok-model-border"></div>
         </div>
-        <div class="ok-model-border"></div>
-      </div>
 
+      </van-list>
       <div class="ok-model-border"></div>
     </div>
 </template>
 
 <script>
+  import {getCustomerDebtList} from "@/service/getData.js"
+  import { List } from 'vant';
+  import Vue from 'vue'
+  Vue.use(List);
     export default {
         mixins: [],     //混合
         components: {},//注册组件
         data() {         //数据
             return {
-              arrearage:22
+              loading: false,
+              finished: false,
+              customerDebtList:[],
+              myData:{paging:true,pageNum:0,limit:10},
+              total:0
             };
         },
         computed: {},  //计算属性
         created() {
+
         },   //创建
         mounted() {
         },   //挂载
-        methods: {},   //方法
+        methods: {
+          onLoad(){
+            this.myData.pageNum++;
+            getCustomerDebtList(this.myData).then(
+              response=>{
+                for(var i=0;i<response.data.results.length;i++){
+                  this.customerDebtList.push(response.data.results[i]);
+                }
+                this.loading=false;
+                if (response.data.lastPage) {
+                  this.finished = true;
+                  this.computDebtTotal();
+                }
+              },error=>{
+                this.loading=false;
+                this.finished = true;
+                console.log(error.response.msg);
+              }
+            );
+
+          },
+          computDebtTotal(){
+            this.total=0;
+            for(var i=0;i<this.customerDebtList.length;i++){
+              this.total+=parseFloat(this.customerDebtList[i].toBePaid);
+            }
+          }
+        },   //方法
         watch: {}      //监听
     }
 </script>

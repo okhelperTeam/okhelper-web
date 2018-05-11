@@ -34,7 +34,7 @@
       <div>
         <ul style="width: 100%;list-style:none;">
           <li class="ok-client-li" >
-            <span>全部供应商:</span><span style="color: orangered;">&nbsp;&nbsp;&nbsp;&nbsp;9</span>
+            <span>全部供应商:</span><span style="color: orangered;">&nbsp;&nbsp;&nbsp;&nbsp;{{supplierDebtList.length}}</span>
           </li>
           <!--<li class="ok-client-li" >-->
             <!--<span>欠款金额合计:</span><span style="color: orangered;">&nbsp;&nbsp;&nbsp;&nbsp;￥999.00</span>-->
@@ -42,35 +42,69 @@
         </ul>
       </div>
       <div class="ok-model-border"></div>
-      <div v-for="item in 9">
-        <div style="width: 65%;display: block;float: left;height: 56px;padding-left: 15px;padding-top: 10px;">
-          <span>郑州市鸿丰纸业</span><span style="background: orange;color: white;margin-left: 10px;padding: 3px;border-radius: 5px;height: 16px;line-height: 16px;font-size: 12px;">李玉梅</span>
-          <div style="font-size: 12px;color: #888888;">手机号：13838384388</div>
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        :offset=10
+        @load="onLoad"
+      >
+        <div v-for="(item,index) in supplierDebtList">
+          <div style="width: 65%;display: block;float: left;height: 56px;padding-left: 15px;padding-top: 10px;">
+            <span>{{item.supplierName}}</span><span style="background: orange;color: white;margin-left: 10px;padding: 3px;border-radius: 5px;height: 16px;line-height: 16px;font-size: 12px;">{{item.supplierContacts}}</span>
+            <div style="font-size: 12px;color: #888888;">手机号：{{item.supplierPhone}}</div>
+          </div>
+          <div style="width: 35%;display: block;float: right;height: 56px;font-size: 12px;color: #888888;">
+            <div style="margin-right:10px;float: right;line-height: 56px;"><i class="ion-chevron-right"></i></div>
+            <div style="font-size:14px;margin-right:10px;float: right;height: 24px;border-radius:5px;color: orangered;margin-top: 16px;text-align: center;line-height: 24px;">0.00</div>
+          </div>
+          <div class="ok-model-border"></div>
         </div>
-        <div style="width: 35%;display: block;float: right;height: 56px;font-size: 12px;color: #888888;">
-          <div style="margin-right:10px;float: right;line-height: 56px;"><i class="ion-chevron-right"></i></div>
-          <div style="font-size:14px;margin-right:10px;float: right;height: 24px;border-radius:5px;color: orangered;margin-top: 16px;text-align: center;line-height: 24px;">0.00</div>
-        </div>
-        <div class="ok-model-border"></div>
-      </div>
-
+      </van-list>
       <div class="ok-model-border"></div>
     </div>
 </template>
 
 <script>
+  import {getSupplierDebtList} from "@/service/getData.js"
+  import { List } from 'vant';
+  import Vue from 'vue'
+  Vue.use(List);
     export default {
         mixins: [],     //混合
         components: {},//注册组件
         data() {         //数据
-            return {};
+            return {
+              loading: false,
+              finished: false,
+              supplierDebtList:[],
+              myData:{paging:true,pageNum:0,limit:10,orderBy:'create_time desc'},
+            };
         },
         computed: {},  //计算属性
         created() {
         },   //创建
         mounted() {
         },   //挂载
-        methods: {},   //方法
+        methods: {
+          onLoad(){
+            this.myData.pageNum++;
+            getSupplierDebtList(this.myData).then(
+              response=>{
+                for(var i=0;i<response.data.results.length;i++){
+                  this.supplierDebtList.push(response.data.results[i]);
+                }
+                this.loading=false;
+                if (response.data.lastPage) {
+                  this.finished = true;
+                }
+              },error=>{
+                this.loading=false;
+                this.finished = true;
+                console.log(error.response.msg);
+              }
+            );
+          }
+        },   //方法
         watch: {}      //监听
     }
 </script>

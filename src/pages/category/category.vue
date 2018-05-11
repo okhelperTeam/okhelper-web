@@ -4,11 +4,11 @@
 <template>
     <div id="">
       <transition-group enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown" :duration="800">
-        <div :key="1" v-show="parentData.categoryShow" style="z-index:100;background:white;width: 100%;height: 100%;position: absolute;top: 0px; ">
+        <div :key="1" v-show="parentData.categoryShow" style="z-index:100;background:white;width: 100%;height:100%;position: fixed;top: 0;left:0 ">
           <div :key="2" style="color: white;height:56px;background:#C20C0C;font-size: 18px;margin: 0 auto;width: 100%;text-align: center;line-height: 56px;">
             <span>{{parentData.choosedCategoryName}}</span>
             <div v-if="parentData.plusShow" style="color:white;float: left;font-size: 25px;width: 56px;height: 20px;">
-              <div @click="productInfoShow=!productInfoShow" :key="5" style="color: white" >
+              <div @click="$router.push('/category/addCategory')" :key="5" style="color: white" >
                 <i :key="6" class="ion-ios-plus-empty"></i>
               </div>
             </div>
@@ -25,30 +25,29 @@
               <div @click="choosedAllCategory" style="margin-left: 30px;font-size: 18px;height: 36px;line-height: 36px;">全部分类
                 <i style="float: right;" :class="{'ion-checkmark-round':isChoosedAll}"></i>
               </div>
-              <category-tree :data="categoryList" :name="categoryName" :chooseId="choosedCategoryId" @getSubMenu="getSubMenu"></category-tree>
+              <category-tree v-if="iscategoryTree" :data="categoryList" :name="categoryName" :chooseId="choosedCategoryId" @getSubMenu="getSubMenu"></category-tree>
             </div>
           </div>
         </div>
       </transition-group>
 
-        <div :key="1" v-if="productInfoShow">
-          <category-info :key="2" @closeCategoryInfo="closeCategoryInfo"/>
-        </div>
-
+        <!-- <div v-if="productInfoShow">
+          <category-info @closeCategoryInfo="closeCategoryInfo"/>
+        </div> -->
 
     </div>
 </template>
 
 <script>
   import categoryTree from '@/pages/category/categoryTree'
-  import categoryInfo from '@/pages/category/categoryInfo'
+  // import categoryInfo from '@/pages/category/categoryInfo'
   import {getCategoryList} from '@/service/getData';
     export default {
         name:'ok-category',
         mixins: [],     //混合
         components: {
           'category-tree':categoryTree,
-          'category-info':categoryInfo
+          // 'category-info':categoryInfo
         },//注册组件
         data() {         //数据
             return {
@@ -57,7 +56,8 @@
               categoryList:[],//分类数据
               categoryName: 'categoryName',
               choosedCategoryId:0,
-              productInfoShow:false
+              productInfoShow:false,
+              iscategoryTree:false
             };
         },
         props:{
@@ -65,13 +65,7 @@
         },
         computed: {},  //计算属性
         created() {
-          getCategoryList(0).then(
-            response=>{
-              this.categoryList=response.data;
-            },error=>{
-              console.log(error.response.msg)
-            }
-          )
+          this.getCategoryList();
         },   //创建
         mounted() {
         },   //挂载
@@ -79,7 +73,10 @@
           getCategoryList(){//获取菜单列表
             getCategoryList(0).then(
               response=>{
-                this.categoryList=response.data;
+                if(response.data != undefined){
+                  this.categoryList=response.data;
+                  this.iscategoryTree=true;
+                }
               },error=>{
                 console.log(error.response.msg)
               }
