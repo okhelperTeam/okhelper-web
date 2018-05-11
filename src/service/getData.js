@@ -57,6 +57,9 @@ var addProduct=myData=>ajax('post','/api/product',myData);
 //查询销售历史订单
 var getSellHistoryList=myData=>ajax('get','/api/sale/sale_table',myData);
 
+//查询临期商品
+var getearlyWarningList=(myData,days)=>ajax('get','/api/product/nearDay/'+days,myData);
+
 //客户欠款查询
 var getCustomerDebtList=myData=>ajax('get','/api/report/customer_debt',myData);
 
@@ -65,6 +68,7 @@ var getSupplierDebtList=myData=>ajax('get','/api/supplier',myData);
 
 //销售汇总查询
 var getSellTotal=myData=>ajax('get','/api/sale/total',myData);
+
 
 export {
   login,
@@ -84,6 +88,7 @@ export {
   addProduct,
   addCategory,
   getSellHistoryList,
+  getearlyWarningList,
   getCustomerDebtList,
   getSupplierDebtList,
   getSellTotal

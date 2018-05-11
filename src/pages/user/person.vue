@@ -17,7 +17,7 @@
       <div>
         <router-link to="/user/register">
           <div>
-            <van-text style="font-size: 20px;float: left;margin-left: 33%;margin-top: -18%;color: black">用户名</van-text>
+            <van-field style="font-size: 20px;float: left;margin-left: 33%;margin-top: -18%;color: black">用户名</van-field>
           </div>
           <div class="person-icon">
             <i class="ion-chevron-right"></i>

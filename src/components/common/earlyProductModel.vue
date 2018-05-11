@@ -1,5 +1,5 @@
 /**
-* Created by lulu on 2018/5/7.
+* Created by lulu on 2018/5/11.
 */
 
 
@@ -13,9 +13,9 @@
         <div class="ok-product-details-name">{{productName}}</div>
         <div  class="ok-product-details-category-name">{{cateName}}</div>
         <div class="ok-product-details-discounts" >{{discounts}}</div>
-        <div class="ok-product-details-price" >零售价：￥{{retailPrice}}</div>
-        <div class="ok-product-details-addtime">上架时间：{{createTime | toTime}}</div>
-        <div class="ok-product-details-addtime">库存：<span style="color: #C20C0C">{{salesStock}}</span></div>
+        <div class="ok-product-details-price" >仓库：{{warehouseName}}</div>
+        <div class="ok-product-details-addtime">生产日期：{{productDate | toTime}}</div>
+        <div class="ok-product-details-addtime">保质期：<span style="color: #C20C0C">{{shelfLife}}</span></div>
       </div>
       <div class="manger-icon">
         <i class="ion-chevron-right"></i>
@@ -39,11 +39,11 @@
       productName: {},
       cateName: {},
       discounts: {},
-      retailPrice: {},
-      createTime: {},
+      productDate: {},
       Id: {},
       index:{},
-      salesStock:{}
+      shelfLife:{},
+      warehouseName:{}
     },
     computed: {},  //计算属性
     created() {
