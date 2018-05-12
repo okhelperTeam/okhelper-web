@@ -32,7 +32,11 @@
       </div>
       <div class="ok-model-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
-        <div style="width:25%;display: block;float: left;padding-left: 20px;">条码<span style="color: #dd0a20">*</span></div>
+        <div style="width:25%;display: block;float: left;padding-left: 20px;">
+          <span>条码</span>
+          <span style="color: #dd0a20">*</span>
+          <i style="color: #108ee9;font-size: 25px;top: 5px;position: relative" class="ion-qr-scanner"></i>
+        </div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:55%;display: block;float: left;">
           <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="唯一保存后不可修改，可生成" type="text" v-model="product.barCode"/>
         </div>
