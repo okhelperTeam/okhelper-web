@@ -85,7 +85,7 @@
       closeScan() {
         if (!window.plus) return;
         scan.close();
-        // plus.navigator.setStatusBarBackground('#C20C0C');
+        plus.navigator.setStatusBarBackground('#C20C0C');
       },
       //闪光灯
       setFlash() {
@@ -108,7 +108,7 @@
             that.P.isOpen=false;
   				   }, false);
           },
-          removeBack(){
+      removeBack(){
             if (!window.plus) return;
             let that=this;
             plus.key.removeEventListener('backbutton',function() {
@@ -165,7 +165,6 @@
           window.localStorage.setItem("hasShow","false");
           this.$nextTick().then(()=>{
             this.removeBack();
-            plus.navigator.setStatusBarBackground('#C20C0C');
           })
         }
       }

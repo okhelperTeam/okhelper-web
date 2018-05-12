@@ -5,7 +5,8 @@
     <div id="">
       <div class="header-bar">
         <div class="header-bar-icon">
-          <i class="ion-qr-scanner"></i>
+          <ok-scan :P="P" @scanover="scanOver"/>
+          <i class="ion-qr-scanner" @click="P.isOpen=true"></i>
         </div>
         <div class="header-bar-search">
           <div class="header-bar-search2">
@@ -21,7 +22,7 @@
         <van-list
           v-model="loading"
           :finished="finished"
-          :offset=10
+          :offset=100
           @load="onLoad"
         >
           <div v-for="(item,index) in productList">
@@ -38,6 +39,9 @@
             />
           </div>
         </van-list>
+        <div v-if="finished & pageNum>1" style="color: #888888;text-align: center;padding: 20px;padding-bottom: 40px;">
+          到底了别滑了，真的没了.....
+        </div>
         <div style="position:fixed;bottom:0;height: 30px;width: 100%;border-top: 1px solid #F2F2F2">
           <div style="background:white;width: 70%;height: 30px;float: left;padding-left:20px;line-height: 30px;">合计种类：{{productChoosedList.length}}</div>
           <div @click="toSellTable" style="background: #C20C0C;color:white;width:30%;height: 30px;float: left;text-align: center;line-height: 30px;">选好了</div>
@@ -66,6 +70,7 @@
   import { List } from 'vant';
   import ProductModel from '@/components/common/productModel';
   import _ from 'lodash';
+  import Scan from '@/components/common/scan';
   Vue.use(List);
 
   Vue.use(Search);
@@ -74,7 +79,8 @@
         components: {
           'ok-header':Header,
           'ok-footer':Footer,
-          'ok-product':ProductModel
+          'ok-product':ProductModel,
+          'ok-scan':Scan
         },//注册组件
         data() {         //数据
             return {
@@ -84,14 +90,19 @@
               searchProductName:'',
               pageNum:0,
               paging:true,
-              limit:6,
+              limit:8,
               productList:[],
-              productChoosedList:[]
+              productChoosedList:[],
+              P:{isOpen:false}
             };
         },
         computed: {},  //计算属性
         created() {
+          if(this.$route.query.barCode!=null&&this.$route.query.barCode!=''){
+              this.searchProductName=this.$route.query.barCode;
+          }else {
           this.onLoad();
+          }
         },   //创建
         mounted() {
         },   //挂载
@@ -118,7 +129,7 @@
               },error=> {
                 this.loading = false;
                 this.finished = true;
-                console.log(error.response.msg);
+                console.log(error.msg);
               }
             );
           },
@@ -133,11 +144,13 @@
           },
           search:_.debounce(function(){
             this.reLoad()
-          },500)
+          },300),
+          scanOver(barCode){
+            this.searchProductName=barCode;
+          }
         },   //方法
         watch: {
           searchProductName:function (newValue,oldValue) {
-              this.searchProductName=newValue;
               this.search();
           }
         }

@@ -49,7 +49,7 @@
         <van-list
           v-model="loading"
           :finished="finished"
-          :offset=10
+          :offset=100
           @load="onLoad"
         >
           <div v-for="(item,index) in productList">
@@ -106,7 +106,7 @@
             return {
               loading: false,
               finished: false,
-              myData:{paging:true,pageNum:0,limit:6,categoryId:0,orderBy:'create_time desc'},
+              myData:{paging:true,pageNum:0,limit:8,categoryId:0,orderBy:'create_time desc'},
               categoryName: 'categoryName', // 显示菜单名称的属性
               parentData:{categoryShow:false,choosedCategoryName:'全部分类',plusShow:false},
               totalCount:0,
