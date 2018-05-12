@@ -1,13 +1,13 @@
 <template>
 <div>
-  <transition enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight">
+  <transition>
     <div class="scan" v-if="P.isOpen">
       <div id="bcid">
       </div>
       <footer>
         <button @click="cancel">取消</button>
         <button @click="setFlash">闪光灯</button>
-        <button @click="choosePic">从相册中获取</button>
+        <!-- <button @click="choosePic">从相册中获取</button> -->
       </footer>
     </div>
   </transition>
@@ -108,7 +108,7 @@
             that.P.isOpen=false;
   				   }, false);
           },
-          removeBack(){
+      removeBack(){
             if (!window.plus) return;
             let that=this;
             plus.key.removeEventListener('backbutton',function() {
@@ -117,14 +117,40 @@
               that.P.isOpen=false;
     				   });
           },
-          choosePic(){
-              if (!window.plus) return;
-              plus.gallery.pick(succss=>{
-                succss.files
-              },error=>{
-
-              },{})
-          }
+          // choosePic(){
+          //   let that=this;
+          //     if (!window.plus) return;
+          //     plus.gallery.pick(path=>{
+          //       plus.barcode.scan( path, function (type,result,file) {
+          //           switch (type) {
+          //             case plus.barcode.QR:
+          //               type = 'QR';
+          //               break;
+          //             case plus.barcode.EAN13:
+          //               type = 'EAN13';
+          //               break;
+          //             case plus.barcode.EAN8:
+          //               type = 'EAN8';
+          //               break;
+          //             default:
+          //               type = '其它' + type;
+          //               break;
+          //           }
+          //           result = result.replace(/\n/g, '');
+          //                         alert(result)
+          //           that.codeUrl = result;
+          //           that.$emit('scanover',that.codeUrl);
+          //           that.cancelScan();
+          //           that.closeScan();
+          //           that.P.isOpen=false;
+          //           window.localStorage.setItem("hasShow",false);
+          //     		}, function (error) {
+          //     			console.log(error.message);
+          //     		});
+          //       },error=>{
+	        //        console.log(error.message);
+          //      },{filter:"image",multiple:false})
+          // }
     },
     watch:{
       'P.isOpen':function(val,oldVal){
@@ -132,8 +158,8 @@
           window.localStorage.setItem("hasShow","true");
           this.back();
           this.$nextTick().then(()=>{
-            this.startRecognize();
-            this.startScan();
+          this.startRecognize();
+          this.startScan();
           })
         }else {
           window.localStorage.setItem("hasShow","false");

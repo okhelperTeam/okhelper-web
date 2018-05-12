@@ -224,8 +224,7 @@
 
         },
         scanOver(code){
-          // console.log(code);
-          alert(code);
+          this.$router.push({path:'/product/searchProduct',query:{barCode:code}});
         }
       },   //方法
       watch: {}      //监听

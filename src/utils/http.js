@@ -88,7 +88,7 @@ export default(method = 'GET', url = '', data = {}) => {
     ajax.request(axiosRequestConfig).then(response => {
       resolve(response.data);
     }, error => {
-      reject(error);
+      reject(error.response.data);
     })
   });
 
