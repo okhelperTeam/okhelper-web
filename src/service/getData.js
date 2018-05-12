@@ -42,8 +42,8 @@ var getPurchaseOrderList=myData=>ajax('get','/api/storage',myData);
 //获取商品列表(商品名)
 var getProductListByName=myData=>ajax('get','/api/product/search',myData);
 
-//获取商品列表(热销)
-var getHotProductList=myData=>ajax('get','/api/report/hot_sale',myData);
+//获取商品列表(热/滞销)
+var getHotOrColdProductList=myData=>ajax('get','/api/report/hot_cold_sale',myData);
 
 //生产商品条码
 var generateBarCode=myData=>ajax('get','/api/until/bar_code',myData);
@@ -78,7 +78,7 @@ export {
   upLoadPayImgs,
   getCategoryList,
   getProductList,
-  getHotProductList,
+  getHotOrColdProductList,
   getSupplierList,
   getCustomerList,
   getPurchaseOrderList,

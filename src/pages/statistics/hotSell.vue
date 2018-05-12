@@ -29,34 +29,23 @@
         </ul>
       </div>
       <div class="ok-model-border"></div>
-      <div v-if="productList.length>0||myData.pageNum==0">
-        <van-list
-          v-model="loading"
-          :finished="finished"
-          :offset=10
-          @load="onLoad"
-        >
-          <div v-for="(item,index) in productList">
-            <ok-product
-              :main-img="item.mainImg"
-              :product-name="item.productName"
-              :cate-name="item.cateName"
-              :discounts="item.youhui"
-              :retail-price="item.retailPrice"
-              :createTime="item.createTime"
-              :Id="item.id"
-              :index="index"
-              :salesStock="item.salesStock"
-              :salesVolume="item.salesVolume"
-              @addProduct="addProduct"
-            />
-          </div>
-        </van-list>
-        <div v-if="finished&&myData.pageNum>1" style="color: #888888;text-align: center;padding: 20px;">
-          到底了别滑了，真的没了.....
+      <div v-if="HotOrColdProductList.length>0">
+        <div v-for="(item,index) in HotOrColdProductList">
+          <ok-product
+            :main-img="item.mainImg"
+            :product-name="item.productName"
+            :cate-name="item.productAttribute"
+            :retail-price="item.retailPrice"
+            :createTime="item.createTime"
+            :Id="item.id"
+            :index="index"
+            :salesStock="item.salesStock"
+            :salesVolume="item.salesVolume"
+            @addProduct="addProduct"
+          />
         </div>
       </div>
-      <div v-if="myData.pageNum!=0&&productList.length==0&&finished==true"  style="color: #888888;text-align: center;padding: 20px;">
+      <div v-if="HotOrColdProductList.length==0"  style="color: #888888;text-align: center;padding: 20px;">
         没有您要找的商品......
       </div>
 
@@ -66,9 +55,7 @@
 <script>
   import Vue from 'vue'
   import ProductModel from '@/components/common/productModel';
-  import {getProductList} from '@/service/getData';
-  import { List } from 'vant';
-  Vue.use(List);
+  import {getHotOrColdProductList} from '@/service/getData';
     export default {
         mixins: [],     //混合
         components: {
@@ -82,62 +69,60 @@
               isYesterday:false,
               isAWeek:false,
               isAMonth:false,
-              loading: false,
-              finished: false,
-              myData:{paging:true,pageNum:0,limit:6,orderBy:'create_time desc'},
-              productList:[
-                {goodsId:10000,goodsPhoto:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'热销',danjia:'599.00',shangjiashijian:'2018-4-20 2:20:10'},
-                {goodsId:10001,goodsPhoto:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'热销',danjia:'499.00',shangjiashijian:'2018-4-20 2:20:10'},
-                {goodsId:10002,goodsPhoto:'',goodsName:'菀草壹韩版春季宽松春秋蝙蝠袖风衣',cateName:'大衣',youhui:'热销',danjia:'699.00',shangjiashijian:'2018-4-20 2:20:10'}
-              ]
+              myData:{isHot:true,range:'today'},
+              HotOrColdProductList:[],
+              productChoosedList:[]
             };
         },
         computed: {},  //计算属性
         created() {
+          this.onLoad();
         },   //创建
         mounted() {
         },   //挂载
         methods: {
           onLoad() {//上划加载商品
-            this.myData.pageNum++;
-            getProductList(this.myData).then(
+            getHotOrColdProductList(this.myData).then(
               response=>{
-                for(var i=0;i<response.data.results.length;i++){
-                  this.productList.push(response.data.results[i]);
+                for(var i=0;i<response.data.length;i++){
+                  this.HotOrColdProductList.push(response.data[i]);
                 }
                 this.loading=false;
-                if (response.data.lastPage) {
-                  this.finished = true;
-                }
               },error=>{
-                this.loading=false;
-                this.finished = true;
                 console.log(error.response.msg);
               }
             );
           },
           reLoad(){
-            this.productList=[];
-            this.myData.pageNum=0;
-            this.finished=false;
+            this.HotOrColdProductList=[];
             this.onLoad();
           },
           isHotP(n){
+            this.isHot=false;this.isCold=false;
             switch (n){
-              case 1:this.isHot=true;this.isCold=false;break;
-              case 2:this.isHot=false;this.isCold=true;break;
-              default:this.isHot=true;this.isCold=false;
+              case 1:this.isHot=true;this.myData.isHot=true;this.reLoad();break;
+              case 2:this.isCold=true;this.myData.isHot=false;this.reLoad();break;
+              default:this.isHot=true;this.myData.isHot=true;this.reLoad();
             }
           },
           hotTime(n){
+            this.isToday=false;this.isYesterday=false;this.isAWeek=false;this.isAMonth=false;
             switch (n){
-              case 1:this.isToday=true;this.isYesterday=false;this.isAWeek=false;this.isAMonth=false;break;
-              case 2:this.isToday=false;this.isYesterday=true;this.isAWeek=false;this.isAMonth=false;break;
-              case 3:this.isToday=false;this.isYesterday=false;this.isAWeek=true;this.isAMonth=false;break;
-              case 4:this.isToday=false;this.isYesterday=false;this.isAWeek=false;this.isAMonth=true;break;
-              default:this.isToday=true;this.isYesterday=false;this.isAWeek=false;this.isAMonth=false;
+              case 1:this.isToday=true;this.myData.range='today';this.reLoad();break;
+              case 2:this.isYesterday=true;this.myData.range='threeDays';this.reLoad();break;
+              case 3:this.isAWeek=true;this.myData.range='week';this.reLoad();break;
+              case 4:this.isAMonth=true;this.myData.range='month';this.reLoad();break;
+              default:this.isToday=true;this.myData.range='today';this.reLoad();
             }
-          }
+          },
+          addProduct(goodsId,isActive){
+            console.log(goodsId);
+            if(isActive){
+              this.productChoosedList.push(goodsId);
+            }else {
+              this.productChoosedList.remove(goodsId);
+            }
+          },
         },   //方法
         watch: {}      //监听
     }
