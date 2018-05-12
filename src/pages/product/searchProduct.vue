@@ -38,6 +38,7 @@
             />
           </div>
         </van-list>
+        <div v-if="productList.length>0" style="height: 30px;width: 100%;"></div>
         <div style="position:fixed;bottom:0;height: 30px;width: 100%;border-top: 1px solid #F2F2F2">
           <div style="background:white;width: 70%;height: 30px;float: left;padding-left:20px;line-height: 30px;">合计种类：{{productChoosedList.length}}</div>
           <div @click="toSellTable" style="background: #C20C0C;color:white;width:30%;height: 30px;float: left;text-align: center;line-height: 30px;">选好了</div>

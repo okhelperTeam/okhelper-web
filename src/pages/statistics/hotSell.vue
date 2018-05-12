@@ -23,7 +23,7 @@
       <div>
         <ul style="width: 100%;list-style:none;">
           <li @click="hotTime(1)" :class="{timeActive:isToday}" class="ok-hotsell-time-li" >今日</li>
-          <li @click="hotTime(2)" :class="{timeActive:isYesterday}" class="ok-hotsell-time-li" >昨日</li>
+          <li @click="hotTime(2)" :class="{timeActive:isYesterday}" class="ok-hotsell-time-li" >近3日</li>
           <li @click="hotTime(3)" :class="{timeActive:isAWeek}" class="ok-hotsell-time-li" >近7日</li>
           <li @click="hotTime(4)" :class="{timeActive:isAMonth}" class="ok-hotsell-time-li" >本月</li>
         </ul>

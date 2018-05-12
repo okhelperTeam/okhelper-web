@@ -20,6 +20,7 @@ const CategoryInfo = resolve => require(['@/pages/category/categoryInfo'], resol
 const Product = resolve => require(['@/pages/product/product'], resolve);
 const SearchProduct = resolve => require(['@/pages/product/searchProduct'], resolve);
 const ProductInfo = resolve => require(['@/pages/product/productInfo'], resolve);
+const Checkstand = resolve => require(['@/pages/checkstand/checkstand'], resolve);
 const Sell = resolve => require(['@/pages/sell/sell'], resolve);
 const SellHistory = resolve => require(['@/pages/sell/sellHistory'], resolve);
 const SellTable= resolve => require(['@/pages/sell/sellTable'], resolve);
@@ -108,6 +109,10 @@ const routes = [
     component:ProductInfo,
     meta:{title:"okhelper-ProductInfo",keepAlive:true}
   },{
+    path:'/checkstand',
+    component:Checkstand,
+    meta:{title:"okhelper-Checkstand"}
+  },{
     path:'/sell',
     component:Sell,
     meta:{title:"okhelper-Sell"}
@@ -118,7 +123,7 @@ const routes = [
   },{
     path:'/sell/sellTable',
     component:SellTable,
-    meta:{title:"okhelper-SellTable"}
+    meta:{title:"okhelper-SellTable",keepAlive:true}
   },{
     path:'/repertory',
     component:Repertory,

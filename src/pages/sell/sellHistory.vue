@@ -74,8 +74,8 @@
             </div>
             <div
               style="font-size:14px;padding-top: 8px;height:80px;display: block;float: left;width: 30%;height:80px;text-align: center;">
-              <!--<div style="text-decoration: underline;">销：1</div>-->
-              <div style="font-size:16px;color: orange;line-height: 80px;">￥{{item.sumPrice | formateMoney}}</div>
+              <div style="text-decoration: underline;">销：{{item.productCount}}</div>
+              <div style="font-size:16px;color: orange;line-height: 40px;">￥{{item.sumPrice | formateMoney}}</div>
               <!--<div style="font-size:12px;color: #888888;">1号仓库</div>-->
             </div>
           </div>
@@ -166,7 +166,6 @@
         );
       },
       reLoad() {
-        // alert(2)
         this.orderList = [];
         this.myData.pageNum = 0;
         this.finished = false;
