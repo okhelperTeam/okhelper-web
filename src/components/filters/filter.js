@@ -1,7 +1,7 @@
 //设置头像的默认图片
 let defaultImg = function (value) {
   if (value === ""||value==null) {
-    return "/static/img/ok-icon-red.png";
+    return "static/img/ok-icon-red.png";
   } else {
     return value;
   }
