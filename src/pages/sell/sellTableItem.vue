@@ -99,7 +99,8 @@
             }
           },
           deleteProduct(){
-            this.$emit('deleteProduct',this.productId);
+            // alert(this.productName+'&7777777')
+            this.$emit('deleteProduct',this.productName);
           }
         },   //方法
         watch: {
