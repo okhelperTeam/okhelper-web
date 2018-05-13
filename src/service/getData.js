@@ -141,8 +141,7 @@ export {
   getCustomerDebtList,
   getSupplierDebtList,
   getSellTotal,
-
-  getProductBybarCode
+  getProductBybarCode,
   getSupplierInfo,
   getCustomerInfo,
   getCustomerTradeHistory,

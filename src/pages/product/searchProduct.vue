@@ -140,8 +140,13 @@
             this.finished=false;
             this.onLoad();
           },
-          addProduct(productId){//选择商品
-            this.productChoosedList.push(productId);
+          addProduct(goodsId,isActive){//选择商品
+            console.log(goodsId);
+            if(isActive){
+              this.productChoosedList.push(goodsId);
+            }else {
+              this.productChoosedList.remove(goodsId);
+            }
           },
           search:_.debounce(function(){
             this.reLoad()

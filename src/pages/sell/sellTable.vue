@@ -145,6 +145,7 @@
           },
           scanOver(code){
             this.$router.push({path:'/product/searchProduct',query:{barCode:code}});
+          },
           changeCustomerShowStatus(){
             this.parentData.customerShow=!this.parentData.customerShow;
           }
