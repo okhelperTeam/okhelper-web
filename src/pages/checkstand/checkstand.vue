@@ -62,7 +62,7 @@
       <div style="width: 100%;height: 40px;line-height: 40px;font-size: 16px;color: #888888">
         <div style="width:33%;display: block;float: left;padding-left: 20px;">收款金额</div>
         <div style="height:37px;width:40%;display: block;float: left;border-bottom: 1px solid #2D84FF;">
-          <input style="height: 30px;font-size: 14px;width: 100%;color: black;" placeholder="0.00" v-model="pay1Money" type="number"/>
+          <input style="height: 30px;font-size: 14px;width: 100%;color: black;" placeholder="0.00" v-model="parentData.pay1Money" type="number"/>
         </div>
         <div @click="computPay1Money" style="height:20px;margin-top:10px;width:10%;display: block;float: right;font-size: 12px;background: white;text-align: center;border-radius: 3px;color: #108ee9;line-height: 20px;border: 1px solid #108ee9;margin-right: 15px;">全款</div>
       </div>
@@ -79,7 +79,7 @@
         <div style="width: 100%;height: 40px;line-height: 40px;font-size: 16px;color: #888888">
           <div style="width:33%;display: block;float: left;padding-left: 20px;">收款金额</div>
           <div style="height:37px;width:40%;display: block;float: left;border-bottom: 1px solid #2D84FF;">
-            <input style="height: 30px;font-size: 14px;width: 100%;color: black;" placeholder="0.00" type="number" v-model="pay2Money"/>
+            <input style="height: 30px;font-size: 14px;width: 100%;color: black;" placeholder="0.00" type="number" v-model="parentData.pay2Money"/>
           </div>
           <div @click="computPay2Money" style="height:20px;margin-top:10px;width:10%;display: block;float: right;font-size: 12px;background: white;text-align: center;border-radius: 3px;color: #108ee9;line-height: 20px;border: 1px solid #108ee9;margin-right: 15px;">补款</div>
         </div>
@@ -103,14 +103,20 @@
         </div>
       </div>
       <div style="margin-top: 15px;" class="ok-border"></div>
-      <div style="position: fixed;bottom: 0px;height: 40px;width: 100%;background: #C20C0C;color: white;text-align: center;line-height: 40px;">去结账</div>
+      <div @click="toGatheringPage" style="position: fixed;bottom: 0px;height: 40px;width: 100%;background: #C20C0C;color: white;text-align: center;line-height: 40px;">去结账</div>
+      <ok-gathering
+        :parentData="parentData"
+      ></ok-gathering>
     </div>
 </template>
 
 <script>
+  import Gathering from '@/pages/checkstand/gathering'
     export default {
         mixins: [],     //混合
-        components: {},//注册组件
+        components: {
+          'ok-gathering':Gathering
+        },//注册组件
         data() {         //数据
             return {
               paymoney:150.00,//应付金额
@@ -120,14 +126,13 @@
               discount:100,
               remark:'',
               showUnit:false,
-              pay1Money:0,
-              pay2Money:0,
-              debtMony:0.00
+              debtMony:0.00,
+              parentData:{gatheringShow:false,showCashResult:false,pay1Money:0,pay2Money:0},
             };
         },
         computed: {
           totalMoney(){
-            return parseFloat(this.pay1Money)+parseFloat(this.pay2Money);
+            return parseFloat(this.parentData.pay1Money)+parseFloat(this.parentData.pay2Money);
           }
         },  //计算属性
         created() {
@@ -135,14 +140,25 @@
         mounted() {
         },   //挂载
         methods: {
+          toGatheringPage(){
+            if(this.parentData.pay2Money!=0&&this.parentData.pay1Money!=0){
+              this.parentData.gatheringShow=true;
+              this.parentData.showCashResult=true;
+            }else if(this.parentData.pay2Money==0&&this.parentData.pay1Money!=0){
+              alert('支付成功');
+            }else if(this.parentData.pay1Money==0){
+              alert('尚有欠款，是否结算');
+            }
+
+          },
           computPay1Money(){
-            this.pay1Money=this.paymoney-this.notSmallChange;
+            this.parentData.pay1Money=this.paymoney-this.notSmallChange;
           },
           computPay2Money(){
-            this.pay2Money=this.paymoney-this.notSmallChange-this.pay1Money;
+            this.parentData.pay2Money=this.paymoney-this.notSmallChange-this.parentData.pay1Money;
           },
           showUnitPay(){
-            this.pay2Money=0;
+            this.parentData.pay2Money=0;
             this.showUnit=!this.showUnit;
           }
         },   //方法

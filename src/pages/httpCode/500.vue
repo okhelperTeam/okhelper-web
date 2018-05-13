@@ -4,8 +4,7 @@
 <template>
     <div id="">
       <div class="back-bar">
-        <router-link :to="$router.back()" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回
-        </router-link>
+        <div @click="$router.back()" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回</div>
         <div class="back-bar-name">
           遇到错误
         </div>
