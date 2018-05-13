@@ -132,7 +132,7 @@
 <script>
   import Vue from 'vue';
   import { Radio ,Field,Cell, CellGroup ,Row, Col,Button,Icon,NavBar,Toast} from 'vant';
-  import {addStoreManager} from '@/service/getData.js'
+  import {addStoreManager,getCheckName} from '@/service/getData.js'
 
   Vue.use(Radio).use(Icon).use(Button).use(Row).use(Col).use(Cell).use(CellGroup).use(Field).use(NavBar);
   export default {
@@ -140,9 +140,10 @@
     components: {},//注册组件
     data () {
       return{
-        storeManager:{userName:'',userPassword:'',storeName:'',storePhone:'',
-          passProblem:'',passAnswer:'',userNick:'',userAvatar:'',userEmail:'',userSex:'',userBirthday:'',deleteStatus:'',
-          storeAddress:'',storePhoto:'',description:'',leaderId:'',},
+        storeManager:{userName:'',userPassword:'',storeName:'',storePhone:'',},
+          // passProblem:'',passAnswer:'',userNick:'',userAvatar:'',userEmail:'',userSex:'',userBirthday:'',deleteStatus:'',
+          // storeAddress:'',storePhoto:'',description:'',leaderId:'',},
+        checkedUserNameResult:false,
       };
     },
     computed: {},  //计算属性
@@ -152,32 +153,50 @@
     },   //挂载
     methods: {
       addNewStoreManager(){
-        if(this.checkIsNull()==true) {
+        //alert(this.checkIsNull());
+        if(this.checkIsNull()) {
+          getCheckName({
+            userName: this.storeManager.userName,
+          }).then(response => {
+            this.checkedUserNameResult = true;
+          }, error => {
+            Toast({
+              position: 'bottom',
+              message: '用户名已存在'
+            });
+            this.checkedUserNameResult = false;
+          })
+        }else
+        // this.checkIsNull()==true&&this.getCheckUserName()==true
+          //alert(this.checkedUserNameResult);
+        if(this.checkedUserNameResult==true) {
+          //alert(1);
           addStoreManager({
             userName: this.storeManager.userName,
             userPassword: this.storeManager.userPassword,
             storeName: this.storeManager.storeName,
             storePhone: this.storeManager.storePhone,
-            passProblem: this.storeManager.passProblem,
-            passAnswer: this.storeManager.passAnswer,
-            userNick: this.storeManager.userNick,
-            userAvatar: this.storeManager.userAvatar,
-            userEmail: this.storeManager.userEmail,
-            userSex: this.storeManager.userSex,
-            userBirthday: this.storeManager.userBirthday,
-            deleteStatus: this.storeManager.deleteStatus,
-            storeAddress: this.storeManager.storeAddress,
-            storePhoto: this.storeManager.storePhoto,
-            description: this.storeManager.description,
-            leaderId: this.storeManager.leaderId,
-          }).then(response => {
+            // passProblem: this.storeManager.passProblem,
+            // passAnswer: this.storeManager.passAnswer,
+            // userNick: this.storeManager.userNick,
+            // userAvatar: this.storeManager.userAvatar,
+            // userEmail: this.storeManager.userEmail,
+            // userSex: this.storeManager.userSex,
+            // userBirthday: this.storeManager.userBirthday,
+            // deleteStatus: this.storeManager.deleteStatus,
+            // storeAddress: this.storeManager.storeAddress,
+            // storePhoto: this.storeManager.storePhoto,
+            // description: this.storeManager.description,
+            // leaderId: this.storeManager.leaderId,
+          }).then(
+            response=> {
             Toast({
               type:'success',
               message: '注册成功',
               duration:1000
             });
             router.push({path:'/user/login'});
-          }, error => {
+          },error => {
             Toast({
               position: 'bottom',
               message: '请检查输入信息是否正确'
@@ -215,8 +234,8 @@
       },
 
       checkIsNull(){
-        if(this.checkUserName()==true||this.storeManager.userPassword==''||this.storeManager.storeName==''||this.checkStorePhone()==true){
-          return true;
+        if(this.checkUserName()==false||this.storeManager.userPassword==''||this.storeManager.storeName==''||this.checkStorePhone()==false){
+          return false;
         } else{
           return true;
         }

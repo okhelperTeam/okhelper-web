@@ -55,7 +55,7 @@
         </div>
       </div>
       </router-link>
-      <div style="height: 110px;padding-top:30px;width: 96%;margin:200px auto;">
+      <div style="height: 110px;padding-top:30px;width: 96%;margin:20px auto;">
         <van-button type="danger" size="large" @click="deleteSupplierInfoById">删除供应商</van-button>
       </div>
     </div>
@@ -143,7 +143,7 @@
           }
         },
         checkIsNull(){
-          if(this.supplierName == ''||this.supplierContacts==''||this.supplierPhone==''||this.supplierAddress==''){
+          if(this.supplier.supplierName == ''||this.supplier.supplierContacts==''||this.supplier.supplierPhone==''||this.supplier.supplierAddress==''){
             return false;
           }
           else {

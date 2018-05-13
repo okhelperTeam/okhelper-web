@@ -15,9 +15,6 @@
         <div class="ok-product-details-addtime">零售价：￥{{retailPrice}}</div>
         <div class="ok-product-details-addtime">库存：<span style="color: #C20C0C">{{salesStock}}</span></div>
       </div>
-      <div class="manger-icon">
-        <i class="ion-chevron-right"></i>
-      </div>
     </div>
     <div class="ok-model-border"></div>
   </div>

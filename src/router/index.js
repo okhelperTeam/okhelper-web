@@ -51,9 +51,9 @@ const PurchaseHistory = resolve => require(['@/pages/warehouse/purchaseHistory']
 const PurchaseOrder = resolve => require(['@/pages/warehouse/purchaseOrder'], resolve);
 const PurchaseInfo = resolve => require(['@/pages/warehouse/purchaseInfo'], resolve);
 const Test = resolve => require(['@/pages/test/test2'], resolve);
-const OpenStore = resolve => require(['@/pages/user/openStore'], resolve);
+const StoreManagerInfo = resolve => require(['@/pages/user/storeManagerInfo'], resolve);
 const ADDCategory = resolve => require(['@/pages/category/categoryInfo'], resolve);
-const Error500 = resolve => require(['@/pages/httpCode/500'], resolve);//500错误页
+const Error500 = resolve => require(['@/pages/httpCode/500'], resolve);//500错误页StoreManagerInfo
 const routes = [
   {
     path: '/'
@@ -65,10 +65,6 @@ const routes = [
     path: '/user/register',
     component: Register,
     meta: {title: "okhelper-register"}
-  },{
-    path: '/user/openStore',
-    component: OpenStore,
-    meta: {title: "okhelper-openStore"}
   },{
     path: '/user/person',
     component: Person,
@@ -189,6 +185,10 @@ const routes = [
     path:'/user/supplierOrder',
     component:SupplierOrder,
     meta:{title:"okhelper-SupplierOrder"}
+  },{
+    path:'/user/storeManagerInfo',
+    component:StoreManagerInfo,
+    meta:{title:"okhelper-StoreManagerInfo"}
   },{
     path:'/user/addSupplier',
     component:AddSupplier,

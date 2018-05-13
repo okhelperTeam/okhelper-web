@@ -132,7 +132,7 @@
           }
         },
         checkIsNull(){
-          if(this.warehouseName == ''||this.storeKeeper==''||this.deleteStatus==''){
+          if(this.warehouse.warehouseName == ''||this.warehouse.storeKeeper==''||this.warehouse.deleteStatus==''){
             return false;
           }
           else {
