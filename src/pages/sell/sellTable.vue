@@ -4,8 +4,8 @@
 <template>
     <div id="">
       <div class="back-bar">
-        <router-link to="/sell" class="back-bar-backBtn">&lt;&nbsp;销售
-        </router-link>
+        <span @click="$router.back()" class="back-bar-backBtn">&lt;&nbsp;销售
+        </span>
         <div class="back-bar-name">
           销售单
         </div>
@@ -53,7 +53,8 @@
         </div>
         <div style="width: 100%;height: 50px;line-height: 50px;padding-left: 20px;font-size: 16px;color: #888888;font-size: 30px;color: cornflowerblue">
           <div style="width: 50%;height: 50px;display: block;float: left;text-align: center;">
-            <i class="ion-android-expand"></i>
+            <ok-scan :P="P" @scanover="scanOver"/>
+            <i class="ion-android-expand" @click="P.isOpen=true"></i>
           </div>
           <router-link to="/product/SearchProduct" style="color: cornflowerblue;width: 50%;height: 50px;display: block;float: left;text-align: center;">
             <i class="ion-android-add"></i>
@@ -93,11 +94,13 @@
   const Back = resolve => require(['@/components/common/backBar'], resolve);
   import sellTableItem from '@/pages/sell/sellTableItem';
   import {getCustomerList} from '@/service/getData.js'
+  import Scan from '@/components/common/scan';
     export default {
         mixins: [],     //混合
         components: {
           'ok-back':Back,
-          sellTableItem
+          sellTableItem,
+          'ok-scan':Scan
         },//注册组件
         data() {         //数据
             return {
@@ -108,7 +111,8 @@
                 {productId:'2',productName:'商品1',productNumber:'001',productColor:'蓝色',productSize:'均码',retailPrice:200,discounts:50,productCount:15,productNotes:'',productNotes:''},
               ],
               totalMoney:10000.56,
-              customerList:[]
+              customerList:[],
+              P:{isOpen:false}
             };
         },
         computed: {
@@ -140,6 +144,9 @@
           },
           deleteProduct(productId){
             this.choosedProductList.remove(productId);
+          },
+          scanOver(code){
+            this.$router.push({path:'/product/searchProduct',query:{barCode:code}});
           }
         },   //方法
         watch: {

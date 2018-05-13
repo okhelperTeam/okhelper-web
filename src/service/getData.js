@@ -12,8 +12,8 @@ var login = myData => ajax('post', '/api/user/login', myData);
 //商品图片上传
 var upLoadGoodsImgs = myData => ajax('post','/api/upload/img',myData);
 
-//商品图片上传
-var upLoadPayImgs = myData => ajax('post','/api/upload/img',myData);
+//收款码上传
+var upLoadPayImgs = myData => ajax('post','/api/upload/money_code',myData);
 
 //获取我的菜单列表
 var getMenuCodeList=myData=>ajax('get','/api/permission/menu/me',myData);
@@ -45,7 +45,7 @@ var getProductListByName=myData=>ajax('get','/api/product/search',myData);
 //获取商品列表(热/滞销)
 var getHotOrColdProductList=myData=>ajax('get','/api/report/hot_cold_sale',myData);
 
-//生产商品条码
+//生成商品条码
 var generateBarCode=myData=>ajax('get','/api/until/bar_code',myData);
 
 //获取我的信息,校验token
@@ -69,6 +69,9 @@ var getSupplierDebtList=myData=>ajax('get','/api/supplier',myData);
 //销售汇总查询
 var getSellTotal=myData=>ajax('get','/api/sale/total',myData);
 
+//根据barCode查询商品
+var getProductBybarCode=barCode=>ajax('get','/api/product/bar_code/'+barCode,{});
+
 
 export {
   login,
@@ -91,5 +94,6 @@ export {
   getearlyWarningList,
   getCustomerDebtList,
   getSupplierDebtList,
-  getSellTotal
+  getSellTotal,
+  getProductBybarCode
 }
