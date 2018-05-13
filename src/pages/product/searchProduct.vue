@@ -39,9 +39,13 @@
             />
           </div>
         </van-list>
+<<<<<<< HEAD
+        <div v-if="productList.length>0" style="height: 30px;width: 100%;"></div>
+=======
         <div v-if="finished & pageNum>1" style="color: #888888;text-align: center;padding: 20px;padding-bottom: 40px;">
           到底了别滑了，真的没了.....
         </div>
+>>>>>>> f73f70fd68ef4b65fa9e543edfdf91d740f33d5d
         <div style="position:fixed;bottom:0;height: 30px;width: 100%;border-top: 1px solid #F2F2F2">
           <div style="background:white;width: 70%;height: 30px;float: left;padding-left:20px;line-height: 30px;">合计种类：{{productChoosedList.length}}</div>
           <div @click="toSellTable" style="background: #C20C0C;color:white;width:30%;height: 30px;float: left;text-align: center;line-height: 30px;">选好了</div>
