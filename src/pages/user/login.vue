@@ -4,7 +4,7 @@
 <template>
   <div class="container">
     <div id="ok-home-icon" style="height: 200px;width: auto;text-align: center;padding-top: 50px;padding-bottom: 25px;">
-      <img src="/static/img/ok-icon-red.png" width="100" height="100">
+      <img src="@/assets/icon/ok-icon-red.png" width="100" height="100">
     </div>
 
     <div style="width:95%; margin:0 auto">
@@ -95,9 +95,14 @@
         },
         computed: {},  //计算属性
         created() {
+          if (window.plus){plus.navigator.setStatusBarBackground('#f8f8f8');}
         },   //创建
         mounted() {
         },   //挂载
+        beforeDestroy(){
+          if (window.plus){plus.navigator.setStatusBarBackground('#C20C0C');}
+          console.log("12345678o");
+        },
         methods: {
           loginOk(){
             // if(this.checkUserName() ==true && this.checkLPwd() == true && this.checkLpicma() == true){

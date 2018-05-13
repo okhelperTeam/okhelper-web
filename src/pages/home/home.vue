@@ -176,6 +176,7 @@
       },
       computed: {},  //计算属性
       created() {
+        if (window.plus){plus.navigator.setStatusBarBackground('#C20C0C');}
         getMenuCodeList().then(
           response=>{
             let menuList=response.data;

@@ -77,7 +77,7 @@
             <div :key="6" style="width: 80%;height: 300px;margin: 0 auto;">
               <div :key="7" style="height: 70%;width: 100%;">
                 <img v-if="alipayIsActive" :key="8" width="100%" height="110%" src="@/assets/icon/alipay.jpg"/>
-                <img v-if="chatpayIsActive" :key="8" width="100%" height="110%" src="@/assets/icon/ok.jpg"/>
+                <img v-if="chatpayIsActive" :key="8" width="100%" height="110%" src="@/assets/icon/ok-icon-red.png"/>
               </div>
               <div :key="9" style="height: 30%;width: 100%;">
                 <div :key="10" @click="payIsActive(1)" style="display:block;float:left;width: 50%;font-size: 30px;color: #108ee9;text-align: center;padding-top: 10px;">

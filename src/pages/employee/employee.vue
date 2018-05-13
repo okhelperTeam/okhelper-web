@@ -26,7 +26,7 @@
     <div class="ok-model-border"></div>
     <div class="employee-info-box" style="height: 80px;width: auto;display: block;">
       <div style="display: block;float: left;width: 30%;text-align: center;height:80px;line-height: 80px;">
-        <img src="@/assets/icon/ok.jpg" width="70px" height="70px"/>
+        <img src="@/assets/icon/ok-icon-red.png" width="70px" height="70px"/>
       </div>
       <div style="display: block;float: left;width: 50%;height:80px;padding-top: 8px;">
         <div style="display: block;float: left;font-size: 16px;">美丽</div>
@@ -42,7 +42,7 @@
     <div class="ok-model-border"></div>
     <div class="employee-info-box" style="height: 80px;width: auto;display: block;">
       <div style="display: block;float: left;width: 30%;text-align: center;height:80px;line-height: 80px;">
-        <img src="@/assets/icon/ok.jpg" width="70px" height="70px"/>
+        <img src="@/assets/icon/ok-icon-red.png" width="70px" height="70px"/>
       </div>
       <div style="display: block;float: left;width: 50%;height:80px;padding-top: 8px;">
         <div style="display: block;float: left;font-size: 16px;">大对对</div>
@@ -58,7 +58,7 @@
     <div class="ok-model-border"></div>
     <div class="employee-info-box" style="height: 80px;width: auto;display: block;">
       <div style="display: block;float: left;width: 30%;text-align: center;height:80px;line-height: 80px;">
-        <img src="@/assets/icon/ok.jpg" width="70px" height="70px"/>
+        <img src="@/assets/icon/ok-icon-red.png" width="70px" height="70px"/>
       </div>
       <div style="display: block;float: left;width: 50%;height:80px;padding-top: 8px;">
         <div style="display: block;float: left;font-size: 16px;">隔壁老张</div>
@@ -74,7 +74,7 @@
     <div class="ok-model-border"></div>
     <div class="employee-info-box" style="height: 80px;width: auto;display: block;">
       <div style="display: block;float: left;width: 30%;text-align: center;height:80px;line-height: 80px;">
-        <img src="@/assets/icon/ok.jpg" width="70px" height="70px"/>
+        <img src="@/assets/icon/ok-icon-red.png" width="70px" height="70px"/>
       </div>
       <div style="display: block;float: left;width: 50%;height:80px;padding-top: 8px;">
         <div style="display: block;float: left;font-size: 16px;">隔壁大潘</div>
