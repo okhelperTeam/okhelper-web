@@ -6,15 +6,15 @@
 <template>
   <div id="">
     <div class="back-bar">
-      <router-link to="/user/person" style="color: white;" class="back-bar-backBtn">&lt;&nbsp;返回
-      </router-link>
+      <span @click="$router.back()" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回
+      </span>
       <div class="back-bar-name">
         客户管理
       </div>
       <div class="back-bar-cancelBtn">
-        <div style="display:block;float:left;width: 25px;height: 25px;font-size: 25px;color: white;font-weight: bolder;">
+        <router-link to="/user/addCustomer" style="display:block;float:left;width: 25px;height: 25px;font-size: 25px;color: white;font-weight: bolder;">
           <i class="ion-ios-plus-empty"></i>
-        </div>
+        </router-link>
         <div style="margin-left:8px;display:block;float:left;width: 25px;height: 25px;font-size: 25px;color: white;font-weight: bolder;">
           <i class="ion-ios-search"></i>
         </div>
@@ -24,6 +24,7 @@
     <div style="margin-top: 56px;" >
       <div v-if="customerList.length==0"></div>
       <div class="ok-text-box1" v-for="item in customerList">
+        <router-link :to="{path: '/user/customerInfo',query: {id:item.id}}">
         <div class="ok-text-name" style="width: 100%">客户名：{{item.customerName}}</div><br>
         <div class="ok-text-name2">
           客户分类： {{item.customerLevel}}
@@ -37,6 +38,7 @@
         <div class="manger-icon">
           <i class="ion-chevron-right"></i>
         </div>
+        </router-link>
       </div>
     </div>
     <div class="ok-model-border"></div>

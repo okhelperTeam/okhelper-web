@@ -21,6 +21,15 @@ var getMenuCodeList=myData=>ajax('get','/api/permission/menu/me',myData);
 //获取仓库列表
 var getWarehouseList = myData=>ajax('get','/api/warehouse',myData);
 
+//查询仓库详情
+var getWarehouseInfo=id=>ajax('get','/api/warehouse/'+id);
+
+//删除仓库
+var deleteWarehouseInfo=id=>ajax('delete','/api/warehouse/'+id);
+
+//新增仓库
+var addWarehouse=myData=>ajax('post','/api/warehouse',myData);
+
 //获取分类列表
 var getCategoryList=(id)=>ajax('get','/api/categorys/'+id);
 
@@ -33,11 +42,36 @@ var getProductList=myData=>ajax('get','/api/product/category',myData);
 //查询所有供应商
 var getSupplierList=myData=>ajax('get','/api/supplier',myData);
 
+//查询供应商详情
+var getSupplierInfo=id=>ajax('get','/api/supplier/'+id);
+
+//新增供应商
+var addSupplier=myData=>ajax('post','/api/supplier',myData);
+
+//删除供应商
+var deleteSupplierInfo=id=>ajax('delete','/api/supplier/'+id);
+
+
+//查询供应商采购记录
+var getSupplierOrderHistory=(id,myData)=>ajax('get','/api/storage/supplier/'+id,myData);
+
+//新增客户
+var addCustomer=myData=>ajax('post','/api/customer',myData);
+
 //查询所有客户
 var getCustomerList=myData=>ajax('get','/api/customer',myData);
 
+//查询客户详情
+var getCustomerInfo=id=>ajax('get','/api/customer/'+id);
+
+//查询客户交易记录
+var getCustomerTradeHistory=(id,myData)=>ajax('get','/api/sale/'+id,myData);
+
 //查询所有采购订单
 var getPurchaseOrderList=myData=>ajax('get','/api/storage',myData);
+
+//查询采购单详情
+var getPurchaseOrderInfo=number=>ajax('get','/api/storage/'+number);
 
 //获取商品列表(商品名)
 var getProductListByName=myData=>ajax('get','/api/product/search',myData);
@@ -51,11 +85,20 @@ var getMyUserInfo=myData=>ajax('get','/api/user/me',myData);
 //新增商品
 var addProduct=myData=>ajax('post','/api/product',myData);
 
+//新增店长
+var addStoreManager=myData=>ajax('post','/api/user/register',myData);
+
+//新增入库单
+var addPurchaseOrder=myData=>ajax('post','/api/storage',myData);
+
 //查询销售历史订单
 var getSellHistoryList=myData=>ajax('get','/api/sale/sale_table',myData);
 
 //查询临期商品
-var getearlyWarningList=(myData,days)=>ajax('get','/api/product/nearDay/'+days,myData);
+var getEarlyWarningList=(myData,days)=>ajax('get','/api/product/nearDay/'+days,myData);
+
+//查询库存不足商品
+var getStockWarningList=(myData,numbers)=>ajax('get','/api/product/lowWarning/'+numbers,myData);
 
 //客户欠款查询
 var getCustomerDebtList=myData=>ajax('get','/api/report/customer_debt',myData);
@@ -84,8 +127,22 @@ export {
   addProduct,
   addCategory,
   getSellHistoryList,
-  getearlyWarningList,
+  getEarlyWarningList,
   getCustomerDebtList,
   getSupplierDebtList,
-  getSellTotal
+  getSellTotal,
+  getSupplierInfo,
+  getCustomerInfo,
+  getCustomerTradeHistory,
+  getWarehouseInfo,
+  getPurchaseOrderInfo,
+  addWarehouse,
+  addCustomer,
+  addSupplier,
+  getSupplierOrderHistory,
+  addPurchaseOrder,
+  addStoreManager,
+  deleteWarehouseInfo,
+  deleteSupplierInfo,
+  getStockWarningList
 }

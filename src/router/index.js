@@ -34,10 +34,15 @@ const Footer = resolve => require(['@/components/footer/footer'], resolve);
 const BackBar = resolve => require(['@/components/common/backBar'], resolve);
 const Customer = resolve => require(['@/pages/user/customer'], resolve);
 const CustomerInfo = resolve => require(['@/pages/user/customerInfo'], resolve);
+const AddCustomer = resolve => require(['@/pages/user/addCustomer'], resolve);
+const CustomerTradeHistory = resolve => require(['@/pages/user/customerTradeHistory'], resolve);
 const Supplier = resolve => require(['@/pages/user/supplier'], resolve);
 const SupplierInfo = resolve => require(['@/pages/user/supplierInfo'], resolve);
+const AddSupplier = resolve => require(['@/pages/user/addSupplier'], resolve);
+const SupplierOrder = resolve => require(['@/pages/user/supplierOrder'], resolve);
 const Warehouse = resolve => require(['@/pages/warehouse/warehouse'], resolve);
 const WarehouseInfo = resolve => require(['@/pages/warehouse/WarehouseInfo'], resolve);
+const AddWarehouse = resolve => require(['@/pages/warehouse/addWarehouse'], resolve);
 const Stock = resolve => require(['@/pages/warehouse/stock'], resolve);
 const StockWarning = resolve => require(['@/pages/warehouse/stockWarning'], resolve);
 const EarlyWarning = resolve => require(['@/pages/warehouse/earlyWarning'], resolve);
@@ -164,9 +169,25 @@ const routes = [
     component:CustomerInfo,
     meta:{title:"okhelper-CustomerInfo"}
   },{
+    path:'/user/addCustomer',
+    component:AddCustomer,
+    meta:{title:"okhelper-AddCustomer"}
+  },{
+    path:'/user/customerTradeHistory',
+    component:CustomerTradeHistory,
+    meta:{title:"okhelper-CustomerTradeHistory"}
+  },{
     path:'/user/supplier',
     component:Supplier,
     meta:{title:"okhelper-Supplier"}
+  },{
+    path:'/user/supplierOrder',
+    component:SupplierOrder,
+    meta:{title:"okhelper-SupplierOrder"}
+  },{
+    path:'/user/addSupplier',
+    component:AddSupplier,
+    meta:{title:"okhelper-AddSupplier"}
   },{
     path:'/user/supplierInfo',
     component:SupplierInfo,
@@ -179,6 +200,10 @@ const routes = [
     path:'/warehouse/warehouseInfo',
     component:WarehouseInfo,
     meta:{title:"okhelper-WarehouseInfo"}
+  },{
+    path:'/warehouse/addWarehouse',
+    component:AddWarehouse,
+    meta:{title:"okhelper-AddWarehouse"}
   },{
     path:'/warehouse/stock',
     component:Stock,

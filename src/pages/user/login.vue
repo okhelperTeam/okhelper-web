@@ -195,26 +195,6 @@
               return true;
             }
           },
-          // Login(){
-          //   if(this.checkLPhone() ==true && this.checkLPsd() == true && this.checkLpicma() == true){
-          //     var that = this;
-          //     $.ajax({
-          //       type:"POST",
-          //       url:this.HOST+"/user/logincheck",
-          //       data:{"loginmobileNo":this.LUserPhone,"loginpassword":this.LUserPsd},
-          //       dataType:"json",
-          //       success:function(data){
-          //         console.log(data);
-          //         if(data.resultflag == "F"){
-          //           $(".login_content1 span:eq(0)").removeClass("disappear");
-          //           $(".login_content1 span:eq(0)").text("手机号或密码错误。")
-          //         }else{
-          //           that.$router.push({path:"/home"})
-          //         }
-          //       }
-          //     })
-          //   }
-          // }
           },   //方法
         watch: {}      //监听
     }

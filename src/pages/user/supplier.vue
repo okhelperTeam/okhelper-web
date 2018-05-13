@@ -6,15 +6,15 @@
 <template>
   <div id="">
     <div class="back-bar">
-      <router-link to="/user/person" style="color: white;" class="back-bar-backBtn">&lt;&nbsp;返回
-      </router-link>
+      <span @click="$router.back()" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回
+      </span>
       <div class="back-bar-name">
         供应商管理
       </div>
       <div class="back-bar-cancelBtn">
-        <div style="display:block;float:left;width: 25px;height: 25px;font-size: 25px;color: white;font-weight: bolder;">
+        <router-link to="/user/addSupplier" style="display:block;float:left;width: 25px;height: 25px;font-size: 25px;color: white;font-weight: bolder;">
           <i class="ion-ios-plus-empty"></i>
-        </div>
+        </router-link>
         <div style="margin-left:8px;display:block;float:left;width: 25px;height: 25px;font-size: 25px;color: white;font-weight: bolder;">
           <i class="ion-ios-search"></i>
         </div>
@@ -29,16 +29,23 @@
         @load="onLoad"
       >
       <div class="ok-text-box1" v-for="item in supplierList" style="float: left;height: 70px">
+        <!--<router-link  :to="{-->
+        <!---->
+    <!--}">-->
+          <div @click="pushSupplierId(item.id)">
+
         <div class="ok-text-name" style="width: 70%">公司名称：{{item.supplierName}}</div><br>
-        <div class="ok-text-name2">
+        <div class="ok-text-name2" style="margin-left: -69%;margin-top: 1%">
           负责人： {{item.supplierContacts}}
         </div>
-        <div class="ok-text-name5">
+        <div class="ok-text-name5" style="margin-left: -69%;margin-top: 1%">
           供应商地址： <span style="color: red">{{item.supplierAddress}}</span>
         </div>
         <div class="manger-icon">
           <i class="ion-chevron-right"></i>
         </div>
+        <!--</router-link>-->
+          </div>
       </div>
       </van-list>
     </div>
@@ -76,7 +83,10 @@
     mounted() {
     },   //挂载
     methods: {
-      onLoad() {//上划加载仓库信息
+      pushSupplierId(id){
+        this.$router.push({path: '/user/supplierInfo',query: {id:id,}});
+      },
+      onLoad() {//上划加载供应商信息
         this.pageNum++;
         getSupplierList({
           paging:this.paging,
