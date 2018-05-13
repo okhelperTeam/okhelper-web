@@ -7,7 +7,7 @@
         <router-link to="/product" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回
         </router-link>
         <div class="back-bar-name">
-          新增商品
+          商品信息
         </div>
         <div class="back-bar-cancelBtn">
           <div @click="addNewProduct" style="margin-left:8px;display:block;float:left;width: 50px;height: 25px;font-size: 18px;color: white;">
@@ -91,20 +91,20 @@
         <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
           <div style="width:25%;display: block;float: left;padding-left: 20px;">颜色</div>
           <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品颜色" type="text"  v-model="product.productDetail.productColor"/>
+            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品颜色" type="text"  />
           </div>
         </div>
         <div class="ok-model-border"></div>
         <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
           <div style="width:25%;display: block;float: left;padding-left: 20px;">尺码</div>
           <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品尺寸" type="text" v-model="product.productDetail.productSize"/>
+            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品尺寸" type="text" />
           </div>
         </div>
         <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
           <div style="width:25%;display: block;float: left;padding-left: 20px;">品牌</div>
           <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品品牌" type="text" v-model="product.productBrand"/>
+            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品品牌" type="text" />
           </div>
         </div>
         <div class="ok-model-border"></div>
@@ -127,7 +127,7 @@
   import Category from "../category/category";
   var VueTouch = require('vue-touch');
   Vue.use(VueTouch, {name: 'v-touch'});
-  import {upLoadGoodsImgs,generateBarCode,addProduct} from '@/service/getData.js'
+  import {upLoadGoodsImgs,generateBarCode,addProduct,getProductById} from '@/service/getData.js'
   import { Uploader } from 'vant';
   import { Toast } from 'vant';
 
@@ -139,6 +139,7 @@
         },//注册组件
         data() {         //数据
             return {
+              updateProductId:0,
               productImgList:[],
               mainImg:[],
               productImgPath:[],//商品图片路径
@@ -152,11 +153,19 @@
             };
         },
         computed: {},  //计算属性
-        created() {
+        created() {//keepAlive状态下created钩子不可用
+
         },   //创建
         mounted() {
         },   //挂载
         methods: {
+          getProductDetailById(){//修改商品
+            getProductById(this.updateProductId).then(response=>{
+              this.product=response.data;
+            },error=>{
+              console.log(error.msg);
+            });
+          },
           changeCategoryShowStatus(){
             this.parentData.categoryShow=!this.parentData.categoryShow;
             this.showProductOtherInfo=false;
@@ -168,7 +177,7 @@
             this.mainImg[n]=true;
             Vue.set(this.mainImg,n,this.mainImg[n]);
             this.product.mainImg=this.productImgPath[n];
-            alert(this.product.mainImg)
+            // alert(this.product.mainImg)
             // this.productImgPath.remove(this.product.mainImg);//删除副图组中主图
           },
           deleteImg(index){
@@ -263,7 +272,8 @@
         watch: {},      //监听
         beforeRouteEnter (to, from, next) { // 缓存组件是，此方法还有效
         next(vm => {
-          // alert(from.fullPath);
+          vm.updateProductId=vm.$route.query.id;
+          vm.getProductDetailById();
         })
       }
     }

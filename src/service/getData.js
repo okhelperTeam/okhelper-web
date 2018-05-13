@@ -54,6 +54,9 @@ var getMyUserInfo=myData=>ajax('get','/api/user/me',myData);
 //新增商品
 var addProduct=myData=>ajax('post','/api/product',myData);
 
+//查询单个商品（商品id）
+var getProductById=id=>ajax('get','/api/product/'+id);
+
 //查询销售历史订单
 var getSellHistoryList=myData=>ajax('get','/api/sale/sale_table',myData);
 
@@ -91,5 +94,6 @@ export {
   getearlyWarningList,
   getCustomerDebtList,
   getSupplierDebtList,
-  getSellTotal
+  getSellTotal,
+  getProductById
 }
