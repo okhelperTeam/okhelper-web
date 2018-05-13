@@ -129,17 +129,17 @@
             this.reLoad();
             break;
           case 2:
-            this.isAll = false;
+            this.isFinished = true;
             this.myData.orderStatus=2;
             this.reLoad();
             break;
           case 3:
-            this.isAll = false;
+            this.isArrearage = true;
             this.myData.orderStatus=4;
             this.reLoad();
             break;
           case 4:
-            this.isAll = false;
+            this.isClose = true;
             this.myData.orderStatus=5;
             this.reLoad();
             break;
