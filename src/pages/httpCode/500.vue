@@ -3,14 +3,25 @@
 */
 <template>
     <div id="">
-
+      <div class="back-bar">
+        <router-link :to="$router.back()" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回
+        </router-link>
+        <div class="back-bar-name">
+          遇到错误
+        </div>
+        <div class="back-bar-cancelBtn"></div>
+      </div>
+      <ok-footer></ok-footer>
     </div>
 </template>
 
 <script>
+  const Footer = resolve => require(['@/components/footer/footer'], resolve);
     export default {
         mixins: [],     //混合
-        components: {},//注册组件
+        components: {
+          'ok-footer':Footer
+        },//注册组件
         data() {         //数据
             return {};
         },

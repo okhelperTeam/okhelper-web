@@ -48,7 +48,7 @@ const PurchaseInfo = resolve => require(['@/pages/warehouse/purchaseInfo'], reso
 const Test = resolve => require(['@/pages/test/test2'], resolve);
 const OpenStore = resolve => require(['@/pages/user/openStore'], resolve);
 const ADDCategory = resolve => require(['@/pages/category/categoryInfo'], resolve);
-
+const Error500 = resolve => require(['@/pages/httpCode/500'], resolve);//500错误页
 const routes = [
   {
     path: '/'
@@ -214,6 +214,9 @@ const routes = [
   },{
     path:'/category/addCategory',
     component:ADDCategory
+  },{
+    path:'/500',
+    component:Error500
   }
 ];
 
