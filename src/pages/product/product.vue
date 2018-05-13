@@ -53,18 +53,21 @@
           @load="onLoad"
         >
           <div v-for="(item,index) in productList">
-            <ok-product
-              :main-img="item.mainImg"
-              :product-name="item.productName"
-              :cate-name="item.cateName"
-              :discounts="item.youhui"
-              :retail-price="item.retailPrice"
-              :createTime="item.createTime"
-              :Id="item.id"
-              :index="index"
-              :salesStock="item.salesStock"
-              @addProduct="addProduct"
-            />
+            <router-link :to="{path:'/product/productInfo',query:{id:item.id}}">
+              <ok-product
+                :main-img="item.mainImg"
+                :product-name="item.productName"
+                :cate-name="item.cateName"
+                :discounts="item.youhui"
+                :retail-price="item.retailPrice"
+                :createTime="item.createTime"
+                :Id="item.id"
+                :index="index"
+                :salesStock="item.salesStock"
+                @addProduct="addProduct"
+              />
+            </router-link>
+
           </div>
         </van-list>
         <div v-if="finished&&myData.pageNum>1" style="color: #888888;text-align: center;padding: 20px;">

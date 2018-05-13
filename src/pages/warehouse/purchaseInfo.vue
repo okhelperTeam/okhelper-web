@@ -6,65 +6,79 @@
 <template>
   <div id="">
     <div class="back-bar">
-      <router-link to="/warehouse/purchaseHistory" style="color: white;" class="back-bar-backBtn">&lt;&nbsp;返回
-      </router-link>
+      <span @click="$router.back()" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回
+      </span>
       <div class="back-bar-name">
-        采购历史信息详情
+        采购历史详情
       </div>
     </div>
-    <div style="margin-top: 20%">
+    <div style="margin-top: 56px">
       <div class="ok-model-text-box">
         <div class="ok-text-first ok-text-box">
-          <div class="ok-text-name">名称*</div>
-          <div class="ok-text-textBox">
-            <input class="ok-text-text" style="" placeholder="2-20个字符" type="text"/>
-            <hr>
+          <div class="ok-text-name">订单号：</div>
+          <div class="ok-text-textBox" style="margin-top: 3%">
+            <span>{{purchaseOrderInfo.orderNumber}} </span>
           </div>
         </div>
         <div class="ok-text-box">
-          <div class="ok-text-name">负责人*</div>
-          <div class="ok-text-textBox">
-            <input class="ok-text-text" placeholder="请输入负责人姓名" type="text"/>
-            <hr>
+          <div class="ok-text-name" style="width: 35%">供应商公司名：</div>
+          <div class="ok-text-textBox" style="margin-top: 3%;width: 50%">
+            <span>{{purchaseOrderInfo.supplier.name}}</span>
+          </div>
+        </div>
+        <div class="ok-text-box">
+          <div class="ok-text-name">入库员名称：</div>
+          <div class="ok-text-textBox" style="margin-top: 3%">
+            <span>{{purchaseOrderInfo.stockiner.name}}</span>
           </div>
         </div>
       </div>
       <div class="ok-border"></div>
-      <div class="ok-model-text-box">
-        <div class="ok-text-box">
-          <div class="ok-text-name" style="font-size: 14px">是否启用</div>
-          <div class="ok-text-textBox">
-            <div class="ok-sliding-block-box-active" style="border-radius:5px;margin-top:8px;float: right;height: 30px;width: 60px;background: brown;z-index: 1;">
-              <div  class="ok-sliding-block-btn-active" style="border-radius:5px;margin-right:2px;box-shadow:1px 1px 3px #888888;float: right;height: 26px;width: 30px;margin-top: 2px;background: white;z-index: 100;"></div>
+      <div>
+        <div class="ok-text-box" style="height: 30px">
+          <div class="ok-text-name">创建时间：</div>
+          <div class="ok-text-textBox" style="margin-top: 3%">
+            <span>{{purchaseOrderInfo.createTime}}</span>
+          </div>
+        </div>
+        <div style="margin-top: -28px;float: left">
+        <div v-if="storageDetailList.length>0||pageNum==0">
+            <div v-for="item in storageDetailList" class="ok-text-box" style="float: left;height: 80px">
+              <div class="ok-text-name" style="width: 100%;color: black">商品名称：<span style="color: #C20C0C">{{item.product.name}}</span></div><br>
+                <div class="ok-text-name2" style="margin-left: 1%;margin-top: -7%;width: 100%">
+                  仓库名称：<span style="color: #C20C0C">{{item.warehouse.name}}</span>
+                </div>
+              <div class="ok-text-name2" style="margin-left: 1%;margin-top: -7%;width: 100%">
+                商品数量：<span style="color: #C20C0C">{{item.storageCount}}</span>   <span style="margin-left: 3%">进货价：<span style="color: #C20C0C">{{item.storagePrice}}</span></span>
+              </div>
+              <div class="ok-text-name2" style="margin-left: 1%;margin-top: -7%;width: 100%">
+                生产日期：<span style="color: #C20C0C">{{item.productDate}}</span>   <span style="margin-left: 3%">保质期：<span style="color: #C20C0C">{{item.shelfLife}}</span></span>
+              </div>
             </div>
+        </div>
+        </div>
+        <div class="ok-text-box" style="float: left;margin-top: 15px;">
+          <div class="ok-text-name">总金额：</div>
+          <div class="ok-text-textBox" style="margin-top: 3%">
+            <span>{{purchaseOrderInfo.totalPrice}}</span>
           </div>
         </div>
+
         <div class="ok-text-box">
-          <div class="ok-text-name">门店</div>
-          <div class="ok-text-textBox">
-            <input class="ok-text-text" placeholder="" type="text"/>
-            <hr>
+          <div class="ok-text-name">描述：</div>
+          <div class="ok-text-textBox" style="margin-top: 3%">
+            <span>{{purchaseOrderInfo.remarks}} </span>
           </div>
         </div>
-        <div class="ok-text-box">
-          <div class="ok-text-name">排序</div>
-          <div class="ok-text-textBox">
-            <input class="ok-text-text" placeholder="" type="text"/>
-            <hr>
-          </div>
-        </div>
-        <div class="ok-text-box">
-          <div class="ok-text-name">备注</div>
-          <div class="ok-text-textBox">
-            <input class="ok-text-text" type="text"/>
-            <hr>
-          </div>
-        </div>
+        <!--<div class="ok-text-box">-->
+        <!--<div class="ok-text-name">备注</div>-->
+        <!--<div class="ok-text-textBox">-->
+        <!--<input class="ok-text-text" type="text"/>-->
+        <!--<hr>-->
+        <!--</div>-->
+        <!--</div>-->
       </div>
       <br>
-      <div style="height: 110px;padding-top:30px;width: 96%;margin:0 auto;">
-        <van-button type="danger" size="large">删除仓库</van-button>
-      </div>
     </div>
   </div>
 </template>
@@ -72,9 +86,38 @@
 <script>
   import Vue from 'vue';
   import {Button} from 'vant';
+  import {getPurchaseOrderInfo} from '@/service/getData';
   Vue.use(Button);
   export default {
-    name: "warehouseInfo"
+    name: "purchaseInfo",
+    data() {
+      return {
+        purchaseOrderInfo:{},
+        storageDetailList:[],
+      }
+    },
+    created() {
+      this.orderNumber = this.$route.query.orderNumber;//获取上个页面传递的id,在下面获取数据的时候先提交id
+      this.getPurchaseInfoByNumber();
+    },
+    methods: {
+      getPurchaseInfoByNumber() {
+        getPurchaseOrderInfo(
+          this.orderNumber
+        ).then(
+          response => {
+            //console.log(response.data);
+            this.purchaseOrderInfo = response.data;
+            for(var i=0;i<response.data.storageDetail.length;i++){
+              this.storageDetailList.push(response.data.storageDetail[i]);
+            }
+
+          }, error => {
+            console.log(error.msg);
+          }
+        );
+      }
+    }
   }
 </script>
 

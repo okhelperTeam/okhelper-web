@@ -6,8 +6,8 @@
 <template>
   <div id="">
     <div class="back-bar">
-      <router-link to="/user/register" style="color: white;" class="back-bar-backBtn">&lt;&nbsp;返回
-      </router-link>
+      <span @click="$router.back()" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回
+      </span>
       <div class="back-bar-name">
         OK帮注册
       </div>
