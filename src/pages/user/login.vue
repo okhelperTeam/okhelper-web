@@ -95,9 +95,14 @@
         },
         computed: {},  //计算属性
         created() {
+          if (window.plus){plus.navigator.setStatusBarBackground('#f8f8f8');}
         },   //创建
         mounted() {
         },   //挂载
+        beforeDestroy(){
+          if (window.plus){plus.navigator.setStatusBarBackground('#C20C0C');}
+          console.log("12345678o");
+        },
         methods: {
           loginOk(){
             // if(this.checkUserName() ==true && this.checkLPwd() == true && this.checkLpicma() == true){
