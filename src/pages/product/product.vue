@@ -49,22 +49,25 @@
         <van-list
           v-model="loading"
           :finished="finished"
-          :offset=10
+          :offset=100
           @load="onLoad"
         >
           <div v-for="(item,index) in productList">
-            <ok-product
-              :main-img="item.mainImg"
-              :product-name="item.productName"
-              :cate-name="item.cateName"
-              :discounts="item.youhui"
-              :retail-price="item.retailPrice"
-              :createTime="item.createTime"
-              :Id="item.id"
-              :index="index"
-              :salesStock="item.salesStock"
-              @addProduct="addProduct"
-            />
+            <router-link :to="{path:'/product/productInfo',query:{id:item.id}}">
+              <ok-product
+                :main-img="item.mainImg"
+                :product-name="item.productName"
+                :cate-name="item.cateName"
+                :discounts="item.youhui"
+                :retail-price="item.retailPrice"
+                :createTime="item.createTime"
+                :Id="item.id"
+                :index="index"
+                :salesStock="item.salesStock"
+                @addProduct="addProduct"
+              />
+            </router-link>
+
           </div>
         </van-list>
         <div v-if="finished&&myData.pageNum>1" style="color: #888888;text-align: center;padding: 20px;">
@@ -106,7 +109,7 @@
             return {
               loading: false,
               finished: false,
-              myData:{paging:true,pageNum:0,limit:6,categoryId:0,orderBy:'create_time desc'},
+              myData:{paging:true,pageNum:0,limit:8,categoryId:0,orderBy:'create_time desc'},
               categoryName: 'categoryName', // 显示菜单名称的属性
               parentData:{categoryShow:false,choosedCategoryName:'全部分类',plusShow:false},
               totalCount:0,

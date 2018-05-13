@@ -33,26 +33,26 @@
           </div>
           <div v-if="showDetails" style="height: auto;width: 100%;border-top: 1px dashed #F2F2F2;padding-left: 20px;padding-right: 10px;padding-bottom: 15px;padding-top: 5px;">
             <div>单据编号：ST201805061237001</div>
-            <div>客户：杨红{{customerName}}</div>
+            <div>客户：{{customerName}}</div>
             <div>结算方式：现金</div>
             <div>
               <div style="width: 50%;display: block;float: left;">
-                <div>仓库：8号仓库</div>
-                <div>单据总金额：￥5,521.00</div>
+                <!--<div>仓库：8号仓库</div>-->
+                <div>单据总金额：￥{{totalPrice | formateMoney}}</div>
                 <div>品牌：菀草壹</div>
-                <div>原价：￥5,521.00</div>
-                <div>总金额：￥5,521.00</div>
-                <div>采购均价：￥521.00</div>
-                <div>毛利：￥521.00</div>
+                <div>原价：￥{{sumPrice | formateMoney}}</div>
+                <!--<div>总金额：￥5,521.00</div>-->
+                <!--<div>采购均价：￥521.00</div>-->
+                <!--<div>毛利：￥521.00</div>-->
               </div>
               <div style="width: 50%;display: block;float: left;">
-                <div>仓库：8号仓库</div>
-                <div>实收金额：￥5,521.00</div>
+                <!--<div>仓库：8号仓库</div>-->
+                <div>实收金额：￥{{realPay | formateMoney}}</div>
                 <div>分类：大衣</div>
-                <div>折扣(%)：100.00</div>
-                <div>折后金额：￥5,521.00</div>
-                <div>成本：￥521.00</div>
-                <div>毛利率(%)：21.00</div>
+                <!--<div>折扣(%)：100.00</div>-->
+                <!--<div>折后金额：￥5,521.00</div>-->
+                <!--<div>成本：￥521.00</div>-->
+                <!--<div>毛利率(%)：21.00</div>-->
               </div>
             </div>
             <div style="clear: both"></div>
@@ -66,17 +66,34 @@
 <script>
     export default {
         mixins: [],     //混合
-        components: {},//注册组件
+        components: {
+          totalPrice(){
+            return this.realPay+this.toBePaid;
+          },
+          // discountPrice:{
+          //   return:
+          // }
+        },//注册组件
         data() {         //数据
-            return {};
+            return {
+              showDetails:false
+            };
         },
         props:{
           productColor:{},
           productSize:{},
           retailPrice:{},
-          productColor:{},
-          productColor:{},
+          salesVolume:{},//销售种类
+          realPay:{},//实付金额
+          remarks:{},
+          payType:{},
+          orderStatus:{},
+          orderNumber:{},
+          discountPrice:{},
+          sumPrice:{},
+          toBePaid:{},
           customerName:{}
+
         },
         computed: {},  //计算属性
         created() {

@@ -20,6 +20,7 @@ const CategoryInfo = resolve => require(['@/pages/category/categoryInfo'], resol
 const Product = resolve => require(['@/pages/product/product'], resolve);
 const SearchProduct = resolve => require(['@/pages/product/searchProduct'], resolve);
 const ProductInfo = resolve => require(['@/pages/product/productInfo'], resolve);
+const Checkstand = resolve => require(['@/pages/checkstand/checkstand'], resolve);
 const Sell = resolve => require(['@/pages/sell/sell'], resolve);
 const SellHistory = resolve => require(['@/pages/sell/sellHistory'], resolve);
 const SellTable= resolve => require(['@/pages/sell/sellTable'], resolve);
@@ -52,7 +53,7 @@ const PurchaseInfo = resolve => require(['@/pages/warehouse/purchaseInfo'], reso
 const Test = resolve => require(['@/pages/test/test2'], resolve);
 const OpenStore = resolve => require(['@/pages/user/openStore'], resolve);
 const ADDCategory = resolve => require(['@/pages/category/categoryInfo'], resolve);
-
+const Error500 = resolve => require(['@/pages/httpCode/500'], resolve);//500错误页
 const routes = [
   {
     path: '/'
@@ -113,6 +114,10 @@ const routes = [
     component:ProductInfo,
     meta:{title:"okhelper-ProductInfo",keepAlive:true}
   },{
+    path:'/checkstand',
+    component:Checkstand,
+    meta:{title:"okhelper-Checkstand"}
+  },{
     path:'/sell',
     component:Sell,
     meta:{title:"okhelper-Sell"}
@@ -123,7 +128,7 @@ const routes = [
   },{
     path:'/sell/sellTable',
     component:SellTable,
-    meta:{title:"okhelper-SellTable"}
+    meta:{title:"okhelper-SellTable",keepAlive:true}
   },{
     path:'/repertory',
     component:Repertory,
@@ -234,6 +239,9 @@ const routes = [
   },{
     path:'/category/addCategory',
     component:ADDCategory
+  },{
+    path:'/500',
+    component:Error500
   }
 ];
 

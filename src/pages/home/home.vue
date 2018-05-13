@@ -176,6 +176,7 @@
       },
       computed: {},  //计算属性
       created() {
+        if (window.plus){plus.navigator.setStatusBarBackground('#C20C0C');}
         getMenuCodeList().then(
           response=>{
             let menuList=response.data;
@@ -224,8 +225,7 @@
 
         },
         scanOver(code){
-          // console.log(code);
-          alert(code);
+          this.$router.push({path:'/product/searchProduct',query:{barCode:code}});
         }
       },   //方法
       watch: {}      //监听

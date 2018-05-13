@@ -226,7 +226,7 @@ input,select{
   outline: none;
   border:none;
   font-family:arial,'\5FAE\8F6F\96C5\9ED1',sans-serif;
-  background: #ffffff !important;
+  background: #ffffff;
   -webkit-appearance:none;
 }
 input:-webkit-autofill{

@@ -76,6 +76,9 @@ var getPurchaseOrderInfo=number=>ajax('get','/api/storage/'+number);
 //获取商品列表(商品名)
 var getProductListByName=myData=>ajax('get','/api/product/search',myData);
 
+//获取商品列表(热/滞销)
+var getHotOrColdProductList=myData=>ajax('get','/api/report/hot_cold_sale',myData);
+
 //生产商品条码
 var generateBarCode=myData=>ajax('get','/api/until/bar_code',myData);
 
@@ -90,6 +93,9 @@ var addStoreManager=myData=>ajax('post','/api/user/register',myData);
 
 //新增入库单
 var addPurchaseOrder=myData=>ajax('post','/api/storage',myData);
+
+//查询单个商品（商品id）
+var getProductById=id=>ajax('get','/api/product/'+id);
 
 //查询销售历史订单
 var getSellHistoryList=myData=>ajax('get','/api/sale/sale_table',myData);
@@ -118,6 +124,7 @@ export {
   upLoadPayImgs,
   getCategoryList,
   getProductList,
+  getHotOrColdProductList,
   getSupplierList,
   getCustomerList,
   getPurchaseOrderList,
@@ -144,5 +151,6 @@ export {
   addStoreManager,
   deleteWarehouseInfo,
   deleteSupplierInfo,
-  getStockWarningList
+  getStockWarningList,
+  getProductById,
 }
