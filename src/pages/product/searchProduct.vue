@@ -39,8 +39,8 @@
             />
           </div>
         </van-list>
-        <div v-if="productList.length>0" style="height: 30px;width: 100%;"></div>
-        <div v-if="finished & pageNum>1" style="color: #888888;text-align: center;padding: 20px;padding-bottom: 40px;">
+        <div v-if="productList.length>0" style="height: 15px;width: 100%;"></div>
+        <div v-if="finished & pageNum>1" style="color: #888888;text-align: center;padding-bottom: 40px;">
           到底了别滑了，真的没了.....
         </div>
         <div style="position:fixed;bottom:0;height: 30px;width: 100%;border-top: 1px solid #F2F2F2">
@@ -91,7 +91,7 @@
               searchProductName:'',
               pageNum:0,
               paging:true,
-              limit:8,
+              limit:10,
               productList:[],
               productChoosedList:[],
               P:{isOpen:false}
@@ -140,8 +140,13 @@
             this.finished=false;
             this.onLoad();
           },
-          addProduct(productId){//选择商品
-            this.productChoosedList.push(productId);
+          addProduct(goodsId,isActive){//选择商品
+            console.log(goodsId);
+            if(isActive){
+              this.productChoosedList.push(goodsId);
+            }else {
+              this.productChoosedList.remove(goodsId);
+            }
           },
           search:_.debounce(function(){
             this.reLoad()

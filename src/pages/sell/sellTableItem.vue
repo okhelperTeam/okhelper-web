@@ -2,7 +2,7 @@
   <div>
       <div style="border-bottom: 1px dashed #F2F2F2;height: 26px;line-height: 26px;">
         <span style="font-weight: bolder;">{{productName}}<span style="color: #108ee9">({{productNumber}})</span></span>
-        <i style="color: #108ee9;margin-left: 15px;" class="ion-edit"></i>
+        <!--<i style="color: #108ee9;margin-left: 15px;" class="ion-edit"></i>-->
       </div>
       <div style="border-bottom: 1px dashed #F2F2F2">
         <ul style="list-style: none;height: 36px;line-height: 36px;width: 100%;font-size: 12px;">
@@ -99,7 +99,8 @@
             }
           },
           deleteProduct(){
-            this.$emit('deleteProduct',this.productId);
+            // alert(this.productName+'&7777777')
+            this.$emit('deleteProduct',this.productName);
           }
         },   //方法
         watch: {
