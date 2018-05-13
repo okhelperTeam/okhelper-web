@@ -1,7 +1,6 @@
 <template>
-<div>
-  <transition>
-    <div class="scan" v-if="P.isOpen">
+<div v-if="P.isOpen">
+    <div class="scan">
       <div id="bcid">
       </div>
       <footer>
@@ -10,7 +9,6 @@
         <!-- <button @click="choosePic">从相册中获取</button> -->
       </footer>
     </div>
-  </transition>
 </div>
 
 

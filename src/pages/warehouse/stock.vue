@@ -7,8 +7,8 @@
 <template>
   <div id="">
     <div class="back-bar">
-      <router-link to="/repertory" style="color: white;" class="back-bar-backBtn">&lt;&nbsp;库存
-      </router-link>
+      <span @click="$router.back()" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回
+      </span>
       <div class="back-bar-name">
       库存展示
       </div>

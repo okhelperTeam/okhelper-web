@@ -6,8 +6,8 @@
 <template>
     <div>
       <div class="back-bar">
-        <router-link to="/repertory" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回
-        </router-link>
+        <span @click="$router.back()" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回
+      </span>
         <div class="back-bar-name">
           采购历史
         </div>
@@ -28,6 +28,7 @@
           @load="onLoad"
         >
         <div class="ok-text-box1" v-for="item in purchaseOrderList">
+          <router-link :to="{path: '/warehouse/purchaseInfo',query: {orderNumber:item.orderNumber}}">
           <div class="ok-text-name" style="width: 100%">公司名称：{{item.supplier.name}}</div><br>
           <div class="ok-text-name2" style="width: 100%;margin-left: -2px;margin-top: -15px;font-size: 13px">
             单号：{{item.orderNumber}}&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red">￥{{item.totalPrice}}</span>
@@ -38,6 +39,7 @@
           <div class="manger-icon">
             <i class="ion-chevron-right"></i>
           </div>
+          </router-link>
         </div>
         </van-list>
       </div>

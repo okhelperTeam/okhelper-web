@@ -35,7 +35,8 @@
         <div style="width:25%;display: block;float: left;padding-left: 20px;">
           <span>条码</span>
           <span style="color: #dd0a20">*</span>
-          <i style="color: #108ee9;font-size: 25px;top: 5px;position: relative" class="ion-qr-scanner"></i>
+          <ok-scan :P="P" @scanover="scanOver"/>
+          <i style="color: #108ee9;font-size: 25px;top: 5px;position: relative" class="ion-qr-scanner" @click="P.isOpen=true"></i>
         </div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:55%;display: block;float: left;">
           <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="唯一保存后不可修改，可生成" type="text" v-model="product.barCode"/>
@@ -127,15 +128,17 @@
   import Category from "../category/category";
   var VueTouch = require('vue-touch');
   Vue.use(VueTouch, {name: 'v-touch'});
-  import {upLoadGoodsImgs,generateBarCode,addProduct,getProductById} from '@/service/getData.js'
+  import {upLoadGoodsImgs,generateBarCode,addProduct,getProductById,getProductBybarCode} from '@/service/getData.js'
   import { Uploader } from 'vant';
   import { Toast } from 'vant';
+  import Scan from '@/components/common/scan';
 
   Vue.use(Uploader);
     export default {
         mixins: [],     //混合
         components: {
-          'ok-category':Category
+          'ok-category':Category,
+          'ok-scan':Scan
         },//注册组件
         data() {         //数据
             return {
@@ -149,7 +152,8 @@
               parentData:{categoryShow:false,choosedCategoryName:'选择分类',plusShow:true},
               choosedCategoryId:0,
               showProductOtherInfo:false,//显示扩展信息
-              product:{mainImg:'',productName:'',productNumber:'',barCode:'',productInPrice:'',productOutPrice:'',productRetailPrice:'',productDetail:{productColor:'',productSize:''},productBrand:'',}
+              product:{mainImg:'',productName:'',productNumber:'',barCode:'',productInPrice:'',productOutPrice:'',productRetailPrice:'',productDetail:{productColor:'',productSize:''},productBrand:'',},
+              P:{isOpen:false}
             };
         },
         computed: {},  //计算属性
@@ -266,8 +270,27 @@
             },error=>{
 
             })
-          }
+          },
+          scanOver(barCode){
+            getProductBybarCode(barCode).then(response=>{
+              //有该商品条码了
+              this.product.barCode="";
+              Toast({
+                position: 'bottom',
+                message: '条码不能重复！'
+              });
+            },error=>{
+              if(error.status==404){
+                this.product.barCode=barCode;
+              }else{
+                Toast({
+                  position: 'bottom',
+                  message: '验证条码失败！'
+                });
+              }
+            })
 
+          }
         },   //方法
         watch: {},      //监听
         beforeRouteEnter (to, from, next) { // 缓存组件是，此方法还有效
