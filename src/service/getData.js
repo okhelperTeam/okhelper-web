@@ -96,6 +96,9 @@ var updateProduct=myData=>ajax('put','/api/product',myData);
 //删除商品
 var deleteProduct=id=>ajax('delete','/api/product/'+id);
 
+//获取员工列表
+var getEmployeeList=myData=>ajax('get','/api/user/employee',myData);
+
 //新增店长
 var addStoreManager=myData=>ajax('post','/api/user/register',myData);
 
@@ -152,6 +155,7 @@ export {
   getHotOrColdProductList,
   getSupplierList,
   getCustomerList,
+  getEmployeeList,
   getPurchaseOrderList,
   getProductListByName,
   generateBarCode,

@@ -89,7 +89,7 @@
               <div @click="deleteImg(index)" style="z-index:10;position:absolute;top:0px;right:0px;width: 20px;height: 20px;background: #C20C0C;text-align: center;line-height: 20px;color: white;">
                 <i class="ion-close-round"></i>
               </div>
-              <img style="position:absolute;top:0px;left:0px;z-index: 5" width="100px" height="100px" :src="imgSrc"/>
+              <img style="position:relative;z-index: 5;width: 100px;height: 100px;" :src="imgSrc"/>
             </div>
 
           </v-touch>
@@ -146,7 +146,7 @@
   import Category from "../category/category";
   var VueTouch = require('vue-touch');
   Vue.use(VueTouch, {name: 'v-touch'});
-  import {upLoadGoodsImgs,generateBarCode,addProduct,getProductById,getProductBybarCode,updateProduct,deleteProduct} from '@/service/getData.js'
+  import {upLoadGoodsImgs,generateBarCode,addProduct,getProductById,getProductBybarCode,updateProduct,deleteProduct,getCategoryList} from '@/service/getData.js'
   import { Uploader } from 'vant';
   import { Toast } from 'vant';
   import Scan from '@/components/common/scan';
@@ -207,7 +207,16 @@
                 this.imgCount=this.productImgList.length;
                 this.productListShow[i]=true;
               }
-
+              //查询分类名称-------------------------------------------------------------------!!!!!等待新接口
+              getCategoryList(this.product.categoryId).then(
+                response=>{
+                  this.parentData.choosedCategoryName=response.data.categoryName;
+                  console.log(this.parentData.choosedCategoryName)
+                },
+                error=>{
+                  console.log(error.msg);
+                }
+              );
               console.log(this.productImgPath)
             },error=>{
               console.log(error.msg);
@@ -294,6 +303,7 @@
           getChoosedCategoryId(categoryItem){//获取从子组件来的分类id
             this.parentData.choosedCategoryName=categoryItem.categoryName;
             this.choosedCategoryId=categoryItem.id;
+            this.product.categoryId=categoryItem.id;
             this.showProductOtherInfo=true;
           },
           addNewOrUpdateProduct(id){
