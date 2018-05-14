@@ -4,8 +4,8 @@
 <template>
   <div id="">
     <div class="back-bar">
-      <router-link to="/sell" class="back-bar-backBtn">&lt;&nbsp;返回
-      </router-link>
+      <div @click="$router.back()" class="back-bar-backBtn">&lt;&nbsp;返回
+      </div>
       <div class="back-bar-name">
         销售历史
       </div>
@@ -108,7 +108,7 @@
         orderList:[],
         loading: false,
         finished: false,
-        myData:{paging:true,pageNum:0,limit:8,range:'month',orderStatus:null,orderBy:'create_time desc'}
+        myData:{paging:true,pageNum:0,limit:8,orderStatus:null,orderBy:'create_time desc'}
       };
     },
     computed: {},  //计算属性

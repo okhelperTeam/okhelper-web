@@ -172,5 +172,4 @@ export {
   getCheckName,
   getStoreManagerInfo,
   updateStoreManager,
-  getProductById,
 }

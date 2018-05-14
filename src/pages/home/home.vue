@@ -40,21 +40,21 @@
     </div>
   </div>
   <div style="margin-top:156px;">
-    <div v-if="showMenuModel[0]"  class="sales_order_add home-fun-model">
-      <router-link to="/sell/sellTable" class="home-fun-model-a">
-        <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
-        <span class="home-fun-model-a-word">分类管理</span>
-      </router-link>
-    </div>
+    <!--<div v-if="showMenuModel[0]"  class="sales_order_add home-fun-model">-->
+      <!--<router-link to="/sell/sellTable" class="home-fun-model-a">-->
+        <!--<i class="ion-ios-pricetag home-fun-model-a-icon"></i>-->
+        <!--<span class="home-fun-model-a-word">分类管理</span>-->
+      <!--</router-link>-->
+    <!--</div>-->
     <div v-if="showMenuModel[1]" class="sales_order_add home-fun-model">
       <router-link to="/product" class="home-fun-model-a">
-        <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
+        <i class="ion-bag home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">商品管理</span>
       </router-link>
     </div>
     <div v-if="showMenuModel[2]" class="sales_order_add home-fun-model">
-      <router-link to="/sell/sellTable" class="home-fun-model-a">
-        <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
+      <router-link to="/statistics/sellDetails" class="home-fun-model-a">
+        <i style="color: orange" class="ion-ios-pie-outline home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">统计报表</span>
       </router-link>
     </div>
@@ -65,20 +65,20 @@
       </router-link>
     </div>
     <div v-if="showMenuModel[4]" class="sales_order_add home-fun-model">
-      <router-link to="/sell/sellTable" class="home-fun-model-a">
+      <router-link to="/warehouse/purchaseOrder" class="home-fun-model-a">
         <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">入库单</span>
       </router-link>
     </div>
     <div v-if="showMenuModel[5]" class="sales_order_add home-fun-model">
       <router-link to="/sell/sellHistory" class="home-fun-model-a">
-        <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
+        <i class="ion-ios-list home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">销售历史</span>
       </router-link>
     </div>
     <div v-if="showMenuModel[6]" class="sales_order_add home-fun-model">
-      <router-link to="/sell/sellTable" class="home-fun-model-a">
-        <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
+      <router-link to="/user/supplier" class="home-fun-model-a">
+        <i style="color: #108ee9" class="ion-ios-people-outline home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">供应商管理</span>
       </router-link>
     </div>
@@ -88,12 +88,12 @@
         <span class="home-fun-model-a-word">新增销售单</span>
       </router-link>
     </div>
-    <div v-if="showMenuModel[8]"  class="home-fun-model">
-      <router-link to="/home" class="home-fun-model-a">
-        <i class="ion-ios-cart home-fun-model-a-icon"></i>
-        <span class="home-fun-model-a-word">采购单</span>
-      </router-link>
-    </div>
+    <!--<div v-if="showMenuModel[8]"  class="home-fun-model">-->
+      <!--<router-link to="/home" class="home-fun-model-a">-->
+        <!--<i class="ion-ios-cart home-fun-model-a-icon"></i>-->
+        <!--<span class="home-fun-model-a-word">采购单</span>-->
+      <!--</router-link>-->
+    <!--</div>-->
     <div v-if="showMenuModel[9]" class="home-fun-model">
       <router-link to="/home" class="home-fun-model-a">
         <i class="ion-ios-box home-fun-model-a-icon"></i>
@@ -106,27 +106,27 @@
         <span class="home-fun-model-a-word">员工管理</span>
       </router-link>
     </div>
-    <div v-if="showMenuModel[11]"  class="home-fun-model">
-      <router-link to="/home" class="home-fun-model-a">
-        <i class="ion-ios-help home-fun-model-a-icon"></i>
-        <span class="home-fun-model-a-word">快速入门</span>
-      </router-link>
-    </div>
+    <!--<div v-if="showMenuModel[11]"  class="home-fun-model">-->
+      <!--<router-link to="/home" class="home-fun-model-a">-->
+        <!--<i class="ion-ios-help home-fun-model-a-icon"></i>-->
+        <!--<span class="home-fun-model-a-word">快速入门</span>-->
+      <!--</router-link>-->
+    <!--</div>-->
     <div v-if="showMenuModel[12]"  class="home-fun-model">
-      <router-link to="/home" class="home-fun-model-a">
-        <i class="ion-ios-help home-fun-model-a-icon"></i>
+      <router-link to="/user/customer" class="home-fun-model-a">
+        <i style="color: pink" class="ion-ios-people home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">客户管理</span>
       </router-link>
     </div>
     <div v-if="showMenuModel[13]"  class="home-fun-model">
-      <router-link to="/home" class="home-fun-model-a">
-        <i class="ion-ios-help home-fun-model-a-icon"></i>
+      <router-link to="/warehouse/warehouse" class="home-fun-model-a">
+        <i style="color: #ff943b" class="ion-ios-home home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">仓库管理</span>
       </router-link>
     </div>
     <div v-if="showMenuModel[14]"  class="home-fun-model">
-      <router-link to="/home" class="home-fun-model-a">
-        <i class="ion-ios-help home-fun-model-a-icon"></i>
+      <router-link to="/role" class="home-fun-model-a">
+        <i style="color: blueviolet" class="ion-ios-person home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">角色管理</span>
       </router-link>
     </div>
@@ -192,11 +192,11 @@
                   break;
                 case 'report':this.showMenuModel[2]=true;
                   break;
+                case 'sales_order_history':this.showMenuModel[3]=true;this.showMenuModel[5]=true;
+                  break;
                 case 'role':this.showMenuModel[14]=true;
                   break;
                 case 'sales_order_add':this.showMenuModel[7]=true;
-                  break;
-                case 'sales_order_history':this.showMenuModel[5]=true;
                   break;
                 case 'stock':this.showMenuModel[9]=true;
                   break;
@@ -246,8 +246,8 @@
     font-size: 18px;
   }
   .home-fun-model{
-    border-right:0.3px solid #cccccc;
-    border-bottom:0.3px solid #cccccc;
+    border-right:0.3px solid #F2F2F2;
+    border-bottom:0.3px solid #F2F2F2;
     display:block;
     float:left;
     height: 130px;
@@ -263,7 +263,8 @@
     display: block;
   }
   .home-fun-model-a-word{
-    font-size: 18px;
+    font-size: 14px;
+    color: black;
     display: block;
   }
 </style>
