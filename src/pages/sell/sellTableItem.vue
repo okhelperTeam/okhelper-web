@@ -1,7 +1,7 @@
 <template>
   <div>
       <div style="border-bottom: 1px dashed #F2F2F2;height: 26px;line-height: 26px;">
-        <span style="font-weight: bolder;">{{productName}}<span style="color: #108ee9">({{productNumber}})</span></span>
+        <span style="font-weight: bolder;">{{productName}}<span v-if="productNumber!=null&&productNumber!=''" style="color: #108ee9">({{productNumber}})</span></span>
         <!--<i style="color: #108ee9;margin-left: 15px;" class="ion-edit"></i>-->
       </div>
       <div style="border-bottom: 1px dashed #F2F2F2">
@@ -15,10 +15,10 @@
             </div>
           </li>
           <li style="display: block;float: left;width: 20%;text-align: center;">
-            <div>{{productColor}}</div>
+            <div><span v-if="productColor!=null&&productColor!=''">{{productColor}}</span><span v-else>均色</span></div>
           </li>
           <li style="display: block;float: left;width: 20%;text-align: center;">
-            <div>{{productSize}}</div>
+            <div><span v-if="productSize!=null&&productSize!=''">{{productSize}}</span><span v-else>均码</span></div>
           </li>
           <li style="display: block;float: left;width: 20%;text-align: center;">
             <div>￥{{discountPrice}}</div>
@@ -30,7 +30,7 @@
             <i @click="showNoteOrPrice(2)" :class="[isPriceOpen?'ion-chevron-up':'ion-chevron-down']"></i>
           </li>
         </ul>
-        <div v-show="isPriceOpen&&editText=='编辑'">
+        <div v-show="isPriceOpen">
           <ul style="list-style: none;background: #F2F2F2;width: 100%;height:50px;padding-top:5px;text-align: center;">
             <li class="sell-table-price-detail-open-li">
               <div>单价</div>
@@ -68,9 +68,9 @@
           productColor:{},
           productSize:{},
           editText:{},
-          productCount:{},
+          productCount:{default:1},
           retailPrice:{},
-          discounts:{},
+          discounts:{default:100},
           productNotes:{}
         },
         components: {
@@ -99,8 +99,7 @@
             }
           },
           deleteProduct(){
-            // alert(this.productName+'&7777777')
-            this.$emit('deleteProduct',this.productName);
+            this.$emit('deleteProduct',this.productId);
           }
         },   //方法
         watch: {

@@ -34,9 +34,9 @@
             </div>
             <div v-for="(item) in choosedProductList">
               <sell-table-item
-                :productId="item.productId"
+                :productId="item.id"
                 :productName="item.productName"
-                :productNumber="item.productNumber"
+                :productNumber="item.articleNumber"
                 :productColor="item.productColor"
                 :productSize="item.productSize"
                 :editText="editText"
@@ -113,11 +113,8 @@
               parentData:{customerShow:false,customerName:'',customerId:''},//选择客户组件数据
               choosedId:this.$route.params.productChoosedList,
               editText:'编辑',
-              choosedProductList:[
-                {productId:'1',productName:'商品1',productNumber:'001',productColor:'蓝色',productSize:'均码',retailPrice:100,discounts:100,productCount:15,productNotes:'',productNotes:''},
-                {productId:'2',productName:'商品1',productNumber:'001',productColor:'蓝色',productSize:'均码',retailPrice:200,discounts:50,productCount:15,productNotes:'',productNotes:''},
-              ],
-              totalMoney:10000.56,
+              choosedProductList:[],
+              totalMoney:0,
               customerList:[],
               P:{isOpen:false}
             };
@@ -140,9 +137,12 @@
               this.editText='编辑';
             }
           },
-          deleteProduct(productName){
-            alert(productName);
-            this.choosedProductList.remove(productName);
+          deleteProduct(productId){
+            for(var i=0;i<this.choosedProductList.length;i++){
+              if(this.choosedProductList[i].id==productId){
+                this.choosedProductList.remove(this.choosedProductList[i]);
+              }
+            }
           },
           scanOver(code){
             this.$router.push({path:'/product/searchProduct',query:{barCode:code}});
