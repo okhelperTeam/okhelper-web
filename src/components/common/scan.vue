@@ -4,8 +4,9 @@
       <div id="bcid">
       </div>
       <footer>
-        <button @click="cancel">取消</button>
-        <button @click="setFlash">闪光灯</button>
+        <div style="float: right;width: 50%;height: 50px;text-align: center;line-height: 50px;color: #108ee9;" @click="cancel">取消</div>
+        <div style="float: left;width: 50%;height: 50px;line-height: 50px;text-align: center;color: #108ee9;" @click="setFlash">
+          <i class="ion-ios-bolt"></i>闪光灯</div>
         <!-- <button @click="choosePic">从相册中获取</button> -->
       </footer>
     </div>
@@ -39,7 +40,9 @@
       //创建扫描控件
       startRecognize() {
         let that=this;
-        if (!window.plus) {alert("请在手机上使用"); that.P.isOpen=false; return;}
+        if (!window.plus) {
+          // alert("请在手机上使用"); that.P.isOpen=false; return;
+        }
         scan = new plus.barcode.Barcode('bcid',
         [plus.barcode.QR,plus.barcode.EAN8,plus.barcode.EAN13],
         {frameColor:'#108ee9',scanbarColor:'#108ee9',background:'#000'});
@@ -195,12 +198,12 @@
 
   footer {
     width: 100%;
-    height: 10%;
+    height: 50px;
     position: absolute;
     left: 0;
     bottom: 0;
     line-height: 6rem;
     z-index: 2;
-    background-color: red;
+    background-color: white;
   }
 </style>
