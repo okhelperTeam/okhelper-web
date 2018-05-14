@@ -32,20 +32,13 @@
                 </div>
               </div>
             </div>
-            <div v-for="(item) in choosedProductList">
-              <sell-table-item
-                :productId="item.id"
-                :productName="item.productName"
-                :productNumber="item.articleNumber"
-                :productColor="item.productColor"
-                :productSize="item.productSize"
-                :editText="editText"
-                :productCount="item.productCount"
-                :retailPrice="item.retailPrice"
-                :discounts="item.discounts"
-                :productNotes="item.productNotes"
-                @deleteProduct="deleteProduct"
-              />
+            <div v-for="(val, key, index) in choosedProductList">
+              <div>{{key}}}</div>
+              <!--<sell-table-item-->
+                <!--:editText="editText"-->
+                <!--:parentData="item"-->
+                <!--@deleteProduct="deleteProduct"-->
+              <!--/>-->
               </div>
             </div>
         </div>
@@ -98,6 +91,7 @@
   import sellTableItem from '@/pages/sell/sellTableItem';
   import {getCustomerList,getProductById} from '@/service/getData.js'
   import Scan from '@/components/common/scan';
+  import Vue from 'vue';
   import SearchCustomer from "../customer/searchCustomer";
     export default {
         mixins: [],     //混合
@@ -125,7 +119,6 @@
           }
         },  //计算属性
         created() {
-
         },   //创建
         mounted() {
         },   //挂载
@@ -152,21 +145,40 @@
           }
         },   //方法
         watch: {
+          'choosedProductList': {
+              handler: function (val, oldVal) {
+                this.totalMoney=0;
+                // alert(this.totalMoney)
+                for(var i=0;i<val.length;i++){
+                  console.log(val[i]);
+                  this.totalMoney+=val[i].retailPrice*val[i].discount;
+                }
+              },
+              deep: true
+            },
 
         } ,     //监听
         beforeRouteEnter (to, from, next) { // 缓存组件是，此方法还有效
           next(vm => {
             // vm.updateProductId=vm.$route.query.id;
-            for(var i=0 ;i<vm.$route.query.productChoosedList.length;i++){
-              getProductById(vm.$route.query.productChoosedList[i]).then(
-                response=>{
-                  vm.choosedProductList.push(response.data);
-                },error=>{
-                  console.log(error.msg);
-                }
-              );
+            if(vm.$route.query.productChoosedList!=null){
+              for(var i=0 ;i<vm.$route.query.productChoosedList.length;i++){
+                getProductById(vm.$route.query.productChoosedList[i]).then(
+                  response=>{
+                    if(vm.choosedProductList[vm.$route.query.productChoosedList[i].id]==null){
+                      var productItem=Object.assign(response.data,{'discounts':100});
+                      vm.choosedProductList[productItem.id]=productItem;
+                      Vue.set(vm.choosedProductList,productItem.id,productItem);
+                      console.log(vm.choosedProductList)
+                    }
+                  },error=>{
+                    console.log(error.msg);
+                  }
+                );
 
+              }
             }
+
 
           })
         }

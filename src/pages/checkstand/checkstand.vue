@@ -127,7 +127,7 @@
               remark:'',
               showUnit:false,
               debtMony:0.00,
-              parentData:{gatheringShow:false,showCashResult:false,pay1Money:0,pay2Money:0},
+              parentData:{gatheringShow:false,showCashResult:false,pay1Money:'',pay2Money:''},
             };
         },
         computed: {
