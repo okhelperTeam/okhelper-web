@@ -90,6 +90,12 @@ var getMyUserInfo=myData=>ajax('get','/api/user/me',myData);
 //新增商品
 var addProduct=myData=>ajax('post','/api/product',myData);
 
+//修改商品
+var updateProduct=myData=>ajax('put','/api/product',myData);
+
+//删除商品
+var deleteProduct=id=>ajax('delete','/api/product/'+id);
+
 //新增店长
 var addStoreManager=myData=>ajax('post','/api/user/register',myData);
 
@@ -100,7 +106,7 @@ var updateStoreManager=myData=>ajax('post','/api/',myData);
 var getStoreManagerInfo=name=>ajax('get','/api/user/me',+name);
 
 //查询商店信息
-var getStore=myData=>ajax('get','\t/api/store',myData);
+var getStore=myData=>ajax('get','/api/store',myData);
 
 //检查用户名
 var getCheckName=myData=>ajax('get','/api/user/check_username',myData);
@@ -132,6 +138,11 @@ var getSellTotal=myData=>ajax('get','/api/sale/total',myData);
 //根据barCode查询商品
 var getProductBybarCode=barCode=>ajax('get','/api/product/bar_code/'+barCode,{});
 
+//发短信验证码
+var sendSMS=myData=>ajax('get','/api/user/phoneCode',myData);
+
+//短信验证码登陆
+var smsLogin=myData=>ajax('post','/api/user/phoneLogin',myData);
 
 export {
   login,
@@ -149,6 +160,8 @@ export {
   generateBarCode,
   getMyUserInfo,
   addProduct,
+  deleteProduct,
+  updateProduct,
   addCategory,
   getSellHistoryList,
   getEarlyWarningList,
@@ -175,5 +188,7 @@ export {
   getStoreManagerInfo,
   updateStoreManager,
   getProductById,
-  getStore
+  getStore,
+  sendSMS,
+  smsLogin,
 }

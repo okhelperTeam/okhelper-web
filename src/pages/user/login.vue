@@ -5,10 +5,14 @@
   <div class="container">
     <div id="ok-home-icon" style="height: 200px;width: auto;text-align: center;padding-top: 50px;padding-bottom: 25px;">
       <img src="@/assets/icon/ok-icon-red.png" width="100" height="100">
+      <div class="change-font-button">
+        <span v-if="verification" @click="verification=false">账号密码登陆</span>
+        <span v-if="!verification" @click="verification=true">短信验证码登陆</span>
+      </div>
     </div>
 
     <div style="width:95%; margin:0 auto">
-      <van-cell-group >
+      <van-cell-group v-if="!verification">
         <van-cell  >
           <i class="ion-person login-icon" slot="icon"/>
           <van-field slot="title"  style="font-size: 16px;"
@@ -16,25 +20,46 @@
             icon="clear"
             placeholder="请输入用户名,店长请使用手机号"
             required
-            :error-message="nameMsg"
             @click-icon="userName = ''"
-            @blur="checkUserName"
-            @focus="nameMsg=''"
           />
         </van-cell>
-        <van-cell  icon="location">
+        <van-cell >
           <i class="ion-unlocked login-icon" slot="icon"/>
           <van-field slot="title"  style="font-size: 16px;"
             v-model="userPassword"
             type="password"
-            placeholder="请输入6-20位字母和数字"
+            placeholder="请输入密码"
             icon="clear"
             required
-            :error-message="pwdMsg"
             @click-icon="userPassword = ''"
-            @blur="checkLPwd"
-            @focus="pwdMsg=''"
           />
+        </van-cell>
+      </van-cell-group>
+
+
+      <van-cell-group v-if="verification">
+        <van-cell  >
+          <!-- <i class="ion-person login-icon" slot="icon"/> -->
+          <van-field slot="title"  style="font-size: 16px;"
+            v-model="userName"
+            icon="clear"
+            placeholder="请输入手机号"
+            required
+            @click-icon="userName = ''"
+          />
+        </van-cell>
+        <van-cell >
+          <!-- <i class="ion-unlocked login-icon" slot="icon"/> -->
+          <van-field
+              center
+              v-model="sms"
+              required
+              placeholder="请输入短信验证码"
+              icon="clear"
+              @click-icon="sms = ''"  style="font-size: 16px;"
+            >
+          <button slot="button" @click="sendSMs" :disabled="verButtonDisabled" :class="verButtonDisabled ? 'smsDisableClass' : 'smsClass'">&nbsp;&nbsp;{{smsButtonText}}&nbsp;&nbsp;</button>
+        </van-field>
         </van-cell>
       </van-cell-group>
 
@@ -69,7 +94,7 @@
 <script>
   import Vue from 'vue';
   import { Field,Cell, CellGroup ,Row, Col,Button,Icon} from 'vant';
-  import {login} from '@/service/getData';
+  import {login,sendSMS,smsLogin} from '@/service/getData';
   import router from '@/router/index'
   import { Toast } from 'vant';
   Vue.use(Icon).use(Button).use(Row).use(Col).use(Cell).use(CellGroup).use(Field);
@@ -90,23 +115,40 @@
               nameIsNull:true,
               pwdIsNull:true,
               yanzhengmaIsNull:false,
-              loginIsTrue:false
+              loginIsTrue:false,
+              verification:true,
+              sms:'',
+              smsButtonText:'发送验证码',
+              awaitSmS:false
             };
         },
-        computed: {},  //计算属性
+        computed: {
+            verButtonDisabled(){
+              let myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+              if(!myreg.test(this.userName)||this.awaitSmS){
+                return true;
+              }else {
+                return false;
+              }
+            }
+        },  //计算属性
         created() {
-          if (window.plus){plus.navigator.setStatusBarBackground('#f8f8f8');}
+
         },   //创建
         mounted() {
+        if (window.plus){plus.navigator.setStatusBarBackground('#000');}
         },   //挂载
         beforeDestroy(){
-          if (window.plus){plus.navigator.setStatusBarBackground('#C20C0C');}
-          console.log("12345678o");
+          if (window.plus){plus.navigator.setStatusBarBackground('#000');}
         },
         methods: {
           loginOk(){
-            // if(this.checkUserName() ==true && this.checkLPwd() == true && this.checkLpicma() == true){
-              if(this.checkUserName() ==true && this.checkLPwd() == true){
+             if(this.verification){
+               this.phoneSmsLogin();
+               return;
+             }
+
+              if(this.userName != '' && this.userPassword != ''){
             login({
               userName:this.userName,
               userPassword:this.userPassword
@@ -136,72 +178,90 @@
           }
 
           },
-
-          // 验证登陆手机号格式
-          checkUserName(){
-            if(this.userName == ''){
-              this.nameMsg="请输入手机号";
-              this.nameIsNull=true;
+          sendSMs(){
+            this.awaitSmS=true;
+            sendSMS({number:this.userName}).then(response=>{
+              var i=60;
+              this.smsButtonText=(i--)+"s后重新获取";
+              var interval=setInterval(()=>{
+                if(i==0){
+                  clearInterval(interval);
+                  this.awaitSmS=false;
+                  this.smsButtonText="发送验证码";
+                }else {
+                    this.smsButtonText=(i--)+"s后重新获取";
+                }
+              },1000);
+              Toast({
+                position: 'bottom',
+                message: '验证码发送成功'
+              });
+            },error=>{
+              Toast({
+                type:'fail',
+                position: 'middle',
+                message: error?error.msg:"网络异常"
+              });
+              this.awaitSmS=false;
+              this.smsButtonText="发送验证码";
+          })
+        },
+        phoneSmsLogin(){
+        if(this.userName != '' && this.sms != ''){
+              smsLogin({phone:this.userName,code:this.sms}).then(response=>{
+                window.localStorage.setItem('token',response.data.token);
+                Toast({
+                  type:'success',
+                  message: '登陆成功',
+                  duration:1000
+                });
+                router.push({path:'/home'});
+              },error=>{
+                Toast({
+                  position: 'bottom',
+                  message: '验证码错误'
+                });
+              })
+          }else {
+            Toast({
+              position: 'bottom',
+              message: '请完善信息'
+            });
           }
-          // else if(this.userName.search(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/)!=0){
-          //     this.nameMsg="请输入正确手机号";
-          //     this.nameIsNull=true;
-          //   }
-            else {
-                this.nameMsg='';
-                this.pwdIsNull=false;
-                return true;
-            }
-          },
 
+        }
 
-          //验证登陆密码格式
-          checkLPwd(){
-            if(this.userPassword == ''){
-              this.pwdMsg="请输入密码";
-              this.pwdIsNull=true;
-             }//else if(this.userPassword.search(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/) != 0){
-            //   this.pwdMsg="密码必须6-20位，包含字母与数字";
-            //   this.pwdIsNull=true;
-            // }
-              else {
-                this.pwdMsg='';
-                this.pwdIsNull=false;
-                return true;
-            }
-          },
-          // 图片验证码
-          createCode(){
-            code = "";
-            var codeLength = 4;//验证码的长度
-            var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R',
-              'S','T','U','V','W','X','Y','Z');//随机数
-            for(var i = 0; i < codeLength; i++) {//循环操作
-              var index = Math.floor(Math.random()*36);//取得随机数的索引（0~35）
-              code += random[index];//根据索引取得随机数加到code上
-            }
-            this.checkCode = code;//把code值赋给验证码
-          },
-          // 失焦验证图和密码
-          checkLpicma(){
-
-            this.picLyanzhengma.toUpperCase();//取得输入的验证码并转化为大写
-            if(this.picLyanzhengma == '') {
-              this.yanzhengmaMsg="请输入验证码";
-              this.yanzhengmaIsNull=true;
-
-            }else if(this.picLyanzhengma.toUpperCase() != this.checkCode ) { //若输入的验证码与产生的验证码不一致时
-              console.log( this.picLyanzhengma.toUpperCase())
-              console.log(code)
-              this.yanzhengmaMsg="验证码不正确";
-              this.yanzhengmaIsNull=true;
-              this.createCode();//刷新验证码
-              this.picLyanzhengma = '';
-            }else { //输入正确时
-              this.yanzhengmaIsNull=false;
-              return true;
-            }
-          },
+         // // 图片验证码
+         // createCode(){
+         //   code = "";
+         //   var codeLength = 4;//验证码的长度
+         //   var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R',
+         //     'S','T','U','V','W','X','Y','Z');//随机数
+         //   for(var i = 0; i < codeLength; i++) {//循环操作
+         //     var index = Math.floor(Math.random()*36);//取得随机数的索引（0~35）
+         //     code += random[index];//根据索引取得随机数加到code上
+         //   }
+         //   this.checkCode = code;//把code值赋给验证码
+         // },
+         // // 失焦验证图和密码
+         // checkLpicma(){
+         //
+         //   this.picLyanzhengma.toUpperCase();//取得输入的验证码并转化为大写
+         //   if(this.picLyanzhengma == '') {
+         //     this.yanzhengmaMsg="请输入验证码";
+         //     this.yanzhengmaIsNull=true;
+         //
+         //   }else if(this.picLyanzhengma.toUpperCase() != this.checkCode ) { //若输入的验证码与产生的验证码不一致时
+         //     console.log( this.picLyanzhengma.toUpperCase())
+         //     console.log(code)
+         //     this.yanzhengmaMsg="验证码不正确";
+         //     this.yanzhengmaIsNull=true;
+         //     this.createCode();//刷新验证码
+         //     this.picLyanzhengma = '';
+         //   }else { //输入正确时
+         //     this.yanzhengmaIsNull=false;
+         //     return true;
+         //   }
           },   //方法
         watch: {}      //监听
     }
@@ -209,7 +269,7 @@
 
 <style scoped>
   .container{
-    background-color:#f8f8f8;
+    background-color:#ffff;
     height:100%;
   }
 
@@ -303,5 +363,30 @@
     letter-spacing:3px;
     color: #053d84;
     background: #f2f2f5;
+  }
+  .smsDisableClass{
+    border: 1px solid;
+    background: transparent;
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 14px;
+  }
+
+  .smsClass{
+    border: 1px solid #e33;
+    background: transparent;
+    color: #e33;
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 14px;
+  }
+
+  .change-font-button{
+    color: #ff0036;
+    width: 100px;
+    position: absolute;
+    top: 430px;
+    right: 45px;
+    font-size: 13px;
   }
 </style>

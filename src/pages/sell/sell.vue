@@ -31,7 +31,7 @@
         </div>
       </router-link>
       <div class="ok-model-border"></div>
-      <router-link to="/1" class="ok-sellOrStore-model">
+      <router-link to="/500" class="ok-sellOrStore-model">
         <div class="ok-sellOrStore-box" style="border-right:0.5px solid #F2F2F2;">
           <div class="ok-sellOrStore-icon">
             <i class="ion-reply"></i>

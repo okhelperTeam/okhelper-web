@@ -32,20 +32,13 @@
                 </div>
               </div>
             </div>
-            <div v-for="(item) in choosedProductList">
-              <sell-table-item
-                :productId="item.productId"
-                :productName="item.productName"
-                :productNumber="item.productNumber"
-                :productColor="item.productColor"
-                :productSize="item.productSize"
-                :editText="editText"
-                :productCount="item.productCount"
-                :retailPrice="item.retailPrice"
-                :discounts="item.discounts"
-                :productNotes="item.productNotes"
-                @deleteProduct="deleteProduct"
-              />
+            <div v-for="(val, key, index) in choosedProductList">
+              <div>{{key}}}</div>
+              <!--<sell-table-item-->
+                <!--:editText="editText"-->
+                <!--:parentData="item"-->
+                <!--@deleteProduct="deleteProduct"-->
+              <!--/>-->
               </div>
             </div>
         </div>
@@ -98,6 +91,7 @@
   import sellTableItem from '@/pages/sell/sellTableItem';
   import {getCustomerList,getProductById} from '@/service/getData.js'
   import Scan from '@/components/common/scan';
+  import Vue from 'vue';
   import SearchCustomer from "../customer/searchCustomer";
     export default {
         mixins: [],     //混合
@@ -113,11 +107,8 @@
               parentData:{customerShow:false,customerName:'',customerId:''},//选择客户组件数据
               choosedId:this.$route.params.productChoosedList,
               editText:'编辑',
-              choosedProductList:[
-                {productId:'1',productName:'商品1',productNumber:'001',productColor:'蓝色',productSize:'均码',retailPrice:100,discounts:100,productCount:15,productNotes:'',productNotes:''},
-                {productId:'2',productName:'商品1',productNumber:'001',productColor:'蓝色',productSize:'均码',retailPrice:200,discounts:50,productCount:15,productNotes:'',productNotes:''},
-              ],
-              totalMoney:10000.56,
+              choosedProductList:[],
+              totalMoney:0,
               customerList:[],
               P:{isOpen:false}
             };
@@ -128,7 +119,6 @@
           }
         },  //计算属性
         created() {
-
         },   //创建
         mounted() {
         },   //挂载
@@ -140,9 +130,12 @@
               this.editText='编辑';
             }
           },
-          deleteProduct(productName){
-            alert(productName);
-            this.choosedProductList.remove(productName);
+          deleteProduct(productId){
+            for(var i=0;i<this.choosedProductList.length;i++){
+              if(this.choosedProductList[i].id==productId){
+                this.choosedProductList.remove(this.choosedProductList[i]);
+              }
+            }
           },
           scanOver(code){
             this.$router.push({path:'/product/searchProduct',query:{barCode:code}});
@@ -152,21 +145,40 @@
           }
         },   //方法
         watch: {
+          'choosedProductList': {
+              handler: function (val, oldVal) {
+                this.totalMoney=0;
+                // alert(this.totalMoney)
+                for(var i=0;i<val.length;i++){
+                  console.log(val[i]);
+                  this.totalMoney+=val[i].retailPrice*val[i].discount;
+                }
+              },
+              deep: true
+            },
 
         } ,     //监听
         beforeRouteEnter (to, from, next) { // 缓存组件是，此方法还有效
           next(vm => {
             // vm.updateProductId=vm.$route.query.id;
-            for(var i=0 ;i<vm.$route.query.productChoosedList.length;i++){
-              getProductById(vm.$route.query.productChoosedList[i]).then(
-                response=>{
-                  vm.choosedProductList.push(response.data);
-                },error=>{
-                  console.log(error.msg);
-                }
-              );
+            if(vm.$route.query.productChoosedList!=null){
+              for(var i=0 ;i<vm.$route.query.productChoosedList.length;i++){
+                getProductById(vm.$route.query.productChoosedList[i]).then(
+                  response=>{
+                    if(vm.choosedProductList[vm.$route.query.productChoosedList[i].id]==null){
+                      var productItem=Object.assign(response.data,{'discounts':100});
+                      vm.choosedProductList[productItem.id]=productItem;
+                      Vue.set(vm.choosedProductList,productItem.id,productItem);
+                      console.log(vm.choosedProductList)
+                    }
+                  },error=>{
+                    console.log(error.msg);
+                  }
+                );
 
+              }
             }
+
 
           })
         }

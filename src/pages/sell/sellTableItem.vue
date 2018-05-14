@@ -1,7 +1,7 @@
 <template>
   <div>
       <div style="border-bottom: 1px dashed #F2F2F2;height: 26px;line-height: 26px;">
-        <span style="font-weight: bolder;">{{productName}}<span style="color: #108ee9">({{productNumber}})</span></span>
+        <span style="font-weight: bolder;">{{parentData.productName}}<span v-if="parentData.productNumber!=null&&parentData.productNumber!=''" style="color: #108ee9">({{parentData.productNumber}})</span></span>
         <!--<i style="color: #108ee9;margin-left: 15px;" class="ion-edit"></i>-->
       </div>
       <div style="border-bottom: 1px dashed #F2F2F2">
@@ -15,30 +15,30 @@
             </div>
           </li>
           <li style="display: block;float: left;width: 20%;text-align: center;">
-            <div>{{productColor}}</div>
+            <div><span v-if="productAttribute.productColor!=null&&productAttribute.productColor!=''">{{productAttribute.productColor}}</span><span v-else>均色</span></div>
           </li>
           <li style="display: block;float: left;width: 20%;text-align: center;">
-            <div>{{productSize}}</div>
+            <div><span v-if="productAttribute.productSize!=null&&productAttribute.productSize!=''">{{productAttribute.productSize}}</span><span v-else>均码</span></div>
           </li>
           <li style="display: block;float: left;width: 20%;text-align: center;">
             <div>￥{{discountPrice}}</div>
           </li>
           <li style="display: block;float: left;width: 20%;text-align: center;">
-            <div>{{productCount}}</div>
+            <div>{{parentData.productCount}}</div>
           </li>
           <li style="display: block;float: left;width: 10%;color: #575757;">
             <i @click="showNoteOrPrice(2)" :class="[isPriceOpen?'ion-chevron-up':'ion-chevron-down']"></i>
           </li>
         </ul>
-        <div v-show="isPriceOpen&&editText=='编辑'">
+        <div v-show="isPriceOpen">
           <ul style="list-style: none;background: #F2F2F2;width: 100%;height:50px;padding-top:5px;text-align: center;">
             <li class="sell-table-price-detail-open-li">
               <div>单价</div>
-              <input class="sell-table-price-detail-open-li-input" type="number" v-model="retailPrice"/>
+              <input class="sell-table-price-detail-open-li-input" type="number" v-model="parentData.retailPrice"/>
             </li>
             <li class="sell-table-price-detail-open-li">
               <div>折扣(%)</div>
-              <input class="sell-table-price-detail-open-li-input" type="number" v-model="discounts"/>
+              <input class="sell-table-price-detail-open-li-input" type="number" v-model="parentData.discounts"/>
             </li>
             <li class="sell-table-price-detail-open-li">
               <div>折后价</div>
@@ -46,13 +46,13 @@
             </li>
             <li class="sell-table-price-detail-open-li">
               <div>数量</div>
-              <input class="sell-table-price-detail-open-li-input" type="number" v-model="productCount"/>
+              <input class="sell-table-price-detail-open-li-input" type="number" v-model="parentData.productCount"/>
             </li>
           </ul>
         </div>
         <div v-show="isNoteOpen&&editText=='编辑'" style="width: 100%;height: 40px;border-top: 1px #F2F2F2 dashed;line-height: 40px;font-size: 16px;margin-top: 5px;margin-bottom: 5px;">
           <div style="width:20%;height: 100%;float: left;text-align: center;color: #888888">备注</div>
-          <input style="border-bottom:1px solid #108ee9;width: 70%;display: inline;height: 34px;margin-top:3px;float: left;" type="text" v-model="productNotes"/>
+          <input style="border-bottom:1px solid #108ee9;width: 70%;display: inline;height: 34px;margin-top:3px;float: left;" type="text" v-model="parentData.productNotes"/>
         </div>
       </div>
   </div>
@@ -62,16 +62,16 @@
     export default {
         mixins: [],     //混合
         props:{
-          productId:{},
-          productName:{},
-          productNumber:{},
-          productColor:{},
-          productSize:{},
+          parentData:{},
+          // productId:{},
+          // productName:{},
+          // productNumber:{},
+          // productDetails:{},
+          // discounts:{default:100},
           editText:{},
-          productCount:{},
-          retailPrice:{},
-          discounts:{},
-          productNotes:{}
+          // productCount:{default:1},
+          // retailPrice:{},
+          // productNotes:{}
         },
         components: {
         },//注册组件
@@ -79,14 +79,21 @@
             return {
               isNoteOpen:false,
               isPriceOpen:false
+
             };
         },
         computed: {
           discountPrice(){
-            return this.retailPrice*this.discounts/100;
+            return this.parentData.retailPrice*this.parentData.discounts/100;
+          },
+          productAttribute(){
+            return 1;
+            // return JSON.parse(this.parentData.productDetails);
           }
         },  //计算属性
         created() {
+          alert(1)
+          console.log(this.parentData);
         },   //创建
         mounted() {
         },   //挂载
@@ -99,8 +106,7 @@
             }
           },
           deleteProduct(){
-            // alert(this.productName+'&7777777')
-            this.$emit('deleteProduct',this.productName);
+            this.$emit('deleteProduct',this.parentData.productId);
           }
         },   //方法
         watch: {

@@ -4,11 +4,11 @@
 <template>
     <div id="">
       <div class="back-bar">
-        <div class="back-bar-backBtn">&lt;&nbsp;返回
+        <div @click="$router.back()" class="back-bar-backBtn">&lt;&nbsp;返回
           <slot name="backPageName"></slot>
         </div>
         <div class="back-bar-name">
-          店铺信息
+          角色信息
           <slot name="nowPageName"></slot>
         </div>
         <div class="back-bar-cancelBtn">
