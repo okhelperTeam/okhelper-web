@@ -129,6 +129,11 @@ var getSellTotal=myData=>ajax('get','/api/sale/total',myData);
 //根据barCode查询商品
 var getProductBybarCode=barCode=>ajax('get','/api/product/bar_code/'+barCode,{});
 
+//发短信验证码
+var sendSMS=myData=>ajax('get','/api/user/phoneCode',myData);
+
+//短信验证码登陆
+var smsLogin=myData=>ajax('post','/api/user/phoneLogin',myData);
 
 export {
   login,
@@ -172,5 +177,6 @@ export {
   getCheckName,
   getStoreManagerInfo,
   updateStoreManager,
-  getProductById,
+  sendSMS,
+  smsLogin,
 }

@@ -276,7 +276,8 @@
               //有该商品条码了
               this.product.barCode="";
               Toast({
-                position: 'bottom',
+                type:'fail',
+                position: 'middle',
                 message: '条码不能重复！'
               });
             },error=>{
