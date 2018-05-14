@@ -90,6 +90,12 @@ var getMyUserInfo=myData=>ajax('get','/api/user/me',myData);
 //新增商品
 var addProduct=myData=>ajax('post','/api/product',myData);
 
+//修改商品
+var updateProduct=myData=>ajax('put','/api/product',myData);
+
+//删除商品
+var deleteProduct=id=>ajax('delete','/api/product/'+id);
+
 //新增店长
 var addStoreManager=myData=>ajax('post','/api/user/register',myData);
 
@@ -151,6 +157,8 @@ export {
   generateBarCode,
   getMyUserInfo,
   addProduct,
+  deleteProduct,
+  updateProduct,
   addCategory,
   getSellHistoryList,
   getEarlyWarningList,

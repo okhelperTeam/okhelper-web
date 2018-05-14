@@ -10,7 +10,7 @@
           商品信息
         </div>
         <div class="back-bar-cancelBtn">
-          <div @click="addNewProduct" style="margin-left:8px;display:block;float:left;width: 50px;height: 25px;font-size: 18px;color: white;">
+          <div @click="addNewOrUpdateProduct($route.query.id)" style="margin-left:8px;display:block;float:left;width: 50px;height: 25px;font-size: 18px;color: white;">
             保存
           </div>
         </div>
@@ -27,7 +27,7 @@
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
       <div style="width:25%;display: block;float: left;padding-left: 20px;">货号<span style="color: #dd0a20">*</span></div>
       <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-        <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="货号" type="text"v-model="product.productNumber"/>
+        <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="货号" type="text"v-model="product.articleNumber"/>
       </div>
       </div>
       <div class="ok-model-border"></div>
@@ -35,32 +35,48 @@
         <div style="width:25%;display: block;float: left;padding-left: 20px;">
           <span>条码</span>
           <span style="color: #dd0a20">*</span>
-          <ok-scan :P="P" @scanover="scanOver"/>
-          <i style="color: #108ee9;font-size: 25px;top: 5px;position: relative" class="ion-qr-scanner" @click="P.isOpen=true"></i>
+          <span v-if="$route.query.id!=null&&$route.query.id!=''"></span>
+          <span v-else>
+            <ok-scan :P="P" @scanover="scanOver"/>
+            <i style="color: #108ee9;font-size: 25px;top: 5px;position: relative" class="ion-qr-scanner" @click="P.isOpen=true"></i>
+          </span>
         </div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:55%;display: block;float: left;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="唯一保存后不可修改，可生成" type="text" v-model="product.barCode"/>
+          <div v-if="$route.query.id!=null&&$route.query.id!=''">
+            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="唯一保存后不可修改，可生成" disabled type="text" v-model="product.barCode"/>
+          </div>
+          <div v-else>
+            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="唯一保存后不可修改，可生成" type="text" v-model="product.barCode"/>
+          </div>
         </div>
-        <div @click="generateBarCodeM" style="float: right;background: #2D84FF;margin-right:20px;height: 30px;width: 50px;border-radius: 5px;margin-top: 10px;color: white;text-align: center;line-height: 30px;">生成</div>
+        <div v-if="$route.query.id==null||$route.query.id==''">
+          <div @click="generateBarCodeM" style="float: right;background: #2D84FF;margin-right:20px;height: 30px;width: 50px;border-radius: 5px;margin-top: 10px;color: white;text-align: center;line-height: 30px;">生成</div>
+        </div>
       </div>
       <div class="ok-border"></div>
+      <!--<div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">-->
+        <!--<div style="width:25%;display: block;float: left;padding-left: 20px;">采购价<span style="color: #dd0a20">*</span></div>-->
+        <!--<div style="height:43px;border-bottom: 1px solid #2D84FF;width:50%;display: block;float: right;margin-right: 20px;">-->
+          <!--<input style="height: 30px;font-size: 16px;width: 100%;" placeholder="￥0.00" type="text" v-model="product.productInPrice"/>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="ok-model-border"></div>-->
+      <!--<div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">-->
+        <!--<div style="width:25%;display: block;float: left;padding-left: 20px;">批发价<span style="color: #dd0a20">*</span></div>-->
+        <!--<div style="height:43px;border-bottom: 1px solid #2D84FF;width:50%;display: block;float: right;margin-right: 20px;">-->
+          <!--<input style="height: 30px;font-size: 16px;width: 100%;" placeholder="￥0.00" type="text" v-model="product.productOutPrice"/>-->
+        <!--</div>-->
+      <!--</div>-->
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
-        <div style="width:25%;display: block;float: left;padding-left: 20px;">采购价<span style="color: #dd0a20">*</span></div>
-        <div style="height:43px;border-bottom: 1px solid #2D84FF;width:50%;display: block;float: right;margin-right: 20px;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="￥0.00" type="text" v-model="product.productInPrice"/>
-        </div>
-      </div>
-      <div class="ok-model-border"></div>
-      <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
-        <div style="width:25%;display: block;float: left;padding-left: 20px;">批发价<span style="color: #dd0a20">*</span></div>
-        <div style="height:43px;border-bottom: 1px solid #2D84FF;width:50%;display: block;float: right;margin-right: 20px;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="￥0.00" type="text" v-model="product.productOutPrice"/>
+        <div style="width:25%;display: block;float: left;padding-left: 20px;">分类<span style="color: #dd0a20">*</span></div>
+        <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
+          <div @click="changeCategoryShowStatus" style="height: 30px;font-size: 16px;width: 100%;">{{parentData.choosedCategoryName}}</div>
         </div>
       </div>
       <div class="ok-model-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">零售价<span style="color: #dd0a20">*</span></div>
-        <div style="height:43px;border-bottom: 1px solid #2D84FF;width:50%;display: block;float: right;margin-right: 20px;">
+        <div style="height:43px;border-bottom: 1px solid #2D84FF;width:69%;display: block;float: left;margin-right: 20px;">
           <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="￥0.00" type="text" v-model="product.productRetailPrice"/>
         </div>
       </div>
@@ -68,14 +84,17 @@
       <div style="height: auto;padding: 20px;background: #F2F2F2;width: 100%;">
         <div v-if="productListShow[index]" v-for="(imgSrc,index) in productImgList" style="margin: 5px;display: block;float: left;">
           <v-touch @press="chooseMainImg(index)" :key="index">
-            <div style="width: 20px;height: 20px;background: orange;position: fixed;text-align: center;line-height: 20px;color: white;" v-show="mainImg[index]">主</div>
-            <div @click="deleteImg(index)" style="z-index:100;position:relative;margin-left: -20px;width: 20px;height: 20px;background: #C20C0C;text-align: center;line-height: 20px;color: white;float: right;">
-              <i class="ion-close-round"></i>
+            <div  style="position:relative;">
+              <div style="width: 20px;height: 20px;background: orange;position:absolute;top:0px;left:0px;z-index:10;float: left;text-align: center;line-height: 20px;color: white;" v-show="mainImg[index]">主</div>
+              <div @click="deleteImg(index)" style="z-index:10;position:absolute;top:0px;right:0px;width: 20px;height: 20px;background: #C20C0C;text-align: center;line-height: 20px;color: white;">
+                <i class="ion-close-round"></i>
+              </div>
+              <img style="position:absolute;top:0px;left:0px;z-index: 5" width="100px" height="100px" :src="imgSrc"/>
             </div>
-            <img width="100px" height="100px" :src="imgSrc"/>
+
           </v-touch>
         </div>
-        <van-uploader :after-read="onRead" accept="image/*" multiple>
+        <van-uploader :after-read="onRead" accept="image/*" multiple :max-size=4096 :oversize="imgOverSize">
           <div style="margin:10px;border: 3px solid #888888;font-size: 50px;width:60px;height: 60px;text-align: center;line-height: 60px;color: #888888;">
             <i class="ion-camera"></i>
           </div>
@@ -92,29 +111,28 @@
         <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
           <div style="width:25%;display: block;float: left;padding-left: 20px;">颜色</div>
           <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品颜色" type="text"  />
+            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品颜色" v-model="product.productColor" type="text"  />
           </div>
         </div>
         <div class="ok-model-border"></div>
         <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
           <div style="width:25%;display: block;float: left;padding-left: 20px;">尺码</div>
           <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品尺寸" type="text" />
+            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品尺寸" v-model="product.productSize" type="text" />
           </div>
         </div>
         <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
           <div style="width:25%;display: block;float: left;padding-left: 20px;">品牌</div>
           <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品品牌" type="text" />
+            <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="商品品牌" v-model="product.productBrand" type="text" />
           </div>
         </div>
         <div class="ok-model-border"></div>
-        <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
-          <div style="width:25%;display: block;float: left;padding-left: 20px;">分类</div>
-          <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-            <div @click="changeCategoryShowStatus" style="height: 30px;font-size: 16px;width: 100%;">{{parentData.choosedCategoryName}}</div>
-          </div>
-        </div>
+
+      </div>
+      <!--商品删除按钮-->
+      <div v-if="$route.query.id!=null&&$route.query.id!=''">
+        <div @click="deleteProductById($route.query.id)" style="margin: 15px;width: auto;height: 40px;line-height: 40px;text-align: center;color: white;background: #C20C0C;font-size: 14px;border-radius: 5px;">删除商品</div>
       </div>
       <ok-category
         :parentData="parentData"
@@ -128,7 +146,7 @@
   import Category from "../category/category";
   var VueTouch = require('vue-touch');
   Vue.use(VueTouch, {name: 'v-touch'});
-  import {upLoadGoodsImgs,generateBarCode,addProduct,getProductById,getProductBybarCode} from '@/service/getData.js'
+  import {upLoadGoodsImgs,generateBarCode,addProduct,getProductById,getProductBybarCode,updateProduct,deleteProduct} from '@/service/getData.js'
   import { Uploader } from 'vant';
   import { Toast } from 'vant';
   import Scan from '@/components/common/scan';
@@ -152,7 +170,7 @@
               parentData:{categoryShow:false,choosedCategoryName:'选择分类',plusShow:true},
               choosedCategoryId:0,
               showProductOtherInfo:false,//显示扩展信息
-              product:{mainImg:'',productName:'',productNumber:'',barCode:'',productInPrice:'',productOutPrice:'',productRetailPrice:'',productDetail:{productColor:'',productSize:''},productBrand:'',},
+              product:{mainImg:'',subImgs:[],productAttribute:'',productName:'',articleNumber:'',barCode:'',productRetailPrice:'',productColor:'',productSize:'',productBrand:''},
               P:{isOpen:false}
             };
         },
@@ -163,9 +181,34 @@
         mounted() {
         },   //挂载
         methods: {
-          getProductDetailById(){//修改商品
-            getProductById(this.updateProductId).then(response=>{
-              this.product=response.data;
+          imgOverSize(){//照片超过4m处理
+
+          },
+          deleteProductById(id){//删除商品
+            deleteProduct(id).then(
+              response=>{
+                Toast({
+                  position: 'bottom',
+                  message: '商品删除成功'
+                });
+              },
+              error=>{}
+            );
+          },
+          getProductDetailById(id){//获取商品信息byId
+            getProductById(id).then(response=>{
+              var productDetail=JSON.parse(response.data.productAttribute);
+              this.product=Object.assign(response.data,productDetail);
+              this.productImgList=this.product.subImgs.split(",");
+              for(var i=0;i<this.productImgList.length;i++){
+                if(this.productImgList[i]==this.product.mainImg){
+                  this.mainImg[i]=true;
+                }
+                this.imgCount=this.productImgList.length;
+                this.productListShow[i]=true;
+              }
+
+              console.log(this.productImgPath)
             },error=>{
               console.log(error.msg);
             });
@@ -187,14 +230,15 @@
           deleteImg(index){
             this.productListShow[index]=false;
             Vue.set(this.productListShow,index,this.productListShow[index]);
-            this.productImgList.remove(index);
+            this.productImgList.splice(index,1);
             this.productImgPath.splice(index,1);//删除图片路径
           },
           onRead(file) {
-            if(this.productImgList.length<=6){
+            if(this.productImgList.length<=6){//上传限制6张
               let formData = new FormData();
               if(file instanceof Array){//instanceof用于判断是否为已知类型
                 for(let item of file){
+                  // alert(item.content)
                   this.productImgList.push(item.content);
                   this.productListShow[this.imgCount]=true;
                   this.imgCount++;
@@ -252,24 +296,37 @@
             this.choosedCategoryId=categoryItem.id;
             this.showProductOtherInfo=true;
           },
-          addNewProduct(){
-            addProduct({
-              productName:this.product.productName,
-              productAttribute:JSON.stringify(this.product.productDetail),
-              categoryId:this.choosedCategoryId,
-              retailPrice:this.product.productRetailPrice,
-              subImgs:this.productImgPath,
-              mainImg:this.product.mainImg,
-              articleNumber:this.product.productNumber,
-              barCode:this.product.barCode
-            }).then(response=>{
-              Toast({
-                position: 'bottom',
-                message: '商品保存成功'
-              });
-            },error=>{
-
-            })
+          addNewOrUpdateProduct(id){
+            this.product.subImgs=this.productImgPath;//数组接收
+            var productDetail={
+              productColor:this.product.productColor,
+              productSize:this.product.productSize,
+              productBrand:this.product.productBrand
+            };//商品详情属性
+            this.product.productAttribute=JSON.stringify(productDetail);//将商品详情转为字符串
+            if(id!=null&&id!=''){//id存在为修改操作
+              updateProduct(this.product).then(
+                response=>{
+                  Toast({
+                    position: 'bottom',
+                    message: '商品修改保存成功'
+                  });
+                },
+                error=>{
+                  console.log(error.msg);
+                }
+              );
+            }else{
+              addProduct(this.product).then(
+                response=>{
+                  Toast({
+                    position: 'bottom',
+                    message: '商品保存成功'
+                  });
+                },error=>{
+                    console.log(error.msg);
+                });
+            }
           },
           scanOver(barCode){
             getProductBybarCode(barCode).then(response=>{
@@ -296,8 +353,7 @@
         watch: {},      //监听
         beforeRouteEnter (to, from, next) { // 缓存组件是，此方法还有效
         next(vm => {
-          vm.updateProductId=vm.$route.query.id;
-          vm.getProductDetailById();
+          vm.getProductDetailById(vm.$route.query.id);
         })
       }
     }

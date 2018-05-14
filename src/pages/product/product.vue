@@ -53,7 +53,6 @@
           @load="onLoad"
         >
           <div v-for="(item,index) in productList">
-            <router-link :to="{path:'/product/productInfo',query:{id:item.id}}">
               <ok-product
                 :main-img="item.mainImg"
                 :product-name="item.productName"
@@ -66,8 +65,7 @@
                 :salesStock="item.salesStock"
                 @addProduct="addProduct"
               />
-            </router-link>
-
+            <!--</div>-->
           </div>
         </van-list>
         <div v-if="finished&&myData.pageNum>1" style="color: #888888;text-align: center;padding: 20px;">
