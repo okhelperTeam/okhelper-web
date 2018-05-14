@@ -161,7 +161,7 @@
           }, error => {
             this.loading = false;
             this.finished = true;
-            console.log(error.response.msg);
+            console.log(error.msg);
           }
         );
       },
