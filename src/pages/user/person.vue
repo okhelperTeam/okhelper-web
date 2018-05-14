@@ -15,7 +15,7 @@
     <div>
       <i class="ion-social-snapchat" style="font-size: 70px;margin-left: 10%"></i>
       <div>
-        <router-link to="/user/register">
+        <router-link to="/user/storeManagerInfo">
           <div>
             <van-field style="font-size: 20px;float: left;margin-left: 33%;margin-top: -18%;color: black">用户名</van-field>
           </div>

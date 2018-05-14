@@ -11,14 +11,6 @@
       <div class="back-bar-name">
         临期商品
       </div>
-      <div class="back-bar-cancelBtn">
-        <router-link to="/product/productInfo" style="display:block;float:left;width: 25px;height: 25px;font-size: 25px;color: white;font-weight: bolder;">
-          <i class="ion-ios-plus-empty"></i>
-        </router-link>
-        <router-link to="/product/SearchProduct" style="margin-left:8px;display:block;float:left;width: 25px;height: 25px;font-size: 25px;color: white;font-weight: bolder;">
-          <i class="ion-ios-search"></i>
-        </router-link>
-      </div>
     </div>
     <div style="margin-top:56px;height: 37px;width: 100%;">
       <div style="width: 25%;height: 37px;display: block;float: left" @click="arrowsShow(0)">

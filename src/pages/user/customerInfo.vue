@@ -87,7 +87,7 @@
       </router-link>
       <hr>
     </div>
-    <div style="height: 110px;padding-top:30px;width: 96%;margin:200px auto;">
+    <div style="height: 110px;padding-top:30px;width: 96%;margin:16px auto;">
       <van-button type="danger" size="large" @click="deleteCustomerInfoById">删除客户</van-button>
     </div>
   </div>
@@ -95,7 +95,7 @@
 
 <script>
   import Vue from 'vue';
-  import {Button} from 'vant';
+  import {Button,Toast} from 'vant';
   import {getCustomerInfo,addCustomer,deleteCustomerInfo} from '@/service/getData';
   Vue.use(Button);
     export default {
@@ -119,14 +119,13 @@
             //console.log(response.data);
             this.customer = response.data;
           }, error => {
-            console.log(error.response.msg);
+            console.log(error.msg);
           }
         );
       },
       deleteCustomerInfoById() {
         deleteCustomerInfo(
           this.id
-
         ).then(
           response => {
             Toast({
@@ -136,11 +135,11 @@
             });
             this.$router.push({path:'/user/customer'});
           }, error => {
-            console.log(error.msg);
             Toast({
               position: 'bottom',
               message: '删除失败',
             });
+            console.log(error.msg);
           }
         );
       },
@@ -176,7 +175,7 @@
         }
       },
       checkIsNull(){
-        if(this.customerName == ''||this.customerStoreName==''||this.customerPhone==''||this.customerAddress==''){
+        if(this.customer.customerName == ''||this.customer.customerStoreName==''||this.customer.customerPhone==''||this.customer.customerAddress==''){
           return false;
         }
         else {

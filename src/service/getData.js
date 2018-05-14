@@ -51,7 +51,6 @@ var addSupplier=myData=>ajax('post','/api/supplier',myData);
 //删除供应商
 var deleteSupplierInfo=id=>ajax('delete','/api/supplier/'+id);
 
-
 //查询供应商采购记录
 var getSupplierOrderHistory=(id,myData)=>ajax('get','/api/storage/supplier/'+id,myData);
 
@@ -66,6 +65,9 @@ var getCustomerInfo=id=>ajax('get','/api/customer/'+id);
 
 //查询客户交易记录
 var getCustomerTradeHistory=(id,myData)=>ajax('get','/api/sale/'+id,myData);
+
+//删除客户
+var deleteCustomerInfo=id=>ajax('delete','/api/customer/'+id);
 
 //查询所有采购订单
 var getPurchaseOrderList=myData=>ajax('get','/api/storage',myData);
@@ -90,6 +92,15 @@ var addProduct=myData=>ajax('post','/api/product',myData);
 
 //新增店长
 var addStoreManager=myData=>ajax('post','/api/user/register',myData);
+
+//更新店长信息
+var updateStoreManager=myData=>ajax('post','/api/',myData);
+
+//查询店长信息
+var getStoreManagerInfo=name=>ajax('get','/api/user/me',+name);
+
+//检查用户名
+var getCheckName=myData=>ajax('get','/api/user/check_username',myData);
 
 //新增入库单
 var addPurchaseOrder=myData=>ajax('post','/api/storage',myData);
@@ -156,5 +167,10 @@ export {
   deleteWarehouseInfo,
   deleteSupplierInfo,
   getStockWarningList,
-  getProductById
+  getProductById,
+  deleteCustomerInfo,
+  getCheckName,
+  getStoreManagerInfo,
+  updateStoreManager,
+  getProductById,
 }
