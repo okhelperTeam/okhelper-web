@@ -108,6 +108,9 @@ var updateStoreManager=myData=>ajax('post','/api/',myData);
 //查询店长信息
 var getStoreManagerInfo=name=>ajax('get','/api/user/me',+name);
 
+//查询商店信息
+var getStore=myData=>ajax('get','/api/store',myData);
+
 //检查用户名
 var getCheckName=myData=>ajax('get','/api/user/check_username',myData);
 
@@ -184,11 +187,12 @@ export {
   deleteWarehouseInfo,
   deleteSupplierInfo,
   getStockWarningList,
-  getProductById,
   deleteCustomerInfo,
   getCheckName,
   getStoreManagerInfo,
   updateStoreManager,
+  getProductById,
+  getStore,
   sendSMS,
   smsLogin,
 }

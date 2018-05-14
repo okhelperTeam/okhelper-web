@@ -20,8 +20,7 @@
         </div>
       </div>
     </div>
-    <hr>
-    <div v-if="supplierList.length>0||pageNum==0" style="margin-top: 13%">
+    <div v-if="supplierList.length>0||pageNum==0" style="margin-top: 56px">
       <van-list
         v-model="loading"
         :finished="finished"
@@ -29,27 +28,22 @@
         @load="onLoad"
       >
       <div class="ok-text-box1" v-for="item in supplierList" style="float: left;height: 70px">
-        <!--<router-link  :to="{-->
-        <!---->
-    <!--}">-->
-          <div @click="pushSupplierId(item.id)">
-
+        <div @click="pushSupplierId(item.id)">
         <div class="ok-text-name" style="width: 70%">公司名称：{{item.supplierName}}</div><br>
-        <div class="ok-text-name2" style="margin-left: -69%;margin-top: 1%">
+        <div class="ok-text-name2" >
           负责人： {{item.supplierContacts}}
         </div>
-        <div class="ok-text-name5" style="margin-left: -69%;margin-top: 1%">
+        <div class="ok-text-name5" >
           供应商地址： <span style="color: red">{{item.supplierAddress}}</span>
         </div>
         <div class="manger-icon">
           <i class="ion-chevron-right"></i>
         </div>
-        <!--</router-link>-->
-          </div>
+        </div>
+        <div class="ok-model-border"></div>
       </div>
       </van-list>
     </div>
-    <div class="ok-model-border"></div>
   </div>
 </template>
 
@@ -126,5 +120,6 @@
     color: #000000;
     margin-right: 10%;
     font-family: 微软雅黑;
+    margin-top: -6%;
   }
 </style>

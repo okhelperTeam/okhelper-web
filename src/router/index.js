@@ -52,6 +52,7 @@ const PurchaseOrder = resolve => require(['@/pages/warehouse/purchaseOrder'], re
 const PurchaseInfo = resolve => require(['@/pages/warehouse/purchaseInfo'], resolve);
 const Test = resolve => require(['@/pages/test/test2'], resolve);
 const StoreManagerInfo = resolve => require(['@/pages/user/storeManagerInfo'], resolve);
+const ChangeUserPhoto = resolve => require(['@/pages/user/changeUserPhoto'], resolve);
 const ADDCategory = resolve => require(['@/pages/category/categoryInfo'], resolve);
 const Error500 = resolve => require(['@/pages/httpCode/500'], resolve);//500错误页StoreManagerInfo
 const routes = [
@@ -189,6 +190,10 @@ const routes = [
     path:'/user/storeManagerInfo',
     component:StoreManagerInfo,
     meta:{title:"okhelper-StoreManagerInfo"}
+  },{
+    path:'/user/changeUserPhoto',
+    component:ChangeUserPhoto,
+    meta:{title:"okhelper-ChangeUserPhoto"}
   },{
     path:'/user/addSupplier',
     component:AddSupplier,
