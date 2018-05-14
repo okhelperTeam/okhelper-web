@@ -113,6 +113,8 @@
             }).then(
               response=>{
                 window.localStorage.setItem('token',response.data.token);
+                window.localStorage.setItem('userName',response.data.userName);
+                window.localStorage.setItem('userAvatar',response.data.userAvatar);
                 Toast({
                   type:'success',
                   message: '登陆成功',

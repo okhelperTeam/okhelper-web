@@ -27,18 +27,16 @@
         <router-link :to="{path: '/user/customerInfo',query: {id:item.id}}">
         <div class="ok-text-name" style="width: 100%">客户名：{{item.customerName}}</div><br>
         <div class="ok-text-name2">
-          客户分类： {{item.customerLevel}}
+          客户分类： {{item.customerLevel}}<span style="margin-left: 3%">客户积分： {{item.customerScore}}</span>
         </div>
         <div class="ok-text-name3">
-          客户积分： {{item.customerScore}}
-        </div>
-        <div class="ok-text-name4">
           客户地址： <span style="color: red">{{item.customerAddress}}</span>
         </div>
         <div class="manger-icon">
           <i class="ion-chevron-right"></i>
         </div>
         </router-link>
+        <div class="ok-model-border"></div>
       </div>
     </div>
     <div class="ok-model-border"></div>
@@ -116,7 +114,7 @@
     font-size: 20px;
     color: black;
     margin-right: 10%;
-    margin-top: -5%;
+    margin-top: -14%;
     font-family: 微软雅黑;
   }
 </style>

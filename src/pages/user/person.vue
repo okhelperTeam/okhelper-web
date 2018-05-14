@@ -12,12 +12,20 @@
         </div>
       </div>
     </div>
-    <div>
-      <i class="ion-social-snapchat" style="font-size: 70px;margin-left: 10%"></i>
+    <div style="height: 100px">
+      <router-link to="/user/changeUserPhoto">
+      <div v-if="checkImg" style="width:25%;border: 1px solid white;border-radius: 100px;height: 90px;padding-left:10px;padding-right:10px;line-height: 40px;text-align: center;margin-left: 10px;margin-top:5px;">
+        <img :src="userAvatar" width="80px" height="80px"/>
+      </div>
+        <div v-else style="width:25%;border: 1px solid white;border-radius: 100px;height: 90px;padding-left: 10px;margin-left: 10px;margin-top:5px;padding-right:10px;padding-top:5px;line-height: 40px;text-align: center;">
+          <img height="70px" width="70px" src="@/assets/icon/username.png"/>
+        </div>
+      </router-link>
+
       <div>
         <router-link to="/user/storeManagerInfo">
           <div>
-            <van-field style="font-size: 20px;float: left;margin-left: 33%;margin-top: -18%;color: black">用户名</van-field>
+            <span style="font-size: 20px;float: left;margin-left: 33%;margin-top: -18%;color: black">用户名：{{userName}}</span>
           </div>
           <div class="person-icon">
             <i class="ion-chevron-right"></i>
@@ -118,8 +126,9 @@
 
 <script>
   import Vue from 'vue';
-  import { Field,Cell, CellGroup ,Row, Col,Button,Icon,NavBar} from 'vant';
+  import { Field,Cell, CellGroup ,Row, Col,Button,Icon,NavBar,} from 'vant';
   const Footer = resolve => require(['@/components/footer/footer'], resolve);
+
 
   Vue.use(Icon).use(Button).use(Row).use(Col).use(Cell).use(CellGroup).use(Field).use(NavBar);
   export default {
@@ -129,20 +138,31 @@
     },//注册组件
     data() {         //数据
       return {
-        username:'',
-        password :''
+        userAvatar:'',
+        userName:'',
+        checkImg:false,
       };
     },
     computed: {},  //计算属性
     created() {
+      console.log(localStorage.getItem("userName"));
+      this.userName=localStorage.getItem("userName");
+      this.userAvatar=localStorage.getItem("userAvatar");
+      this.checkIsNull();
     },   //创建
     mounted() {
     },   //挂载
     methods: {
+      checkIsNull(){
+        if(this.userAvatar==null)
+          this.checkImg=false;
+        else
+          this.checkImg=true;
+      },
       exitLogin(){
         window.localStorage.removeItem("token");
         this.$router.push({path:'/user/login'});
-      }
+      },
     },   //方法
     watch: {}      //监听
   }
