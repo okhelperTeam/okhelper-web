@@ -92,8 +92,8 @@
           }
         },  //计算属性
         created() {
-          alert(1)
-          console.log(this.parentData);
+          // alert(1)
+          // console.log(this.parentData);
         },   //创建
         mounted() {
         },   //挂载
@@ -106,7 +106,7 @@
             }
           },
           deleteProduct(){
-            this.$emit('deleteProduct',this.parentData.productId);
+            this.$emit('deleteProduct',this.parentData.id);
           }
         },   //方法
         watch: {
