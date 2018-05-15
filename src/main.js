@@ -4,14 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router/index'
 import '@/assets/css/resetBrowser.css'
-import {defaultImg, toTime, formateData, formateMoney,formateTime} from './components/filters/filter'
+import {defaultImg, toTime, formateMoney,formateTime} from './components/filters/filter'
 
 Vue.config.productionTip = false;
 
 //注册filter
 Vue.filter("defaultImg",defaultImg);
 Vue.filter("toTime",toTime);
-Vue.filter("formateData",formateData);
 Vue.filter("formateMoney",formateMoney);
 Vue.filter("formateTime",formateTime);
 

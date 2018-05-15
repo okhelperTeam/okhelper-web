@@ -337,15 +337,32 @@
                 }
               );
             }else{
-              addProduct(this.product).then(
-                response=>{
-                  Toast({
-                    position: 'bottom',
-                    message: '商品保存成功'
-                  });
-                },error=>{
+              //添加商品前判断各项值是否符合接口要求
+              if(this.choosedCategoryId==0){
+                Toast({
+                  position: 'bottom',
+                  message: '请选择分类！'
+                });
+              }else if(this.product.productName==''){
+                Toast({
+                  position: 'bottom',
+                  message: '请填写商品名称！'
+                });
+              }else if(this.product.retailPrice==''){
+                this.product.retailPrice==0;
+              }else{
+                //发起新增商品请求
+                addProduct(this.product).then(
+                  response=>{
+                    Toast({
+                      position: 'bottom',
+                      message: '商品保存成功'
+                    });
+                  },error=>{
                     console.log(error.msg);
                 });
+              }
+
             }
           },
           scanOver(barCode){
@@ -374,6 +391,16 @@
         beforeRouteEnter (to, from, next) { // 缓存组件是，此方法还有效
         next(vm => {
           vm.getProductDetailById(vm.$route.query.id);
+          if(vm.$route.query.id==null||vm.$route.query.id==''){
+            //新增商品时数据清空----------------------
+            this.mainImg=[];
+            this.imgCount=0;
+            this.productImgList=[];
+            this.productImgPath=[];//商品图片路径
+            this.productListShow=[];
+            this.product={};
+            this.choosedCategoryId=0;
+          }
         })
       }
     }

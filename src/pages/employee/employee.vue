@@ -20,8 +20,8 @@
     </div>
     <div class="ok-model-border"></div>
     <div style="margin-top:56px;width: 100%;height: 34px;background: #F2F2F2;">
-      <div @click="choosedStartOrStop(1)" :class="{isActive:isStart}" style="display:block;float:left;width: 50%;height: 28px;line-height:28px;text-align:center;background: white;color:black;border-right: 1px solid #F2F2F2">已启用（4）</div>
-      <div @click="choosedStartOrStop(2)" :class="{isActive:isStop}" style="display:block;float:left;width: 50%;height: 28px;line-height:28px;text-align:center;background: white;color:black;border-right: 1px solid #F2F2F2">已停用（0）</div>
+      <div @click="choosedStartOrStop(1)" :class="{isActive:isStart}" style="display:block;float:left;width: 50%;height: 28px;line-height:28px;text-align:center;background: white;color:black;border-right: 1px solid #F2F2F2">已启用（{{isStartCount}}）</div>
+      <div @click="choosedStartOrStop(2)" :class="{isActive:isStop}" style="display:block;float:left;width: 50%;height: 28px;line-height:28px;text-align:center;background: white;color:black;border-right: 1px solid #F2F2F2">已停用（{{isStopCount}}）</div>
     </div>
     <div class="ok-model-border"></div>
     <div v-if="employeeList.length>0||myData.pageNum==0">
@@ -54,6 +54,12 @@
           <div class="ok-model-border"></div>
         </div>
       </van-list>
+      <div v-if="finished&&myData.pageNum>1" style="color: #888888;text-align: center;padding: 20px;">
+        到底了别滑了，真的没了.....
+      </div>
+    </div>
+    <div v-if="myData.pageNum!=0&&employeeList.length==0&&finished==true"  style="color: #888888;text-align: center;padding: 20px;">
+      没有您要找的员工......
     </div>
   </div>
 </template>
@@ -75,12 +81,37 @@
         finished: false,
         isStart:true,
         isStop:false,
+        isStartCount:0,
+        isStopCount:0,
         employeeList:[],
-        myData:{paging:true,pageNum:0,limit:8,orderBy:'create_time desc'},
+        myData:{paging:true,pageNum:0,limit:8,deleteStatus:1,orderBy:'create_time desc'},
       };
     },
     computed: {},  //计算属性
     created() {
+      //请求启用员工人数
+      getEmployeeList(this.myData).then(
+        response=>{
+          this.isStartCount=response.data.total;
+        },error=>{
+          this.loading=false;
+          this.finished = true;
+          console.log(error.response.msg);
+        }
+      );
+      //请求停用员工人数
+      this.myData.deleteStatus=0;
+      getEmployeeList(this.myData).then(
+        response=>{
+          this.isStopCount=response.data.total;
+        },error=>{
+          this.loading=false;
+          this.finished = true;
+          console.log(error.response.msg);
+        }
+      );
+      //onLoad()默认值
+      this.myData.deleteStatus=1;
     },   //创建
     mounted() {
     },   //挂载
@@ -89,9 +120,9 @@
         this.isStart=false;
         this.isStop=false;
         switch (n){
-          case 1:this.isStart=true;break;
-          case 2:this.isStop=true;break;
-          default:this.isStart=true;
+          case 1:this.isStart=true;this.myData.deleteStatus=1;this.reLoad();break;
+          case 2:this.isStop=true;this.myData.deleteStatus=0;this.reLoad();break;
+          default:this.isStart=true;this.myData.deleteStatus=1;this.reLoad();
         }
       },
       onLoad() {//上划加载员工
