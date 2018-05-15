@@ -6,9 +6,9 @@
     <div id="">
       <div style="color: white;height:56px;background:#C20C0C;font-size: 18px;margin: 0 auto;width: 100%;text-align: center;line-height: 56px;">
         <span>收银台</span>
-        <router-link to="/sell" style="float: left;font-size: 25px;width: 56px;height: 20px;color: white;margin-left: 10px;" >
+        <span @click="$router.back()" style="float: left;font-size: 25px;width: 56px;height: 20px;color: white;margin-left: 10px;" >
           <i class="ion-ios-arrow-left"></i><span style="font-size: 16px;position:relative;top: -3px;">&nbsp;返回</span>
-        </router-link>
+        </span>
         <div style="float: right;font-size: 25px;width: 56px;height: 20px;" >
           <i class="ion-ios-close-empty"></i>
         </div>
