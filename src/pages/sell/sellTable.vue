@@ -73,10 +73,9 @@
       </div>
       <div style="clear: both" class="ok-border"></div>
       <div style="width: 100%;height: 40px;bottom: 0;position: fixed;border-top:1px solid #F2F2F2 ">
-        <div style="margin-left:20px;font-size: 14px;height: 40px;line-height:40px;background: white;width: 60%;display: block;float: left;" v-model="choosedProductMap.length">合计：{{choosedProductMap.length}}件&nbsp;&nbsp;&nbsp;<span style="color: orange;">￥{{totalMoney}}</span></div>
+        <div style="margin-left:20px;font-size: 14px;height: 40px;line-height:40px;background: white;width: 60%;display: block;float: left;">合计：{{Object.keys(choosedProductMap).length}}件&nbsp;&nbsp;&nbsp;<span style="color: orange;">￥{{totalMoney}}</span></div>
         <div @click="$router.push({path:'/checkstand'})" style="width: 30%;height: 40px;display: block;float: right;color:white;background: cadetblue;text-align:center;line-height:40px;font-size: 14px;">出售</div>
       </div>
-
 
       <ok-customer
         :parentData="parentData"
@@ -171,9 +170,7 @@
                     console.log(error.msg);
                   }
                 );
-
               }
-
             }
           })
         }

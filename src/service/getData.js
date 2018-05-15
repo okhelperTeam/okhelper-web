@@ -33,6 +33,9 @@ var addWarehouse=myData=>ajax('post','/api/warehouse',myData);
 //获取分类列表
 var getCategoryList=(id)=>ajax('get','/api/categorys/'+id);
 
+//查询分类自身信息（id）
+var getCategorySelf=id=>ajax('get','/api/categoryself/'+id);
+
 //新增分类
 var addCategory=myData=>ajax('post','/api/categorys',myData);
 
@@ -165,6 +168,7 @@ export {
   getMyUserInfo,
   addProduct,
   deleteProduct,
+  getCategorySelf,
   updateProduct,
   addCategory,
   getSellHistoryList,

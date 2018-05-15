@@ -77,7 +77,7 @@
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">零售价<span style="color: #dd0a20">*</span></div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:69%;display: block;float: left;margin-right: 20px;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="￥0.00" type="text" v-model="product.productRetailPrice"/>
+          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="￥0.00" type="text" v-model="product.retailPrice"/>
         </div>
       </div>
 
@@ -146,7 +146,7 @@
   import Category from "../category/category";
   var VueTouch = require('vue-touch');
   Vue.use(VueTouch, {name: 'v-touch'});
-  import {upLoadGoodsImgs,generateBarCode,addProduct,getProductById,getProductBybarCode,updateProduct,deleteProduct,getCategoryList} from '@/service/getData.js'
+  import {upLoadGoodsImgs,generateBarCode,addProduct,getProductById,getProductBybarCode,updateProduct,deleteProduct,getCategorySelf} from '@/service/getData.js'
   import { Uploader } from 'vant';
   import { Toast } from 'vant';
   import Scan from '@/components/common/scan';
@@ -162,7 +162,7 @@
             return {
               updateProductId:0,
               productImgList:[],
-              mainImg:[],
+              mainImg:[false],
               productImgPath:[],//商品图片路径
               productListShow:[],
               imgCount:0,
@@ -170,7 +170,7 @@
               parentData:{categoryShow:false,choosedCategoryName:'选择分类',plusShow:true},
               choosedCategoryId:0,
               showProductOtherInfo:false,//显示扩展信息
-              product:{mainImg:'',subImgs:[],productAttribute:'',productName:'',articleNumber:'',barCode:'',productRetailPrice:'',productColor:'',productSize:'',productBrand:''},
+              product:{mainImg:'',subImgs:[],productAttribute:'',productName:'',articleNumber:'',barCode:'',retailPrice:'',productColor:'',productSize:'',productBrand:'',categoryId:1},
               P:{isOpen:false}
             };
         },
@@ -207,8 +207,8 @@
                 this.imgCount=this.productImgList.length;
                 this.productListShow[i]=true;
               }
-              //查询分类名称-------------------------------------------------------------------!!!!!等待新接口
-              getCategoryList(this.product.categoryId).then(
+              //查询分类名称
+              getCategorySelf(this.product.categoryId).then(
                 response=>{
                   this.parentData.choosedCategoryName=response.data.categoryName;
                   console.log(this.parentData.choosedCategoryName)
@@ -236,13 +236,15 @@
             // alert(this.product.mainImg)
             // this.productImgPath.remove(this.product.mainImg);//删除副图组中主图
           },
-          deleteImg(index){
+          deleteImg(index){//删除照片
             this.productListShow[index]=false;
             Vue.set(this.productListShow,index,this.productListShow[index]);
             this.productImgList.splice(index,1);
             this.productImgPath.splice(index,1);//删除图片路径
+            this.imgCount--;
+            this.product.subImgs.splice(index,1);
           },
-          onRead(file) {
+          onRead(file) {//上传照片
             if(this.productImgList.length<=6){//上传限制6张
               let formData = new FormData();
               if(file instanceof Array){//instanceof用于判断是否为已知类型
@@ -256,6 +258,11 @@
                     response=>{
                       console.log(response.data.url);
                       this.productImgPath.push(response.data.url);//存入图片路径
+                      if(this.productImgPath.length==1){
+                        this.mainImg[0]=true;
+                        Vue.set(this.mainImg,0,this.mainImg[0]);
+                        this.product.mainImg=this.productImgPath[0];
+                      }
                       Toast({
                         position: 'bottom',
                         message: '图片上传成功'
@@ -275,6 +282,11 @@
                   response=>{
                     console.log(response.data.url);
                     this.productImgPath.push(response.data.url);//存入图片路径
+                    if(this.productImgPath.length==1){
+                      this.mainImg[0]=true;
+                      Vue.set(this.mainImg,0,this.mainImg[0]);
+                      this.product.mainImg=this.productImgPath[0];
+                    }
                     Toast({
                       position: 'bottom',
                       message: '图片上传成功'
@@ -290,8 +302,6 @@
                 message: '已有6张图片'
               });
             }
-
-
           },
           generateBarCodeM(){
             generateBarCode().then(response=>{
