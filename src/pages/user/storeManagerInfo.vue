@@ -29,21 +29,21 @@
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">店铺名<span style="color: #dd0a20">*</span></div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="店铺名" type="text"v-model="storeManager.storeName"/>
+          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="店铺名" type="text"v-model="store.storeName"/>
         </div>
       </div>
       <div class="ok-model-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">联系方式<span style="color: #dd0a20">*</span></div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="店铺联系方式" type="text"v-model="storeManager.storePhone"/>
+          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="店铺联系方式" type="text"v-model="store.storePhone"/>
         </div>
       </div>
       <div class="ok-model-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">店铺地址</div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="店铺地址" type="text"v-model="storeManager.storeAddress"/>
+          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="店铺地址" type="text"v-model="store.storeAddress"/>
         </div>
       </div>
       <div class="ok-model-border"></div>
@@ -86,7 +86,7 @@
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:35%;display: block;float: left;padding-left: 20px;">店铺描述：</div>
         <div style="height:90px;border: 1px solid #2D84FF;width:90%;display: block;float: right;margin-right: 20px;">
-          <textarea cols="41" rows="3" v-model="storeManager.description"></textarea>
+          <textarea cols="41" rows="3" v-model="store.description"></textarea>
         </div>
       </div>
       <div class="ok-model-border"></div>
@@ -97,17 +97,16 @@
 <script>
   import Vue from 'vue';
   import {Button,Toast} from 'vant';
-  import {getCustomerInfo,addCustomer,deleteCustomerInfo} from '@/service/getData';
+  import {getStoreManagerInfo,getStore} from '@/service/getData';
   Vue.use(Button);
   export default {
-    name: "customerInfo",
     data() {
       return {
-        storeManager:{storePhoto:'',storeName:'',storePhone:'',storeAddress:'',userEmail:'',userNick:'',userAvatar:'',userSex:'',userBirthday:'',description:''}
+        storeManager:{userEmail:'',userNick:'',userAvatar:'',userSex:'',userBirthday:'',description:''},
+        store:{storeLogo:'', description: '', moneyCode: '',storeName:'',storePhone:'',storeAddress:'',}
       }
     },
     created() {
-      this.name = this.$route.query.name;//获取上个页面传递的id,在下面获取数据的时候先提交id
       this.getStoreManagerInfoByName();
     },
     methods:{
@@ -122,20 +121,28 @@
             console.log(error.msg);
           }
         );
+        getStore().then(
+          response => {
+            //console.log(response.data);
+            this.store = response.data;
+          }, error => {
+            console.log(error.msg);
+          }
+        );
       },
 
       updateStoreManagerByName(){
         if(this.checkIsNull()==true) {
           updateStoreManager({
-            storePhoto: this.storeManager.storePhoto,
-            storeName: this.storeManager.storeName,
-            storePhone: this.storeManager.storePhone,
-            storeAddress: this.storeManager.storeAddress,
+            storeLogo: this.store.storeLogo,
+            storeName: this.store.storeName,
+            storePhone: this.store.storePhone,
+            storeAddress: this.store.storeAddress,
             userEmail: this.storeManager.userEmail,
             userNick: this.storeManager.userNick,
             userAvatar: this.storeManager.userAvatar,
             userBirthday: this.storeManager.userBirthday,
-            description: this.storeManager.description,
+            description: this.store.description,
             userSex: this.storeManager.userSex,
           }).then(response => {
             Toast({
@@ -156,7 +163,7 @@
         }
       },
       checkIsNull(){
-        if(this.storeManager.storeName == ''||this.storeManager.storePhone==''){
+        if(this.store.storeName == ''||this.store.storePhone==''){
           return false;
         }
         else {

@@ -55,7 +55,7 @@
    padding-right:20px;
    font-size:16px;
    display: block;
-   height: 70px;
+   height: 80px;
    text-align: left;
    width: 100%;
    margin-top: 5px;
@@ -73,20 +73,22 @@
   height: 40px;
   line-height:40px;
   display: block;
-  margin-left: 1%;
+  margin-left: 0.3%;
   float: left;
   font-size: 10px;
-  margin-top: -8%;
+  margin-top: -6%;
+  width: 100%;
 }
 .ok-text-name3{
   color:black;
   height: 40px;
   line-height:70px;
   display: block;
-  margin-left: -21%;
+  margin-left: 0.3%;
   float: left;
   font-size: 10px;
-  margin-top: -7%;
+  margin-top: -9%;
+  width: 100%;
 }
 .ok-text-name4{
   color:darkgrey;

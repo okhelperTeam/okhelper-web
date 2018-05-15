@@ -90,6 +90,15 @@ var getMyUserInfo=myData=>ajax('get','/api/user/me',myData);
 //新增商品
 var addProduct=myData=>ajax('post','/api/product',myData);
 
+//修改商品
+var updateProduct=myData=>ajax('put','/api/product',myData);
+
+//删除商品
+var deleteProduct=id=>ajax('delete','/api/product/'+id);
+
+//获取员工列表
+var getEmployeeList=myData=>ajax('get','/api/user/employee',myData);
+
 //新增店长
 var addStoreManager=myData=>ajax('post','/api/user/register',myData);
 
@@ -98,6 +107,9 @@ var updateStoreManager=myData=>ajax('post','/api/',myData);
 
 //查询店长信息
 var getStoreManagerInfo=name=>ajax('get','/api/user/me',+name);
+
+//查询商店信息
+var getStore=myData=>ajax('get','/api/store',myData);
 
 //检查用户名
 var getCheckName=myData=>ajax('get','/api/user/check_username',myData);
@@ -146,11 +158,14 @@ export {
   getHotOrColdProductList,
   getSupplierList,
   getCustomerList,
+  getEmployeeList,
   getPurchaseOrderList,
   getProductListByName,
   generateBarCode,
   getMyUserInfo,
   addProduct,
+  deleteProduct,
+  updateProduct,
   addCategory,
   getSellHistoryList,
   getEarlyWarningList,
@@ -172,11 +187,12 @@ export {
   deleteWarehouseInfo,
   deleteSupplierInfo,
   getStockWarningList,
-  getProductById,
   deleteCustomerInfo,
   getCheckName,
   getStoreManagerInfo,
   updateStoreManager,
+  getProductById,
+  getStore,
   sendSMS,
   smsLogin,
 }

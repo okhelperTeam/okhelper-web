@@ -7,13 +7,15 @@
         <div class="ok-product-img-box">
           <img :src="mainImg | defaultImg" width="70px" height="70px"/>
         </div>
-        <div class="ok-product-details-box">
-          <div class="ok-product-details-name">{{productName}}</div>
-          <div  class="ok-product-details-category-name">{{cateName}}</div>
-          <div class="ok-product-details-discounts" >{{discounts}}</div>
-          <div class="ok-product-details-price" >￥{{retailPrice}}</div>
-          <div class="ok-product-details-addtime">上架时间：{{createTime | formateTime('YMDHM')}}</div>
-          <div class="ok-product-details-addtime">库存：{{salesStock}}</div>
+        <div  @click="$router.push({path:'/product/productInfo',query:{id:Id}})">
+          <div class="ok-product-details-box">
+            <div class="ok-product-details-name">{{productName}}</div>
+            <div  class="ok-product-details-category-name">{{cateName}}</div>
+            <div class="ok-product-details-discounts" >{{discounts}}</div>
+            <div class="ok-product-details-price" >￥{{retailPrice}}</div>
+            <div class="ok-product-details-addtime">上架时间：{{createTime | formateTime('YMDHM')}}</div>
+            <div class="ok-product-details-addtime">库存：{{salesStock}}</div>
+          </div>
         </div>
         <div class="ok-product-operation">
           <i style="display: block" class="ion-share"></i>

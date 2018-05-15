@@ -10,7 +10,7 @@
         员工管理
       </div>
       <div class="back-bar-cancelBtn">
-        <div style="display:block;float:left;width: 25px;height: 25px;font-size: 25px;color: white;font-weight: bolder;">
+        <div @click="$router.push({path:'/employee/employeeInfo'})" style="display:block;float:left;width: 25px;height: 25px;font-size: 25px;color: white;font-weight: bolder;">
           <i class="ion-ios-plus-empty"></i>
         </div>
         <div style="margin-left:8px;display:block;float:left;width: 25px;height: 25px;font-size: 25px;color: white;font-weight: bolder;">
@@ -19,98 +19,113 @@
       </div>
     </div>
     <div class="ok-model-border"></div>
-    <div style="margin-top:56px;width: 100%;height: 34px;background: #F2F2F2;padding-top: 3px;padding-right: 10px;padding-left: 10px;">
-      <div style="color:white;display:block;float:left;width: 50%;height: 28px;line-height:28px;text-align:center;border-radius:3px;background: brown;border-right: 1px solid #F2F2F2">已启用（4）</div>
-      <div style="display:block;float:left;width: 50%;height: 28px;line-height:28px;text-align:center;border-radius:3px;background: white;color:black;border-right: 1px solid #F2F2F2">已停用（0）</div>
+    <div style="margin-top:56px;width: 100%;height: 34px;background: #F2F2F2;">
+      <div @click="choosedStartOrStop(1)" :class="{isActive:isStart}" style="display:block;float:left;width: 50%;height: 28px;line-height:28px;text-align:center;background: white;color:black;border-right: 1px solid #F2F2F2">已启用（4）</div>
+      <div @click="choosedStartOrStop(2)" :class="{isActive:isStop}" style="display:block;float:left;width: 50%;height: 28px;line-height:28px;text-align:center;background: white;color:black;border-right: 1px solid #F2F2F2">已停用（0）</div>
     </div>
     <div class="ok-model-border"></div>
-    <div class="employee-info-box" style="height: 80px;width: auto;display: block;">
-      <div style="display: block;float: left;width: 30%;text-align: center;height:80px;line-height: 80px;">
-        <img src="@/assets/icon/ok-icon-red.png" width="70px" height="70px"/>
-      </div>
-      <div style="display: block;float: left;width: 50%;height:80px;padding-top: 8px;">
-        <div style="display: block;float: left;font-size: 16px;">美丽</div>
-        <div style="display: block;float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background: orange;border-radius: 5px;margin-left: 10px;">店长</div>
-        <div style="display: block;float: left;margin-left: 10px;">女</div>
-        <div style="clear: both;">手机号：1322222222</div>
-        <div>创建时间：2018-4-19</div>
-      </div>
-      <div style="font-size:18px;line-height:80px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
-        修改
-      </div>
+    <div v-if="employeeList.length>0||myData.pageNum==0">
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        :offset=100
+        @load="onLoad"
+      >
+        <div v-for="(item,index) in employeeList">
+          <div class="employee-info-box" style="height: 80px;width: auto;display: block;">
+            <div style="display: block;float: left;width: 30%;text-align: center;height:80px;line-height: 80px;">
+              <img :src="item.userAvatar | defaultImg" width="70px" height="70px"/>
+            </div>
+            <div style="display: block;float: left;width: 50%;height:80px;padding-top:20px;">
+              <div>
+                <div style="display: block;float: left;font-size: 16px;">{{item.userName}}</div>
+                <div style="display: block;float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background: orange;border-radius: 5px;margin-left: 10px;">{{item.userNike}}</div>
+                <div style="display: block;float: left;margin-left: 10px;margin-top: 2px;">
+                  <i v-if="item.userSex=='男'" style="color: #108ee9;" class="ion-male"></i>
+                  <i v-if="item.userSex=='女'" style="color: hotpink;" class="ion-female"></i>
+                </div>
+              </div>
+              <div style="clear: both;">手机号：{{item.userPhone==''||item.userPhone==null?'暂无':item.userPhone}}</div>
+            </div>
+            <div style="font-size:18px;line-height:80px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
+              <i class="ion-ios-arrow-right"></i>
+            </div>
+          </div>
+          <div class="ok-model-border"></div>
+        </div>
+      </van-list>
     </div>
-    <div class="ok-model-border"></div>
-    <div class="employee-info-box" style="height: 80px;width: auto;display: block;">
-      <div style="display: block;float: left;width: 30%;text-align: center;height:80px;line-height: 80px;">
-        <img src="@/assets/icon/ok-icon-red.png" width="70px" height="70px"/>
-      </div>
-      <div style="display: block;float: left;width: 50%;height:80px;padding-top: 8px;">
-        <div style="display: block;float: left;font-size: 16px;">大对对</div>
-        <div style="display: block;float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background: orange;border-radius: 5px;margin-left: 10px;">小工</div>
-        <div style="display: block;float: left;margin-left: 10px;">x</div>
-        <div style="clear: both;">手机号：1322222223</div>
-        <div>创建时间：2018-4-19</div>
-      </div>
-      <div style="font-size:18px;line-height:80px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
-        修改
-      </div>
-    </div>
-    <div class="ok-model-border"></div>
-    <div class="employee-info-box" style="height: 80px;width: auto;display: block;">
-      <div style="display: block;float: left;width: 30%;text-align: center;height:80px;line-height: 80px;">
-        <img src="@/assets/icon/ok-icon-red.png" width="70px" height="70px"/>
-      </div>
-      <div style="display: block;float: left;width: 50%;height:80px;padding-top: 8px;">
-        <div style="display: block;float: left;font-size: 16px;">隔壁老张</div>
-        <div style="display: block;float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background: orange;border-radius: 5px;margin-left: 10px;">小工</div>
-        <div style="display: block;float: left;margin-left: 10px;">x</div>
-        <div style="clear: both;">手机号：1322222226</div>
-        <div>创建时间：2018-4-19</div>
-      </div>
-      <div style="font-size:18px;line-height:80px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
-        修改
-      </div>
-    </div>
-    <div class="ok-model-border"></div>
-    <div class="employee-info-box" style="height: 80px;width: auto;display: block;">
-      <div style="display: block;float: left;width: 30%;text-align: center;height:80px;line-height: 80px;">
-        <img src="@/assets/icon/ok-icon-red.png" width="70px" height="70px"/>
-      </div>
-      <div style="display: block;float: left;width: 50%;height:80px;padding-top: 8px;">
-        <div style="display: block;float: left;font-size: 16px;">隔壁大潘</div>
-        <div style="display: block;float: left;width:auto;color:white;padding-left:3px;padding-right:3px;background: orange;border-radius: 5px;margin-left: 10px;">小工</div>
-        <div style="display: block;float: left;margin-left: 10px;">x</div>
-        <div style="clear: both;">手机号：1322222228</div>
-        <div>创建时间：2018-4-19</div>
-      </div>
-      <div style="font-size:18px;line-height:80px;height:80px;display: block;float: left;width: 20%;height:80px;text-align: center;">
-        修改
-      </div>
-    </div>
-    <div class="ok-model-border"></div>
   </div>
 </template>
 
 <script>
   const Back = resolve => require(['@/components/common/backBar'], resolve);
+  import Vue from 'vue';
+  import {getEmployeeList} from '@/service/getData';
+  import { List } from 'vant';
+  Vue.use(List);
   export default {
     mixins: [],     //混合
     components: {
       'ok-back':Back
     },//注册组件
     data() {         //数据
-      return {};
+      return {
+        loading: false,
+        finished: false,
+        isStart:true,
+        isStop:false,
+        employeeList:[],
+        myData:{paging:true,pageNum:0,limit:8,orderBy:'create_time desc'},
+      };
     },
     computed: {},  //计算属性
     created() {
     },   //创建
     mounted() {
     },   //挂载
-    methods: {},   //方法
+    methods: {
+      choosedStartOrStop(n){//切换停用启用条件
+        this.isStart=false;
+        this.isStop=false;
+        switch (n){
+          case 1:this.isStart=true;break;
+          case 2:this.isStop=true;break;
+          default:this.isStart=true;
+        }
+      },
+      onLoad() {//上划加载员工
+        this.myData.pageNum++;
+        getEmployeeList(this.myData).then(
+          response=>{
+            for(var i=0;i<response.data.results.length;i++){
+              this.employeeList.push(response.data.results[i]);
+            }
+            this.loading=false;
+            if (response.data.lastPage) {
+              this.finished = true;
+            }
+          },error=>{
+            this.loading=false;
+            this.finished = true;
+            console.log(error.response.msg);
+          }
+        );
+      },
+      reLoad(){
+        this.employeeList=[];
+        this.myData.pageNum=0;
+        this.finished=false;
+        this.onLoad();
+      },
+    },   //方法
     watch: {}      //监听
   }
 </script>
 
 <style scoped>
-
+  .isActive{
+    color: white!important;
+    background: #C20C0C!important;
+  }
 </style>
