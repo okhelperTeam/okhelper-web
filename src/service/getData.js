@@ -147,6 +147,9 @@ var sendSMS=myData=>ajax('get','/api/user/phoneCode',myData);
 //短信验证码登陆
 var smsLogin=myData=>ajax('post','/api/user/phoneLogin',myData);
 
+//下单
+var placeOrder=myData=>ajax('post','/api/sale/place_order',myData);
+
 export {
   login,
   getMenuCodeList,
@@ -195,4 +198,5 @@ export {
   getStore,
   sendSMS,
   smsLogin,
+  placeOrder
 }

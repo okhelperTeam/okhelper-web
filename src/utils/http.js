@@ -22,7 +22,7 @@ export default(method = 'GET', url = '', data = {}) => {
       if(data instanceof FormData){
         return data;
       }else {
-        return qs.stringify(data);
+        return qs.stringify(data,{allowDots: true});
       }
     }],
     headers: {

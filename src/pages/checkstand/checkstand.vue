@@ -16,40 +16,40 @@
       <div style="width: 100%;height: 40px;line-height: 40px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">销售单号</div>
         <div style="height:43px;width:70%;display: block;float: left;">
-          <input style="height: 30px;font-size: 14px;width: 100%;padding-left: 30px" disabled placeholder="ST0000000000001" type="text"/>
+          <input style="height: 30px;font-size: 14px;width: 100%;padding-left: 30px" disabled placeholder="请输入订单号" type="text" v-model="orderNumber"/>
         </div>
       </div>
       <div class="ok-model-border"></div>
       <div style="width: 100%;height: 40px;line-height: 40px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">客户名称</div>
         <div style="height:43px;width:70%;display: block;float: left;">
-          <input style="height: 30px;font-size: 14px;width: 100%;padding-left: 30px" disabled placeholder="老王" type="text"/>
+          <input style="height: 30px;font-size: 14px;width: 100%;padding-left: 30px" disabled placeholder="零售客户" type="text" v-model="customerName"/>
         </div>
       </div>
-      <div class="ok-model-border"></div>
+      <!-- <div class="ok-model-border"></div>
       <div style="width: 100%;height: 40px;line-height: 40px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">商品数量</div>
         <div style="height:43px;width:70%;display: block;float: left;">
           <input style="height: 30px;font-size: 16px;width: 100%;padding-left: 30px" disabled placeholder="0" type="number"/>
         </div>
-      </div>
-      <div class="ok-border"></div>
+      </div> -->
+      <!-- <div class="ok-border"></div>
       <div style="width: 100%;height: 40px;line-height: 40px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;font-size: 12px;">整单折扣(%)</div>
         <div style="height:43px;width:70%;display: block;float: left;">
           <input style="height: 30px;font-size: 16px;width: 100%;padding-left: 30px"  placeholder="100" v-model="discount" type="number"/>
         </div>
-      </div>
+      </div> -->
       <div class="ok-model-border"></div>
       <div style="width: 100%;height: 40px;line-height: 40px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">应收金额</div>
         <div style="height:43px;width:40%;display: block;float: left;">
           <input style="height: 30px;font-size: 16px;width: 100%;color: orange;padding-left: 30px" disabled type="number" v-model="paymoney"/>
         </div>
-        <div style="height:20px;margin-top:10px;width:10%;display: block;float: left;font-size: 12px;background: orange;text-align: center;border-radius: 3px;color: white;line-height: 20px;">抹零</div>
+        <!-- <div style="height:20px;margin-top:10px;width:10%;display: block;float: left;font-size: 12px;background: orange;text-align: center;border-radius: 3px;color: white;line-height: 20px;">抹零</div>
         <div style="height:43px;width:20%;display: block;float: left;">
           <input style="height: 30px;font-size: 12px;width: 100%;padding-left: 10px;" placeholder="0.00" type="number" v-model="notSmallChange"/>
-        </div>
+        </div> -->
       </div>
       <div class="ok-border"></div>
       <div style="width: 100%;height: 40px;line-height: 40px;font-size: 16px;color: #888888">
@@ -62,9 +62,12 @@
       <div style="width: 100%;height: 40px;line-height: 40px;font-size: 16px;color: #888888">
         <div style="width:33%;display: block;float: left;padding-left: 20px;">收款金额</div>
         <div style="height:37px;width:40%;display: block;float: left;border-bottom: 1px solid #2D84FF;">
-          <input style="height: 30px;font-size: 14px;width: 100%;color: black;" placeholder="0.00" v-model="parentData.pay1Money" type="number"/>
+          <input style="height: 30px;font-size: 14px;width: 100%;color: black;" placeholder="0.00" type="number" v-model="parentData.pay1Money" />
         </div>
-        <div @click="computPay1Money" style="height:20px;margin-top:10px;width:10%;display: block;float: right;font-size: 12px;background: white;text-align: center;border-radius: 3px;color: #108ee9;line-height: 20px;border: 1px solid #108ee9;margin-right: 15px;">全款</div>
+
+        <div @click="computPay1Money" style="height:20px;margin-top:10px;width:10%;display: block;float: right;font-size: 12px;background: white;text-align: center;border-radius: 3px;color: #108ee9;line-height: 20px;border: 1px solid #108ee9;margin-right: 15px;">
+          全款
+        </div>
       </div>
       <div style="margin-top: 5px;" class="ok-model-border"></div>
       <div v-if="showUnit">
@@ -119,7 +122,7 @@
         },//注册组件
         data() {         //数据
             return {
-              paymoney:150.00,//应付金额
+              paymoney:0.00,//应付金额
               notSmallChange:0,
               payType:'现金',
               payType2:'支付宝',
@@ -128,6 +131,9 @@
               showUnit:false,
               debtMony:0.00,
               parentData:{gatheringShow:false,showCashResult:false,pay1Money:'',pay2Money:''},
+              orderNumber:'',
+              customerName:'',
+              isCash:false
             };
         },
         computed: {
@@ -136,10 +142,16 @@
           }
         },  //计算属性
         created() {
+          this.initData();
         },   //创建
         mounted() {
         },   //挂载
         methods: {
+          initData(){
+            this.orderNumber=this.$route.query.orderNumber;
+            this.customerName=this.$route.query.customerName;
+            this.paymoney=parseFloat(this.$route.query.sumPrice).toFixed(2);
+          },
           toGatheringPage(){
             if(this.parentData.pay2Money!=0&&this.parentData.pay1Money!=0){
               this.parentData.gatheringShow=true;

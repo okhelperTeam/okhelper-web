@@ -46,7 +46,7 @@
       </div>
 
     </div>
-    <div v-if="orderList.length>0||myData.pageNum==0">
+    <div v-if="orderList.length>0||myData.pageNum==0||loading">
       <van-list
         v-model="loading"
         :finished="finished"
