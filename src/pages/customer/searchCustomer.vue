@@ -28,7 +28,7 @@
                 :offset=100
                 @load="onLoad"
               >
-                <div @click="choosedCustomer(index,item.customerName,item.customerId)" v-for="(item,index) in customerList">
+                <div @click="choosedCustomer(index,item.customerName,item.id)" v-for="(item,index) in customerList">
                   <div style="width: 70%;height: 40px;padding-left: 15px;line-height: 40px;float: left">{{item.customerName}}</div>
                   <i v-if="showChoosed[index]" style="float: right;font-size: 20px;margin-right: 15px;" class="ion-checkmark-round"></i>
                   <div class="ok-model-border"></div>
@@ -80,8 +80,8 @@
             this.showChoosed[index]=true;
             Vue.set(this.showChoosed,index,this.showChoosed[index]);
             this.parentData.customerName=customerName;
-            this.parentData.customerShow=false;
             this.parentData.customerId=customerId;
+            this.parentData.customerShow=false;
           },
           onLoad() {//上划加载商品
             this.myData.pageNum++;

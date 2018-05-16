@@ -372,7 +372,7 @@
               Toast({
                 type:'fail',
                 position: 'middle',
-                message: '条码不能重复！'
+                message: '条码不能重复'
               });
             },error=>{
               if(error.status==404){
