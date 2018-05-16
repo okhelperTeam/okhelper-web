@@ -34,11 +34,11 @@
           <ul style="list-style: none;background: #F2F2F2;width: 100%;height:50px;padding-top:5px;text-align: center;">
             <li class="sell-table-price-detail-open-li">
               <div>单价</div>
-              <input class="sell-table-price-detail-open-li-input" type="number" v-model="parentData.retailPrice"/>
+              <input class="sell-table-price-detail-open-li-input" type="number" v-model="parentData.retailPrice" disabled/>
             </li>
             <li class="sell-table-price-detail-open-li">
               <div>折扣(%)</div>
-              <input class="sell-table-price-detail-open-li-input" type="number" v-model="parentData.discounts"/>
+              <input @blur="minMaxDiscount" class="sell-table-price-detail-open-li-input" type="number" v-model="parentData.discounts"/>
             </li>
             <li class="sell-table-price-detail-open-li">
               <div>折后价</div>
@@ -46,7 +46,7 @@
             </li>
             <li class="sell-table-price-detail-open-li">
               <div>数量</div>
-              <input class="sell-table-price-detail-open-li-input" type="number" v-model="parentData.productCount"/>
+              <input @blur="minMaxCount" class="sell-table-price-detail-open-li-input" type="number" v-model="parentData.productCount"/>
             </li>
           </ul>
         </div>
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+    import { Toast } from 'vant';
     export default {
         mixins: [],     //混合
         props:{
@@ -84,7 +85,7 @@
         },
         computed: {
           discountPrice(){
-            return this.parentData.retailPrice*this.parentData.discounts/100;
+            return parseFloat(this.parentData.retailPrice*this.parentData.discounts/100).toFixed(2);
           },
           productAttribute(){
             return 1;
@@ -92,8 +93,8 @@
           }
         },  //计算属性
         created() {
-          alert(1)
-          console.log(this.parentData);
+          // alert(1)
+          // console.log(this.parentData);
         },   //创建
         mounted() {
         },   //挂载
@@ -106,10 +107,47 @@
             }
           },
           deleteProduct(){
-            this.$emit('deleteProduct',this.parentData.productId);
+            this.$emit('deleteProduct',this.parentData.id);
+          },
+          minMaxCount(){
+            if(this.parentData.productCount>this.parentData.salesStock){
+                Toast({
+                  position: 'middle',
+                  message: '销售数量不能大于库存'
+                });
+              this.parentData.productCount=this.parentData.salesStock;
+            }
+
+            if(this.parentData.productCount<1){
+              Toast({
+                position: 'middle',
+                message: '销售数量不能小于1'
+              });
+              this.parentData.productCount=1;
+            }
+          },
+          minMaxDiscount(){
+            if(this.parentData.discounts>100){
+                Toast({
+                  position: 'middle',
+                  message: '折扣率不能大于100'
+                });
+              this.parentData.discounts=100;
+            }
+
+            if(this.parentData.discounts<1){
+              Toast({
+                position: 'middle',
+                message: '折扣率不能小于1'
+              });
+              this.parentData.discounts=1;
+            }
           }
         },   //方法
         watch: {
+          // 'parentData.productCount':function(val,olVal){
+          //
+          // }
         }      //监听
     }
 </script>

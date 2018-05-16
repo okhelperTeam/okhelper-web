@@ -88,9 +88,9 @@
             // this.$emit('closeCategoryInfo',{close:false,reflashCategoryList:true});
           },
           saveCategoryInfo(){
-            this.category.superId=this.choosedCategoryId;
+            //------------------------当选择上级分类为全部分类时报400，父类不存在------------------------------------------
             addCategory({
-              superId:this.category.superId,
+              superId:this.choosedCategoryId,
               categoryName:this.category.categoryName,
               remarks:this.category.remarks
             }).then(response=>{
@@ -100,7 +100,7 @@
                 message: '新增分类成功'
               });
             },error=>{
-
+                console.log(error.msg);
             });
           }
         },   //方法
