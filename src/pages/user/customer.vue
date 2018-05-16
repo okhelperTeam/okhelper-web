@@ -22,7 +22,13 @@
     </div>
     <hr>
     <div style="margin-top: 56px;" >
-      <div v-if="customerList.length==0"></div>
+      <div v-if="customerList.length>0||pageNum==0">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          :offset=0
+          @load="onLoad"
+        >
       <div class="ok-text-box1" v-for="item in customerList">
         <router-link :to="{path: '/user/customerInfo',query: {id:item.id}}">
         <div class="ok-text-name" style="width: 100%">客户名：{{item.customerName}}</div><br>
@@ -38,8 +44,16 @@
         </router-link>
         <div class="ok-model-border"></div>
       </div>
+        </van-list>
+      </div>
+      <div v-else style="width: 100%;text-align: center;padding-bottom: 20px;margin-top: 20%">
+        <router-link to="/user/addCustomer">
+          <div style="width:30%;border: 1px solid black;border-radius: 5px;height: 40px;padding-left:10px;padding-right:10px;line-height: 40px;text-align: center;margin: 0 auto;">
+            去新增客户
+          </div>
+        </router-link>
+      </div>
     </div>
-    <div class="ok-model-border"></div>
   </div>
 </template>
 
@@ -70,7 +84,6 @@
     },
     computed: {},  //计算属性
     created() {
-      this.onLoad();
     },   //创建
     mounted() {
     },   //挂载

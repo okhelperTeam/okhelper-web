@@ -88,7 +88,6 @@
         deleteWarehouseInfoById() {
           deleteWarehouseInfo(
             this.id
-
           ).then(
             response => {
               Toast({
