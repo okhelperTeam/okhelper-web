@@ -33,6 +33,7 @@
               :discounts="item.youhui"
               :retail-price="item.retailPrice"
               :createTime="item.createTime"
+              :salesStock="item.salesStock"
               :Id="item.id"
               :index="index"
               @addProduct="addProduct"

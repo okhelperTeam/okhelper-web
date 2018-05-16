@@ -94,7 +94,6 @@
         <div @click="placeOrder" style="width: 30%;height: 40px;display: block;float: right;color:white;background: cadetblue;text-align:center;line-height:40px;font-size: 14px;">出售</div>
       </div>
 
-
       <ok-customer
         :parentData="parentData"
       ></ok-customer>
@@ -274,9 +273,7 @@
                     console.log(error.msg);
                   }
                 );
-
               }
-
             }
           })
         }

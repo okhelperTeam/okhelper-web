@@ -14,13 +14,6 @@ let toTime = function (ns) {
   return dformat;
 }
 
-
-//格式化时间(yyyy-MM-dd)
-let formateData = function (value) {
-  return value.substring(0, 10);
-
-}
-
 //元素的补零计算
 function addZero(val){
   if(val < 10){
@@ -92,4 +85,6 @@ let formatePayType = function (value) {
   }
 
 }
-export {defaultImg,toTime, formateData,formateMoney,formateTime,formatePayType}
+
+
+export {defaultImg,toTime,formateMoney,formateTime,formatePayType}

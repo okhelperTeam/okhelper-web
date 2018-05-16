@@ -33,6 +33,9 @@ var addWarehouse=myData=>ajax('post','/api/warehouse',myData);
 //获取分类列表
 var getCategoryList=(id)=>ajax('get','/api/categorys/'+id);
 
+//查询分类自身信息（id）
+var getCategorySelf=id=>ajax('get','/api/categoryself/'+id);
+
 //新增分类
 var addCategory=myData=>ajax('post','/api/categorys',myData);
 
@@ -98,6 +101,9 @@ var deleteProduct=id=>ajax('delete','/api/product/'+id);
 
 //获取员工列表
 var getEmployeeList=myData=>ajax('get','/api/user/employee',myData);
+
+//获取员工列表
+var addEmployee=myData=>ajax('post','/api/user/employee',myData);
 
 //新增店长
 var addStoreManager=myData=>ajax('post','/api/user/register',myData);
@@ -168,6 +174,7 @@ export {
   getMyUserInfo,
   addProduct,
   deleteProduct,
+  getCategorySelf,
   updateProduct,
   addCategory,
   getSellHistoryList,
@@ -175,6 +182,7 @@ export {
   getCustomerDebtList,
   getSupplierDebtList,
   getSellTotal,
+  addEmployee,
   getProductBybarCode,
   getSupplierInfo,
   getCustomerInfo,
