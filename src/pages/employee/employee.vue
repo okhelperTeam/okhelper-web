@@ -93,6 +93,29 @@
     mounted() {
     },   //挂载
     methods: {
+      getStopEmployeeCount(){
+        //请求启用员工人数
+        alert(this.myData.deleteStatus);
+        getEmployeeList(this.myData).then(
+          response=>{
+            this.isStartCount=response.data.total;
+          },error=>{
+            console.log(error.response.msg);
+          }
+        );
+      },
+      getStartEmployeeCount(){
+        //请求停用员工人数
+        this.myData.deleteStatus=0;
+        alert(this.myData.deleteStatus);
+        getEmployeeList(this.myData).then(
+          response=>{
+            this.isStopCount=response.data.total;
+          },error=>{
+            console.log(error.response.msg);
+          }
+        );
+      },
       choosedStartOrStop(n){//切换停用启用条件
         this.isStart=false;
         this.isStop=false;

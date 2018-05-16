@@ -64,7 +64,7 @@
         <div class="ok-text-box">
           <div class="ok-text-name">员工生日</div>
           <div class="ok-text-textBox">
-            <div class="ok-text-text"  @click="showBirthdayPicker=!showBirthdayPicker">{{employee.userBirthday | formateTime('YMD')}}</div>
+            <div class="ok-text-text" style="margin-top: 5px;"  @click="showBirthdayPicker=!showBirthdayPicker">{{employee.userBirthday | formateTime('YMD')}}</div>
           </div>
         </div>
         <div class="ok-model-border"></div>
@@ -76,9 +76,9 @@
         </div>
         <div class="ok-model-border"></div>
         <div class="ok-text-box">
-          <div class="ok-text-name" style="font-size: 14px">账号是否启用</div>
+          <div class="ok-text-name" style="font-size: 14px;margin-top: -10px;">账号是否启用</div>
           <div class="ok-text-textBox" style="border-bottom: 0px;">
-            <div style="width: auto;height: auto;float: right;margin-top: 10px;">
+            <div style="width: auto;height: auto;float: right;">
               <van-switch v-model="isActiveEmployee" />
             </div>
           </div>
@@ -180,7 +180,6 @@
               }else {
                 this.employee.deleteStatus=0;
               }
-
             }
           }
         },  //计算属性
@@ -232,7 +231,6 @@
                 );
               }
             }
-
           },
           checkUserName(){//检查账号是否重复
             getCheckName({userName:this.employee.userName}).then(
