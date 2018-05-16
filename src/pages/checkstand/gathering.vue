@@ -22,7 +22,7 @@
                     <van-icon name="qr" style="font-size: 25px;color: #A4D3EE;" />
                   </div>
                   <div style="width: 60%;height: 50px;float: left;">
-                    <div style="color: orange;padding-left:30px;font-size: 18px;">￥{{parentData.pay1Money}}</div>
+                    <div style="color: orange;padding-left:30px;font-size: 18px;">￥{{parentData.pay2Money}}</div>
                     <div style="color: black;text-align: center;font-size: 14px;">扫码收款(微信/支付宝)</div>
                   </div>
                   <div style="width: 22%;height: 50px;float: left;">
