@@ -156,6 +156,12 @@ var smsLogin=myData=>ajax('post','/api/user/phoneLogin',myData);
 //下单
 var placeOrder=myData=>ajax('post','/api/sale/place_order',myData);
 
+//支付
+var pay=(orderId,myData)=>ajax('post','/api/sale/payment/'+orderId,myData);
+
+//获取角色列表
+var getRoleList=myData=>ajax('get','/api/role',myData);
+
 export {
   login,
   getMenuCodeList,
@@ -206,5 +212,7 @@ export {
   getStore,
   sendSMS,
   smsLogin,
-  placeOrder
+  placeOrder,
+  pay,
+  getRoleList
 }

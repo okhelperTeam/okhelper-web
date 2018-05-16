@@ -26,7 +26,8 @@
                     <div style="color: black;text-align: center;font-size: 14px;">扫码收款(微信/支付宝)</div>
                   </div>
                   <div style="width: 22%;height: 50px;float: left;">
-                    <div style="background: #108ee9;height: 30px;width: 100%;color: white;text-align:center;padding-top:5px;padding-bottom:5px;margin-top: 7px;">扫码</div>
+                    <ok-scan :P="P" @scanover="scanOver"/>
+                    <div @click="P.isOpen=true;" style="background: #108ee9;height: 30px;width: 100%;color: white;text-align:center;padding-top:5px;padding-bottom:5px;margin-top: 7px;">扫码</div>
                   </div>
                 </div>
                 <div style="height: 70px;color: #888888;font-size: 8px;padding-top: 5px;">
@@ -62,22 +63,57 @@
 <script>
   import { Icon } from 'vant';
   import Vue from 'vue';
+  import {pay} from '@/service/getData'
+  import Scan from '@/components/common/scan';
+  import { Toast } from 'vant';
   Vue.use(Icon);
     export default {
         mixins: [],     //混合
-        components: {},//注册组件
+        components: {
+          'ok-scan':Scan
+        },//注册组件
         data() {         //数据
-            return {};
+            return {
+              P:{isOpen:false},
+              aliPayPrice:0.00,
+              orderId:'',
+              tradeType:1
+            };
         },
         props:{
           parentData:{}
         },
         computed: {},  //计算属性
         created() {
+          this.initData();
         },   //创建
         mounted() {
         },   //挂载
-        methods: {},   //方法
+        methods: {
+          scanOver(code){//条码支付
+            Toast.loading({
+              duration: 0,       // 持续展示 toast
+              forbidClick: true, // 禁用背景点击
+              loadingType: 'spinner',
+              mask: true,
+              message: '正在扣款...'
+            });
+            pay(this.parentData.saleOrderId,{realPay:this.xxxxx,payType:2,tradeType:this.xxxxxx,aliPayAuthCode:code})
+            .then(response=>{
+            Toast.clear();
+            Toast.success({
+              duration: 1500,
+              message: '支付成功'
+            });
+            },error=>{
+              Toast.clear();
+              Toast({
+                position: 'middle',
+                message: error==null?"网络异常":error.msg
+              });
+            })
+          }
+        },   //方法
         watch: {}      //监听
     }
 </script>

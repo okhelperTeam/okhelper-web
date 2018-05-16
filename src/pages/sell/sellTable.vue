@@ -177,7 +177,8 @@
               });
               return;
             }
-            Toast.loading({
+            Toast({
+              type:"loading",
               duration: 0,       // 持续展示 toast
               forbidClick: true, // 禁用背景点击
               loadingType: 'spinner',
@@ -195,11 +196,11 @@
                 Toast.clear();
                 this.$router.push({path:'/checkstand',query:{saleOrderId:response.data.id,sumPrice:response.data.sumPrice,orderNumber:response.data.orderNumber,customerName:this.parentData.customerName}})
             },error=>{
-                 Toast.clear();
+              Toast.clear();
               Toast({
                 type:'text',
                 position: 'middle',
-                message: error==null?"系统异常!":error.msg
+                message: error==null?"系统异常":error.msg
               });
             })
           },

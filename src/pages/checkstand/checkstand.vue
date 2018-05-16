@@ -130,7 +130,7 @@
               remark:'',
               showUnit:false,
               debtMony:0.00,
-              parentData:{gatheringShow:false,showCashResult:false,pay1Money:'',pay2Money:''},
+              parentData:{gatheringShow:false,showCashResult:false,pay1Money:'',pay2Money:'',orderId:''},
               orderNumber:'',
               customerName:'',
               isCash:false
@@ -148,6 +148,7 @@
         },   //挂载
         methods: {
           initData(){
+            this.parentData.saleOrderId=this.$route.query.saleOrderId;//订单Id
             this.orderNumber=this.$route.query.orderNumber;
             this.customerName=this.$route.query.customerName;
             this.paymoney=parseFloat(this.$route.query.sumPrice).toFixed(2);
