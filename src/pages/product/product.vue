@@ -4,8 +4,8 @@
 <template>
     <div id="">
       <div class="back-bar">
-        <router-link to="/sell" style="color: white" class="back-bar-backBtn">&lt;&nbsp;销售
-        </router-link>
+        <div @click="$router.back()" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回
+        </div>
         <div class="back-bar-name">
           <div style="width: 70%;margin: 0 auto;" @click="parentData.categoryShow=true">{{parentData.choosedCategoryName}}&nbsp;&nbsp;<i class="ion-arrow-down-b"></i> </div>
         </div>

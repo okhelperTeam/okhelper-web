@@ -140,6 +140,7 @@
 }
 /*sell*/
 .ok-sellOrStore-model{
+  color: black;
   width: 50%;
   height: 80px;
   padding-top: 15px;
@@ -163,6 +164,7 @@
   text-align: center;
 }
 .ok-sellOrStore-content{
+  color: black;
   width: 70%;
   height: 50px;
   display: block;

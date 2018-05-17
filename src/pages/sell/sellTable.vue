@@ -128,7 +128,7 @@
               P:{isOpen:false},
               remarks:'',
               wholeDiscount:100,
-              notSmallChange:0//抹零
+              notSmallChange:''//抹零
             };
         },
         computed: {

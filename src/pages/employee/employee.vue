@@ -31,7 +31,7 @@
         :offset=100
         @load="onLoad"
       >
-        <div v-for="(item,index) in employeeList">
+        <div v-for="(item,index) in employeeList" @click="$router.push({path:'/employee/employeeInfo',query:{userName:item.userName}})">
           <div class="employee-info-box" style="height: 80px;width: auto;display: block;">
             <div style="display: block;float: left;width: 30%;text-align: center;height:80px;line-height: 80px;">
               <img :src="item.userAvatar | defaultImg" width="70px" height="70px"/>
@@ -58,7 +58,7 @@
         到底了别滑了，真的没了.....
       </div>
     </div>
-    <div v-if="myData.pageNum!=0&&employeeList.length==0&&finished==true"  style="color: #888888;text-align: center;padding: 20px;">
+    <div v-if="myData.pageNum!=0&&employeeList.length==0&&finished==true" style="color: #888888;text-align: center;padding: 20px;">
       没有您要找的员工......
     </div>
   </div>

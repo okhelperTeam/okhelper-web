@@ -5,7 +5,7 @@
   <div class="container">
     <div id="ok-home-icon" style="height: 200px;width: auto;text-align: center;padding-top: 50px;padding-bottom: 25px;">
       <img src="@/assets/icon/ok-icon-red.png" width="100" height="100">
-      <div class="change-font-button">
+      <div class="change-font-button" style="color: #C20C0C">
         <span v-if="verification" @click="verification=false">账号密码登陆</span>
         <span v-if="!verification" @click="verification=true">短信验证码登陆</span>
       </div>
@@ -64,16 +64,16 @@
       </van-cell-group>
 
       <div style="height: 110px;padding-top:30px;width: 80%;margin:auto;">
-        <van-button @click="loginOk" type="danger" size="large">登录</van-button>
-        <span v-if="loginIsTrue" class="tishixiaoxi disappear">{{loginMsg}}</span>
+        <van-button @click="loginOk" style="background: #C20C0C" type="danger" size="large">登录</van-button>
+        <span v-if="loginIsTrue" class="tishixiaoxi disappear" style="color: #C20C0C">{{loginMsg}}</span>
       </div>
       <div style="float: right;margin-top: 50px">
         <router-link to="/user/register">
       <div class="register-icon" style="float:right;margin-right: 55px">
         <i class="ion-person-add"></i>
       </div>
-      <div class="user-login-bottom" style="margin-right: 43px">
-        <span style="float:right;margin-top: -10px;color: #dd0a20">立即注册</span>
+      <div style="margin-right: 43px">
+        <span style="float:right;margin-top: -10px;color: #C20C0C">立即注册</span>
       </div>
         </router-link>
       </div>
@@ -82,8 +82,8 @@
           <div class="register-icon" style="float:left;margin-left: 55px">
             <i class="ion-ios-help"></i>
           </div>
-          <div class="user-login-bottom" style="margin-left: 43px">
-            <span style="float:left;margin-top: -10px;color: #dd0a20" >忘记密码</span>
+          <div style="margin-left: 43px">
+            <span style="float:left;margin-top: -10px;color: #C20C0C" >忘记密码</span>
           </div>
         </router-link>
       </div>

@@ -168,6 +168,11 @@ var pay=(orderId,myData)=>ajax('post','/api/sale/payment/'+orderId,myData);
 //获取角色列表
 var getRoleList=myData=>ajax('get','/api/role',myData);
 
+//获取员工信息（员工账号）
+var getEmployeeByUserName=username=>ajax('get','/api/user/employeeInfo/'+username);
+
+//变更角色
+var changeEmployeeRoleListByUserName=username=>ajax('put','/api/role/change_role/'+username);
 
 export {
   login,
@@ -224,4 +229,6 @@ export {
   getNotOutboundList,
   pay,
   getRoleList,
+  getEmployeeByUserName,
+  changeEmployeeRoleListByUserName
 }

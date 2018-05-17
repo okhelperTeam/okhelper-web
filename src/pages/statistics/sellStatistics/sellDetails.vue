@@ -5,7 +5,7 @@
     <div id="">
       <div  style="color:white;background: #C20C0C;font-size:18px;padding-top:12px;height: 56px;width: 100%;text-align: center;">
         <div style="width: 20%;font-size:16px;display: block;float: left;height: 32px;line-height: 32px;">
-          <router-link to="/statistics">&lt;&nbsp;返回</router-link>
+          <div @click="$router.back()">&lt;&nbsp;返回</div>
         </div>
         <div style="width: 60%;display: block;float: left;height: 32px;line-height: 32px;">销售明细</div>
         <div style="width: 20%;display: block;float: left;height: 32px;line-height: 32px;"></div>

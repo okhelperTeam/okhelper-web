@@ -10,7 +10,7 @@
           员工信息
         </div>
         <div class="back-bar-cancelBtn">
-          <div @click="addNewOrUpdateEmployee($route.query.id)" style="margin-left:8px;display:block;float:left;width: 50px;height: 25px;font-size: 18px;color: white;">
+          <div @click="addNewOrUpdateEmployee($route.query.username)" style="margin-left:8px;display:block;float:left;width: 50px;height: 25px;font-size: 18px;color: white;">
             保存
           </div>
         </div>
@@ -104,6 +104,7 @@
               v-for="(item, index) in roleList"
               :key="item.id"
               :name="item"
+              @change="changeUserRoleList"
               >
               <div style="width: 90%;height: 80px;padding-right: 10px;display: block;float: left;">
                 <div style="width: 100%;font-size: 18px;margin-top: 10px;color: black;margin-top: 20px;">{{item.roleName}}</div>
@@ -134,7 +135,7 @@
   import Vue from 'vue';
   import { Checkbox, CheckboxGroup } from 'vant';
   import { Switch } from 'vant';
-  import {getCheckName,addEmployee,getRoleList} from '@/service/getData';
+  import {getCheckName,addEmployee,getRoleList,getEmployeeByUserName,changeEmployeeRoleListByUserName} from '@/service/getData';
 
   Vue.use(Switch);
   Vue.use(Checkbox).use(CheckboxGroup);
@@ -185,11 +186,27 @@
           }
         },  //计算属性
         created() {
+          getEmployeeByUserName(this.$route.query.userName).then(
+            response=>{
+              this.employee=response.data;
+            },error=>{}
+          );
+
           this.getMyRoleList();
         },   //创建
         mounted() {
         },   //挂载
         methods: {
+          changeUserRoleList(){
+            changeEmployeeRoleListByUserName(this.employee.userName).then(
+              response=>{
+                Toast({
+                  position: 'bottom',
+                  message: '员工账号注册成功'
+                });
+              },error=>{}
+            );
+          },
           getMyRoleList(){
             getRoleList({}).then(
               response=>{
@@ -213,8 +230,8 @@
           onSexChange(picker, value, index) {//性别选择器值回调
             this.employee.userSex=value;
           },
-          addNewOrUpdateEmployee(id){//添加/修改员工
-            if(id!=null&&id!=''){
+          addNewOrUpdateEmployee(username){//添加/修改员工
+            if(username!=null&&username!=''){
               //修改员工
 
             }else{
@@ -232,10 +249,7 @@
                 this.employee.userBirthday=this.employee.userBirthday.toString();
                 addEmployee(this.employee).then(
                   response=>{
-                    Toast({
-                      position: 'bottom',
-                      message: '添加员工成功'
-                    });
+                    this.changeUserRoleList();
                     this.employee.userBirthday=new Date((this.employee.userBirthday).replace("/-/g", "/"));
                   },
                   error=>{}

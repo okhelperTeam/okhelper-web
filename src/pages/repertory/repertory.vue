@@ -12,7 +12,7 @@
         <div class="ok-sellOrStore-icon">
           <i class="ion-ios-pricetags"></i>
         </div>
-        <router-link to="/warehouse/stock">
+        <router-link to="/warehouse/stock" style="color: black">
           <div class="ok-sellOrStore-content">
             <div>库存查询</div>
             <div class="ok-sellOrStore-subcontent">所有商品</div>
@@ -25,7 +25,7 @@
         <div class="ok-sellOrStore-icon">
           <i class="ion-ios-star"></i>
         </div>
-        <router-link to="/warehouse/stockWarning">
+        <router-link to="/warehouse/stockWarning" style="color: black">
           <div class="ok-sellOrStore-content">
             <div>过低预警</div>
             <div class="ok-sellOrStore-subcontent">存量过低商品<span style="color: red;"><15件</span></div>
@@ -39,7 +39,7 @@
         <div class="ok-sellOrStore-icon">
           <i class="ion-reply"></i>
         </div>
-        <router-link to="/warehouse/earlyWarning">
+        <router-link to="/warehouse/earlyWarning" style="color: black">
           <div class="ok-sellOrStore-content">
             <div>临期预警</div>
             <div class="ok-sellOrStore-subcontent">临期商品<span style="color: red;"><10天</span></div>
@@ -52,7 +52,7 @@
         <div class="ok-sellOrStore-icon">
           <i class="ion-reply"></i>
         </div>
-        <router-link to="/warehouse/outbound">
+        <router-link to="/warehouse/outbound" style="color: black">
           <div class="ok-sellOrStore-content">
             <div>出货查询</div>
             <div class="ok-sellOrStore-subcontent">分配商品<span style="color: red;">出库</span></div>
@@ -66,7 +66,7 @@
         <div class="ok-sellOrStore-icon">
           <i class="ion-ios-cart"></i>
         </div>
-        <router-link to="/warehouse/purchaseHistory">
+        <router-link to="/warehouse/purchaseHistory" style="color: black">
           <div class="ok-sellOrStore-content">
             <div>采购进货</div>
             <div class="ok-sellOrStore-subcontent">进货、增加库存</div>

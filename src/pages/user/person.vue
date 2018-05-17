@@ -14,11 +14,8 @@
     </div>
     <div style="height: 100px">
       <router-link to="/user/changeUserPhoto">
-      <div v-if="checkImg" style="width:25%;border: 1px solid white;border-radius: 100px;height: 90px;padding-left:10px;padding-right:10px;line-height: 40px;text-align: center;margin-left: 10px;margin-top:5px;">
-        <img :src="userAvatar" width="80px" height="80px"/>
-      </div>
-        <div v-else style="width:25%;border: 1px solid white;border-radius: 100px;height: 90px;padding-left: 10px;margin-left: 10px;margin-top:5px;padding-right:10px;padding-top:5px;line-height: 40px;text-align: center;">
-          <i class="ion-person login-icon"></i>
+        <div v-if="checkImg" style="width:25%;border: 1px solid white;border-radius: 100px;height: 90px;padding-left:10px;padding-right:10px;line-height: 40px;text-align: center;margin-left: 10px;margin-top:5px;">
+          <img :src="userAvatar | defaultImg" width="80px" height="80px"/>
         </div>
       </router-link>
 
