@@ -149,7 +149,7 @@
           productList.push({warehouseId:x[key].warehouseId,productId:x[key].id,storageCount:x[key].productCount,storagePrice:(parseFloat(x[key].storagePrice).toFixed(2)),
             productDate:x[key].productDate,shelfLife:x[key].shelfLife,remarks:x[key].remarks});
         }
-        placeStorage({supplierId:this.parentData.supplierId,remarks:"",placeOrderItemDtos:productList})
+        placeStorage({supplierId:this.parentData.supplierId,remarks:"",storageDetail:productList})
           .then(response=>{
             Toast.clear();
             Toast({
