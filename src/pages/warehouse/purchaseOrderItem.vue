@@ -43,11 +43,12 @@
           </li>
           <li class="sell-table-price-detail-open-li">
             <div>生产日期*</div>
-            <input class="sell-table-price-detail-open-li-input" type="number" v-model="parentData.productDate"/>
+            <input class="sell-table-price-detail-open-li-input" style="width: 140%;margin-left:-15%" type="date" v-model="parentData.productDate"/>
           </li>
           <li class="sell-table-price-detail-open-li">
             <div>保质期*</div>
             <input class="sell-table-price-detail-open-li-input" type="number" v-model="parentData.shelfLife"/>
+            <!--<div class="sell-table-price-detail-open-li-input" style="margin-top: 5px;"  @click="showBirthdayPicker=!showBirthdayPicker">{{parentData.shelfLife | formateTime('YMD')}}</div>-->
           </li>
           <li class="sell-table-price-detail-open-li">
             <div>数量*</div>
@@ -95,6 +96,7 @@
         isPriceOpen:false,
         warehouseName:'',
         warehouseList:[],
+        showBirthdayPicker:false,
       };
     },
     computed: {

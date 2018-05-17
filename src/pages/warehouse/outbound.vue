@@ -71,7 +71,7 @@
             limit:this.limit,
           }).then(
             response=>{
-              alert(1);
+              //alert(1);
               for(var i=0;i<response.data.results.length;i++){
                 this.notOutBoundList.push(response.data.results[i]);
               }
