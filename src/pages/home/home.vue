@@ -76,10 +76,10 @@
         <span class="home-fun-model-a-word">销售历史</span>
       </router-link>
     </div>
-    <div v-if="showMenuModel[6]" class="sales_order_add home-fun-model">
-      <router-link to="/user/supplier" class="home-fun-model-a">
-        <i style="color: #108ee9" class="ion-ios-people-outline home-fun-model-a-icon"></i>
-        <span class="home-fun-model-a-word">供应商管理</span>
+    <div v-if="showMenuModel[11]"  class="home-fun-model">
+      <router-link to="/statistics/hotSell" class="home-fun-model-a">
+        <i style="color: #FF3030" class="ion-fireball home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">热销排行</span>
       </router-link>
     </div>
     <!--<div v-if="showMenuModel[8]"  class="home-fun-model">-->
@@ -89,33 +89,33 @@
       <!--</router-link>-->
     <!--</div>-->
     <div v-if="showMenuModel[9]" class="home-fun-model">
-      <router-link to="/home" class="home-fun-model-a">
+      <router-link to="/warehouse/stock" class="home-fun-model-a">
         <i class="ion-ios-box home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">库存管理</span>
-      </router-link>
-    </div>
-    <div v-if="showMenuModel[10]"  class="home-fun-model">
-      <router-link to="/employee" class="home-fun-model-a">
-        <i class="ion-ios-people home-fun-model-a-icon"></i>
-        <span class="home-fun-model-a-word">员工管理</span>
-      </router-link>
-    </div>
-    <!--<div v-if="showMenuModel[11]"  class="home-fun-model">-->
-      <!--<router-link to="/home" class="home-fun-model-a">-->
-        <!--<i class="ion-ios-help home-fun-model-a-icon"></i>-->
-        <!--<span class="home-fun-model-a-word">快速入门</span>-->
-      <!--</router-link>-->
-    <!--</div>-->
-    <div v-if="showMenuModel[12]"  class="home-fun-model">
-      <router-link to="/user/customer" class="home-fun-model-a">
-        <i style="color: pink" class="ion-ios-people home-fun-model-a-icon"></i>
-        <span class="home-fun-model-a-word">客户管理</span>
       </router-link>
     </div>
     <div v-if="showMenuModel[13]"  class="home-fun-model">
       <router-link to="/warehouse/warehouse" class="home-fun-model-a">
         <i style="color: #ff943b" class="ion-ios-home home-fun-model-a-icon"></i>
         <span class="home-fun-model-a-word">仓库管理</span>
+      </router-link>
+    </div>
+    <div v-if="showMenuModel[12]"  class="home-fun-model">
+      <router-link to="/user/customer" class="home-fun-model-a">
+        <i style="color: #EEEE00" class="ion-ios-people home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">客户管理</span>
+      </router-link>
+    </div>
+    <div v-if="showMenuModel[6]" class="sales_order_add home-fun-model">
+      <router-link to="/user/supplier" class="home-fun-model-a">
+        <i style="color: #66CD00" class="ion-ios-people-outline home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">供应商管理</span>
+      </router-link>
+    </div>
+    <div v-if="showMenuModel[10]"  class="home-fun-model">
+      <router-link to="/employee" class="home-fun-model-a">
+        <i style="color: #108ee9" class="ion-ios-people home-fun-model-a-icon"></i>
+        <span class="home-fun-model-a-word">员工管理</span>
       </router-link>
     </div>
     <div v-if="showMenuModel[14]"  class="home-fun-model">
@@ -167,7 +167,7 @@
         return {
           goods:"",
           //vue无法直接检测数组的更新，需要使用Vue对象set方法  Vue.set(数组名，i，数组[i])
-          showMenuModel:[false,false,false,false,false,false,false,false,false,false,false,true],
+          showMenuModel:[false,false,false,false,false,false,false,false,false,false,false,false],
           P:{isOpen:false},
           permissionCount:0
         };
@@ -186,9 +186,9 @@
                   break;
                 case 'employee':this.showMenuModel[10]=true;
                   break;
-                case 'goods':this.showMenuModel[1]=true;
+                case 'product':this.showMenuModel[1]=true;
                   break;
-                case 'report':this.showMenuModel[2]=true;
+                case 'report':this.showMenuModel[11]=true;
                   break;
                 case 'sales_order_history':this.showMenuModel[3]=true;this.showMenuModel[5]=true;
                   break;

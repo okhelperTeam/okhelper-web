@@ -54,18 +54,18 @@
         </div>
       </router-link>
       <div style="clear: both" class="ok-border"></div>
-      <router-link to="/checkstand" class="ok-sellOrStore-model">
-        <div class="ok-sellOrStore-box" style="border-right:0.5px solid #F2F2F2;">
-          <div class="ok-sellOrStore-icon">
-            <van-icon name="points" />
-          </div>
-          <div class="ok-sellOrStore-content">
-            <div>收银台</div>
-            <div class="ok-sellOrStore-subcontent">销售历史</div>
-          </div>
-        </div>
-      </router-link>
-      <div class="ok-model-border"></div>
+      <!--<router-link to="/checkstand" class="ok-sellOrStore-model">-->
+        <!--<div class="ok-sellOrStore-box" style="border-right:0.5px solid #F2F2F2;">-->
+          <!--<div class="ok-sellOrStore-icon">-->
+            <!--<van-icon name="points" />-->
+          <!--</div>-->
+          <!--<div class="ok-sellOrStore-content">-->
+            <!--<div>收银台</div>-->
+            <!--<div class="ok-sellOrStore-subcontent">销售历史</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</router-link>-->
+      <!--<div class="ok-model-border"></div>-->
       <ok-footer></ok-footer>
       <transition-group enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
         <div :key="1" v-show="show" style="z-index:100;background:#C20C0C;width: 100%;height: 100%;position: absolute;top: 0px; ">

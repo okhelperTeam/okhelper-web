@@ -122,7 +122,7 @@
           <!--</div>-->
         </van-cell-group>
         <div style="height: 110px;padding-top:30px;width: 80%;margin:0 auto;">
-          <van-button type="danger" size="large" @click="addNewStoreManager">立即开店</van-button>
+          <van-button type="danger" style="background: #C20C0C" size="large" @click="addNewStoreManager">立即开店</van-button>
         </div>
       </div>
     </div>
@@ -245,7 +245,10 @@
   }
 </script>
 
-<style scoped>
+<style>
+  .van-button--danger{
+    color: #C20C0C;
+  }
   .login-icon{
     width: 30%;
     display: inline;
