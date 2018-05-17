@@ -24,10 +24,10 @@
       <div style="height:56px;width:100%"></div>
 
       <van-swipe :autoplay="3000" style="background: white;">
-        <van-swipe-item><img height="120px" width="373px" src="@/assets/icon/ok-ad1.png"/></van-swipe-item>
-        <van-swipe-item><img height="120px" width="373px" src="@/assets/icon/ok-ad2.png"/></van-swipe-item>
-        <van-swipe-item><img height="120px" width="373px" src="@/assets/icon/ok-ad3.png"/></van-swipe-item>
-        <van-swipe-item><img height="120px" width="373px" src="@/assets/icon/ok-ad4.png"/></van-swipe-item>
+        <van-swipe-item><img height="120px" width="375px" src="@/assets/icon/ok-ad1.png"/></van-swipe-item>
+        <van-swipe-item><img height="120px" width="375px" src="@/assets/icon/ok-ad2.png"/></van-swipe-item>
+        <van-swipe-item><img height="120px" width="375px" src="@/assets/icon/ok-ad3.png"/></van-swipe-item>
+        <van-swipe-item><img height="120px" width="375px" src="@/assets/icon/ok-ad4.png"/></van-swipe-item>
       </van-swipe>
       <van-notice-bar
         text="号外号外！！！OK帮服务现在免费向大众开放了！！！快来注册吧！！！"
@@ -130,6 +130,9 @@
         <span class="home-fun-model-a-word">。。。</span>
       </router-link>
     </div> -->
+    <div v-if="permissionCount==0"  style="color: #888888;text-align: center;padding: 20px;clear: both;">
+      暂无任何权限，请联系老板为你增添权限哟~
+    </div>
     <div style="width:100%;height:56px;clear:both;"></div>
   </div>
     <ok-footer></ok-footer>
@@ -165,7 +168,8 @@
           goods:"",
           //vue无法直接检测数组的更新，需要使用Vue对象set方法  Vue.set(数组名，i，数组[i])
           showMenuModel:[false,false,false,false,false,false,false,false,false,false,false,true],
-          P:{isOpen:false}
+          P:{isOpen:false},
+          permissionCount:0
         };
       },
       computed: {},  //计算属性
@@ -200,9 +204,9 @@
                   break;
                 default:
                 Vue.set(this.showMenuModel,0,this.showMenuModel[0]);
-
               }
             }
+            this.permissionCount=menuList.length;
           },error=>{
             console.log(error.response.msg)
           }
