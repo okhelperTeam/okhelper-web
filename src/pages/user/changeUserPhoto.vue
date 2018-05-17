@@ -15,9 +15,6 @@
     <div v-if="checkImg" style="margin-top: 40%;margin-left:10%;width: 80%;height: 50%;border: 1px solid black;">
       <img :src="userAvatar | defaultImg" width="100%" height="280px"/>
     </div>
-    <div v-else style="margin-top: 40%;margin-left:10%;width: 80%;height: 50%;border: 1px solid black;">
-      <img height="280px" width="100%" src="@/assets/icon/username.png"/>
-    </div>
     <div style="width: 100%;text-align: center;padding-bottom: 20px;">
       <van-uploader :after-read="onRead" accept="image/*" multiple>
       <div style="width:100%;border: 1px solid black;border-radius: 5px;height: 40px;padding-left:10px;padding-right:10px;line-height: 40px;text-align: center;margin: 12% auto;">
