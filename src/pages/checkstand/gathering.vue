@@ -98,7 +98,7 @@
               mask: true,
               message: '正在扣款...'
             });
-            pay(this.parentData.saleOrderId,{realPay:this.xxxxx,payType:2,tradeType:this.xxxxxx,aliPayAuthCode:code})
+            pay(this.parentData.orderId,{realPay:this.parentData.pay2Money,payType:2,tradeType:1,aliPayAuthCode:code})
             .then(response=>{
             Toast.clear();
             Toast.success({

@@ -169,9 +169,20 @@
           },
           toGatheringPage(){
             if(this.parentData.pay2Money!=0&&this.parentData.pay1Money!=0){
-              this.parentData.gatheringShow=true;
-              this.parentData.showCashResult=true;
-            }else if(this.parentData.pay2Money==0&&this.parentData.pay1Money!=0){
+              pay(
+                this.parentData.orderId,
+                {
+                  realPay:this.parentData.pay1Money,
+                  payType:1
+                }).then(
+                response=>{
+                  this.parentData.gatheringShow=true;
+                  this.parentData.showCashResult=true;
+                },error=>{
+
+                }
+              );
+            }else if(this.parentData.pay1Money!=0){
               pay(
                 this.parentData.orderId,
                 {
