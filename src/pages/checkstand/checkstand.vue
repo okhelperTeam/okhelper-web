@@ -10,7 +10,7 @@
           <i class="ion-ios-arrow-left"></i><span style="font-size: 16px;position:relative;top: -3px;">&nbsp;返回</span>
         </span>
         <div style="float: right;font-size: 25px;width: 56px;height: 20px;" >
-          <i class="ion-ios-close-empty"></i>
+          <i></i>
         </div>
       </div>
       <div style="width: 100%;height: 40px;line-height: 40px;font-size: 16px;color: #888888">
@@ -151,7 +151,7 @@
             if((this.paymoney-this.parentData.pay1Money-this.parentData.pay2Money)==0){
               return 0;
             }else {
-              return this.paymoney-this.parentData.pay1Money-this.parentData.pay2Money;
+              return parseFloat( this.paymoney-this.parentData.pay1Money-this.parentData.pay2Money).toFixed(2);
             }
           }
         },  //计算属性

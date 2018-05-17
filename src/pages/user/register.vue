@@ -50,25 +50,6 @@
               </div>
             </div>
           </div>
-          <!--<div style="display: block;text-align: center;">-->
-            <!--<div style="display: block;">-->
-              <!--<div class="login-icon">-->
-                <!--<i class="ion-unlocked"></i>-->
-              <!--</div>-->
-              <!--<div class="login-text">-->
-                <!--<van-field-->
-                  <!--v-model="passwordagn"-->
-                  <!--type="password"-->
-                  <!--style="font-size: 20px"-->
-                  <!--lable="密码确认"-->
-                  <!--placeholder="再次输入密码"-->
-                  <!--icon="clear"-->
-                  <!--@click-icon="passwordagn = ''"-->
-                <!--/>-->
-                <!--<hr>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
           <div style="display: block;text-align: center;">
             <div style="display: block;">
               <div class="login-icon">
@@ -98,28 +79,14 @@
                   lable="联系方式"
                   style="font-size: 20px"
                   placeholder="请输入店铺联系方式*"
-                  icon="clear"
                   @blur="checkStorePhone"
+                  icon="clear"
                   @click-icon="storeManager.storePhone = ''"
                 />
                 <hr>
               </div>
             </div>
           </div>
-          <!--<div style="display: block;text-align: center;">-->
-          <!--<div style="display: block;">-->
-          <!--<div class="login-icon">-->
-          <!--<i class="ion-social-apple"></i>-->
-          <!--</div>-->
-          <!--<div class="login-text">-->
-          <!--<van-radio-group v-model="storeManager.userSex">-->
-          <!--<van-radio name="1">女</van-radio>-->
-          <!--<van-radio name="2">男</van-radio>-->
-          <!--</van-radio-group>-->
-          <!--</div>-->
-
-          <!--</div>-->
-          <!--</div>-->
         </van-cell-group>
         <div style="height: 110px;padding-top:30px;width: 80%;margin:0 auto;">
           <van-button type="danger" size="large" @click="addNewStoreManager">立即开店</van-button>
@@ -140,10 +107,8 @@
     components: {},//注册组件
     data () {
       return{
-        storeManager:{userName:'',userPassword:'',storeName:'',storePhone:'',},
-          // passProblem:'',passAnswer:'',userNick:'',userAvatar:'',userEmail:'',userSex:'',userBirthday:'',deleteStatus:'',
-          // storeAddress:'',storePhoto:'',description:'',leaderId:'',},
-        checkedUserNameResult:false,
+        storeManager:{userName:'',userPassword:'',storeName:'',storePhone:''},
+        verification:false,
       };
     },
     computed: {},  //计算属性
@@ -152,42 +117,51 @@
     mounted() {
     },   //挂载
     methods: {
-      addNewStoreManager(){
-        //alert(this.checkIsNull());
-        if(this.checkIsNull()) {
-          getCheckName({
-            userName: this.storeManager.userName,
-          }).then(response => {
-            this.checkedUserNameResult = true;
-          }, error => {
+      checkUserName(){
+          if(this.storeManager.userName == ''){
+            this.verification=false;
             Toast({
               position: 'bottom',
-              message: '用户名已存在'
+              message: '用户名不能为空'
             });
-            this.checkedUserNameResult = false;
-          })
-        }else
-        // this.checkIsNull()==true&&this.getCheckUserName()==true
-          //alert(this.checkedUserNameResult);
-        if(this.checkedUserNameResult==true) {
-          //alert(1);
+          }
+          else if(this.storeManager.userName.search(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/)!=0){
+            this.verification=false;
+            Toast({
+              position: 'bottom',
+              message: '请检查手机号是否可用'
+            });
+          }
+          else {
+            this.verification=true;
+          }
+          if(this.verification){
+              getCheckName({
+                userName: this.storeManager.userName,
+              }).then(response => {
+                //this.checkedUserNameResult = true;
+                return true;
+              }, error => {
+                Toast({
+                  position: 'bottom',
+                  message: '用户名已存在'
+                });
+                //this.checkedUserNameResult = false;
+                return false;
+              })
+          }else{
+            return false;
+          }
+      },
+      addNewStoreManager(){
+        if(this.checkIsNull()) {
+          //alert(this.checkIsNull());
+          //alert(this.storeManager.userName)
           addStoreManager({
             userName: this.storeManager.userName,
             userPassword: this.storeManager.userPassword,
             storeName: this.storeManager.storeName,
             storePhone: this.storeManager.storePhone,
-            // passProblem: this.storeManager.passProblem,
-            // passAnswer: this.storeManager.passAnswer,
-            // userNick: this.storeManager.userNick,
-            // userAvatar: this.storeManager.userAvatar,
-            // userEmail: this.storeManager.userEmail,
-            // userSex: this.storeManager.userSex,
-            // userBirthday: this.storeManager.userBirthday,
-            // deleteStatus: this.storeManager.deleteStatus,
-            // storeAddress: this.storeManager.storeAddress,
-            // storePhoto: this.storeManager.storePhoto,
-            // description: this.storeManager.description,
-            // leaderId: this.storeManager.leaderId,
           }).then(
             response=> {
             Toast({
@@ -210,22 +184,19 @@
         }
       },
       // 验证登陆手机号格式
-      checkUserName(){
-        if(this.storeManager.userName == ''){
-          return false;
-        }
-         else if(this.storeManager.userName.search(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/)!=0){
-          return false;
-        }
-        else {
-          return true;
-        }
-      },
       checkStorePhone(){
         if(this.storeManager.storePhone == ''){
+          Toast({
+            position: 'bottom',
+            message: '店铺手机号不能为空'
+          });
           return false;
         }
         else if(this.storeManager.storePhone.search(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/)!=0){
+          Toast({
+            position: 'bottom',
+            message: '请检查手机号是否可用'
+          });
           return false;
         }
         else {
@@ -241,7 +212,9 @@
         }
       },
     },   //方法
-    watch: {}     //监听
+    watch: {
+
+    }     //监听
   }
 </script>
 
