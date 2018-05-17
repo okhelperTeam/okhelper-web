@@ -14,10 +14,10 @@
 
       <div style="clear:both;width: 100%;height:46px;background: #F2F2F2;text-align: center;">
           <div style="display:block;float:left;height: 36px;line-height: 36px;width: 50%;">
-            <div @click="isHotP(1)" :class="{hotActive:isHot}" style="background: black;color: white;text-align: center;">热销品</div>
+            <div @click="isHotP(1)" :class="{hotActive:isHot}" style="background: #575757;color: white;text-align: center;">热销品</div>
           </div>
           <div style="display:block;float:left;height: 36px;line-height: 36px;width: 50%;">
-            <div @click="isHotP(2)" :class="{hotActive:isCold}" style="background: black;color: white;text-align: center;">滞销品</div>
+            <div @click="isHotP(2)" :class="{hotActive:isCold}" style="background: #575757;color: white;text-align: center;">滞销品</div>
           </div>
       </div>
       <div>
@@ -34,12 +34,10 @@
           <ok-product
             :main-img="item.mainImg"
             :product-name="item.productName"
-            :cate-name="item.productAttribute"
             :retail-price="item.retailPrice"
             :createTime="item.createTime"
             :Id="item.id"
             :index="index"
-            :salesStock="item.salesStock"
             :salesVolume="item.salesVolume"
             @addProduct="addProduct"
           />

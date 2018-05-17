@@ -71,8 +71,7 @@
       </div>
     </div>
     <ok-warehouse
-    :parentData="parentData",
-    :warehouseShow="warehouseShow"
+    :parentData="parentData"
   ></ok-warehouse>
   </div>
 </template>
@@ -84,11 +83,8 @@
   export default {
     mixins: [],     //混合
     props:{
-      warehouseName:'',
-      warehouseList:[],
-      parentData:{warehouseShow:false,warehouseName:'',warehouseId:''},
+      parentData:{warehouseShow:false},
       editText:{},
-      //count:1
     },
     components: {
       'ok-warehouse':SearchWarehouse,
@@ -97,7 +93,8 @@
       return {
         isNoteOpen:false,
         isPriceOpen:false,
-        warehouseShow:false
+        warehouseName:'',
+        warehouseList:[],
       };
     },
     computed: {
@@ -140,7 +137,8 @@
         }
       },
       changeWarehouseShowStatus(){
-        this.warehouseShow!=this.warehouseShow
+        this.parentData.warehouseShow=true;
+
       },
     },   //方法
     watch: {

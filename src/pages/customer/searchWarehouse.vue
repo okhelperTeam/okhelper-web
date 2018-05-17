@@ -7,7 +7,7 @@
     <transition-group enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown" :duration="800">
       <div :key="1" v-show="parentData.warehouseShow" style="z-index:100;background:white;width: 100%;height:100%;position: fixed;top: 0;left:0 ">
         <div :key="2" style="color: white;height:56px;background:#C20C0C;font-size: 18px;margin: 0 auto;width: 100%;text-align: center;line-height: 56px;">
-          <span>供应商信息</span>
+          <span>仓库信息</span>
           <div style="color:white;float: left;font-size: 25px;width: 56px;height: 20px;">
             <div @click="$router.push('/warehouse/warehouseInfo')" :key="5" style="color: white" >
               <i :key="6" class="ion-ios-plus-empty"></i>
@@ -40,7 +40,7 @@
             </div>
           </div>
           <div :key="9" v-if="myData.pageNum!=0&&warehouseList.length==0&&finished==true"  style="color: #888888;text-align: center;padding: 20px;">
-            没有您要找的供应商......
+            没有您要找的仓库.....
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
       };
     },
     props:{
-      parentData:{}
+      parentData:{warehouseShow:false}
     },
     computed: {},  //计算属性
     created() {
