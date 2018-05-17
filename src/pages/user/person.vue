@@ -18,7 +18,7 @@
         <img :src="userAvatar" width="80px" height="80px"/>
       </div>
         <div v-else style="width:25%;border: 1px solid white;border-radius: 100px;height: 90px;padding-left: 10px;margin-left: 10px;margin-top:5px;padding-right:10px;padding-top:5px;line-height: 40px;text-align: center;">
-          <img height="70px" width="70px" src="@/assets/icon/username.png"/>
+          <i class="ion-person login-icon"></i>
         </div>
       </router-link>
 

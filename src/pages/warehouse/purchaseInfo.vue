@@ -44,14 +44,14 @@
         <div style="margin-top: -28px;float: left">
         <div v-if="storageDetailList.length>0||pageNum==0">
             <div v-for="item in storageDetailList" class="ok-text-box" style="float: left;height: 80px">
-              <div class="ok-text-name" style="width: 100%;color: black">商品名称：<span style="color: #C20C0C">{{item.product.name}}</span></div><br>
+              <div class="ok-text-name" >商品名称：<span style="color: #C20C0C;" class="ok-product-details-name">{{item.product.name}}</span></div><br>
                 <div class="ok-text-name2" style="margin-left: 1%;margin-top: -7%;width: 100%">
                   仓库名称：<span style="color: #C20C0C">{{item.warehouse.name}}</span>
                 </div>
-              <div class="ok-text-name2" style="margin-left: 1%;margin-top: -7%;width: 100%">
+              <div class="ok-text-name2" style="margin-left: 1%;margin-top: -5%;width: 100%">
                 商品数量：<span style="color: #C20C0C">{{item.storageCount}}</span>   <span style="margin-left: 3%">进货价：<span style="color: #C20C0C">{{item.storagePrice}}</span></span>
               </div>
-              <div class="ok-text-name2" style="margin-left: 1%;margin-top: -7%;width: 100%">
+              <div class="ok-text-name2" style="margin-left: 1%;margin-top: -5%;width: 100%">
                 生产日期：<span style="color: #C20C0C">{{item.productDate}}</span>   <span style="margin-left: 3%">保质期：<span style="color: #C20C0C">{{item.shelfLife}}</span></span>
               </div>
             </div>
@@ -78,7 +78,6 @@
         <!--</div>-->
         <!--</div>-->
       </div>
-      <br>
     </div>
   </div>
 </template>
@@ -122,5 +121,7 @@
 </script>
 
 <style scoped>
-
+  .ok-product-details-name{
+    width:100%;display: block;float: left;font-size: 14px;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;margin-top: -48px;margin-left: 75px;
+  }
 </style>

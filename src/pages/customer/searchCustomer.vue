@@ -39,7 +39,7 @@
               </div>
             </div>
             <div :key="9" v-if="myData.pageNum!=0&&customerList.length==0&&finished==true"  style="color: #888888;text-align: center;padding: 20px;">
-              没有您要找的商品......
+              没有您要找的客户......
             </div>
           </div>
         </div>

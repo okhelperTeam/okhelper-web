@@ -106,15 +106,12 @@
             return {
               userName:'',
               userPassword:'',
-              userYanzhengma:'',
               checkCode:'',
               nameMsg:'',
               pwdMsg:'',
               loginMsg:'',
-              yanzhengmaMsg:'',
               nameIsNull:true,
               pwdIsNull:true,
-              yanzhengmaIsNull:false,
               loginIsTrue:false,
               verification:true,
               sms:'',
@@ -148,7 +145,6 @@
                this.phoneSmsLogin();
                return;
              }
-
               if(this.userName != '' && this.userPassword != ''){
             login({
               userName:this.userName,
