@@ -91,12 +91,12 @@
         <hr>
       </div>
       <div class="person-manger">
-        <router-link to="/user/register">
+        <router-link to="/employee">
           <div class="photo-icon" style="color: #EE9A00">
             <i class="ion-gear-b"></i>
           </div>
           <div>
-            <label style="font-size: 20px;float: left;margin-left: 20%;margin-top: -11%;color: black">系统设置</label>
+            <label style="font-size: 20px;float: left;margin-left: 20%;margin-top: -11%;color: black">员工管理</label>
           </div>
           <div class="manger-icon">
             <i class="ion-chevron-right"></i>
