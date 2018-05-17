@@ -37,8 +37,8 @@
             <purchase-order-item
               :editText="editText"
               :parentData="item"
-              @choosewarehouseOver="choosewoarehouseOver"
               @deleteProduct="deleteProduct"
+              @choosewoarehouseOver="choosewoarehouseOver"
               />
           </div>
         </div>
@@ -146,10 +146,10 @@
         var x=this.choosedProductMap;
         var productList=[];
         for(let key in this.choosedProductMap){
-          productList.push({warehouseId:x[key].parentData.warehouseId,productId:x[key].id,storageCount:x[key].productCount,storagePrice:(parseFloat(x[key].storagePrice).toFixed(2)),
+          productList.push({warehouseId:x[key].warehouseId,productId:x[key].id,storageCount:x[key].productCount,storagePrice:(parseFloat(x[key].storagePrice).toFixed(2)),
             productDate:x[key].productDate,shelfLife:x[key].shelfLife,remarks:x[key].remarks});
         }
-        placeStorage({customerId:this.parentData.customerId,remarks:"",placeOrderItemDtos:productList})
+        placeStorage({supplierId:this.parentData.supplierId,remarks:"",placeOrderItemDtos:productList})
           .then(response=>{
             Toast.clear();
             Toast({
@@ -196,9 +196,9 @@
             getProductById(vm.$route.query.productChoosedList[i]).then(
               response=>{
                 if(!vm.choosedProductMap.hasOwnProperty(vm.$route.query.productChoosedList[i])){
-                  let productItem=Object.assign(response.data,{'productCount':1},{'warehouseId':''});
+                  let productItem=Object.assign(response.data,{productCount:1},{warehouseId:''},{warehouseShow:false});
                   vm.choosedProductMap[productItem.id]=productItem;
-                  vm.choosedProductMap=Object.assign({},vm.choosedProductMap);
+                    vm.choosedProductMap=Object.assign({},vm.choosedProductMap);
                 }else {
                   alert(1111111)
                 }
