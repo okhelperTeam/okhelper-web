@@ -156,6 +156,12 @@ var smsLogin=myData=>ajax('post','/api/user/phoneLogin',myData);
 //下单
 var placeOrder=myData=>ajax('post','/api/sale/place_order',myData);
 
+//入库
+var placeStorage=myData=>ajax('post','/api/storage',myData);
+
+//查询未发货订单
+var getNotOutboundList=myData=>ajax('get','/api/delivery/unsend_orders',myData);
+
 export {
   login,
   getMenuCodeList,
@@ -206,5 +212,7 @@ export {
   getStore,
   sendSMS,
   smsLogin,
-  placeOrder
+  placeOrder,
+  placeStorage,
+  getNotOutboundList
 }

@@ -47,6 +47,19 @@
         </router-link>
       </div>
     </div>
+    <div class="ok-sellOrStore-model">
+      <div class="ok-sellOrStore-box" style="border-right:0.5px solid #F2F2F2;">
+        <div class="ok-sellOrStore-icon">
+          <i class="ion-reply"></i>
+        </div>
+        <router-link to="/warehouse/outbound">
+          <div class="ok-sellOrStore-content">
+            <div>出货查询</div>
+            <div class="ok-sellOrStore-subcontent">分配商品<span style="color: red;">出库</span></div>
+          </div>
+        </router-link>
+      </div>
+    </div>
     <div style="clear: both" class="ok-border"></div>
     <div class="ok-sellOrStore-model">
       <div class="ok-sellOrStore-box" style="border-right:0.5px solid #F2F2F2;">
