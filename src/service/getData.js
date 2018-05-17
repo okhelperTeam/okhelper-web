@@ -162,6 +162,13 @@ var placeStorage=myData=>ajax('post','/api/storage',myData);
 //查询未发货订单
 var getNotOutboundList=myData=>ajax('get','/api/delivery/unsend_orders',myData);
 
+//支付
+var pay=(orderId,myData)=>ajax('post','/api/sale/payment/'+orderId,myData);
+
+//获取角色列表
+var getRoleList=myData=>ajax('get','/api/role',myData);
+
+
 export {
   login,
   getMenuCodeList,
@@ -214,5 +221,7 @@ export {
   smsLogin,
   placeOrder,
   placeStorage,
-  getNotOutboundList
+  getNotOutboundList,
+  pay,
+  getRoleList,
 }

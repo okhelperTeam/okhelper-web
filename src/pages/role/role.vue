@@ -46,6 +46,7 @@
 
 <script>
   const Back = resolve => require(['@/components/common/backBar'], resolve);
+  import {getRoleList} from '@/service/getData'
     export default {
         mixins: [],     //混合
         components: {

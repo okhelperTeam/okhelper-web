@@ -46,7 +46,7 @@
   padding-right:20px;
   font-size:16px;
   display: block;
-  height: 58px;
+  height: 50px;
   text-align: left;
   width: 100%;
   /*margin-top: 56px;*/
@@ -63,7 +63,7 @@
 .ok-text-name{
   color:black;
   width: 30%;
-  height: 48px;
+  height: 42px;
   line-height:48px;
   display: block;
   float: left;
@@ -125,7 +125,7 @@
 .ok-text-textBox{
   color:#C20C0C;
   width:70%;
-  height: 48px;
+  height: 42px;
   display: block;
   float: left;
   margin-bottom: 5px;
@@ -134,7 +134,7 @@
 }
 .ok-text-text{
   font-size: 16px;
-  height: 46px;
+  height: 40px;
   width: 100%;
   color: black;
 }

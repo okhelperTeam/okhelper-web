@@ -24,7 +24,7 @@
       <div @click="choosedStartOrStop(2)" :class="{isActive:isStop}" style="display:block;float:left;width: 50%;height: 28px;line-height:28px;text-align:center;background: white;color:black;border-right: 1px solid #F2F2F2">已停用（{{isStopCount}}）</div>
     </div>
     <div class="ok-model-border"></div>
-    <div v-if="employeeList.length>0||myData.pageNum==0">
+    <div v-if="employeeList.length>0||myData.pageNum==0||loading==true">
       <van-list
         v-model="loading"
         :finished="finished"
@@ -89,33 +89,33 @@
     },
     computed: {},  //计算属性
     created() {
-      //请求启用员工人数
-      getEmployeeList(this.myData).then(
-        response=>{
-          this.isStartCount=response.data.total;
-        },error=>{
-          this.loading=false;
-          this.finished = true;
-          console.log(error.response.msg);
-        }
-      );
-      //请求停用员工人数
-      this.myData.deleteStatus=0;
-      getEmployeeList(this.myData).then(
-        response=>{
-          this.isStopCount=response.data.total;
-        },error=>{
-          this.loading=false;
-          this.finished = true;
-          console.log(error.response.msg);
-        }
-      );
-      //onLoad()默认值
-      this.myData.deleteStatus=1;
     },   //创建
     mounted() {
     },   //挂载
     methods: {
+      getStopEmployeeCount(){
+        //请求启用员工人数
+        alert(this.myData.deleteStatus);
+        getEmployeeList(this.myData).then(
+          response=>{
+            this.isStartCount=response.data.total;
+          },error=>{
+            console.log(error.response.msg);
+          }
+        );
+      },
+      getStartEmployeeCount(){
+        //请求停用员工人数
+        this.myData.deleteStatus=0;
+        alert(this.myData.deleteStatus);
+        getEmployeeList(this.myData).then(
+          response=>{
+            this.isStopCount=response.data.total;
+          },error=>{
+            console.log(error.response.msg);
+          }
+        );
+      },
       choosedStartOrStop(n){//切换停用启用条件
         this.isStart=false;
         this.isStop=false;
@@ -127,21 +127,65 @@
       },
       onLoad() {//上划加载员工
         this.myData.pageNum++;
-        getEmployeeList(this.myData).then(
-          response=>{
-            for(var i=0;i<response.data.results.length;i++){
-              this.employeeList.push(response.data.results[i]);
-            }
-            this.loading=false;
-            if (response.data.lastPage) {
+        if(this.myData.pageNum==1){
+          //请求启用员工人数
+          getEmployeeList(Object.assign(this.myData,{pageNum:1,deleteStatus:1})).then(
+            response=>{
+              this.isStartCount=response.data.total;
+              if(this.isStart){
+                for(var i=0;i<response.data.results.length;i++){
+                  this.employeeList.push(response.data.results[i]);
+                }
+                this.loading=false;
+                if (response.data.lastPage) {
+                  this.finished = true;
+                }
+              }
+            },error=>{
+              this.loading=false;
               this.finished = true;
+              console.log(error.msg);
             }
-          },error=>{
-            this.loading=false;
-            this.finished = true;
-            console.log(error.response.msg);
-          }
-        );
+          );
+          //请求停用员工人数
+          setTimeout(()=>{
+            getEmployeeList(Object.assign(this.myData,{pageNum:1,deleteStatus:0})).then(
+              response=>{
+                this.isStopCount=response.data.total;
+                if(this.isStop){
+                  for(var i=0;i<response.data.results.length;i++){
+                    this.employeeList.push(response.data.results[i]);
+                  }
+                  this.loading=false;
+                  if (response.data.lastPage) {
+                    this.finished = true;
+                  }
+                }
+              },error=>{
+                this.loading=false;
+                this.finished = true;
+                console.log(error.msg);
+              }
+            );
+          },200)
+        }else {
+          getEmployeeList(this.myData).then(
+            response=>{
+              for(var i=0;i<response.data.results.length;i++){
+                this.employeeList.push(response.data.results[i]);
+              }
+              this.loading=false;
+              if (response.data.lastPage) {
+                this.finished = true;
+              }
+            },error=>{
+              this.loading=false;
+              this.finished = true;
+              console.log(error.response.msg);
+            }
+          );
+        }
+
       },
       reLoad(){
         this.employeeList=[];

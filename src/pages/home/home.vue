@@ -82,12 +82,6 @@
         <span class="home-fun-model-a-word">供应商管理</span>
       </router-link>
     </div>
-    <div v-if="showMenuModel[7]" class="sales_order_add home-fun-model">
-      <router-link to="/sell/sellTable" class="home-fun-model-a">
-        <i class="ion-ios-pricetag home-fun-model-a-icon"></i>
-        <span class="home-fun-model-a-word">新增销售单</span>
-      </router-link>
-    </div>
     <!--<div v-if="showMenuModel[8]"  class="home-fun-model">-->
       <!--<router-link to="/home" class="home-fun-model-a">-->
         <!--<i class="ion-ios-cart home-fun-model-a-icon"></i>-->
