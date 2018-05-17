@@ -50,6 +50,8 @@ const EarlyWarning = resolve => require(['@/pages/warehouse/earlyWarning'], reso
 const PurchaseHistory = resolve => require(['@/pages/warehouse/purchaseHistory'], resolve);
 const PurchaseOrder = resolve => require(['@/pages/warehouse/purchaseOrder'], resolve);
 const PurchaseInfo = resolve => require(['@/pages/warehouse/purchaseInfo'], resolve);
+const SearchStockProduct = resolve => require(['@/pages/warehouse/searchStockProduct'], resolve);
+const Outbound = resolve => require(['@/pages/warehouse/outbound'], resolve);
 const Test = resolve => require(['@/pages/test/test2'], resolve);
 const StoreManagerInfo = resolve => require(['@/pages/user/storeManagerInfo'], resolve);
 const ChangeUserPhoto = resolve => require(['@/pages/user/changeUserPhoto'], resolve);
@@ -207,6 +209,10 @@ const routes = [
     component:Warehouse,
     meta:{title:"okhelper-Warehouse"}
   },{
+    path:'/warehouse/searchStockProduct',
+    component:SearchStockProduct,
+    meta:{title:"okhelper-SearchStockProduct"}
+  },{
     path:'/warehouse/warehouseInfo',
     component:WarehouseInfo,
     meta:{title:"okhelper-WarehouseInfo"}
@@ -217,7 +223,11 @@ const routes = [
   },{
     path:'/warehouse/stock',
     component:Stock,
-    meta:{title:"okhelper-stock"}
+    meta:{title:"okhelper-Stock"}
+  },{
+    path:'/warehouse/outbound',
+    component:Outbound,
+    meta:{title:"okhelper-Outbound"}
   },{
     path:'/warehouse/stockWarning',
     component:StockWarning,
@@ -233,7 +243,7 @@ const routes = [
   },{
     path:'/warehouse/purchaseOrder',
     component:PurchaseOrder,
-    meta:{title:"okhelper-purchaseOrder"}
+    meta:{title:"okhelper-purchaseOrder",keepAlive:true}
 },{
     path:'/warehouse/purchaseInfo',
     component:PurchaseInfo,

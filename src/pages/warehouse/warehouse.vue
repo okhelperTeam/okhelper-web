@@ -47,8 +47,13 @@
       </div>
       </van-list>
     </div>
-
-
+    <div v-else style="width: 100%;text-align: center;padding-bottom: 20px;margin-top: 10%">
+      <router-link to="/warehouse/addWarehouse">
+      <div style="width:30%;border: 1px solid black;border-radius: 5px;height: 40px;padding-left:10px;padding-right:10px;line-height: 40px;text-align: center;margin: 0 auto;">
+        去新增仓库
+      </div>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -98,7 +103,7 @@
                 this.loading=false;
                 this.finished = true;
 
-                console.log(error.response.msg);
+                console.log(error.msg);
               }
             );
           },
