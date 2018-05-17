@@ -97,18 +97,19 @@
         <span style="font-size: 14px;color: #575757;">所属角色</span>
         <span style="font-size: 12px;color: #575757;">(如需编辑或者新增角色权限，请前往&nbsp;<span @click="$router.push({path:'/role'})" style="color: #108ee9;font-size: 14px">【角色权限】</span>)</span>
       </div>
-        <van-checkbox-group v-model="roleId">
+        <van-checkbox-group v-model="choosedRoleIdList">
 
-          <div style="height: 80px;width: 100%;border-bottom: 1px solid #888888;">
+          <div style="height: 80px;width: 100%;">
             <van-checkbox
               v-for="(item, index) in roleList"
-              :key="item"
+              :key="item.id"
               :name="item"
               >
-            <div style="width: 80%;height: 80px;padding-right: 10px;display: block;float: left;">
-              <div style="width: 100%;font-size: 18px;margin-top: 10px;color: black;">采购员</div>
-              <span style="color: #888888">负责采购事宜，包括新建商品、采购单、采购退货、库存盘点等</span>
-            </div>
+              <div style="width: 90%;height: 80px;padding-right: 10px;display: block;float: left;">
+                <div style="width: 100%;font-size: 18px;margin-top: 10px;color: black;margin-top: 20px;">{{item.roleName}}</div>
+                <span style="color: #888888;margin-top: 5px;">{{item.description}}</span>
+              </div>
+              <!--<div class="ok-model-border"></div>-->
             </van-checkbox>
           </div>
       </van-checkbox-group>
@@ -133,7 +134,7 @@
   import Vue from 'vue';
   import { Checkbox, CheckboxGroup } from 'vant';
   import { Switch } from 'vant';
-  import {getCheckName,addEmployee} from '@/service/getData';
+  import {getCheckName,addEmployee,getRoleList} from '@/service/getData';
 
   Vue.use(Switch);
   Vue.use(Checkbox).use(CheckboxGroup);
@@ -153,8 +154,8 @@
             return {
               sexArray: [ '女', '男', '保密'],
               checked: true,
-              roleId:['1','2'],
-              roleList:['1','2'],
+              choosedRoleIdList:[],
+              roleList:[],
               passwordAgain:'',
               showSexPicker:false,
               showBirthdayPicker:false,
@@ -184,10 +185,20 @@
           }
         },  //计算属性
         created() {
+          this.getMyRoleList();
         },   //创建
         mounted() {
         },   //挂载
         methods: {
+          getMyRoleList(){
+            getRoleList({}).then(
+              response=>{
+                this.roleList=response.data;
+              },error=>{
+
+              }
+            );
+          },
           onBirthdayChange(picker,value,index){
             this.employee.userBirthday=value;
           },
