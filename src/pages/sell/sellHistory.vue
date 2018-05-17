@@ -50,7 +50,7 @@
       <van-list
         v-model="loading"
         :finished="finished"
-        :offset=10
+        :offset=100
         @load="onLoad"
       >
         <div v-for="(item,index) in orderList">
@@ -108,7 +108,7 @@
         orderList:[],
         loading: false,
         finished: false,
-        myData:{paging:true,pageNum:0,limit:8,orderStatus:null,orderBy:'create_time desc'}
+        myData:{paging:true,pageNum:0,limit:10,orderStatus:null,orderBy:'create_time desc'}
       };
     },
     computed: {},  //计算属性

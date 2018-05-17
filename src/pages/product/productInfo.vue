@@ -94,7 +94,7 @@
 
           </v-touch>
         </div>
-        <van-uploader :after-read="onRead" accept="image/*" multiple :max-size=4096 :oversize="imgOverSize">
+        <van-uploader :after-read="onRead" accept="image/*" multiple >
           <div style="margin:10px;border: 3px solid #888888;font-size: 50px;width:60px;height: 60px;text-align: center;line-height: 60px;color: #888888;">
             <i class="ion-camera"></i>
           </div>
@@ -181,9 +181,6 @@
         mounted() {
         },   //挂载
         methods: {
-          imgOverSize(){//照片超过4m处理
-
-          },
           deleteProductById(id){//删除商品
             deleteProduct(id).then(
               response=>{
@@ -248,7 +245,9 @@
             this.product.subImgs.splice(index,1);
           },
           onRead(file) {//上传照片
+                    alert(1)
             if(this.productImgList.length<=6){//上传限制6张
+
               let formData = new FormData();
               if(file instanceof Array){//instanceof用于判断是否为已知类型
                 for(let item of file){
@@ -396,13 +395,13 @@
           vm.getProductDetailById(vm.$route.query.id);
           if(vm.$route.query.id==null||vm.$route.query.id==''){
             //新增商品时数据清空----------------------
-            this.mainImg=[];
-            this.imgCount=0;
-            this.productImgList=[];
-            this.productImgPath=[];//商品图片路径
-            this.productListShow=[];
-            this.product={};
-            this.choosedCategoryId=0;
+            vm.mainImg=[];
+            vm.imgCount=0;
+            vm.productImgList=[];
+            vm.productImgPath=[];//商品图片路径
+            vm.productListShow=[];
+            vm.product={};
+            vm.choosedCategoryId=0;
           }
         })
       }
