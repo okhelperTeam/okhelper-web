@@ -4,8 +4,8 @@
 <template>
     <div id="">
       <div class="back-bar">
-        <router-link to="/product" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回
-        </router-link>
+        <span @click="$router.back()" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回
+        </span>
         <div class="back-bar-name">
           商品信息
         </div>
@@ -208,16 +208,19 @@
                 this.productListShow[i]=true;
               }
               //查询分类名称
-              getCategorySelf(this.product.categoryId).then(
-                response=>{
-                  this.parentData.choosedCategoryName=response.data.categoryName;
-                  console.log(this.parentData.choosedCategoryName)
-                },
-                error=>{
-                  console.log(error.msg);
-                }
-              );
-              console.log(this.productImgPath)
+              if(this.product.categoryId!=0){
+                getCategorySelf(this.product.categoryId).then(
+                  response=>{
+                    this.parentData.choosedCategoryName=response.data.categoryName;
+                    console.log(this.parentData.choosedCategoryName)
+                  },
+                  error=>{
+                    console.log(error.msg);
+                  }
+                );
+              }else {
+                this.parentData.choosedCategoryName="全部分类";
+              }
             },error=>{
               console.log(error.msg);
             });

@@ -37,6 +37,7 @@
             :createTime="item.createTime"
             :salesStock="item.salesStock"
             :Id="item.id"
+            :is-edit="false"
             :index="index"
             @addProduct="addProduct"
           />

@@ -70,7 +70,7 @@
                 重点客户
               </div>
               <div style="clear: both;">{{item.orderNumber}}</div>
-              <div>业务时间：{{item.createTime | toTime}}</div>
+              <div>业务时间：{{item.createTime | formateTime('YMDHM')}}</div>
             </div>
             <div
               style="font-size:14px;padding-top: 8px;height:80px;display: block;float: left;width: 30%;height:80px;text-align: center;">
