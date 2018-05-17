@@ -14,7 +14,7 @@
     <div style="width:95%; margin:0 auto">
       <van-cell-group v-if="!verification">
         <van-cell  >
-          <i class="ion-person login-icon" slot="icon"/>
+          <i class="ion-person tlogin-icon" slot="icon"/>
           <van-field slot="title"  style="font-size: 16px;"
             v-model="userName"
             icon="clear"
@@ -24,7 +24,7 @@
           />
         </van-cell>
         <van-cell >
-          <i class="ion-unlocked login-icon" slot="icon"/>
+          <i class="ion-unlocked tlogin-icon" slot="icon"/>
           <van-field slot="title"  style="font-size: 16px;"
             v-model="userPassword"
             type="password"
@@ -39,7 +39,7 @@
 
       <van-cell-group v-if="verification">
         <van-cell  >
-          <!-- <i class="ion-person login-icon" slot="icon"/> -->
+          <!-- <i class="ion-person tlogin-icon" slot="icon"/> -->
           <van-field slot="title"  style="font-size: 16px;"
             v-model="userName"
             icon="clear"
@@ -49,7 +49,7 @@
           />
         </van-cell>
         <van-cell >
-          <!-- <i class="ion-unlocked login-icon" slot="icon"/> -->
+          <!-- <i class="ion-unlocked tlogin-icon" slot="icon"/> -->
           <van-field
               center
               v-model="sms"
@@ -136,10 +136,11 @@
 
         },   //创建
         mounted() {
-        if (window.plus){plus.navigator.setStatusBarBackground('#000');}
+        // if (window.plus){plus.navigator.setStatusBarBackground('#ffff');}
+          if (window.plus){plus.navigator.setStatusBarBackground('#fff');}
         },   //挂载
         beforeDestroy(){
-          if (window.plus){plus.navigator.setStatusBarBackground('#000');}
+          if (window.plus){plus.navigator.setStatusBarBackground('#C20C0C');}
         },
         methods: {
           loginOk(){
@@ -273,7 +274,7 @@
     height:100%;
   }
 
-  .login-icon{
+  .tlogin-icon{
     font-size: 25px;
     color: #dd0a20;
     line-height: 44px;

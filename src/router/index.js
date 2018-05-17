@@ -50,7 +50,6 @@ const EarlyWarning = resolve => require(['@/pages/warehouse/earlyWarning'], reso
 const PurchaseHistory = resolve => require(['@/pages/warehouse/purchaseHistory'], resolve);
 const PurchaseOrder = resolve => require(['@/pages/warehouse/purchaseOrder'], resolve);
 const PurchaseInfo = resolve => require(['@/pages/warehouse/purchaseInfo'], resolve);
-const Test = resolve => require(['@/pages/test/test2'], resolve);
 const StoreManagerInfo = resolve => require(['@/pages/user/storeManagerInfo'], resolve);
 const ChangeUserPhoto = resolve => require(['@/pages/user/changeUserPhoto'], resolve);
 const ADDCategory = resolve => require(['@/pages/category/categoryInfo'], resolve);
@@ -238,9 +237,6 @@ const routes = [
     path:'/warehouse/purchaseInfo',
     component:PurchaseInfo,
     meta:{title:"okhelper-purchaseInfo"}
-  },{
-    path:'/test',
-    component:Test
   },{
     path:'/category/addCategory',
     component:ADDCategory
