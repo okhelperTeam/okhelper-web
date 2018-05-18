@@ -148,11 +148,13 @@
   import { Swipe, SwipeItem } from 'vant';
   import { NoticeBar } from 'vant';
   import scan from '@/components/common/scan';
+  import { Toast } from 'vant';
 
   Vue.use(NoticeBar);
 
   Vue.use(Swipe).use(SwipeItem);
-  const Footer = resolve => require(['@/components/footer/footer'], resolve);
+  import Footer from '@/components/footer/footer'
+
   Vue.use(Icon);
 
   Vue.use(NavBar);
@@ -169,15 +171,19 @@
           //vue无法直接检测数组的更新，需要使用Vue对象set方法  Vue.set(数组名，i，数组[i])
           showMenuModel:[false,false,false,false,false,false,false,false,false,false,false,false],
           P:{isOpen:false},
-          permissionCount:0
+          permissionCount:0,
+          hasRepertory:false,
+          hasSell:false,
+          hasStatistics:false
         };
       },
       computed: {},  //计算属性
       created() {
         if (window.plus){plus.navigator.setStatusBarBackground('#C20C0C');}
+        var menuList=[];
         getMenuCodeList().then(
           response=>{
-            let menuList=response.data;
+           menuList  =response.data;
             for(let item of menuList){
               switch (item.menuCode) {
                 case 'category':this.showMenuModel[0]=true;
@@ -207,10 +213,52 @@
               }
             }
             this.permissionCount=menuList.length;
+
+            var menuListCode = [];
+            for(let item of menuList){
+              menuListCode.push(item.menuCode);
+            }
+            let warehosePerList=menuListCode.filter(function(item) {
+              if(item=='warehouse'||item=='stock'||item=='delivery_order')
+                return item;
+            });
+            console.log(warehosePerList);
+            if(warehosePerList.length==3){
+              this.hasRepertory=true;
+            }else {
+              this.hasRepertory=false;
+            }
+
+            let sellPerList=menuListCode.filter(function(item) {
+              if(item=='product'||item=='category'||item=='sales_order_add'||item=='sales_order_history'||item=='sales_order')
+                return item;
+            });
+            if(sellPerList.length==5){
+              this.hasSell=true;
+            }else {
+              this.hasSell=false;
+            }
+
+            let statisticsPerList=menuListCode.filter(function(item) {
+              if(item=='report')
+                return item;
+            });
+            if(statisticsPerList.length==1){
+              this.hasStatistics=true;
+            }else {
+              this.hasStatistics=false;
+            }
+
+
+
+
+
           },error=>{
             console.log(error.response.msg)
-          }
-        );
+          });
+
+
+
       },   //创建
       mounted() {
       },   //挂载
@@ -226,7 +274,26 @@
           this.$router.push({path:'/product/searchProduct',query:{barCode:code}});
         }
       },   //方法
-      watch: {}      //监听
+      watch: {},      //监听
+      beforeRouteLeave(to,from,next){
+        if(to.fullPath=='/repertory'&&!this.hasRepertory){
+          Toast.fail("你无权访问此模块")
+          next({path:'/home'});
+          return;
+        }
+        if(to.fullPath=='/sell'&&!this.hasSell){
+          Toast.fail("你无权访问此模块")
+          next({path:'/home'});
+              return;
+        }
+        if(to.fullPath=='/statistics'&&!this.hasStatistics){
+          Toast.fail("你无权访问此模块")
+          next({path:'/home'});
+              return;
+        }
+
+        next();
+      }
     }
 </script>
 

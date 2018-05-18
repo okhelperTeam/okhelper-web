@@ -10,7 +10,7 @@
         OK帮注册
       </div>
     </div>
-    <div class="container" style="width:auto;margin-top: 7%">
+    <div class="container" style="width:auto;margin-top: 55px;">
       <div style="width:auto;height: 200px; margin:0 auto">
 
         <van-cell-group>
@@ -218,10 +218,10 @@
   }
 </script>
 
-<style>
-  .van-button--danger{
-    color: #C20C0C;
-  }
+<style scoped>
+  /* .van-button--danger{
+    background-color: #C20C0C;
+  } */
   .login-icon{
     width: 30%;
     display: inline;

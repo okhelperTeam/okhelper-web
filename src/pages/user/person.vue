@@ -123,8 +123,9 @@
 
 <script>
   import Vue from 'vue';
-  import { Field,Cell, CellGroup ,Row, Col,Button,Icon,NavBar,} from 'vant';
+  import { Field,Cell, CellGroup ,Row, Col,Button,Icon,NavBar} from 'vant';
   const Footer = resolve => require(['@/components/footer/footer'], resolve);
+  import {getMyUserInfo} from '@/service/getData';
 
 
   Vue.use(Icon).use(Button).use(Row).use(Col).use(Cell).use(CellGroup).use(Field).use(NavBar);
@@ -142,9 +143,14 @@
     },
     computed: {},  //计算属性
     created() {
-      console.log(localStorage.getItem("userName"));
-      this.userName=localStorage.getItem("userName");
-      this.userAvatar=localStorage.getItem("userAvatar");
+      // this.userName=sessionStorage.getItem("userName");
+      // this.userAvatar=sessionStorage.getItem("userAvatar");
+      getMyUserInfo().then(response=>{
+        this.userName=response.data.userName;
+        this.userAvatar=response.data.userAvatar;
+      },error=>{
+        console.log(error.msg);
+      })
       this.checkIsNull();
     },   //创建
     mounted() {

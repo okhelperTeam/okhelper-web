@@ -174,6 +174,9 @@ var getEmployeeByUserName=username=>ajax('get','/api/user/employeeInfo/'+usernam
 //变更角色
 var changeEmployeeRoleListByUserName=username=>ajax('put','/api/role/change_role/'+username);
 
+//上传并修改我的头像
+var changeMyAvator=myData=>ajax('put','/api/upload/avator/me',myData);
+
 export {
   login,
   getMenuCodeList,
@@ -230,5 +233,6 @@ export {
   pay,
   getRoleList,
   getEmployeeByUserName,
-  changeEmployeeRoleListByUserName
+  changeEmployeeRoleListByUserName,
+  changeMyAvator
 }

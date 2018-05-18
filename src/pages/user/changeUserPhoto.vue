@@ -28,7 +28,7 @@
 <script>
   import Vue from 'vue';
   import { Icon,Uploader } from 'vant';
-  import {upLoadGoodsImgs} from '@/service/getData.js';
+  import {changeMyAvator} from '@/service/getData.js';
   import { Toast } from 'vant';
   Vue.use(Icon).use(Toast).use(Uploader);
     export default {
@@ -54,7 +54,7 @@
           let formData = new FormData();
           this.userAvatar=file.content;
           formData.append('file',file.file);
-          upLoadGoodsImgs(formData).then(
+          changeMyAvator(formData).then(
             response=>{
               console.log(response.data.url);
               this.userAvatar=response.data.url;//存入图片路径
