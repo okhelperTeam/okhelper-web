@@ -172,7 +172,7 @@ var getRoleList=myData=>ajax('get','/api/role',myData);
 var getEmployeeByUserName=username=>ajax('get','/api/user/employeeInfo/'+username);
 
 //变更角色
-var changeEmployeeRoleListByUserName=username=>ajax('put','/api/role/change_role/'+username);
+var changeEmployeeRoleListByUserName=(username,myData)=>ajax('put','/api/role/change_role/'+username,myData);
 
 export {
   login,
