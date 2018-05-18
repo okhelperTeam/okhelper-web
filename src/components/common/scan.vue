@@ -4,9 +4,9 @@
       <div id="bcid">
       </div>
       <footer>
-        <div style="float: right;width: 50%;height: 50px;text-align: center;line-height: 50px;color: #108ee9;" @click="cancel">取消</div>
-        <div style="float: left;width: 50%;height: 50px;line-height: 50px;text-align: center;color: #108ee9;" @click="setFlash">
-          <i class="ion-ios-bolt"></i>闪光灯</div>
+        <div style="float: right;width: 50%;height: 50px;text-align: center;line-height: 50px;color: #108ee9;font-size: 16px;" @click="cancel">取消</div>
+        <div style="float: left;width: 50%;height: 50px;line-height: 50px;text-align: center;color: #108ee9;font-size: 16px" @click="setFlash">
+          <i style="font-size: 25px" class="ion-ios-bolt"></i><span style="top: -5px;position: relative;">闪光灯</span></div>
         <!-- <button @click="choosePic">从相册中获取</button> -->
       </footer>
     </div>

@@ -73,7 +73,12 @@
         </div>
       </div>
       <div v-if="myData.pageNum!=0&&productList.length==0&&finished==true"  style="color: #888888;text-align: center;padding: 20px;">
-        没有您要找的商品......
+        没有找到相关商品
+        <div style="width: 100%;text-align: center;padding-bottom: 20px;margin-top: 15px;">
+          <div @click="$router.push({path:'/product/productInfo'})" style="width:30%;border: 1px solid black;border-radius: 5px;height: 40px;padding-left:10px;padding-right:10px;line-height: 40px;text-align: center;margin: 0 auto;">
+            去新增商品
+          </div>
+        </div>
       </div>
       <div style="height: 30px;width: 100%;"></div>
       <div style="position:fixed;bottom:0;height: 30px;width: 100%;border-top: 1px solid #F2F2F2">
