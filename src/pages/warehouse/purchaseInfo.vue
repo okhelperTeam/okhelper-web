@@ -33,7 +33,7 @@
           </div>
         </div>
       </div>
-      <div class="ok-border"></div>
+      <!--<div class="ok-border"></div>-->
       <div>
         <div class="ok-text-box" style="height: 30px">
           <div class="ok-text-name">创建时间：</div>
@@ -45,7 +45,7 @@
         <div v-if="storageDetailList.length>0||pageNum==0">
             <div v-for="item in storageDetailList" class="ok-text-box" style="float: left;height: 80px">
               <div class="ok-text-name" >商品名称：<span style="color: #C20C0C;" class="ok-product-details-name">{{item.product.name}}</span></div><br>
-                <div class="ok-text-name2" style="margin-left: 1%;margin-top: -7%;width: 100%">
+                <div class="ok-text-name2" style="margin-left: 1%;margin-top: -3%;width: 100%">
                   仓库名称：<span style="color: #C20C0C">{{item.warehouse.name}}</span>
                 </div>
               <div class="ok-text-name2" style="margin-left: 1%;margin-top: -5%;width: 100%">
@@ -57,7 +57,7 @@
             </div>
         </div>
         </div>
-        <div class="ok-text-box" style="float: left;margin-top: 15px;">
+        <div class="ok-text-box" style="float: left;margin-top: 30px;">
           <div class="ok-text-name">总金额：</div>
           <div class="ok-text-textBox" style="margin-top: 3%">
             <span>{{purchaseOrderInfo.totalPrice}}</span>

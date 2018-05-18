@@ -36,7 +36,7 @@
       <div v-for="item in warehouseList" class="ok-text-box" style="float: left">
         <router-link :to="{path: '/warehouse/warehouseInfo',query: {id:item.id}}">
         <div class="ok-text-name" style="width: 80%">仓库名称：{{item.warehouseName}}</div><br>
-        <div @click="getId(item.id)" class="ok-text-name2" style="margin-left: 1%;margin-top: -7%">
+        <div @click="getId(item.id)" class="ok-text-name2" style="margin-left: 1%;margin-top: -3%">
         仓库负责人：{{item.storeKeeper}}
         </div>
         <div class="manger-icon">
