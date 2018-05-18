@@ -245,7 +245,7 @@
             this.product.subImgs.splice(index,1);
           },
           onRead(file) {//上传照片
-                    alert(1)
+                    // alert(1)
             if(this.productImgList.length<=6){//上传限制6张
 
               let formData = new FormData();
@@ -308,6 +308,7 @@
           generateBarCodeM(){
             generateBarCode().then(response=>{
               this.product.barCode=response.data.barCode;
+            this.product=  Object.assign({},this.product);
             },error=>{
               console.log(error.response.msg);
             })
@@ -371,6 +372,7 @@
             getProductBybarCode(barCode).then(response=>{
               //有该商品条码了
               this.product.barCode="";
+                this.product=  Object.assign({},this.product);
               Toast({
                 type:'fail',
                 position: 'middle',
@@ -379,6 +381,7 @@
             },error=>{
               if(error.status==404){
                 this.product.barCode=barCode;
+                    this.product=  Object.assign({},this.product);
               }else{
                 Toast({
                   position: 'bottom',
@@ -393,15 +396,19 @@
         beforeRouteEnter (to, from, next) { // 缓存组件是，此方法还有效
         next(vm => {
           vm.getProductDetailById(vm.$route.query.id);
-          if(vm.$route.query.id==null||vm.$route.query.id==''){
-            //新增商品时数据清空----------------------
-            vm.mainImg=[];
-            vm.imgCount=0;
-            vm.productImgList=[];
-            vm.productImgPath=[];//商品图片路径
-            vm.productListShow=[];
-            vm.product={};
-            vm.choosedCategoryId=0;
+          if(to.fullPath=='/category/addCategory'){
+
+          }else{
+            if(vm.$route.query.id==null||vm.$route.query.id==''){
+              //新增商品时数据清空----------------------
+              vm.mainImg=[];
+              vm.imgCount=0;
+              vm.productImgList=[];
+              vm.productImgPath=[];//商品图片路径
+              vm.productListShow=[];
+              vm.product={};
+              vm.choosedCategoryId=0;
+            }
           }
         })
       }
@@ -409,5 +416,7 @@
 </script>
 
 <style scoped>
-
+  input{
+    line-height: 30px;
+  }
 </style>

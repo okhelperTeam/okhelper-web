@@ -109,5 +109,7 @@
 </script>
 
 <style scoped>
-
+input{
+  line-height: 30px;
+}
 </style>

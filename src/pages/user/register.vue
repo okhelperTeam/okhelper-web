@@ -169,7 +169,7 @@
               message: '注册成功',
               duration:1000
             });
-            router.push({path:'/user/login'});
+            this.$router.push({path:'/user/login'});
           },error => {
             Toast({
               position: 'bottom',
