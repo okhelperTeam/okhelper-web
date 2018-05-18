@@ -40,7 +40,7 @@
         <div class="ok-text-box">
           <div class="ok-text-name">密码<span style="color: #C20C0C">*</span></div>
           <div class="ok-text-textBox">
-            <input class="ok-text-text" placeholder="不设，则默认为12345" v-model="employee.userPassword" type="text"/>
+            <input class="ok-text-text" placeholder="不设，则默认为12345" v-model="employee.userPassword" type="password"/>
           </div>
         </div>
         <div class="ok-model-border"></div>
