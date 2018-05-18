@@ -8,7 +8,7 @@
     <div class="back-bar">
       <span @click="$router.back()" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回
       </span>
-      <div  style="color:white;background: #C20C0C;font-size:16px;padding-top:12px;height: 56px;width: 100%;text-align: center;">
+      <div  style="color:white;background: #C20C0C;font-size:16px;padding-top:12px;height: 56px;width: 80%;text-align: center;">
         <div style="display: block;font-size: 20px;">更换头像</div>
       </div>
     </div>
