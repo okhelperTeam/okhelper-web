@@ -145,7 +145,7 @@
         },
         computed: {
           totalMoney(){
-            return parseFloat(this.parentData.pay1Money)+parseFloat(this.parentData.pay2Money);
+            return parseFloat(parseFloat(this.parentData.pay1Money).toFixed(2)+parseFloat(this.parentData.pay2Money).toFixed(2)).toFixed(2);
           },
           debtMony(){
             if((this.paymoney-this.parentData.pay1Money-this.parentData.pay2Money)==0){

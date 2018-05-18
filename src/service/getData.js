@@ -108,9 +108,6 @@ var addEmployee=myData=>ajax('post','/api/user/employee',myData);
 //新增店长
 var addStoreManager=myData=>ajax('post','/api/user/register',myData);
 
-//更新店长信息
-var updateStoreManager=myData=>ajax('post','/api/',myData);
-
 //查询店长信息
 var getStoreManagerInfo=name=>ajax('get','/api/user/me',+name);
 
@@ -175,7 +172,10 @@ var getEmployeeByUserName=username=>ajax('get','/api/user/employeeInfo/'+usernam
 var changeEmployeeRoleListByUserName=(username,myData)=>ajax('put','/api/role/change_role/'+username,myData);
 
 //上传并修改我的头像
-var changeMyAvator=myData=>ajax('put','/api/upload/avator/me',myData);
+var changeMyAvator=myData=>ajax('post','/api/upload/avator/me',myData);
+
+//修改个人信息
+var updateStoreManager=myData=>ajax('put','/api/user/myInfo',myData);
 
 export {
   login,

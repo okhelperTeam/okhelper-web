@@ -12,7 +12,7 @@
         <div style="display: block;font-size: 20px;">更换头像</div>
       </div>
     </div>
-    <div v-if="checkImg" style="margin-top: 40%;margin-left:10%;width: 80%;height: 50%;border: 1px solid black;">
+    <div  style="margin-top: 40%;margin-left:10%;width: 80%;height: 50%;border: 1px solid black;">
       <img :src="userAvatar | defaultImg" width="100%" height="280px"/>
     </div>
     <div style="width: 100%;text-align: center;padding-bottom: 20px;">
@@ -40,8 +40,8 @@
           }
       },
       created(){
-        this.userAvatar=localStorage.getItem("userAvatar");
-        this.checkIsNull();
+        this.userAvatar=this.$route.query.avator;
+        // this.checkIsNull();
       },
       methods:{
           checkIsNull(){
@@ -56,13 +56,12 @@
           formData.append('file',file.file);
           changeMyAvator(formData).then(
             response=>{
-              console.log(response.data.url);
               this.userAvatar=response.data.url;//存入图片路径
               Toast({
                 position: 'bottom',
                 message: '图片上传成功'
               });
-              this.$router.push({path:'/user/person'});
+              this.userAvatar=response.data.url;
             },error=>{
               console.log(error.response.msg);
             }

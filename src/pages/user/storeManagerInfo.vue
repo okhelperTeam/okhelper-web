@@ -9,7 +9,7 @@
       <span @click="$router.back()" style="color: white" class="back-bar-backBtn">&lt;&nbsp;返回
       </span>
       <div class="back-bar-name">
-        店长信息
+        个人信息
       </div>
       <div class="back-bar-cancelBtn">
         <div @click="updateStoreManagerByName" style="margin-left:8px;display:block;float:left;width: 50px;height: 25px;font-size: 18px;color: white;">
@@ -26,26 +26,26 @@
       </div>
       <div class="ok-model-border"></div>
 
-      <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
+      <!-- <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">店铺名<span style="color: #dd0a20">*</span></div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="店铺名" type="text"v-model="store.storeName"/>
+          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="店铺名" type="text"v-model="store.storeName" disabled/>
         </div>
-      </div>
-      <div class="ok-model-border"></div>
+      </div> -->
+      <!-- <div class="ok-model-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">联系方式<span style="color: #dd0a20">*</span></div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="店铺联系方式" type="text"v-model="store.storePhone"/>
+          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="店铺联系方式" type="text"v-model="store.storePhone" disabled/>
         </div>
-      </div>
-      <div class="ok-model-border"></div>
+      </div> -->
+      <!-- <div class="ok-model-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">店铺地址</div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
-          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="店铺地址" type="text"v-model="store.storeAddress"/>
+          <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="店铺地址" type="text"v-model="store.storeAddress" disabled/>
         </div>
-      </div>
+      </div> -->
       <div class="ok-model-border"></div>
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">用户邮箱</div>
@@ -61,13 +61,13 @@
         </div>
       </div>
       <div class="ok-model-border"></div>
-      <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
+      <!-- <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">生日</div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
           <input style="height: 30px;font-size: 16px;width: 100%;" placeholder="生日" type="text"v-model="storeManager.userBirthday"/>
         </div>
       </div>
-      <div class="ok-model-border"></div>
+      <div class="ok-model-border"></div> -->
       <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:25%;display: block;float: left;padding-left: 20px;">昵称</div>
         <div style="height:43px;border-bottom: 1px solid #2D84FF;width:70%;display: block;float: left;">
@@ -83,12 +83,12 @@
         <!--<div style="width:100%;display: block;float: left;padding-left: 20px;font-size: 12px"><span style="color: #dd0a20">(客户等级从0至5的整数，默认为0)</span></div>-->
       <!--</div>-->
       <!--<div class="ok-model-border"></div>-->
-      <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
+      <!-- <div style="width: 100%;height: 50px;line-height: 50px;font-size: 16px;color: #888888">
         <div style="width:35%;display: block;float: left;padding-left: 20px;">店铺描述：</div>
         <div style="height:90px;border: 1px solid #2D84FF;width:90%;display: block;float: right;margin-right: 20px;">
-          <textarea cols="41" rows="3" v-model="store.description"></textarea>
+          <textarea cols="41" rows="3" v-model="store.description" disabled></textarea>
         </div>
-      </div>
+      </div> -->
       <div class="ok-model-border"></div>
     </div>
   </div>
@@ -97,12 +97,12 @@
 <script>
   import Vue from 'vue';
   import {Button,Toast} from 'vant';
-  import {getStoreManagerInfo,getStore} from '@/service/getData';
+  import {getStoreManagerInfo,getStore,updateStoreManager} from '@/service/getData';
   Vue.use(Button);
   export default {
     data() {
       return {
-        storeManager:{userEmail:'',userNick:'',userAvatar:'',userSex:'',userBirthday:'',description:''},
+        storeManager:{userEmail:'',userNick:'',userSex:''},
         store:{storeLogo:'', description: '', moneyCode: '',storeName:'',storePhone:'',storeAddress:'',}
       }
     },
@@ -132,17 +132,10 @@
       },
 
       updateStoreManagerByName(){
-        if(this.checkIsNull()==true) {
+        if(true) {
           updateStoreManager({
-            storeLogo: this.store.storeLogo,
-            storeName: this.store.storeName,
-            storePhone: this.store.storePhone,
-            storeAddress: this.store.storeAddress,
             userEmail: this.storeManager.userEmail,
             userNick: this.storeManager.userNick,
-            userAvatar: this.storeManager.userAvatar,
-            userBirthday: this.storeManager.userBirthday,
-            description: this.store.description,
             userSex: this.storeManager.userSex,
           }).then(response => {
             Toast({
@@ -162,14 +155,14 @@
           });
         }
       },
-      checkIsNull(){
-        if(this.store.storeName == ''||this.store.storePhone==''){
-          return false;
-        }
-        else {
-          return true;
-        }
-      },
+      // checkIsNull(){
+      //   if(this.store.storeName == ''||this.store.storePhone==''){
+      //     return false;
+      //   }
+      //   else {
+      //     return true;
+      //   }
+      // },
     }
   }
 </script>

@@ -13,11 +13,11 @@
       </div>
     </div>
     <div style="height: 100px">
-      <router-link to="/user/changeUserPhoto">
+      <div @click="$router.push({path:'/user/changeUserPhoto',query: { avator: userAvatar }})">
         <div v-if="checkImg" style="width:25%;border: 1px solid white;border-radius: 100px;height: 90px;padding-left:10px;padding-right:10px;line-height: 40px;text-align: center;margin-left: 10px;margin-top:5px;">
           <img :src="userAvatar | defaultImg" width="80px" height="80px"/>
         </div>
-      </router-link>
+      </div>
 
       <div>
         <router-link to="/user/storeManagerInfo">
