@@ -12,8 +12,7 @@
       <div class="ok-product-details-box">
         <div class="ok-product-details-name">{{productName}}</div>
         <div class="ok-product-details-price" >创建时间：{{createTime}}</div>
-        <div class="ok-product-details-addtime">零售价：￥{{retailPrice}}</div>
-        <div class="ok-product-details-addtime">库存：<span style="color: #C20C0C">{{salesStock}}</span></div>
+        <div class="ok-product-details-addtime">库存：<span style="color: #C20C0C">{{totalStock}}</span></div>
       </div>
     </div>
     <div class="ok-model-border"></div>
@@ -34,10 +33,9 @@
       productName: {},
       productTitle: {},
       createTime:{},
-      retailPrice: {},
       Id: {},
       index:{},
-      salesStock:{},
+      totalStock:{},
 
     },
     computed: {},  //计算属性

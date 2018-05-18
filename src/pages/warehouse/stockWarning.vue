@@ -57,9 +57,8 @@
             :product-name="item.productName"
             :product-title="item.productTitle"
             :Id="item.id"
-            :retail-price="item.retailPrice"
             :index="index"
-            :sales-stock="item.salesStock"
+            :total-stock="item.totalStock"
             :create-time="item.createTime"
           />
         </div>
