@@ -198,7 +198,11 @@
         },   //挂载
         methods: {
           changeUserRoleList(){
-            changeEmployeeRoleListByUserName(this.employee.userName).then(
+            var rolesIdList=[];
+            for(var i=0;i<this.choosedRoleIdList.length;i++){
+              rolesIdList.push(this.choosedRoleIdList[i].id);
+            }
+            changeEmployeeRoleListByUserName(this.employee.userName,{roles:rolesIdList}).then(
               response=>{
                 Toast({
                   position: 'bottom',

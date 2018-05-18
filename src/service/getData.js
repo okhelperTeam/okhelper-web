@@ -172,7 +172,7 @@ var getRoleList=myData=>ajax('get','/api/role',myData);
 var getEmployeeByUserName=username=>ajax('get','/api/user/employeeInfo/'+username);
 
 //变更角色
-var changeEmployeeRoleListByUserName=username=>ajax('put','/api/role/change_role/'+username);
+var changeEmployeeRoleListByUserName=(username,myData)=>ajax('put','/api/role/change_role/'+username,myData);
 
 //上传并修改我的头像
 var changeMyAvator=myData=>ajax('put','/api/upload/avator/me',myData);

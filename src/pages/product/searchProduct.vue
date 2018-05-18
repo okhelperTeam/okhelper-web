@@ -54,7 +54,7 @@
           没有找到相关商品
         </div>
         <div style="width: 100%;text-align: center;padding-bottom: 20px;">
-          <div style="width:30%;border: 1px solid black;border-radius: 5px;height: 40px;padding-left:10px;padding-right:10px;line-height: 40px;text-align: center;margin: 0 auto;">
+          <div @click="$router.push({path:'/product/productInfo'})" style="width:30%;border: 1px solid black;border-radius: 5px;height: 40px;padding-left:10px;padding-right:10px;line-height: 40px;text-align: center;margin: 0 auto;">
             去新增商品
           </div>
         </div>
