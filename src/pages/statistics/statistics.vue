@@ -47,13 +47,13 @@
           <i class="ion-ios-paper"></i>
         </div>
         <div style="width: 80%;height: 70px;display: block;float: left;padding-top: 10px;">
-          <router-link to="/statistics/sellDetails" style="width: 100%" class="ok-sellOrStore-content">
+          <div style="width: 100%" class="ok-sellOrStore-content">
             <div>销售报表</div>
             <div style="margin-top: 5px;">
-              <div style="float: left;display: block" class="ok-sellOrStore-subcontent">今日销售&nbsp;&nbsp;&nbsp;<span style="color: red;">{{sellTotal.saleCount}}</span>&nbsp;&nbsp;&nbsp;笔</div>
+              <div style="float: left;display: block" class="ok-sellOrStore-subcontent">本月销售&nbsp;&nbsp;&nbsp;<span style="color: red;">{{sellTotal.saleCount}}</span>&nbsp;&nbsp;&nbsp;笔</div>
               <div style="float: right;display: block;margin-left: 20px;" class="ok-sellOrStore-subcontent">销售金额&nbsp;&nbsp;&nbsp;<span style="color: red;">￥{{sellTotal.totalSales}}</span></div>
             </div>
-            </router-link>
+          </div>
         </div>
       </div>
       <div class="ok-model-border"></div>

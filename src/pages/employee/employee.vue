@@ -137,9 +137,9 @@
                   this.employeeList.push(response.data.results[i]);
                 }
                 this.loading=false;
-                // if (response.data.lastPage) {
-                //   this.finished = true;
-                // }
+                if (response.data.lastPage) {
+                  this.finished = true;
+                }
               }
             },error=>{
               this.loading=false;
@@ -157,9 +157,9 @@
                     this.employeeList.push(response.data.results[i]);
                   }
                   this.loading=false;
-                  // if (response.data.lastPage) {
-                  //   this.finished = true;
-                  // }
+                  if (response.data.lastPage) {
+                    this.finished = true;
+                  }
                 }
               },error=>{
                 this.loading=false;
