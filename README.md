@@ -1,4 +1,4 @@
-# okhelper2
+# okhelper-web
 
 > A Vue.js project
 
