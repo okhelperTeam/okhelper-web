@@ -30,5 +30,6 @@ npm test
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 #### okhelper.apk 为已经打包好的app 可下载测试
+#### 修改/config/index.js 的 proxyTable 改成你的后端地址 
 
 #### 此项目为纯前端项目，后端请转至：https://github.com/okhelperTeam/okhelper-service
