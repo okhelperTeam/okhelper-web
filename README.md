@@ -27,7 +27,6 @@ npm run e2e
 npm test
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 #### okhelper.apk 为已经打包好的app 可下载测试（服务已经下线）
 
