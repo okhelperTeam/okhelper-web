@@ -28,7 +28,7 @@ npm test
 ```
 
 
-#### okhelper.apk 为已经打包好的app 可下载测试（服务已经下线）
+#### okhelper.apk 为已经打包好的app 可下载测试（后端服务已经下线）
 
 #### 修改/config/index.js 的 proxyTable 改成你的后端地址 
 
